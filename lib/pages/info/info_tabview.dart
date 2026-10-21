@@ -190,7 +190,7 @@ class _InfoTabViewState extends State<InfoTabView> {
           scrollBehavior: const ScrollBehavior().copyWith(
             scrollbars: false,
           ),
-          key: const PageStorageKey<String>('關聯'),
+          key: const PageStorageKey<String>('关联'),
           slivers: <Widget>[
             SliverOverlapInjector(
               handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
@@ -529,7 +529,7 @@ class _RelatedBangumiCardH extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final textScaler =
         MediaQuery.textScalerOf(context).clamp(maxScaleFactor: 1.1);
-    final relationLabel = relation.relation.isEmpty ? '關聯' : relation.relation;
+    final relationLabel = relation.relation.isEmpty ? '关联' : relation.relation;
     final bangumiItem = relation.toBangumiItem();
     final title = bangumiItem.nameCn.isEmpty
         ? bangumiItem.name.trim()

@@ -22,7 +22,7 @@ class CharacterInfoView extends StatelessWidget {
   final String characterRelation;
   final List<String> actorNames;
 
-  static const _quickKeys = {'性別', '生日', '年齡', '身高', '體重', '血型'};
+  static const _quickKeys = {'性别', '生日', '年龄', '身高', '体重', '血型'};
 
   @override
   Widget build(BuildContext context) {

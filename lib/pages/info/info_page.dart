@@ -47,7 +47,7 @@ class _InfoPageState extends State<InfoPage>
     '概覽',
     '吐槽',
     '角色',
-    '關聯',
+    '关联',
     '製作人員',
   ];
   static const Duration _minimumBangumiInfoLoadingDuration =
