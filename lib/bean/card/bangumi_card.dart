@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:kazumi/utils/zh_convert.dart';
 import 'package:kazumi/bean/card/network_img_layer.dart';
 import 'package:kazumi/bean/dialog/dialog_helper.dart';
 import 'package:kazumi/modules/bangumi/bangumi_item.dart';
@@ -89,7 +90,7 @@ class BangumiContent extends StatelessWidget {
               );
           final textScaler = ts.clamp(maxScaleFactor: 1.1);
           final painter = TextPainter(
-            text: TextSpan(text: bangumiItem.nameCn, style: style),
+            text: TextSpan(text: bangumiItem.nameCn.tw, style: style),
             textDirection: Directionality.of(context),
             textScaler: textScaler,
           );
@@ -98,7 +99,7 @@ class BangumiContent extends StatelessWidget {
               .clamp(1, 3);
           painter.dispose();
           return Text(
-            bangumiItem.nameCn,
+            bangumiItem.nameCn.tw,
             textAlign: TextAlign.start,
             style: style,
             textScaler: textScaler,

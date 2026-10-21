@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:kazumi/utils/zh_convert.dart';
 import 'package:kazumi/bean/card/network_img_layer.dart';
 import 'package:kazumi/modules/bangumi/bangumi_item.dart';
 
@@ -57,7 +58,7 @@ class BangumiTimelineCard extends StatelessWidget {
     final metadata = <String>[
       if (episodes != null) '${episodes.group(1)} 話',
       ...tags
-          .map((name) => name.trim())
+          .map((name) => name.trim().tw)
           .where((name) => name.isNotEmpty)
           .toSet(),
     ];
@@ -103,7 +104,7 @@ class BangumiTimelineCard extends StatelessWidget {
   Widget _buildDetails(BuildContext context) {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
-    final translatedName = bangumiItem.nameCn.trim();
+    final translatedName = bangumiItem.nameCn.trim().tw;
     final title =
         translatedName.isNotEmpty ? translatedName : bangumiItem.name.trim();
     final supportingText = _supportingText(title);

@@ -6,6 +6,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:window_manager/window_manager.dart';
 
+import 'package:kazumi/utils/zh_convert.dart';
 import 'package:kazumi/bean/appbar/drag_to_move_bar.dart' as dtb;
 import 'package:kazumi/bean/card/bangumi_info_card.dart';
 import 'package:kazumi/bean/card/network_img_layer.dart';
@@ -348,7 +349,7 @@ class _InfoPageState extends State<InfoPage>
                       child: Text(
                         infoController.bangumiItem.nameCn == ''
                             ? infoController.bangumiItem.name
-                            : infoController.bangumiItem.nameCn,
+                            : infoController.bangumiItem.nameCn.tw,
                       ),
                     ),
                   ),

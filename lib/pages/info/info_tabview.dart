@@ -1,6 +1,7 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:kazumi/utils/zh_convert.dart';
 import 'package:kazumi/bean/widget/error_widget.dart';
 import 'package:kazumi/bean/widget/empty_state_widget.dart';
 import 'package:kazumi/pages/info/info_comments_view.dart';
@@ -89,7 +90,7 @@ class _InfoTabViewState extends State<InfoTabView> {
               Text('簡介', style: TextStyle(fontSize: 18)),
               const SizedBox(height: 8),
               LayoutBuilder(builder: (context, constraints) {
-                final span = TextSpan(text: widget.bangumiItem.summary);
+                final span = TextSpan(text: widget.bangumiItem.summary.tw);
                 final tp =
                     TextPainter(text: span, textDirection: TextDirection.ltr);
                 tp.layout(maxWidth: constraints.maxWidth);
@@ -104,7 +105,7 @@ class _InfoTabViewState extends State<InfoTabView> {
                             ? maxWidth
                             : MediaQuery.sizeOf(context).width - 32,
                         child: SelectableText(
-                          widget.bangumiItem.summary,
+                          widget.bangumiItem.summary.tw,
                           textAlign: TextAlign.start,
                           scrollBehavior: const ScrollBehavior().copyWith(
                             scrollbars: false,
@@ -125,7 +126,7 @@ class _InfoTabViewState extends State<InfoTabView> {
                   );
                 } else {
                   return SelectableText(
-                    widget.bangumiItem.summary,
+                    widget.bangumiItem.summary.tw,
                     textAlign: TextAlign.start,
                     scrollPhysics: NeverScrollableScrollPhysics(),
                     selectionHeightStyle: ui.BoxHeightStyle.max,
@@ -160,7 +161,7 @@ class _InfoTabViewState extends State<InfoTabView> {
                     label: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text('${widget.bangumiItem.tags[index].name} '),
+                        Text('${widget.bangumiItem.tags[index].name.tw} '),
                         Text(
                           '${widget.bangumiItem.tags[index].count}',
                           style: TextStyle(
@@ -529,11 +530,12 @@ class _RelatedBangumiCardH extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final textScaler =
         MediaQuery.textScalerOf(context).clamp(maxScaleFactor: 1.1);
-    final relationLabel = relation.relation.isEmpty ? '关联' : relation.relation;
+    final relationLabel =
+        (relation.relation.isEmpty ? '关联' : relation.relation).tw;
     final bangumiItem = relation.toBangumiItem();
     final title = bangumiItem.nameCn.isEmpty
         ? bangumiItem.name.trim()
-        : bangumiItem.nameCn.trim();
+        : bangumiItem.nameCn.trim().tw;
 
     return Card(
       elevation: 0,

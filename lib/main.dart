@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:kazumi/utils/zh_convert.dart';
 import 'package:kazumi/app_module.dart';
 import 'package:kazumi/app_widget.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -95,6 +96,7 @@ void main() async {
     SystemProxyService.init();
   }
   await MeteredNetworkService.refresh();
+  await ZhConvert.init();
   ProxyManager.applyProxy();
   runApp(
     ModularApp(

@@ -1,3 +1,4 @@
+import 'package:kazumi/utils/zh_convert.dart';
 import 'package:kazumi/modules/collect/collect_module.dart';
 import 'package:kazumi/modules/collect/collect_type.dart';
 
@@ -24,7 +25,9 @@ class CollectLibraryQuery {
       if (!CollectType.fromValue(entry.type).isCollected) return false;
       final item = entry.bangumiItem;
       final names =
-          [item.nameCn, item.name, ...item.alias].join('\n').toLowerCase();
+          [item.nameCn, item.nameCn.tw, item.name, ...item.alias]
+              .join('\n')
+              .toLowerCase();
       return terms.every(names.contains);
     }).toList();
   }
@@ -58,7 +61,7 @@ class CollectLibraryQuery {
 
   static String titleOf(CollectedBangumi entry) {
     final item = entry.bangumiItem;
-    return item.nameCn.trim().isNotEmpty ? item.nameCn : item.name;
+    return item.nameCn.trim().isNotEmpty ? item.nameCn.tw : item.name;
   }
 
   static DateTime _airDate(CollectedBangumi entry) =>

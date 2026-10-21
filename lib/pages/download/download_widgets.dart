@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:kazumi/utils/zh_convert.dart';
 import 'package:kazumi/bean/card/network_img_layer.dart';
 import 'package:kazumi/bean/card/rule_card.dart';
 import 'package:kazumi/bean/widget/kazumi_menu.dart';
@@ -93,7 +94,7 @@ class DownloadRecordCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          record.bangumiName,
+                          record.bangumiName.tw,
                           style: textTheme.titleMedium
                               ?.copyWith(fontWeight: FontWeight.w700),
                           maxLines: 2,

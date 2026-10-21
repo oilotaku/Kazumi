@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kazumi/utils/zh_convert.dart';
 import 'package:kazumi/modules/bangumi/episode_item.dart';
 
 class EpisodeCommentsPicker extends StatelessWidget {
@@ -50,7 +51,7 @@ class EpisodeCommentsPicker extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final info = episodes[index];
                   final title =
-                      info.nameCn.isNotEmpty ? info.nameCn : info.name;
+                      info.nameCn.isNotEmpty ? info.nameCn.tw : info.name;
                   final selected = index + 1 == selectedEpisode;
                   return Material(
                     color: selected

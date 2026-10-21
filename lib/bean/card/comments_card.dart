@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kazumi/utils/zh_convert.dart';
 import 'package:kazumi/bean/widget/bangumi_avatar.dart';
 import 'package:kazumi/modules/comments/comment_item.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -111,7 +112,7 @@ class CommentsCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            Text(item.comment.comment),
+            Text(item.comment.comment.tw),
           ],
         ),
       ),

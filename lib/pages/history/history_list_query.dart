@@ -1,3 +1,4 @@
+import 'package:kazumi/utils/zh_convert.dart';
 import 'package:kazumi/modules/history/history_module.dart';
 
 enum HistorySourceFilter {
@@ -44,7 +45,7 @@ List<HistoryDateGroup> groupHistoryEntries(
     if (!source._matches(entry)) return false;
     final item = entry.bangumiItem;
     return keyword.isEmpty ||
-        [item.name, item.nameCn, ...item.alias, entry.adapterName]
+        [item.name, item.nameCn, item.nameCn.tw, ...item.alias, entry.adapterName]
             .any((value) => value.toLowerCase().contains(keyword));
   }).toList()
     ..sort((a, b) => b.lastWatchTime.compareTo(a.lastWatchTime));

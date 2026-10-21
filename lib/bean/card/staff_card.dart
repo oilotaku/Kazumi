@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kazumi/utils/zh_convert.dart';
 import 'package:kazumi/bean/widget/bangumi_avatar.dart';
 import 'package:kazumi/modules/staff/staff_item.dart';
 
@@ -22,10 +23,10 @@ class StaffCard extends StatelessWidget {
         maxLines: 1,
       ),
       subtitle: staffFullItem.staff.nameCN.isNotEmpty
-          ? Text(staffFullItem.staff.nameCN)
+          ? Text(staffFullItem.staff.nameCN.tw)
           : null,
       trailing: Text(staffFullItem.relations.isNotEmpty
-          ? staffFullItem.relations.first
+          ? staffFullItem.relations.first.tw
           : ''),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kazumi/utils/zh_convert.dart';
 import 'package:kazumi/bbcode/bbcode_widget.dart';
 import 'package:kazumi/bean/widget/bangumi_avatar.dart';
 import 'package:kazumi/modules/comments/comment_item.dart';
@@ -267,12 +268,12 @@ typedef _CommentData = ({User user, String content, int createdAt});
 
 _CommentData _fromEpisode(EpisodeComment comment) => (
       user: comment.user,
-      content: comment.comment,
+      content: comment.comment.tw,
       createdAt: comment.createdAt,
     );
 
 _CommentData _fromCharacter(CharacterComment comment) => (
       user: comment.user,
-      content: comment.comment,
+      content: comment.comment.tw,
       createdAt: comment.createdAt,
     );

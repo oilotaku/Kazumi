@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kazumi/utils/zh_convert.dart';
 import 'package:kazumi/bean/card/network_img_layer.dart';
 import 'package:kazumi/bean/widget/kazumi_menu.dart';
 import 'package:kazumi/bean/widget/loading_indicator.dart';
@@ -46,10 +47,10 @@ class HistoryRecordTile extends StatelessWidget {
     final colors = theme.colorScheme;
     final title = history.bangumiItem.nameCn.isEmpty
         ? history.bangumiItem.name
-        : history.bangumiItem.nameCn;
+        : history.bangumiItem.nameCn.tw;
     final episode = history.lastWatchEpisodeName.isEmpty
         ? '第 ${history.lastWatchEpisode} 話'
-        : history.lastWatchEpisodeName;
+        : history.lastWatchEpisodeName.tw;
     final source = HistoryEntryKind.normalize(history.entryKind) ==
             HistoryEntryKind.offline
         ? '快取'

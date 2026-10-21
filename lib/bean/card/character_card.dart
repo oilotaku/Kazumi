@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kazumi/utils/zh_convert.dart';
 import 'package:kazumi/bean/dialog/adaptive_bottom_sheet.dart';
 import 'package:kazumi/bean/widget/bangumi_avatar.dart';
 import 'package:kazumi/modules/characters/character_item.dart';
@@ -26,7 +27,7 @@ class CharacterCard extends StatelessWidget {
       subtitle: characterItem.actorList.isNotEmpty
           ? Text(characterItem.actorList[0].name)
           : null,
-      trailing: Text(characterItem.relation),
+      trailing: Text(characterItem.relation.tw),
       onTap: () {
         showAdaptiveBottomSheet<void>(
           context: context,

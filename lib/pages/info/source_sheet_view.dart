@@ -397,7 +397,7 @@ class _SourceSheetViewState extends State<_SourceSheetView> {
             child: Row(
               children: [
                 Expanded(
-                  child: Text(result.name,
+                  child: Text(result.name.tw,
                       style: theme.textTheme.bodyLarge?.copyWith(
                         color: theme.colorScheme.onSurface,
                       )),

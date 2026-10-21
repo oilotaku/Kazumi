@@ -161,6 +161,7 @@ flutter:
     - assets/images/logo/
     - assets/statements/
     - licenses/ech_http/
+    - assets/opencc/
   fonts:
     - family: MI_Sans_Regular
       fonts:

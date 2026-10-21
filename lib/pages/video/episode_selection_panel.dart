@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:scrollview_observer/scrollview_observer.dart';
 
+import 'package:kazumi/utils/zh_convert.dart';
 import 'package:kazumi/bean/widget/empty_state_widget.dart';
 import 'package:kazumi/modules/download/download_module.dart';
 import 'package:kazumi/modules/roads/road_module.dart';
@@ -123,7 +124,7 @@ class EpisodeSelectionPanelState extends State<EpisodeSelectionPanel> {
                       Semantics(
                         header: true,
                         child: Text(
-                          widget.title.isEmpty ? '劇集列表' : widget.title,
+                          widget.title.isEmpty ? '劇集列表' : widget.title.tw,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: theme.textTheme.titleLarge?.copyWith(
@@ -208,7 +209,7 @@ class EpisodeSelectionPanelState extends State<EpisodeSelectionPanel> {
                       final episode = index + 1;
                       final name = index < road!.identifier.length &&
                               road.identifier[index].trim().isNotEmpty
-                          ? road.identifier[index]
+                          ? road.identifier[index].tw
                           : '第$episode集';
                       return _EpisodeRow(
                         key: ValueKey('$_visibleRoad:$episode'),

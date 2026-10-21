@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:kazumi/utils/zh_convert.dart';
 import 'package:kazumi/bean/card/network_img_layer.dart';
 import 'package:kazumi/bean/dialog/material_bottom_sheet.dart';
 import 'package:kazumi/bean/widget/content_section.dart';
@@ -40,7 +41,7 @@ class CharacterInfoView extends StatelessWidget {
     final originalName =
         character.name.isNotEmpty ? character.name : tappedName;
     final name = character.nameCn.isNotEmpty
-        ? character.nameCn
+        ? character.nameCn.tw
         : tappedName.isNotEmpty
             ? tappedName
             : originalName;
@@ -154,7 +155,7 @@ class CharacterInfoView extends StatelessWidget {
               const SizedBox(height: 24),
               ContentSection(
                 title: '人物簡介',
-                child: SelectableText(character.summary,
+                child: SelectableText(character.summary.tw,
                     style: theme.textTheme.bodyLarge?.copyWith(height: 1.65)),
               ),
             ],
@@ -203,12 +204,12 @@ Widget _buildInfoField(BuildContext context, String label, String value) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(label,
+      Text(label.tw,
           style: theme.textTheme.labelLarge?.copyWith(
             color: theme.colorScheme.onSurfaceVariant,
           )),
       const SizedBox(height: 4),
-      SelectableText(value,
+      SelectableText(value.tw,
           style: theme.textTheme.bodyLarge?.copyWith(height: 1.5)),
     ],
   );

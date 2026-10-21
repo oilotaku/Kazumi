@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:kazumi/utils/zh_convert.dart';
 import 'package:kazumi/bean/card/user_comments_card.dart';
 import 'package:kazumi/bean/widget/error_widget.dart';
 import 'package:kazumi/bean/widget/empty_state_widget.dart';
@@ -239,7 +240,7 @@ class _EpisodeHeader extends StatelessWidget {
     final colors = Theme.of(context).colorScheme;
     final type = Theme.of(context).textTheme;
     final number = info?.episode ?? episode;
-    final translatedTitle = info?.nameCn ?? '';
+    final translatedTitle = (info?.nameCn ?? '').tw;
     final originalTitle = info?.name ?? '';
     final title = translatedTitle.isNotEmpty
         ? translatedTitle

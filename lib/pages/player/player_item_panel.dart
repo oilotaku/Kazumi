@@ -5,6 +5,7 @@ import 'package:canvas_danmaku/models/danmaku_content_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kazumi/utils/zh_convert.dart';
 import 'package:kazumi/bean/widget/kazumi_menu.dart';
 import 'package:kazumi/bean/widget/play_pause_icon.dart';
 import 'package:kazumi/pages/player/player_adjustment_hud.dart';
@@ -782,7 +783,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
                   child: compact
                       ? const SizedBox(height: 40)
                       : Text(
-                          ' ${videoPageController.title} [${videoPageController.roadList[videoPageController.selectedEpisode.road].identifier[videoPageController.selectedEpisode.episode - 1]}]',
+                          ' ${videoPageController.title.tw} [${videoPageController.roadList[videoPageController.selectedEpisode.road].identifier[videoPageController.selectedEpisode.episode - 1].tw}]',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: Theme.of(context)
