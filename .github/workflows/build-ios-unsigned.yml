@@ -2,6 +2,9 @@ name: Build unsigned iOS IPA (zh-TW)
 
 on:
   workflow_dispatch:
+  push:
+    branches: [zh-tw]
+    paths: ['lib/**', 'pubspec.*', 'ios/**', '.github/workflows/build-ios-unsigned.yml']
 
 env:
   DANDANAPI_APPID: ${{ secrets.DANDANAPI_APPID }}
