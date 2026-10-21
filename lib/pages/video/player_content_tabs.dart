@@ -37,8 +37,8 @@ class PlayerContentTabs extends StatelessWidget {
           if (index == 0) onEpisodesSelected();
         },
         tabs: [
-          Tab(text: '选集', height: height),
-          Tab(text: '评论', height: height),
+          Tab(text: '選集', height: height),
+          Tab(text: '評論', height: height),
         ],
       ),
     );

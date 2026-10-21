@@ -35,10 +35,10 @@ class _InfoActionsMenuState extends State<InfoActionsMenu> {
   Future<void> _copyTitle() async {
     try {
       await Clipboard.setData(ClipboardData(text: _title));
-      _notify('标题已复制');
+      _notify('標題已複製');
     } catch (error) {
       KazumiLogger().w('InfoActionsMenu: failed to copy title', error: error);
-      _notify('复制失败，请重试');
+      _notify('複製失敗，請重試');
     }
   }
 
@@ -53,7 +53,7 @@ class _InfoActionsMenuState extends State<InfoActionsMenu> {
     } catch (error) {
       KazumiLogger().w('InfoActionsMenu: failed to open browser', error: error);
     }
-    _notify('无法打开浏览器');
+    _notify('無法開啟瀏覽器');
   }
 
   Future<void> _saveCover() async {
@@ -63,7 +63,7 @@ class _InfoActionsMenuState extends State<InfoActionsMenu> {
         .map((size) => item.images[size]?.trim() ?? '')
         .firstWhere((url) => url.isNotEmpty, orElse: () => '');
     if (imageUrl.isEmpty) {
-      _notify('暂无封面');
+      _notify('暫無封面');
       return;
     }
     final fileName = _coverFileName(_title, item.id);
@@ -74,14 +74,14 @@ class _InfoActionsMenuState extends State<InfoActionsMenu> {
 
       if (isDesktop()) {
         final path = await FilePicker.platform.saveFile(
-          dialogTitle: '保存封面',
+          dialogTitle: '儲存封面',
           fileName: fileName,
           type: FileType.custom,
           allowedExtensions: const ['png'],
           bytes: bytes,
           lockParentWindow: true,
         );
-        if (path != null) _notify('封面已保存');
+        if (path != null) _notify('封面已儲存');
         return;
       }
 
@@ -93,10 +93,10 @@ class _InfoActionsMenuState extends State<InfoActionsMenu> {
       if (!result.isSuccess) {
         throw StateError(result.errorMessage ?? 'Gallery save failed');
       }
-      _notify('已保存到相册');
+      _notify('已儲存到相簿');
     } catch (error) {
       KazumiLogger().w('InfoActionsMenu: failed to save cover', error: error);
-      _notify('封面保存失败，请重试');
+      _notify('封面儲存失敗，請重試');
     } finally {
       if (mounted) setState(() => _savingCover = false);
     }
@@ -108,15 +108,15 @@ class _InfoActionsMenuState extends State<InfoActionsMenu> {
       menuChildren: [
         KazumiMenuItem(
           onPressed: _savingCover ? null : _saveCover,
-          label: _savingCover ? '保存中…' : '保存封面',
+          label: _savingCover ? '儲存中…' : '儲存封面',
         ),
         KazumiMenuItem(
           onPressed: _title.trim().isEmpty ? null : _copyTitle,
-          label: '复制标题',
+          label: '複製標題',
         ),
         KazumiMenuItem(
           onPressed: _openExternally,
-          label: '外部打开',
+          label: '外部開啟',
         ),
       ],
       builder: (context, toggle) => IconButton(

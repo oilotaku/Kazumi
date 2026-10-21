@@ -5,10 +5,10 @@ import 'package:kazumi/bean/widget/state_presentation.dart';
 class GeneralErrorWidget extends StatelessWidget {
   const GeneralErrorWidget({
     required this.errMsg,
-    this.title = '出了点问题',
+    this.title = '出了點問題',
     this.icon = Icons.error_outline_rounded,
     this.onRetry,
-    this.retryText = '重试',
+    this.retryText = '重試',
     this.actions = const [],
     this.compact = false,
     super.key,

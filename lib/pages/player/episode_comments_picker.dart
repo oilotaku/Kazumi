@@ -31,11 +31,11 @@ class EpisodeCommentsPicker extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('选择讨论分集',
+                  Text('選擇討論分集',
                       style: type.headlineSmall
                           ?.copyWith(fontWeight: FontWeight.w700)),
                   const SizedBox(height: 8),
-                  Text('切换想看的讨论，视频会继续播放。',
+                  Text('切換想看的討論，影片會繼續播放。',
                       style: type.bodyMedium
                           ?.copyWith(color: colors.onSurfaceVariant)),
                 ],

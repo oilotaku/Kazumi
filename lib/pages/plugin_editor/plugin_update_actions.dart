@@ -12,7 +12,7 @@ Future<void> updateAllPluginsWithFeedback(
     );
     KazumiDialog.showToast(message: _batchUpdateMessage(result));
   } catch (_) {
-    KazumiDialog.showToast(message: '更新规则失败');
+    KazumiDialog.showToast(message: '更新規則失敗');
   }
 }
 
@@ -21,19 +21,19 @@ Future<PluginUpdateResult> updatePluginWithFeedback(
   String name, {
   required bool installing,
 }) async {
-  KazumiDialog.showToast(message: installing ? '导入中' : '更新中');
+  KazumiDialog.showToast(message: installing ? '匯入中' : '更新中');
   late final PluginUpdateResult result;
   try {
     result = await controller.tryUpdatePluginByName(name);
   } catch (_) {
-    KazumiDialog.showToast(message: '保存规则失败');
+    KazumiDialog.showToast(message: '儲存規則失敗');
     return PluginUpdateResult.failed;
   }
   final message = switch (result) {
-    PluginUpdateResult.updated => installing ? '导入成功' : '更新成功',
-    PluginUpdateResult.requiresNewerClient => '规则需要更高版本客户端',
-    PluginUpdateResult.failed => installing ? '导入规则失败' : '更新规则失败',
-    PluginUpdateResult.notNewer => '远程规则版本不高于本地，已跳过更新',
+    PluginUpdateResult.updated => installing ? '匯入成功' : '更新成功',
+    PluginUpdateResult.requiresNewerClient => '規則需要更高版本客戶端',
+    PluginUpdateResult.failed => installing ? '匯入規則失敗' : '更新規則失敗',
+    PluginUpdateResult.notNewer => '遠端規則版本不高於本地，已跳過更新',
   };
   KazumiDialog.showToast(message: message);
   return result;
@@ -41,23 +41,23 @@ Future<PluginUpdateResult> updatePluginWithFeedback(
 
 String _batchUpdateMessage(PluginBatchUpdateResult result) {
   if (result.hasNoCandidates) {
-    return '没有可更新的规则';
+    return '沒有可更新的規則';
   }
   if (result.failed == 0 &&
       result.requiresNewerClient == 0 &&
       result.notNewer == 0) {
-    return '更新成功 ${result.updated} 条';
+    return '更新成功 ${result.updated} 條';
   }
 
-  final parts = <String>['成功 ${result.updated} 条'];
+  final parts = <String>['成功 ${result.updated} 條'];
   if (result.requiresNewerClient > 0) {
-    parts.add('不兼容 ${result.requiresNewerClient} 条');
+    parts.add('不相容 ${result.requiresNewerClient} 條');
   }
   if (result.notNewer > 0) {
-    parts.add('已跳过 ${result.notNewer} 条');
+    parts.add('已跳過 ${result.notNewer} 條');
   }
   if (result.failed > 0) {
-    parts.add('失败 ${result.failed} 条');
+    parts.add('失敗 ${result.failed} 條');
   }
   return '更新完成：${parts.join('，')}';
 }

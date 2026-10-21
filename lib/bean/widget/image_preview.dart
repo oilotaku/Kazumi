@@ -265,8 +265,8 @@ class _ImageViewerState extends State<ImageViewer> {
   }
 
   Widget _buildErrorWidget() => const MediaErrorWidget(
-        title: '图片加载失败',
-        errMsg: '请检查网络连接，返回后重新打开图片。',
+        title: '圖片載入失敗',
+        errMsg: '請檢查網路連線，返回後重新開啟圖片。',
         icon: Icons.broken_image_outlined,
       );
 

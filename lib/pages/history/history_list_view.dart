@@ -121,12 +121,12 @@ class _HistoryListViewState extends State<HistoryListView> {
                             focusNode: _searchFocus,
                             textInputAction: TextInputAction.search,
                             decoration: InputDecoration(
-                              hintText: '搜索番剧、别名或来源',
+                              hintText: '搜尋番劇、別名或來源',
                               prefixIcon: const Icon(Icons.search_rounded),
                               suffixIcon: _query.isEmpty
                                   ? null
                                   : IconButton(
-                                      tooltip: '清除搜索',
+                                      tooltip: '清除搜尋',
                                       onPressed: _clearSearch,
                                       icon: const Icon(Icons.close_rounded),
                                     ),
@@ -160,10 +160,10 @@ class _HistoryListViewState extends State<HistoryListView> {
                             liveRegion: true,
                             child: Text(
                               widget.editing
-                                  ? '共 $count 条记录 · 点按删除按钮移除'
+                                  ? '共 $count 條記錄 · 點按刪除按鈕移除'
                                   : filtered
-                                      ? '找到 $count 条记录 · 最近观看优先'
-                                      : '共 $count 条记录 · 最近观看优先',
+                                      ? '找到 $count 條記錄 · 最近觀看優先'
+                                      : '共 $count 條記錄 · 最近觀看優先',
                               style: theme.textTheme.bodyMedium
                                   ?.copyWith(color: colors.onSurfaceVariant),
                             ),
@@ -213,7 +213,7 @@ class _HistoryListViewState extends State<HistoryListView> {
                     style: theme.textTheme.titleLarge
                         ?.copyWith(fontWeight: FontWeight.w700)),
               ),
-              Text('${group.entries.length} 条',
+              Text('${group.entries.length} 條',
                   style: theme.textTheme.labelLarge
                       ?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
             ],
@@ -290,12 +290,12 @@ class _HistoryListViewState extends State<HistoryListView> {
   Widget _emptyState(bool filtered) {
     return GeneralEmptyState(
       icon: filtered ? Icons.search_off_rounded : Icons.history_rounded,
-      title: filtered ? '没有找到相关记录' : '还没有观看记录',
+      title: filtered ? '沒有找到相關記錄' : '還沒有觀看記錄',
       actions: [
         if (filtered)
           StateActionButton.tonal(
             onPressed: _resetFilters,
-            text: '查看全部记录',
+            text: '檢視全部記錄',
           ),
       ],
     );

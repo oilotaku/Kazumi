@@ -17,7 +17,7 @@ class ProxySettingsPage extends StatefulWidget {
 class _ProxySettingsPageState extends State<ProxySettingsPage> {
   Future<void> _setProxyEnabled(bool value) async {
     if (value && !GStorage.getSetting(SettingsKeys.proxyConfigured)) {
-      KazumiDialog.showToast(message: '请先在代理配置中完成测试');
+      KazumiDialog.showToast(message: '請先在代理配置中完成測試');
       return;
     }
     await GStorage.putSetting(SettingsKeys.proxyEnable, value);
@@ -33,7 +33,7 @@ class _ProxySettingsPageState extends State<ProxySettingsPage> {
   Widget build(BuildContext context) {
     final proxyEnabled = GStorage.getSetting(SettingsKeys.proxyEnable);
     return SettingsDetailScaffold(
-      title: const Text('网络设置'),
+      title: const Text('網路設定'),
       body: SettingsList(
         sections: [
           const NetworkMirrorSettings(),
@@ -43,8 +43,8 @@ class _ProxySettingsPageState extends State<ProxySettingsPage> {
               SettingsTile.switchTile(
                 leading: Icons.vpn_key_rounded,
                 onToggle: (value) => _setProxyEnabled(value ?? !proxyEnabled),
-                title: const Text('启用代理'),
-                description: const Text('启用后网络请求将通过代理服务器'),
+                title: const Text('啟用代理'),
+                description: const Text('啟用後網路請求將透過代理伺服器'),
                 initialValue: proxyEnabled,
               ),
               SettingsTile(
@@ -54,7 +54,7 @@ class _ProxySettingsPageState extends State<ProxySettingsPage> {
                   if (mounted) setState(() {});
                 },
                 title: const Text('代理配置'),
-                description: const Text('配置代理服务器地址和认证信息'),
+                description: const Text('配置代理伺服器地址和認證資訊'),
               ),
             ],
           ),

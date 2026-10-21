@@ -18,12 +18,12 @@ class _SourceSearchGroup {
       status == PluginSearchStatus.success && results.isNotEmpty;
 
   String get statusLabel => switch (status) {
-        PluginSearchStatus.pending => '检索中…',
+        PluginSearchStatus.pending => '檢索中…',
         PluginSearchStatus.success =>
-          results.isEmpty ? '无结果' : '${results.length} 个结果',
-        PluginSearchStatus.noResult => '无结果',
-        PluginSearchStatus.error => '检索失败',
-        PluginSearchStatus.captcha => '需要验证',
+          results.isEmpty ? '無結果' : '${results.length} 個結果',
+        PluginSearchStatus.noResult => '無結果',
+        PluginSearchStatus.error => '檢索失敗',
+        PluginSearchStatus.captcha => '需要驗證',
       };
 }
 
@@ -129,10 +129,10 @@ class _SourceSheetViewState extends State<_SourceSheetView> {
       body: Column(
         children: [
           MaterialBottomSheetHeader(
-            title: '播放来源',
+            title: '播放來源',
             description: pending > 0
-                ? '检索中 ${widget.groups.length - pending}/${widget.groups.length} · $resultCount 个结果'
-                : '${widget.groups.length} 个来源 · $resultCount 个结果',
+                ? '檢索中 ${widget.groups.length - pending}/${widget.groups.length} · $resultCount 個結果'
+                : '${widget.groups.length} 個來源 · $resultCount 個結果',
             compact: true,
             onClose: widget.onClose,
           ),
@@ -197,7 +197,7 @@ class _SourceSheetViewState extends State<_SourceSheetView> {
                   header: true,
                   button: true,
                   expanded: !collapsed,
-                  label: '来源规则：${group.name}，${group.statusLabel}',
+                  label: '來源規則：${group.name}，${group.statusLabel}',
                   onTap: toggle,
                   excludeSemantics: true,
                   child: Material(
@@ -249,7 +249,7 @@ class _SourceSheetViewState extends State<_SourceSheetView> {
           Padding(
             padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
             child: Text(
-              '检索词：${group.keyword}',
+              '檢索詞：${group.keyword}',
               style: theme.textTheme.bodySmall
                   ?.copyWith(color: colors.onSurfaceVariant),
             ),
@@ -275,16 +275,16 @@ class _SourceSheetViewState extends State<_SourceSheetView> {
           PluginSearchStatus.noResult =>
             GeneralEmptyState(
               icon: Icons.search_off_rounded,
-              title: '没有找到匹配结果',
+              title: '沒有找到匹配結果',
               compact: true,
               actions: [
                 StateActionButton.tonal(
                   onPressed: () => widget.onSourceSearch(group.name),
-                  text: '修改检索词',
+                  text: '修改檢索詞',
                 ),
                 TextButton(
                   onPressed: () => widget.onSourceAliasSearch(group.name),
-                  child: const Text('使用别名'),
+                  child: const Text('使用別名'),
                 ),
               ],
             ),
@@ -323,7 +323,7 @@ class _SourceSheetViewState extends State<_SourceSheetView> {
                   children: [
                     Flexible(
                       child: Text(
-                        showAll ? '收起全部条目' : '展开全部 ${group.results.length} 个结果',
+                        showAll ? '收起全部條目' : '展開全部 ${group.results.length} 個結果',
                         textAlign: TextAlign.center,
                         style: theme.textTheme.labelLarge
                             ?.copyWith(color: primary),
@@ -358,19 +358,19 @@ class _SourceSheetViewState extends State<_SourceSheetView> {
           ),
           menuChildren: [
             KazumiMenuItem(
-              label: '修改此来源的检索词',
+              label: '修改此來源的檢索詞',
               onPressed: () => widget.onSourceSearch(group.name),
             ),
             KazumiMenuItem(
-              label: '使用别名检索此来源',
+              label: '使用別名檢索此來源',
               onPressed: () => widget.onSourceAliasSearch(group.name),
             ),
             KazumiMenuItem(
-              label: '重新检索此来源',
+              label: '重新檢索此來源',
               onPressed: () => widget.onRetry(group.name),
             ),
             KazumiMenuItem(
-              label: '在浏览器中打开',
+              label: '在瀏覽器中開啟',
               onPressed: () => widget.onOpenBrowser(group.name),
             ),
           ],
@@ -388,7 +388,7 @@ class _SourceSheetViewState extends State<_SourceSheetView> {
       onTap: () => widget.onPlay(group.name, result),
       child: Semantics(
         button: true,
-        label: '播放 ${result.name}，来源 ${group.name}',
+        label: '播放 ${result.name}，來源 ${group.name}',
         excludeSemantics: true,
         child: ConstrainedBox(
           constraints: const BoxConstraints(minHeight: 64),
@@ -419,10 +419,10 @@ class _SourceSheetViewState extends State<_SourceSheetView> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
           child: Row(
             children: [
-              const LoadingIndicator(size: 20, semanticsLabel: '正在检索'),
+              const LoadingIndicator(size: 20, semanticsLabel: '正在檢索'),
               const SizedBox(width: 12),
               Expanded(
-                  child: Text('正在检索…',
+                  child: Text('正在檢索…',
                       style: Theme.of(context).textTheme.bodyMedium)),
             ],
           ),
@@ -436,16 +436,16 @@ class _SourceSheetViewState extends State<_SourceSheetView> {
     final (icon, title, hint, action, onAction) = requiresVerification
         ? (
             Icons.verified_user_outlined,
-            '需要验证',
-            '完成网站验证后继续检索。',
-            '进行验证',
+            '需要驗證',
+            '完成網站驗證後繼續檢索。',
+            '進行驗證',
             () => widget.onVerify(sourceName),
           )
         : (
             Icons.error_outline_rounded,
-            '检索失败',
-            '可以重试，或打开网站检查是否可用。',
-            '重试',
+            '檢索失敗',
+            '可以重試，或開啟網站檢查是否可用。',
+            '重試',
             () => widget.onRetry(sourceName),
           );
     return Padding(
@@ -493,7 +493,7 @@ class _SourceSheetViewState extends State<_SourceSheetView> {
               FilledButton.tonal(onPressed: onAction, child: Text(action)),
               TextButton(
                 onPressed: () => widget.onOpenBrowser(sourceName),
-                child: const Text('打开网站'),
+                child: const Text('開啟網站'),
               ),
             ],
           ),

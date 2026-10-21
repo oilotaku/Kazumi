@@ -52,12 +52,12 @@ class BangumiSyncService extends ChangeNotifier {
 
   Future<String> _validateToken(String token) async {
     if (token.isEmpty) {
-      throw StateError('请先连接 Bangumi 账号');
+      throw StateError('請先連線 Bangumi 帳號');
     }
     final user = await BangumiApi.getCurrentUser(accessToken: token);
     final name = user?.username;
     if (name == null || name.trim().isEmpty) {
-      throw const FormatException('Bangumi 用户信息不完整');
+      throw const FormatException('Bangumi 使用者資訊不完整');
     }
     return name;
   }
@@ -113,22 +113,22 @@ class BangumiSyncService extends ChangeNotifier {
     if (error is NetworkException) {
       switch (error.statusCode) {
         case 401:
-          return 'Access Token 无效或已过期，请在「Bangumi 账号」中更换';
+          return 'Access Token 無效或已過期，請在「Bangumi 帳號」中更換';
         case 403:
-          return 'Bangumi 拒绝访问，请检查 Token 权限或稍后重试';
+          return 'Bangumi 拒絕訪問，請檢查 Token 許可權或稍後重試';
         case 429:
-          return 'Bangumi 请求过于频繁，请稍后重试';
+          return 'Bangumi 請求過於頻繁，請稍後重試';
       }
       if (error.statusCode != null) {
-        return 'Bangumi 服务请求失败（HTTP ${error.statusCode}），请稍后重试';
+        return 'Bangumi 服務請求失敗（HTTP ${error.statusCode}），請稍後重試';
       }
       return error.message;
     }
     if (error is FormatException || error is TypeError) {
-      return 'Bangumi 返回的用户信息格式异常，请稍后重试';
+      return 'Bangumi 返回的使用者資訊格式異常，請稍後重試';
     }
     if (error is StateError) return error.message.toString();
-    return 'Bangumi 操作失败，请稍后重试';
+    return 'Bangumi 操作失敗，請稍後重試';
   }
 
   Future<bool> syncCollectibleWhenIdle(int bangumiId, int localType) {
@@ -157,10 +157,10 @@ class BangumiSyncService extends ChangeNotifier {
     return _operations.run(() async {
       try {
         if (!GStorage.getSetting(SettingsKeys.bangumiSyncEnable)) {
-          throw StateError('请先开启 Bangumi 同步');
+          throw StateError('請先開啟 Bangumi 同步');
         }
         await _connectConfiguredToken();
-        onProgress?.call('开始同步 Bangumi 状态', 0, 0);
+        onProgress?.call('開始同步 Bangumi 狀態', 0, 0);
 
         final priority = BangumiSyncPriority.fromValue(
           GStorage.getSetting(SettingsKeys.bangumiSyncPriority),
@@ -180,63 +180,63 @@ class BangumiSyncService extends ChangeNotifier {
         final totalOperations = mergePlan.totalOperations;
 
         if (totalOperations == 0) {
-          onProgress?.call('未发现状态差异，无需同步', 1, 1);
+          onProgress?.call('未發現狀態差異，無需同步', 1, 1);
           return;
         }
 
         int syncedCount = 0;
         if (mergePlan.localOnlyUploads.isNotEmpty) {
-          onProgress?.call('正在上传本地新增状态', syncedCount, totalOperations);
+          onProgress?.call('正在上傳本地新增狀態', syncedCount, totalOperations);
           for (final upload in mergePlan.localOnlyUploads) {
             final updated = await BangumiApi.updateBangumiByType(
               upload.bangumiId,
               upload.type,
             );
             if (!updated) {
-              onProgress?.call('上传本地新增状态失败', syncedCount, totalOperations);
-              throw Exception('同步失败：条目 ${upload.bangumiId} 上传到 Bangumi 失败');
+              onProgress?.call('上傳本地新增狀態失敗', syncedCount, totalOperations);
+              throw Exception('同步失敗：條目 ${upload.bangumiId} 上傳到 Bangumi 失敗');
             }
             syncedCount++;
-            onProgress?.call('正在上传本地新增状态', syncedCount, totalOperations);
+            onProgress?.call('正在上傳本地新增狀態', syncedCount, totalOperations);
           }
         }
 
         if (mergePlan.remoteOnlyPuts.isNotEmpty) {
-          onProgress?.call('正在补全本地缺失状态', syncedCount, totalOperations);
+          onProgress?.call('正在補全本地缺失狀態', syncedCount, totalOperations);
           for (final mutation in mergePlan.remoteOnlyPuts) {
             await _applyLocalMutation(mutation);
             syncedCount++;
-            onProgress?.call('正在补全本地缺失状态', syncedCount, totalOperations);
+            onProgress?.call('正在補全本地缺失狀態', syncedCount, totalOperations);
           }
         }
 
         if (mergePlan.conflictUploads.isNotEmpty) {
           onProgress?.call(
-              '${priority.label}：正在上传冲突状态', syncedCount, totalOperations);
+              '${priority.label}：正在上傳衝突狀態', syncedCount, totalOperations);
           for (final upload in mergePlan.conflictUploads) {
             final updated = await BangumiApi.updateBangumiByType(
               upload.bangumiId,
               upload.type,
             );
             if (!updated) {
-              throw Exception('同步失败：条目 ${upload.bangumiId} 上传到 Bangumi 失败');
+              throw Exception('同步失敗：條目 ${upload.bangumiId} 上傳到 Bangumi 失敗');
             }
             syncedCount++;
             onProgress?.call(
-                '${priority.label}：正在上传冲突状态', syncedCount, totalOperations);
+                '${priority.label}：正在上傳衝突狀態', syncedCount, totalOperations);
           }
         }
         if (mergePlan.conflictLocalUpdates.isNotEmpty) {
           onProgress?.call(
-              '${priority.label}：正在更新本地冲突状态', syncedCount, totalOperations);
+              '${priority.label}：正在更新本地衝突狀態', syncedCount, totalOperations);
           for (final mutation in mergePlan.conflictLocalUpdates) {
             await _applyLocalMutation(mutation);
             syncedCount++;
             onProgress?.call(
-                '${priority.label}：正在更新本地冲突状态', syncedCount, totalOperations);
+                '${priority.label}：正在更新本地衝突狀態', syncedCount, totalOperations);
           }
         }
-        onProgress?.call('Bangumi 状态同步完成', 1, 1);
+        onProgress?.call('Bangumi 狀態同步完成', 1, 1);
       } catch (e) {
         KazumiLogger().e('Bangumi sync failed', error: e);
         rethrow;

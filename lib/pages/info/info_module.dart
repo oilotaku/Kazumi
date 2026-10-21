@@ -14,7 +14,7 @@ final infoModule = createModule(
       child: (context, state) {
         final bangumiItem = state.arguments;
         if (bangumiItem is! BangumiItem) {
-          return const RouteErrorPage(message: '番组详情参数无效，请返回后重新打开。');
+          return const RouteErrorPage(message: '番組詳情參數無效，請返回後重新開啟。');
         }
         return InfoPage(
           inputBangumiItem: bangumiItem,

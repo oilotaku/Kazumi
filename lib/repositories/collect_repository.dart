@@ -2,61 +2,61 @@ import 'package:kazumi/services/storage/storage.dart';
 import 'package:kazumi/modules/collect/collect_type.dart';
 import 'package:kazumi/services/logging/logger.dart';
 
-/// 收藏数据访问接口
+/// 收藏資料訪問介面
 ///
-/// 提供收藏相关的数据访问抽象，解耦业务逻辑与数据存储
+/// 提供收藏相關的資料訪問抽象，解耦業務邏輯與資料儲存
 abstract class ICollectRepository {
-  /// 根据收藏类型获取番剧ID集合
+  /// 根據收藏型別獲取番劇ID集合
   ///
-  /// [type] 收藏类型
-  /// 返回符合条件的番剧ID集合
+  /// [type] 收藏型別
+  /// 返回符合條件的番劇ID集合
   Set<int> getBangumiIdsByType(CollectType type);
 
-  /// 批量获取多种类型的番剧ID集合
+  /// 批次獲取多種型別的番劇ID集合
   ///
-  /// [types] 收藏类型列表
-  /// 返回符合条件的番剧ID集合（并集）
+  /// [types] 收藏型別列表
+  /// 返回符合條件的番劇ID集合（並集）
   Set<int> getBangumiIdsByTypes(List<CollectType> types);
 
-  // ========== 搜索页过滤器设置 ==========
+  // ========== 搜尋頁過濾器設定 ==========
 
-  /// 获取搜索页"不显示已看过番剧"设置
+  /// 獲取搜尋頁"不顯示已看過番劇"設定
 
-  /// 更新搜索页"不显示已看过番剧"设置
+  /// 更新搜尋頁"不顯示已看過番劇"設定
 
-  /// 获取搜索页"不显示已抛弃番剧"设置
+  /// 獲取搜尋頁"不顯示已拋棄番劇"設定
 
-  /// 更新搜索页"不显示已抛弃番剧"设置
+  /// 更新搜尋頁"不顯示已拋棄番劇"設定
 
-  // ========== 时间表页过滤器设置 ==========
+  // ========== 時間表頁過濾器設定 ==========
 
-  /// 获取时间表页"不显示已抛弃番剧"设置
+  /// 獲取時間表頁"不顯示已拋棄番劇"設定
   bool getTimelineNotShowAbandonedBangumis();
 
-  /// 更新时间表页"不显示已抛弃番剧"设置
+  /// 更新時間表頁"不顯示已拋棄番劇"設定
   Future<void> updateTimelineNotShowAbandonedBangumis(bool value);
 
-  /// 获取时间表页"不显示已看过番剧"设置
+  /// 獲取時間表頁"不顯示已看過番劇"設定
   bool getTimelineNotShowWatchedBangumis();
 
-  /// 更新时间表页"不显示已看过番剧"设置
+  /// 更新時間表頁"不顯示已看過番劇"設定
   Future<void> updateTimelineNotShowWatchedBangumis(bool value);
 
-  /// 获取时间表页"只显示在看的番剧"设置
+  /// 獲取時間表頁"只顯示在看的番劇"設定
   bool getTimelineOnlyShowWatchingBangumis();
 
-  /// 更新时间表页"只显示在看的番剧"设置
+  /// 更新時間表頁"只顯示在看的番劇"設定
   Future<void> updateTimelineOnlyShowWatchingBangumis(bool value);
 
-  // ========== 其他设置 ==========
+  // ========== 其他設定 ==========
 
-  /// 获取隐私模式设置
+  /// 獲取隱私模式設定
   bool getPrivateMode();
 }
 
-/// 收藏数据访问实现类
+/// 收藏資料訪問實現類
 ///
-/// 基于Hive实现的收藏数据访问层
+/// 基於Hive實現的收藏資料訪問層
 class CollectRepository implements ICollectRepository {
   final _collectiblesBox = GStorage.collectibles;
 
@@ -93,9 +93,9 @@ class CollectRepository implements ICollectRepository {
     }
   }
 
-  // ========== 搜索页过滤器设置实现 ==========
+  // ========== 搜尋頁過濾器設定實現 ==========
 
-  // ========== 时间表页过滤器设置实现 ==========
+  // ========== 時間表頁過濾器設定實現 ==========
 
   @override
   bool getTimelineNotShowAbandonedBangumis() {
@@ -187,7 +187,7 @@ class CollectRepository implements ICollectRepository {
     }
   }
 
-  // ========== 其他设置实现 ==========
+  // ========== 其他設定實現 ==========
 
   @override
   bool getPrivateMode() {

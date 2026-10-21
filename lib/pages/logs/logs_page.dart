@@ -143,7 +143,7 @@ class _LogsPageState extends State<LogsPage> {
       });
     } catch (e) {
       if (!mounted) return;
-      KazumiDialog.showToast(message: '清空失败: $e');
+      KazumiDialog.showToast(message: '清空失敗: $e');
     }
   }
 
@@ -151,17 +151,17 @@ class _LogsPageState extends State<LogsPage> {
     try {
       await Clipboard.setData(ClipboardData(text: _fullContent));
       if (!mounted) return;
-      KazumiDialog.showToast(message: '已复制到剪贴板');
+      KazumiDialog.showToast(message: '已複製到剪貼簿');
     } catch (e) {
       if (!mounted) return;
-      KazumiDialog.showToast(message: '复制失败: $e');
+      KazumiDialog.showToast(message: '複製失敗: $e');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return SettingsDetailScaffold(
-      title: const Text('日志'),
+      title: const Text('日誌'),
       body: _buildBody(),
       floatingActionButton: _buildFloatingButtons(),
     );
@@ -176,8 +176,8 @@ class _LogsPageState extends State<LogsPage> {
 
     if (_hasError) {
       return GeneralErrorWidget(
-        title: '无法读取日志',
-        errMsg: '请稍后重新加载。',
+        title: '無法讀取日誌',
+        errMsg: '請稍後重新載入。',
         icon: Icons.receipt_long_rounded,
         onRetry: _loadLogs,
       );
@@ -186,7 +186,7 @@ class _LogsPageState extends State<LogsPage> {
     if (_logLines.isEmpty) {
       return const GeneralEmptyState(
         icon: Icons.receipt_long_rounded,
-        title: '还没有日志记录',
+        title: '還沒有日誌記錄',
       );
     }
 
@@ -227,14 +227,14 @@ class _LogsPageState extends State<LogsPage> {
         FloatingActionButton(
           heroTag: null,
           onPressed: _clearLogs,
-          tooltip: '清空日志',
+          tooltip: '清空日誌',
           child: const Icon(Icons.clear_all),
         ),
         const SizedBox(width: 15),
         FloatingActionButton(
           heroTag: null,
           onPressed: _copyLogs,
-          tooltip: '复制日志',
+          tooltip: '複製日誌',
           child: const Icon(Icons.copy),
         ),
       ],

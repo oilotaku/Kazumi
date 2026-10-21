@@ -16,7 +16,7 @@ Future<void> openAboutLink(BuildContext context, String url) async {
       return;
     }
   } catch (_) {}
-  if (context.mounted) _showMessage(context, '无法打开链接，请稍后重试');
+  if (context.mounted) _showMessage(context, '無法開啟連結，請稍後重試');
 }
 
 class AboutContent extends StatelessWidget {
@@ -141,7 +141,7 @@ class _CheckUpdateButtonState extends State<CheckUpdateButton> {
     try {
       await widget.onCheckUpdate();
     } catch (_) {
-      if (mounted) _showMessage(context, '检查更新失败，请稍后重试');
+      if (mounted) _showMessage(context, '檢查更新失敗，請稍後重試');
     } finally {
       if (mounted) setState(() => _checking = false);
     }
@@ -150,8 +150,8 @@ class _CheckUpdateButtonState extends State<CheckUpdateButton> {
   @override
   Widget build(BuildContext context) => StateActionButton(
         onPressed: _checking ? null : _check,
-        text: _checking ? '正在检查…' : '检查更新',
-        reserveText: '正在检查…',
+        text: _checking ? '正在檢查…' : '檢查更新',
+        reserveText: '正在檢查…',
         icon: Icons.update_rounded,
       );
 }

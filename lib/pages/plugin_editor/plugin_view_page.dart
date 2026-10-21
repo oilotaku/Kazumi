@@ -109,23 +109,23 @@ class _PluginViewPageState extends State<PluginViewPage> {
       final file = result.files.single;
       final bytes = file.bytes ??
           (file.path == null ? null : await File(file.path!).readAsBytes());
-      if (bytes == null) throw const FileSystemException('无法读取所选文件');
+      if (bytes == null) throw const FileSystemException('無法讀取所選檔案');
       final parsed = PluginImportParser.parse(utf8.decode(bytes));
       if (parsed.plugins.isEmpty) {
         KazumiDialog.showToast(
             message: parsed.failures.isEmpty
-                ? '文件中没有可导入的规则'
+                ? '檔案中沒有可匯入的規則'
                 : parsed.failures.first);
         return;
       }
       await _controller.updatePlugins(parsed.plugins);
       KazumiDialog.showToast(
-          message: '已导入 ${parsed.plugins.length} 条规则，'
-              '跳过重复 ${parsed.duplicateCount} 条，失败 ${parsed.failureCount} 条');
+          message: '已匯入 ${parsed.plugins.length} 條規則，'
+              '跳過重複 ${parsed.duplicateCount} 條，失敗 ${parsed.failureCount} 條');
     } catch (error, stackTrace) {
       KazumiLogger().e('Plugin: failed to import rules from file',
           error: error, stackTrace: stackTrace);
-      KazumiDialog.showToast(message: '导入规则文件失败：$error');
+      KazumiDialog.showToast(message: '匯入規則檔案失敗：$error');
     }
   }
 
@@ -150,9 +150,9 @@ class _PluginViewPageState extends State<PluginViewPage> {
     try {
       await _controller.removePlugins(names);
       if (mounted) _leaveSelection();
-      KazumiDialog.showToast(message: '已删除 ${names.length} 条规则');
+      KazumiDialog.showToast(message: '已刪除 ${names.length} 條規則');
     } catch (_) {
-      KazumiDialog.showToast(message: '删除规则失败，请重试');
+      KazumiDialog.showToast(message: '刪除規則失敗，請重試');
     } finally {
       if (mounted) setState(() => _deleting = false);
     }
@@ -162,7 +162,7 @@ class _PluginViewPageState extends State<PluginViewPage> {
     try {
       await _controller.onReorder(oldIndex, newIndex);
     } catch (_) {
-      KazumiDialog.showToast(message: '保存规则顺序失败');
+      KazumiDialog.showToast(message: '儲存規則順序失敗');
     }
   }
 
@@ -178,11 +178,11 @@ class _PluginViewPageState extends State<PluginViewPage> {
       } else {
         KazumiDialog.showToast(
             message: state == PluginUpdateAvailability.notInCatalog
-                ? '规则仓库中没有当前规则'
-                : '规则已是最新');
+                ? '規則庫中沒有當前規則'
+                : '規則已是最新');
       }
     } catch (_) {
-      KazumiDialog.showToast(message: '检查规则更新失败');
+      KazumiDialog.showToast(message: '檢查規則更新失敗');
     } finally {
       if (mounted) setState(() => _updatingNames.remove(plugin.name));
     }
@@ -195,17 +195,17 @@ class _PluginViewPageState extends State<PluginViewPage> {
           if (!didPop && _selecting) _leaveSelection();
         },
         child: SettingsDetailScaffold(
-          title: Text(_selecting ? '已选择 ${_selected.length} 条' : '规则管理'),
+          title: Text(_selecting ? '已選擇 ${_selected.length} 條' : '規則管理'),
           leading: _selecting
               ? IconButton(
-                  tooltip: '退出多选',
+                  tooltip: '退出多選',
                   onPressed: _leaveSelection,
                   icon: const Icon(Icons.close_rounded))
               : null,
           actions: [
             if (_selecting)
               IconButton(
-                tooltip: '删除所选规则',
+                tooltip: '刪除所選規則',
                 onPressed: _selected.isEmpty || _deleting
                     ? null
                     : () => _delete(Set.of(_selected)),
@@ -213,7 +213,7 @@ class _PluginViewPageState extends State<PluginViewPage> {
               )
             else
               IconButton(
-                tooltip: '批量选择',
+                tooltip: '批次選擇',
                 onPressed: () => setState(() => _selecting = true),
                 icon: const Icon(Icons.checklist_rounded),
               ),
@@ -255,8 +255,8 @@ class _PluginViewPageState extends State<PluginViewPage> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         RulePageIntro(
-                          title: '我的规则',
-                          description: '管理你的番剧来源。拖动调整搜索顺序，点按规则进行编辑。',
+                          title: '我的規則',
+                          description: '管理你的番劇來源。拖動調整搜尋順序，點按規則進行編輯。',
                           icon: Icons.extension_rounded,
                           actions: [
                             FilledButton.icon(
@@ -264,14 +264,14 @@ class _PluginViewPageState extends State<PluginViewPage> {
                                     minimumSize: const Size(120, 48)),
                                 onPressed: _add,
                                 icon: const Icon(Icons.add_rounded),
-                                label: const Text('添加规则')),
+                                label: const Text('新增規則')),
                             FilledButton.tonalIcon(
                                 style: FilledButton.styleFrom(
                                     minimumSize: const Size(120, 48)),
                                 onPressed: () =>
                                     context.pushNamed('/settings/plugin/shop'),
                                 icon: const Icon(Icons.travel_explore_rounded),
-                                label: const Text('规则仓库')),
+                                label: const Text('規則庫')),
                           ],
                         ),
                         const SizedBox(height: 20),
@@ -279,12 +279,12 @@ class _PluginViewPageState extends State<PluginViewPage> {
                           controller: _search,
                           onChanged: (_) => setState(() {}),
                           decoration: ruleInputDecoration(context,
-                              hint: '搜索名称或站点',
+                              hint: '搜尋名稱或站點',
                               prefix: const Icon(Icons.search_rounded),
                               suffix: query.isEmpty
                                   ? null
                                   : IconButton(
-                                      tooltip: '清除搜索',
+                                      tooltip: '清除搜尋',
                                       onPressed: () => setState(_search.clear),
                                       icon: const Icon(Icons.close_rounded))),
                         ),
@@ -328,14 +328,14 @@ class _PluginViewPageState extends State<PluginViewPage> {
                                   child: Text(visible.isNotEmpty &&
                                           visible.every(
                                               (p) => _selected.contains(p.name))
-                                      ? '取消全选'
-                                      : '全选当前列表')),
+                                      ? '取消全選'
+                                      : '全選當前列表')),
                           ],
                         ),
                         if (_catalogFailed)
                           Padding(
                               padding: const EdgeInsets.symmetric(vertical: 8),
-                              child: Text('暂时无法检查更新，已安装的规则仍可使用。',
+                              child: Text('暫時無法檢查更新，已安裝的規則仍可使用。',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodySmall
@@ -347,21 +347,21 @@ class _PluginViewPageState extends State<PluginViewPage> {
                     footer: all.isEmpty
                         ? const GeneralEmptyState(
                             icon: Icons.extension_rounded,
-                            title: '还没有安装规则',
+                            title: '還沒有安裝規則',
                           )
                         : visible.isEmpty
                             ? GeneralEmptyState(
                                 icon: Icons.search_off_rounded,
                                 title: _updatesOnly && query.isEmpty
-                                    ? '没有可更新的规则'
-                                    : '没有符合条件的规则',
+                                    ? '沒有可更新的規則'
+                                    : '沒有符合條件的規則',
                                 actions: [
                                   StateActionButton.tonal(
                                       onPressed: () => setState(() {
                                             _search.clear();
                                             _updatesOnly = false;
                                           }),
-                                      text: '显示全部规则'),
+                                      text: '顯示全部規則'),
                                 ],
                               )
                             : null,
@@ -403,7 +403,7 @@ class _PluginViewPageState extends State<PluginViewPage> {
                           if (_controller.validityTracker
                               .isSearchValid(plugin.name))
                             RuleTag(
-                                label: '搜索通过',
+                                label: '搜尋透過',
                                 background: colors.tertiaryContainer,
                                 foreground: colors.onTertiaryContainer),
                         ],
@@ -412,7 +412,7 @@ class _PluginViewPageState extends State<PluginViewPage> {
                           if (_selecting)
                             Checkbox(
                                 value: _selected.contains(plugin.name),
-                                semanticLabel: '选择 ${plugin.name}',
+                                semanticLabel: '選擇 ${plugin.name}',
                                 onChanged: (_) => _toggleSelection(plugin.name))
                           else if (_updatingNames.contains(plugin.name))
                             const Padding(
@@ -422,7 +422,7 @@ class _PluginViewPageState extends State<PluginViewPage> {
                             _menu(plugin, actualIndex),
                           if (canReorder)
                             Tooltip(
-                              message: '拖动排序',
+                              message: '拖動排序',
                               child: ReorderableDragStartListener(
                                 index: index,
                                 child: const SizedBox.square(
@@ -455,17 +455,17 @@ class _PluginViewPageState extends State<PluginViewPage> {
           KazumiMenuItem(
               onPressed: () => context.pushNamed('/settings/plugin/editor',
                   arguments: plugin),
-              label: '编辑规则'),
+              label: '編輯規則'),
           KazumiMenuItem(
               onPressed: () =>
                   context.pushNamed('/settings/plugin/test', arguments: plugin),
-              label: '测试规则'),
+              label: '測試規則'),
           KazumiMenuItem(
               onPressed: _updating ? null : () => _updateOne(plugin),
-              label: '检查更新'),
+              label: '檢查更新'),
           KazumiMenuItem(
               onPressed: () => showRuleShareDialog(context, plugin),
-              label: '分享规则'),
+              label: '分享規則'),
           const Divider(),
           KazumiMenuItem(
               onPressed: index == 0 ? null : () => _reorder(index, index - 1),
@@ -479,7 +479,7 @@ class _PluginViewPageState extends State<PluginViewPage> {
           KazumiMenuItem(
               destructive: true,
               onPressed: _deleting ? null : () => _delete({plugin.name}),
-              label: '删除规则'),
+              label: '刪除規則'),
         ],
       );
 }

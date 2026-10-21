@@ -106,7 +106,7 @@ class _PluginCatalogViewState extends State<PluginCatalogView> {
       await GStorage.putSetting(SettingsKeys.enableGitProxy, !enabled);
       if (mounted) _refresh();
     } catch (_) {
-      KazumiDialog.showToast(message: '切换规则镜像失败，请重试');
+      KazumiDialog.showToast(message: '切換規則映象失敗，請重試');
     }
   }
 
@@ -149,14 +149,14 @@ class _PluginCatalogViewState extends State<PluginCatalogView> {
         builder: (context, toggle) => TextButton.icon(
           onPressed: toggle,
           icon: const Icon(Icons.sort_rounded, size: 20),
-          label: Text(_sort == _CatalogSort.name ? '名称排序' : '最近更新'),
+          label: Text(_sort == _CatalogSort.name ? '名稱排序' : '最近更新'),
         ),
         menuChildren: [
           for (final sort in _CatalogSort.values)
             KazumiMenuItem(
               selected: _sort == sort,
               onPressed: () => setState(() => _sort = sort),
-              label: sort == _CatalogSort.name ? '按名称排序' : '按更新时间排序',
+              label: sort == _CatalogSort.name ? '按名稱排序' : '按更新時間排序',
             ),
         ],
       );
@@ -166,8 +166,8 @@ class _PluginCatalogViewState extends State<PluginCatalogView> {
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       if (!widget._onboarding) ...[
         const RulePageIntro(
-          title: '发现更多来源',
-          description: '浏览社区规则，为你的番剧搜索添加更多选择。',
+          title: '發現更多來源',
+          description: '瀏覽社群規則，為你的番劇搜尋新增更多選擇。',
           icon: Icons.travel_explore_rounded,
         ),
         const SizedBox(height: 20),
@@ -175,12 +175,12 @@ class _PluginCatalogViewState extends State<PluginCatalogView> {
           controller: _search,
           onChanged: (_) => setState(() {}),
           decoration: ruleInputDecoration(context,
-              hint: '搜索规则或作者',
+              hint: '搜尋規則或作者',
               prefix: const Icon(Icons.search_rounded),
               suffix: _search.text.isEmpty
                   ? null
                   : IconButton(
-                      tooltip: '清除搜索',
+                      tooltip: '清除搜尋',
                       onPressed: () => setState(_search.clear),
                       icon: const Icon(Icons.close_rounded))),
         ),
@@ -192,7 +192,7 @@ class _PluginCatalogViewState extends State<PluginCatalogView> {
           children: [
             for (final entry in [
               (_CatalogFilter.all, '全部 $total'),
-              (_CatalogFilter.installed, '已安装 $installed'),
+              (_CatalogFilter.installed, '已安裝 $installed'),
               (_CatalogFilter.updates, '可更新 $updates'),
             ])
               FilterChip(
@@ -205,7 +205,7 @@ class _PluginCatalogViewState extends State<PluginCatalogView> {
       Row(children: [
         if (widget._onboarding)
           Expanded(
-            child: Text('规则仓库 · 已安装 $installed',
+            child: Text('規則庫 · 已安裝 $installed',
                 style: theme.textTheme.titleSmall?.copyWith(
                     color: theme.colorScheme.primary,
                     fontWeight: FontWeight.w600)),
@@ -215,7 +215,7 @@ class _PluginCatalogViewState extends State<PluginCatalogView> {
           const Spacer(),
         ],
         IconButton.filledTonal(
-            tooltip: '刷新规则列表',
+            tooltip: '重新整理規則列表',
             onPressed: _loading ? null : _refresh,
             icon: const Icon(Icons.refresh_rounded)),
       ]),
@@ -226,7 +226,7 @@ class _PluginCatalogViewState extends State<PluginCatalogView> {
       if (_loadFailed && total > 0)
         Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Text('刷新失败，正在显示上次获取的规则。', style: theme.textTheme.bodySmall)),
+            child: Text('重新整理失敗，正在顯示上次獲取的規則。', style: theme.textTheme.bodySmall)),
       const SizedBox(height: 8),
     ]);
   }
@@ -240,22 +240,22 @@ class _PluginCatalogViewState extends State<PluginCatalogView> {
     if (_loadFailed && _controller.pluginHTTPList.isEmpty) {
       final enabled = GStorage.getSetting(SettingsKeys.enableGitProxy);
       return GeneralErrorWidget(
-        title: '无法访问规则仓库',
-        errMsg: '请检查网络连接，或切换规则仓库镜像后重试。',
+        title: '無法訪問規則庫',
+        errMsg: '請檢查網路連線，或切換規則庫映象後重試。',
         icon: Icons.cloud_off_rounded,
         onRetry: _refresh,
-        retryText: '重新加载',
+        retryText: '重新載入',
         actions: [
           StateActionButton.tonal(
             onPressed: _toggleGitProxyAndRefresh,
             icon: Icons.tune_rounded,
-            text: enabled ? '关闭规则镜像' : '启用规则镜像',
+            text: enabled ? '關閉規則映象' : '啟用規則映象',
           ),
         ],
       );
     }
     return GeneralEmptyState(
-      title: _controller.pluginHTTPList.isEmpty ? '仓库暂无规则' : '没有符合条件的规则',
+      title: _controller.pluginHTTPList.isEmpty ? '倉庫暫無規則' : '沒有符合條件的規則',
       icon: _controller.pluginHTTPList.isEmpty
           ? Icons.extension_rounded
           : Icons.search_off_rounded,
@@ -305,12 +305,12 @@ class _PluginCatalogViewState extends State<PluginCatalogView> {
                             foreground: colors.onSurfaceVariant),
                         if (item.antiCrawlerEnabled)
                           RuleTag(
-                              label: '含验证支持',
+                              label: '含驗證支援',
                               background: colors.tertiaryContainer,
                               foreground: colors.onTertiaryContainer),
                       ],
                       caption: item.lastUpdate > 0
-                          ? '更新于 ${DateTime.fromMillisecondsSinceEpoch(item.lastUpdate).toString().split(' ').first}'
+                          ? '更新於 ${DateTime.fromMillisecondsSinceEpoch(item.lastUpdate).toString().split(' ').first}'
                           : null,
                       trailing: _CatalogRuleAction(
                         status: status,
@@ -351,7 +351,7 @@ class _CatalogRuleAction extends StatelessWidget {
         child: Row(mainAxisSize: MainAxisSize.min, children: [
           Icon(Icons.check_rounded, size: 18, color: colors.onSurfaceVariant),
           const SizedBox(width: 6),
-          Text('已安装',
+          Text('已安裝',
               style: Theme.of(context)
                   .textTheme
                   .labelLarge
@@ -372,7 +372,7 @@ class _CatalogRuleAction extends StatelessWidget {
         else
           Icon(installing ? Icons.add_rounded : Icons.sync_rounded, size: 18),
         const SizedBox(width: 6),
-        Text(installing ? (busy ? '安装中' : '安装') : (busy ? '更新中' : '更新')),
+        Text(installing ? (busy ? '安裝中' : '安裝') : (busy ? '更新中' : '更新')),
       ]),
     );
   }

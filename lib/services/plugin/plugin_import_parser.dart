@@ -30,7 +30,7 @@ class PluginImportParser {
     if (value.isEmpty) {
       return const PluginImportParseResult(
         plugins: [],
-        failures: ['导入内容为空'],
+        failures: ['匯入內容為空'],
         duplicateCount: 0,
       );
     }
@@ -57,7 +57,7 @@ class PluginImportParser {
     } else {
       final segments = findKazumiRuleLinkSegments(value).toList();
       if (segments.isEmpty) {
-        failures.add('未找到有效的 JSON 或 kazumi:// 规则链接');
+        failures.add('未找到有效的 JSON 或 kazumi:// 規則連結');
       } else {
         for (var index = 0; index < segments.length; index++) {
           final segment = segments[index];
@@ -100,7 +100,7 @@ class PluginImportParser {
       final entry = _decodeRuleEntry(scheme, rawPayload);
       _parseEntry(entry, index, plugins, failures);
     } catch (error) {
-      failures.add('第 $index 条：$error');
+      failures.add('第 $index 條：$error');
     }
   }
 
@@ -133,7 +133,7 @@ class PluginImportParser {
           return Map<String, dynamic>.from(decoded);
         }
         firstError ??=
-            const FormatException('规则链接内容必须是 JSON object');
+            const FormatException('規則連結內容必須是 JSON object');
       } on FormatException catch (error) {
         firstError ??= error;
         // Try a shorter prefix in case prose follows the rule link.
@@ -155,22 +155,22 @@ class PluginImportParser {
       } else if (entry is String) {
         final decoded = json.decode(kazumiBase64ToJson(entry));
         if (decoded is! Map) {
-          throw const FormatException('规则链接内容必须是 JSON object');
+          throw const FormatException('規則連結內容必須是 JSON object');
         }
         plugin = Plugin.fromJson(Map<String, dynamic>.from(decoded));
       } else {
-        throw const FormatException('规则必须是 JSON object 或 kazumi:// 链接');
+        throw const FormatException('規則必須是 JSON object 或 kazumi:// 連結');
       }
 
       if (plugin.name.trim().isEmpty) {
-        throw const FormatException('规则名称不能为空');
+        throw const FormatException('規則名稱不能為空');
       }
       if (plugin.requiresNewerClient) {
-        throw const FormatException('规则需要更高版本客户端');
+        throw const FormatException('規則需要更高版本客戶端');
       }
       plugins.add(plugin);
     } catch (error) {
-      failures.add('第 $index 条：$error');
+      failures.add('第 $index 條：$error');
     }
   }
 }

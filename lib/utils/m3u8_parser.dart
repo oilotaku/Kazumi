@@ -263,9 +263,9 @@ class M3u8Parser {
     return path.endsWith('.m3u8');
   }
 
-  /// 展开嵌套 M3U8 片段。
-  /// [fetcher] 异步回调，给定 URL 返回 M3U8 文本内容。
-  /// [maxDepth] 递归深度上限，防止无限嵌套。
+  /// 展開巢狀 M3U8 片段。
+  /// [fetcher] 非同步回撥，給定 URL 返回 M3U8 文字內容。
+  /// [maxDepth] 遞迴深度上限，防止無限巢狀。
   static Future<List<M3u8Segment>> resolveNestedSegments(
     List<M3u8Segment> segments,
     Future<String> Function(String url) fetcher, {
@@ -288,7 +288,7 @@ class M3u8Parser {
         continue;
       }
 
-      // 该 segment 的 URI 指向嵌套 m3u8，展开
+      // 該 segment 的 URI 指向巢狀 m3u8，展開
       try {
         final content = await fetcher(seg.uri);
         final nested = parseMediaPlaylist(content, seg.uri);
@@ -317,10 +317,10 @@ class M3u8Parser {
           ));
         }
 
-        // 后续 segment 的 group 需要额外偏移，避免碰撞
+        // 後續 segment 的 group 需要額外偏移，避免碰撞
         groupOffset += maxNestedGroup;
       } catch (e) {
-        // 获取/解析失败，保留原始 segment
+        // 獲取/解析失敗，保留原始 segment
         result.add(M3u8Segment(
           duration: seg.duration,
           uri: seg.uri,

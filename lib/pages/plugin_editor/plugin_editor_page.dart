@@ -15,41 +15,41 @@ import 'package:kazumi/request/config/api_endpoints.dart';
 import 'package:kazumi/services/plugin/api_rule_engine.dart';
 
 abstract final class _RuleEditorText {
-  static const pageTitle = '规则编辑器';
-  static const testRule = '测试规则';
-  static const save = '保存';
+  static const pageTitle = '規則編輯器';
+  static const testRule = '測試規則';
+  static const save = '儲存';
 
   static const modeXPath = 'XPath';
   static const modeApi = 'API';
   static const methodGet = 'GET';
   static const methodPost = 'POST';
-  static const bodyTypeNone = '无';
+  static const bodyTypeNone = '無';
   static const bodyTypeJson = 'JSON';
-  static const bodyTypeForm = '表单';
-  static const formatNested = '嵌套 JSON';
-  static const formatDelimited = '分隔字符串';
+  static const bodyTypeForm = '表單';
+  static const formatNested = '巢狀 JSON';
+  static const formatDelimited = '分隔字串';
 
-  static const legacyParser = '简易解析';
-  static const legacyParserDesc = '使用简易解析器而不是现代解析器';
-  static const adBlocker = '广告过滤';
-  static const adBlockerDesc = '启用 HLS 广告过滤';
+  static const legacyParser = '簡易解析';
+  static const legacyParserDesc = '使用簡易解析器而不是現代解析器';
+  static const adBlocker = '廣告過濾';
+  static const adBlockerDesc = '啟用 HLS 廣告過濾';
 
-  static const antiCrawlerEnable = '启用反反爬虫';
-  static const antiCrawlerEnableDesc = '检索失败时显示验证码验证按钮而非重试';
-  static const captchaTypeLabel = '验证类型';
-  static const captchaTypeImage = '图片验证码';
-  static const captchaTypeAutoClick = '自动点击';
-  static const captchaTypeScript = '自定义脚本';
-  static const captchaTypeImageDesc = '展示验证码图片，由用户手动输入';
-  static const captchaTypeAutoClickDesc = '检测到验证按钮后自动模拟点击';
-  static const captchaTypeScriptDesc = '加载页面后执行规则内的验证脚本';
-  static const captchaTypeUnknownDesc = '未知验证类型';
-  static const captchaDetectTypeLabel = '验证页检测方式';
-  static const captchaDetectTypeDesc = '优先使用该标记判断搜索响应是否为验证页';
-  static const captchaDetectText = '文本';
-  static const captchaDetectRegex = '正则';
-  static const captchaDetectValueHintText = '身份验证';
-  static const captchaDetectValueHintRegex = '身份验证|smart_verify';
+  static const antiCrawlerEnable = '啟用反反爬蟲';
+  static const antiCrawlerEnableDesc = '檢索失敗時顯示驗證碼驗證按鈕而非重試';
+  static const captchaTypeLabel = '驗證型別';
+  static const captchaTypeImage = '圖片驗證碼';
+  static const captchaTypeAutoClick = '自動點選';
+  static const captchaTypeScript = '自定義指令碼';
+  static const captchaTypeImageDesc = '展示驗證碼圖片，由使用者手動輸入';
+  static const captchaTypeAutoClickDesc = '檢測到驗證按鈕後自動模擬點選';
+  static const captchaTypeScriptDesc = '載入頁面後執行規則內的驗證指令碼';
+  static const captchaTypeUnknownDesc = '未知驗證型別';
+  static const captchaDetectTypeLabel = '驗證頁檢測方式';
+  static const captchaDetectTypeDesc = '優先使用該標記判斷搜尋響應是否為驗證頁';
+  static const captchaDetectText = '文字';
+  static const captchaDetectRegex = '正則';
+  static const captchaDetectValueHintText = '身份驗證';
+  static const captchaDetectValueHintRegex = '身份驗證|smart_verify';
   static const captchaDetectValueHintXPath = '//button[@id="verify"]';
   static const captchaImageHint = '//img[@class="captcha"]';
   static const captchaInputHint = '//input[@name="captcha"]';
@@ -57,87 +57,87 @@ abstract final class _RuleEditorText {
   static const captchaScriptHint =
       'KazumiCaptcha.log("ready"); KazumiCaptcha.done();';
 
-  static const sectionBasic = '基本信息';
-  static const sectionBasicDesc = '规则的名称、版本与站点地址';
-  static const sectionSearch = '搜索规则';
-  static const sectionSearchDesc = '定义如何在站点内检索条目';
-  static const sectionChapter = '选集规则';
-  static const sectionChapterDesc = '定义如何获取播放线路与剧集列表';
-  static const advancedOptions = '高级选项';
-  static const advancedOptionsDesc = '行为、网络与反反爬虫配置';
-  static const groupBehavior = '行为设置';
-  static const groupNetwork = '网络设置';
-  static const groupAntiCrawler = '反反爬虫';
+  static const sectionBasic = '基本資訊';
+  static const sectionBasicDesc = '規則的名稱、版本與站點地址';
+  static const sectionSearch = '搜尋規則';
+  static const sectionSearchDesc = '定義如何在站點內檢索條目';
+  static const sectionChapter = '選集規則';
+  static const sectionChapterDesc = '定義如何獲取播放線路與劇集列表';
+  static const advancedOptions = '高階選項';
+  static const advancedOptionsDesc = '行為、網路與反反爬蟲配置';
+  static const groupBehavior = '行為設定';
+  static const groupNetwork = '網路設定';
+  static const groupAntiCrawler = '反反爬蟲';
 
-  static const ruleName = '规则名称';
-  static const ruleVersion = '规则版本';
-  static const baseUrl = '基础地址（URL）';
-  static const searchRuleType = '搜索规则类型';
-  static const chapterRuleType = '选集规则类型';
+  static const ruleName = '規則名稱';
+  static const ruleVersion = '規則版本';
+  static const baseUrl = '基礎地址（URL）';
+  static const searchRuleType = '搜尋規則型別';
+  static const chapterRuleType = '選集規則型別';
 
-  static const searchUrl = '搜索地址（URL）';
-  static const searchListXPath = '搜索结果列表（XPath）';
-  static const itemNameXPath = '条目名称（XPath）';
-  static const itemLinkXPath = '条目链接（XPath）';
-  static const roadListXPath = '播放线路列表（XPath）';
-  static const episodeListXPath = '剧集列表（XPath）';
+  static const searchUrl = '搜尋地址（URL）';
+  static const searchListXPath = '搜尋結果列表（XPath）';
+  static const itemNameXPath = '條目名稱（XPath）';
+  static const itemLinkXPath = '條目連結（XPath）';
+  static const roadListXPath = '播放線路列表（XPath）';
+  static const episodeListXPath = '劇集列表（XPath）';
 
-  static const searchMethod = '搜索请求方法';
-  static const searchRequestUrl = '搜索请求地址（URL）';
-  static const searchHeaders = '搜索请求头（JSON）';
-  static const searchQuery = '搜索查询参数（JSON）';
-  static const searchBodyType = '搜索请求体类型';
-  static const searchBody = '搜索请求体（JSON）';
-  static const searchListPath = '搜索结果列表路径（JSONPath）';
-  static const itemNamePath = '条目名称路径（JSONPath，相对条目）';
-  static const itemSourcePath = '条目来源路径（JSONPath，相对条目）';
-  static const detailPageUrl = '详情页地址模板（URL，可选）';
-  static const detailPageUrlHelper = '@source 替换为条目来源，如 https://site/GV@source';
+  static const searchMethod = '搜尋請求方法';
+  static const searchRequestUrl = '搜尋請求地址（URL）';
+  static const searchHeaders = '搜尋請求頭（JSON）';
+  static const searchQuery = '搜尋查詢參數（JSON）';
+  static const searchBodyType = '搜尋請求體型別';
+  static const searchBody = '搜尋請求體（JSON）';
+  static const searchListPath = '搜尋結果列表路徑（JSONPath）';
+  static const itemNamePath = '條目名稱路徑（JSONPath，相對條目）';
+  static const itemSourcePath = '條目來源路徑（JSONPath，相對條目）';
+  static const detailPageUrl = '詳情頁地址模板（URL，可選）';
+  static const detailPageUrlHelper = '@source 替換為條目來源，如 https://site/GV@source';
 
-  static const chapterMethod = '选集请求方法';
-  static const chapterRequestUrl = '选集请求地址（URL）';
-  static const chapterHeaders = '选集请求头（JSON）';
-  static const chapterQuery = '选集查询参数（JSON）';
-  static const chapterBodyType = '选集请求体类型';
-  static const chapterBody = '选集请求体（JSON）';
-  static const chapterResponseFormat = '选集响应格式';
-  static const roadListPath = '播放线路列表路径（JSONPath，留空表示单线路）';
-  static const roadNamePath = '线路名称路径（JSONPath，相对线路）';
-  static const episodeListPath = '剧集列表路径（JSONPath，相对线路）';
-  static const episodeNamePath = '剧集名称路径（JSONPath，相对剧集）';
-  static const playbackEntryPath = '播放入口地址路径（JSONPath，使用播放页地址模板时可留空）';
-  static const playbackEntryPathHelper = '从剧集对象读取交给 WebView 的地址，可以是播放页面或媒体直链。';
-  static const roadNamesPath = '线路名称串路径（JSONPath）';
-  static const roadEpisodesPath = '线路剧集串路径（JSONPath）';
-  static const roadSeparator = '线路分隔符';
-  static const episodeSeparator = '剧集分隔符';
-  static const fieldSeparator = '名称与地址分隔符';
-  static const responseVariables = '响应变量（JSON：变量名 → JSONPath）';
-  static const playPageUrl = '播放页地址模板（URL，可选）';
-  static const playPageUrlHelper = '可用变量：@source、@episodeUrl、'
-      '@roadIndex/@episodeIndex（从 0 起）、@roadNumber/@episodeNumber（从 1 起）'
-      '及响应变量。';
-  static const playPageQuery = '播放页查询参数（JSON）';
-  static const playPageQueryHelper = '与地址模板可用变量相同，合并进最终 URL 的查询参数。';
+  static const chapterMethod = '選集請求方法';
+  static const chapterRequestUrl = '選集請求地址（URL）';
+  static const chapterHeaders = '選集請求頭（JSON）';
+  static const chapterQuery = '選集查詢參數（JSON）';
+  static const chapterBodyType = '選集請求體型別';
+  static const chapterBody = '選集請求體（JSON）';
+  static const chapterResponseFormat = '選集響應格式';
+  static const roadListPath = '播放線路列表路徑（JSONPath，留空表示單線路）';
+  static const roadNamePath = '線路名稱路徑（JSONPath，相對線路）';
+  static const episodeListPath = '劇集列表路徑（JSONPath，相對線路）';
+  static const episodeNamePath = '劇集名稱路徑（JSONPath，相對劇集）';
+  static const playbackEntryPath = '播放入口地址路徑（JSONPath，使用播放頁地址模板時可留空）';
+  static const playbackEntryPathHelper = '從劇集物件讀取交給 WebView 的地址，可以是播放頁面或媒體直鏈。';
+  static const roadNamesPath = '線路名稱串路徑（JSONPath）';
+  static const roadEpisodesPath = '線路劇集串路徑（JSONPath）';
+  static const roadSeparator = '線路分隔符';
+  static const episodeSeparator = '劇集分隔符';
+  static const fieldSeparator = '名稱與地址分隔符';
+  static const responseVariables = '響應變數（JSON：變數名 → JSONPath）';
+  static const playPageUrl = '播放頁地址模板（URL，可選）';
+  static const playPageUrlHelper = '可用變數：@source、@episodeUrl、'
+      '@roadIndex/@episodeIndex（從 0 起）、@roadNumber/@episodeNumber（從 1 起）'
+      '及響應變數。';
+  static const playPageQuery = '播放頁查詢參數（JSON）';
+  static const playPageQueryHelper = '與地址模板可用變數相同，合併進最終 URL 的查詢參數。';
 
-  static const userAgent = '用户代理（User-Agent）';
-  static const userAgentHelper = '仅用于播放器和下载器。';
-  static const referer = '播放请求来源（Referer）';
-  static const refererHelper = '仅用于播放器和下载器。';
+  static const userAgent = '使用者代理（User-Agent）';
+  static const userAgentHelper = '僅用於播放器和下載器。';
+  static const referer = '播放請求來源（Referer）';
+  static const refererHelper = '僅用於播放器和下載器。';
 
-  static const captchaDetectValue = '验证页检测值';
-  static const captchaDetectValueHelper = '留空时使用验证码图片或验证按钮的 XPath 进行检测。';
-  static const captchaImage = '验证码图片（XPath）';
-  static const captchaImageHelper = '填写验证码图片元素的 XPath。';
-  static const captchaInput = '验证码输入框（XPath）';
-  static const captchaInputHelper = '填写验证码输入框元素的 XPath。';
-  static const captchaSubmitButton = '验证提交按钮（XPath）';
-  static const captchaSubmitButtonHelper = '填写提交验证码按钮元素的 XPath。';
-  static const verifyButton = '验证按钮（XPath）';
-  static const verifyButtonHelper = '填写验证按钮元素的 XPath，检测到后将自动点击。';
-  static const captchaScript = '验证脚本（JavaScript）';
+  static const captchaDetectValue = '驗證頁檢測值';
+  static const captchaDetectValueHelper = '留空時使用驗證碼圖片或驗證按鈕的 XPath 進行檢測。';
+  static const captchaImage = '驗證碼圖片（XPath）';
+  static const captchaImageHelper = '填寫驗證碼圖片元素的 XPath。';
+  static const captchaInput = '驗證碼輸入框（XPath）';
+  static const captchaInputHelper = '填寫驗證碼輸入框元素的 XPath。';
+  static const captchaSubmitButton = '驗證提交按鈕（XPath）';
+  static const captchaSubmitButtonHelper = '填寫提交驗證碼按鈕元素的 XPath。';
+  static const verifyButton = '驗證按鈕（XPath）';
+  static const verifyButtonHelper = '填寫驗證按鈕元素的 XPath，檢測到後將自動點選。';
+  static const captchaScript = '驗證指令碼（JavaScript）';
   static const captchaScriptHelper =
-      '可调用 KazumiCaptcha.log、clicked、done 和 fail。';
+      '可呼叫 KazumiCaptcha.log、clicked、done 和 fail。';
 }
 
 class PluginEditorPage extends StatefulWidget {
@@ -454,9 +454,9 @@ class _PluginEditorPageState extends State<PluginEditorPage> {
                 children: [
                   RulePageIntro(
                     title: widget.plugin.name.isEmpty
-                        ? '编写新规则'
+                        ? '編寫新規則'
                         : widget.plugin.name,
-                    description: '从站点信息到搜索与选集，逐步配置你的番剧来源。',
+                    description: '從站點資訊到搜尋與選集，逐步配置你的番劇來源。',
                     icon: Icons.edit_note_rounded,
                   ),
                   const SizedBox(height: 20),
@@ -478,9 +478,9 @@ class _PluginEditorPageState extends State<PluginEditorPage> {
                     value: _section,
                     segments: const [
                       ButtonSegment(value: 0, label: Text('基本')),
-                      ButtonSegment(value: 1, label: Text('搜索')),
-                      ButtonSegment(value: 2, label: Text('选集')),
-                      ButtonSegment(value: 3, label: Text('高级')),
+                      ButtonSegment(value: 1, label: Text('搜尋')),
+                      ButtonSegment(value: 2, label: Text('選集')),
+                      ButtonSegment(value: 3, label: Text('高階')),
                     ],
                     onChanged: (value) => setState(() => _section = value),
                   ),
@@ -511,7 +511,7 @@ class _PluginEditorPageState extends State<PluginEditorPage> {
                           icon: const Icon(Icons.science_outlined),
                           label: Text(
                               MediaQuery.textScalerOf(context).scale(14) > 20
-                                  ? '测试'
+                                  ? '測試'
                                   : _RuleEditorText.testRule))),
                   const SizedBox(width: 12),
                   Expanded(
@@ -522,7 +522,7 @@ class _PluginEditorPageState extends State<PluginEditorPage> {
                           icon: _saving
                               ? const LoadingIndicator(size: 20)
                               : const Icon(Icons.check_rounded),
-                          label: Text(_saving ? '保存中' : _RuleEditorText.save))),
+                          label: Text(_saving ? '儲存中' : _RuleEditorText.save))),
                 ]),
               ),
             ),
@@ -575,8 +575,8 @@ class _PluginEditorPageState extends State<PluginEditorPage> {
                   value: isSearch ? searchMode : chapterMode,
                   segments: _ruleModeSegments,
                   description: (mode) => mode == RuleMode.api
-                      ? '请求接口并从 JSON 响应中提取数据。'
-                      : '从网页 HTML 中定位并提取内容。',
+                      ? '請求介面並從 JSON 響應中提取資料。'
+                      : '從網頁 HTML 中定位並提取內容。',
                   onChanged: (value) => setState(() {
                     if (isSearch) {
                       searchMode = value;
@@ -1035,13 +1035,13 @@ class _PluginEditorPageState extends State<PluginEditorPage> {
       request: ApiRequestConfig(
         method: searchApiMethod,
         url: valueOf(searchApiURLController),
-        headers: _parseJsonMap(searchApiHeadersController, '搜索请求头'),
-        query: _parseJsonMap(searchApiQueryController, '搜索查询参数'),
+        headers: _parseJsonMap(searchApiHeadersController, '搜尋請求頭'),
+        query: _parseJsonMap(searchApiQueryController, '搜尋查詢參數'),
         bodyType: searchApiBodyType,
         body: _parseBody(
           searchApiBodyController,
           searchApiBodyType,
-          '搜索请求体',
+          '搜尋請求體',
         ),
       ),
       listPath: valueOf(searchApiListPathController),
@@ -1051,7 +1051,7 @@ class _PluginEditorPageState extends State<PluginEditorPage> {
     );
     if (!shouldValidate) return config;
     if (config.request.url.isEmpty) {
-      throw const FormatException('搜索请求地址不能为空');
+      throw const FormatException('搜尋請求地址不能為空');
     }
     const ApiRuleStrategy()
       ..prepareRequest(config.request, const {'keyword': 'test'})
@@ -1063,19 +1063,19 @@ class _PluginEditorPageState extends State<PluginEditorPage> {
     final pageUrl = chapterApiPageURLController.text.trim();
     final variablesRaw = _parseJsonMap(
       chapterApiVariablesController,
-      '选集响应变量',
+      '選集響應變數',
     );
     final config = ApiChapterConfig(
       request: ApiRequestConfig(
         method: chapterApiMethod,
         url: chapterApiURLController.text.trim(),
-        headers: _parseJsonMap(chapterApiHeadersController, '选集请求头'),
-        query: _parseJsonMap(chapterApiQueryController, '选集查询参数'),
+        headers: _parseJsonMap(chapterApiHeadersController, '選集請求頭'),
+        query: _parseJsonMap(chapterApiQueryController, '選集查詢參數'),
         bodyType: chapterApiBodyType,
         body: _parseBody(
           chapterApiBodyController,
           chapterApiBodyType,
-          '选集请求体',
+          '選集請求體',
         ),
       ),
       format: chapterApiFormat,
@@ -1098,13 +1098,13 @@ class _PluginEditorPageState extends State<PluginEditorPage> {
               url: pageUrl,
               query: _parseJsonMap(
                 chapterApiPageQueryController,
-                '播放页查询参数',
+                '播放頁查詢參數',
               ),
             ),
     );
     if (chapterMode != RuleMode.api) return config;
     if (config.request.url.isEmpty) {
-      throw const FormatException('选集请求地址不能为空');
+      throw const FormatException('選集請求地址不能為空');
     }
     const ApiRuleStrategy()
       ..prepareRequest(config.request, const {'source': 'test'})
@@ -1119,7 +1119,7 @@ class _PluginEditorPageState extends State<PluginEditorPage> {
     final text = controller.text.trim();
     if (text.isEmpty) return <String, dynamic>{};
     final value = jsonDecode(text);
-    if (value is! Map) throw FormatException('$label 必须是 JSON 对象');
+    if (value is! Map) throw FormatException('$label 必須是 JSON 物件');
     return value.map((key, value) => MapEntry(key.toString(), value));
   }
 
@@ -1138,7 +1138,7 @@ class _PluginEditorPageState extends State<PluginEditorPage> {
       throw FormatException('$label 不是有效 JSON：${error.message}');
     }
     if (bodyType == ApiBodyType.form && value is! Map) {
-      throw FormatException('$label 在表单模式下必须是 JSON 对象');
+      throw FormatException('$label 在表單模式下必須是 JSON 物件');
     }
     return value;
   }

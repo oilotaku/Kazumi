@@ -1,4 +1,4 @@
-// 记录进入 tag 时 list 所在位置
+// 記錄進入 tag 時 list 所在位置
 class BBCodeTag {
   int? bold;
   int? italic;

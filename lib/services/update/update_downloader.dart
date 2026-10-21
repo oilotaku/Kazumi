@@ -23,7 +23,7 @@ class UpdateIntegrityException implements Exception {
   final String actual;
 
   @override
-  String toString() => '文件完整性验证失败: 期望 $expected，实际 $actual';
+  String toString() => '檔案完整性驗證失敗: 期望 $expected，實際 $actual';
 }
 
 Iterable<Object> _errorChain(Object error) sync* {
@@ -57,15 +57,15 @@ String getUpdateDownloadErrorMessage(Object error) {
     final code = fileError.osError?.errorCode;
     final windows = Platform.isWindows;
     if (windows ? code == 5 : code == 1 || code == 13) {
-      return '无法写入更新文件，请检查临时目录权限';
+      return '無法寫入更新檔案，請檢查臨時目錄許可權';
     }
     if (windows ? code == 112 || code == 39 : code == 28) {
-      return '磁盘空间不足';
+      return '磁碟空間不足';
     }
-    return '更新文件读写失败';
+    return '更新檔案讀寫失敗';
   }
   if (error is UpdateIntegrityException) {
-    return '文件完整性验证失败，可能是网络传输错误';
+    return '檔案完整性驗證失敗，可能是網路傳輸錯誤';
   }
   final networkType =
       causes.whereType<NetworkException>().firstOrNull?.type;
@@ -73,19 +73,19 @@ String getUpdateDownloadErrorMessage(Object error) {
     case NetworkExceptionType.connectionTimeout ||
           NetworkExceptionType.receiveTimeout ||
           NetworkExceptionType.sendTimeout:
-      return '下载超时，请稍后重试';
+      return '下載超時，請稍後重試';
     case NetworkExceptionType.connectionError ||
           NetworkExceptionType.badResponse ||
           NetworkExceptionType.badCertificate:
-      return '网络连接错误';
+      return '網路連線錯誤';
     default:
       if (causes.any((cause) =>
           cause is SocketException ||
           cause is HttpException ||
           cause is HandshakeException)) {
-        return '网络连接错误';
+        return '網路連線錯誤';
       }
-      return '下载失败';
+      return '下載失敗';
   }
 }
 
@@ -105,7 +105,7 @@ Future<String> downloadUpdateFile({
 
   final hash = expectedHash.toLowerCase();
   if (!RegExp(r'^[a-f0-9]{64}$').hasMatch(hash)) {
-    throw ArgumentError('更新缺少有效的 SHA256 校验值');
+    throw ArgumentError('更新缺少有效的 SHA256 校驗值');
   }
 
   final file = File(filePath);

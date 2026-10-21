@@ -17,11 +17,11 @@ class _DecoderSettingsState extends State<DecoderSettings> {
   @override
   Widget build(BuildContext context) {
     return SettingsDetailScaffold(
-      title: const Text('硬件解码器'),
+      title: const Text('硬體解碼器'),
       body: SettingsList(
         sections: [
           SettingsRadioSection<String>(
-            title: Text('选择不受支持的解码器将回退到软件解码'),
+            title: Text('選擇不受支援的解碼器將回退到軟體解碼'),
             groupValue: _decoder,
             onChanged: (String? value) {
               if (value != null) {

@@ -722,13 +722,13 @@ class BangumiApi {
       String str;
       switch (e.statusCode) {
         case 400:
-          str = 'Validation Error 验证错误';
+          str = 'Validation Error 驗證錯誤';
           break;
         case 401:
-          str = 'Unauthorized 未经授权';
+          str = 'Unauthorized 未經授權';
           break;
         case 404:
-          str = 'User not found 用户不存在';
+          str = 'User not found 使用者不存在';
           break;
         default:
           str = 'Error $e';

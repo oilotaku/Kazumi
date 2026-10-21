@@ -2,45 +2,45 @@ import 'package:kazumi/services/storage/storage.dart';
 import 'package:kazumi/modules/search/search_history_module.dart';
 import 'package:kazumi/services/logging/logger.dart';
 
-/// 搜索历史数据访问接口
+/// 搜尋歷史資料訪問介面
 ///
-/// 提供搜索历史相关的数据访问抽象
+/// 提供搜尋歷史相關的資料訪問抽象
 abstract class ISearchHistoryRepository {
-  /// 获取所有搜索历史（按时间戳倒序）
+  /// 獲取所有搜尋歷史（按時間戳倒序）
   List<SearchHistory> getAllHistories();
 
-  /// 保存搜索历史
+  /// 儲存搜尋歷史
   ///
-  /// [keyword] 搜索关键词
+  /// [keyword] 搜尋關鍵詞
   /// 返回是否成功
   Future<bool> saveHistory(String keyword);
 
-  /// 删除指定搜索历史
+  /// 刪除指定搜尋歷史
   ///
-  /// [history] 要删除的历史记录
+  /// [history] 要刪除的歷史記錄
   Future<void> deleteHistory(SearchHistory history);
 
-  /// 清空所有搜索历史
+  /// 清空所有搜尋歷史
   Future<void> clearAllHistories();
 
-  /// 删除重复的历史记录
+  /// 刪除重複的歷史記錄
   ///
-  /// [keyword] 关键词
+  /// [keyword] 關鍵詞
   Future<void> deleteDuplicates(String keyword);
 
-  /// 检查是否达到最大历史记录数
+  /// 檢查是否達到最大歷史記錄數
   ///
-  /// [maxCount] 最大记录数
-  /// 返回是否已满
+  /// [maxCount] 最大記錄數
+  /// 返回是否已滿
   bool isHistoryFull(int maxCount);
 
-  /// 删除最旧的历史记录
+  /// 刪除最舊的歷史記錄
   Future<void> deleteOldest();
 }
 
-/// 搜索历史数据访问实现类
+/// 搜尋歷史資料訪問實現類
 ///
-/// 基于Hive实现的搜索历史数据访问层
+/// 基於Hive實現的搜尋歷史資料訪問層
 class SearchHistoryRepository implements ISearchHistoryRepository {
   final _searchHistoryBox = GStorage.searchHistory;
 

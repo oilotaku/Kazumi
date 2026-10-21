@@ -18,11 +18,11 @@ class _RendererSettingsState extends State<RendererSettings> {
   @override
   Widget build(BuildContext context) {
     return SettingsDetailScaffold(
-      title: const Text('视频渲染器'),
+      title: const Text('影片渲染器'),
       body: SettingsList(
         sections: [
           SettingsRadioSection<String>(
-            title: Text('选择合适的渲染器以获得最佳播放体验'),
+            title: Text('選擇合適的渲染器以獲得最佳播放體驗'),
             groupValue: _renderer,
             onChanged: (String? value) {
               if (value != null) {

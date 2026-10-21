@@ -126,8 +126,8 @@ abstract class _MyController with Store {
     if (error != null) {
       KazumiDialog.showToast(
           message: switch (error) {
-        DanmakuShieldRuleError.empty => '请输入关键词',
-        DanmakuShieldRuleError.tooLong => '关键词过长',
+        DanmakuShieldRuleError.empty => '請輸入關鍵詞',
+        DanmakuShieldRuleError.tooLong => '關鍵詞過長',
       });
       return false;
     }
@@ -141,13 +141,13 @@ abstract class _MyController with Store {
     try {
       final changed = await _shieldRepository.setRule(item, deleted: deleted);
       if (!changed && !deleted) {
-        KazumiDialog.showToast(message: '已存在该关键词');
+        KazumiDialog.showToast(message: '已存在該關鍵詞');
         return false;
       }
       return true;
     } catch (e) {
       KazumiLogger().e('Danmaku: failed to save shield rule', error: e);
-      KazumiDialog.showToast(message: '屏蔽规则保存失败，请重试');
+      KazumiDialog.showToast(message: '遮蔽規則儲存失敗，請重試');
       return false;
     }
   }
@@ -166,7 +166,7 @@ abstract class _MyController with Store {
     } catch (err) {
       KazumiLogger().e('Update: check update failed', error: err);
       if (type == 'manual') {
-        KazumiDialog.showToast(message: '检查更新失败，请稍后重试');
+        KazumiDialog.showToast(message: '檢查更新失敗，請稍後重試');
       }
       return false;
     }

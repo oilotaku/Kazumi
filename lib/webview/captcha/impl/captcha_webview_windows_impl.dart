@@ -509,9 +509,9 @@ $script
       await WebviewController.initializeEnvironment(
         additionalArguments: '--proxy-server=$formattedProxy',
       );
-      KazumiLogger().i('[Captcha WebView] 代理设置成功 $formattedProxy');
+      KazumiLogger().i('[Captcha WebView] 代理設定成功 $formattedProxy');
     } catch (e) {
-      KazumiLogger().e('[Captcha WebView] 设置代理失败 $e');
+      KazumiLogger().e('[Captcha WebView] 設定代理失敗 $e');
     }
   }
 }

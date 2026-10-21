@@ -55,7 +55,7 @@ class BangumiTimelineCard extends StatelessWidget {
         ? bangumiItem.metaTags
         : bangumiItem.tags.map((tag) => tag.name);
     final metadata = <String>[
-      if (episodes != null) '${episodes.group(1)} 话',
+      if (episodes != null) '${episodes.group(1)} 話',
       ...tags
           .map((name) => name.trim())
           .where((name) => name.isNotEmpty)
@@ -205,14 +205,14 @@ class BangumiTimelineCard extends StatelessWidget {
       height: _labelLineHeight,
     );
     if (bangumiItem.ratingScore <= 0) {
-      return Text('暂无评分',
+      return Text('暫無評分',
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: labelStyle?.copyWith(color: colors.onSurfaceVariant));
     }
     final score = bangumiItem.ratingScore.toStringAsFixed(1);
     return Semantics(
-      label: '评分 $score',
+      label: '評分 $score',
       excludeSemantics: true,
       child: Container(
         padding: _ratingPadding,

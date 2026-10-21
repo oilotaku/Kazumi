@@ -34,66 +34,66 @@ const List<_SettingsGroup> _settingsGroups = [
     title: '播放',
     categories: [
       _SettingsCategory(
-        label: '播放设置',
-        description: '解码、渲染与播放行为',
+        label: '播放設定',
+        description: '解碼、渲染與播放行為',
         icon: Icons.display_settings_rounded,
         path: '/settings/player',
       ),
       _SettingsCategory(
-        label: '弹幕设置',
-        description: '弹幕来源与显示效果',
+        label: '彈幕設定',
+        description: '彈幕來源與顯示效果',
         icon: Icons.subtitles_rounded,
         path: '/settings/danmaku',
       ),
       _SettingsCategory(
-        label: '操作设置',
-        description: '播放器按键映射',
+        label: '操作設定',
+        description: '播放器按鍵對映',
         icon: Icons.keyboard_rounded,
         path: '/settings/keyboard',
       ),
     ],
   ),
   _SettingsGroup(
-    title: '资源',
+    title: '資源',
     categories: [
       _SettingsCategory(
-        label: '规则管理',
-        description: '番剧资源规则',
+        label: '規則管理',
+        description: '番劇資源規則',
         icon: Icons.extension_rounded,
         path: '/settings/plugin',
       ),
       _SettingsCategory(
-        label: '下载设置',
-        description: '并发数与弹幕缓存',
+        label: '下載設定',
+        description: '併發數與彈幕快取',
         icon: Icons.downloading_rounded,
         path: '/settings/download-settings',
       ),
     ],
   ),
   _SettingsGroup(
-    title: '应用',
+    title: '應用',
     categories: [
       _SettingsCategory(
-        label: '外观设置',
-        description: '主题、配色与字体',
+        label: '外觀設定',
+        description: '主題、配色與字型',
         icon: Icons.palette_rounded,
         path: '/settings/theme',
       ),
       _SettingsCategory(
-        label: '界面设置',
-        description: '启动、窗口行为与展示信息',
+        label: '介面設定',
+        description: '啟動、視窗行為與展示資訊',
         icon: Icons.pages_rounded,
         path: '/settings/interface',
       ),
       _SettingsCategory(
-        label: '同步设置',
-        description: '追番状态与多设备同步',
+        label: '同步設定',
+        description: '追番狀態與多裝置同步',
         icon: Icons.cloud_rounded,
         path: '/settings/sync',
       ),
       _SettingsCategory(
-        label: '网络设置',
-        description: '访问加速与代理',
+        label: '網路設定',
+        description: '訪問加速與代理',
         icon: Icons.language_rounded,
         path: '/settings/proxy',
       ),
@@ -103,20 +103,20 @@ const List<_SettingsGroup> _settingsGroups = [
     title: '其他',
     categories: [
       _SettingsCategory(
-        label: '更新设置',
-        description: '应用与规则更新',
+        label: '更新設定',
+        description: '應用與規則更新',
         icon: Icons.update_rounded,
         path: '/settings/update',
       ),
       _SettingsCategory(
-        label: '存储与日志',
-        description: '图片缓存与错误日志',
+        label: '儲存與日誌',
+        description: '圖片快取與錯誤日誌',
         icon: Icons.storage_rounded,
         path: '/settings/storage',
       ),
       _SettingsCategory(
-        label: '关于',
-        description: '版本与开源信息',
+        label: '關於',
+        description: '版本與開源資訊',
         icon: Icons.info_outline_rounded,
         path: '/settings/about',
       ),
@@ -227,7 +227,7 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Scaffold(
           appBar: wide
               ? SysAppBar(
-                  title: const Text('设置'),
+                  title: const Text('設定'),
                   leading: BackButton(onPressed: _exitSettings),
                 )
               : null,
@@ -286,7 +286,7 @@ class SettingsIndexPage extends StatelessWidget {
     }
     return Scaffold(
       appBar: SysAppBar(
-        title: const Text('设置'),
+        title: const Text('設定'),
         leading: BackButton(onPressed: () {
           if (!context.maybePop()) context.navigate('/tab/my');
         }),

@@ -2,8 +2,8 @@ import 'package:kazumi/modules/bangumi/bangumi_item.dart';
 
 typedef BangumiRelationFetcher = Future<List<BangumiRelation>> Function(int id);
 
-const String bangumiPrequelRelation = '前传';
-const String bangumiSequelRelation = '续集';
+const String bangumiPrequelRelation = '前傳';
+const String bangumiSequelRelation = '續集';
 
 const Set<String> _bangumiMainlineRelations = {
   bangumiPrequelRelation,
@@ -47,7 +47,7 @@ class BangumiRelation {
 
     final relation = (json['relation'] ?? '').toString().trim();
     return BangumiRelation(
-      relation: relation.isEmpty ? '关联' : relation,
+      relation: relation.isEmpty ? '關聯' : relation,
       bangumiItem: BangumiItem(
         id: id,
         type: type,

@@ -30,10 +30,10 @@ class OnboardingPage extends StatefulWidget {
 }
 
 enum _OnboardingStep {
-  welcome('使用约定'),
-  updates('更新来源'),
-  mirrors('访问加速'),
-  rules('添加规则');
+  welcome('使用約定'),
+  updates('更新來源'),
+  mirrors('訪問加速'),
+  rules('新增規則');
 
   const _OnboardingStep(this.label);
 
@@ -82,10 +82,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
       };
 
   String get _primaryLabel => !_agreed
-      ? '同意并继续'
+      ? '同意並繼續'
       : _isLastStep
-          ? '开始使用'
-          : '继续';
+          ? '開始使用'
+          : '繼續';
 
   Future<void> _navigate({required bool forward}) async {
     if (_busy || (!forward && _currentIndex == 0)) return;
@@ -233,19 +233,19 @@ class _SkipRulesDialog extends StatelessWidget {
         scrollable: true,
         constraints: const BoxConstraints(maxWidth: 560),
         icon: const Icon(Icons.warning_amber_rounded),
-        title: const Text('暂不添加规则？'),
+        title: const Text('暫不新增規則？'),
         content: const Text(
-          '没有规则时无法搜索和播放番剧。之后也可以在规则管理中添加。',
+          '沒有規則時無法搜尋和播放番劇。之後也可以在規則管理中新增。',
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('仍然继续'),
+            child: const Text('仍然繼續'),
           ),
           FilledButton(
             autofocus: true,
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('返回添加'),
+            child: const Text('返回新增'),
           ),
         ],
       );

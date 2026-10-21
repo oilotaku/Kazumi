@@ -19,7 +19,7 @@ const List<_ShortcutGroup> _shortcutGroups = [
       '播放控制', ['playorpause', 'forward', 'rewind', 'skip', 'next', 'prev']),
   _ShortcutGroup('音量', ['volumeup', 'volumedown', 'togglemute']),
   _ShortcutGroup(
-      '画面与弹幕', ['fullscreen', 'exitfullscreen', 'screenshot', 'toggledanmaku']),
+      '畫面與彈幕', ['fullscreen', 'exitfullscreen', 'screenshot', 'toggledanmaku']),
   _ShortcutGroup('倍速', ['speed1', 'speed2', 'speed3', 'speedup', 'speeddown']),
 ];
 
@@ -119,7 +119,7 @@ class _KeyboardSettingsPageState extends State<KeyboardSettingsPage> {
         if (otherFunc == func && i == index) continue;
         if (otherKeys[i] == rawKey) {
           final name = shortcutsChineseName[otherFunc] ?? otherFunc;
-          KazumiDialog.showToast(message: "按键已被【$name】占用，请重新输入");
+          KazumiDialog.showToast(message: "按鍵已被【$name】佔用，請重新輸入");
           return true;
         }
       }
@@ -181,7 +181,7 @@ class _KeyboardSettingsPageState extends State<KeyboardSettingsPage> {
         GStorage.putStringListSettingByName('shortcut_$func', shortcuts[func]!);
       }
     });
-    KazumiDialog.showToast(message: '已恢复默认快捷键');
+    KazumiDialog.showToast(message: '已恢復預設快捷鍵');
   }
 
   List<_ShortcutGroup> get displayGroups {
@@ -208,11 +208,11 @@ class _KeyboardSettingsPageState extends State<KeyboardSettingsPage> {
     final textTheme = Theme.of(context).textTheme;
 
     return SettingsDetailScaffold(
-      title: const Text('操作设置'),
+      title: const Text('操作設定'),
       actions: [
         IconButton(
           icon: const Icon(Icons.settings_backup_restore_rounded),
-          tooltip: '恢复默认',
+          tooltip: '恢復預設',
           onPressed: restoreDefaults,
         ),
       ],
@@ -244,7 +244,7 @@ class _KeyboardSettingsPageState extends State<KeyboardSettingsPage> {
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 12),
                     child: Text(
-                      '点按按键标签，再按下新按键完成修改',
+                      '點按按鍵標籤，再按下新按鍵完成修改',
                       style: textTheme.bodySmall?.copyWith(
                         color: colorScheme.onSurfaceVariant,
                       ),
@@ -312,7 +312,7 @@ class _KeyboardSettingsPageState extends State<KeyboardSettingsPage> {
     // Pending placeholders must not count toward the last-binding safeguard.
     final realCount = keys.where((value) => value != '...').length;
     return _KeyCap(
-      label: listening ? '按任意键' : keyAliases[keys[i]] ?? keys[i],
+      label: listening ? '按任意鍵' : keyAliases[keys[i]] ?? keys[i],
       listening: listening,
       onTap: () => onKeyCapTap(func, i),
       onDelete:
@@ -395,7 +395,7 @@ class _AddKeyButton extends StatelessWidget {
     );
 
     return Tooltip(
-      message: '添加按键',
+      message: '新增按鍵',
       child: Material(
         color: Colors.transparent,
         shape: shape,

@@ -19,58 +19,58 @@ typedef HistoryDeleteSyncAppender = Future<void> Function(History history);
 
 typedef HistoryClearSyncAppender = Future<void> Function();
 
-/// 历史记录数据访问接口
+/// 歷史記錄資料訪問介面
 ///
-/// 提供观看历史相关的数据访问抽象
+/// 提供觀看歷史相關的資料訪問抽象
 abstract class IHistoryRepository {
-  /// 历史记录变更事件流
+  /// 歷史記錄變更事件流
   ///
-  /// 写入、删除、清空各推送一次。所有历史写入都经过本仓库。
+  /// 寫入、刪除、清空各推送一次。所有歷史寫入都經過本倉庫。
   Stream<void> get changes;
 
-  /// 获取所有历史记录（按时间倒序）
+  /// 獲取所有歷史記錄（按時間倒序）
   List<History> getAllHistories();
 
-  /// 获取特定番剧的历史记录
+  /// 獲取特定番劇的歷史記錄
   ///
-  /// [adapterName] 适配器名称
-  /// [bangumiItem] 番剧信息
-  /// 返回历史记录，不存在返回null
+  /// [adapterName] 介面卡名稱
+  /// [bangumiItem] 番劇資訊
+  /// 返回歷史記錄，不存在返回null
   History? getHistory(
     String adapterName,
     BangumiItem bangumiItem, {
     String entryKind = HistoryEntryKind.online,
   });
 
-  /// 更新或创建历史记录
+  /// 更新或建立歷史記錄
   ///
-  /// [identity] 播放历史身份
-  /// [progress] 观看进度
-  /// [duration] 视频总时长；距结尾 [nearEndWatchedThreshold] 以内的进度视为
-  /// 已看完，归零保存。传 [Duration.zero] 表示时长未知，不做该判断
+  /// [identity] 播放歷史身份
+  /// [progress] 觀看進度
+  /// [duration] 影片總時長；距結尾 [nearEndWatchedThreshold] 以內的進度視為
+  /// 已看完，歸零儲存。傳 [Duration.zero] 表示時長未知，不做該判斷
   Future<void> updateHistory({
     required PlaybackHistoryIdentity identity,
     required Duration progress,
     Duration duration = Duration.zero,
   });
 
-  /// 获取上次观看的进度
+  /// 獲取上次觀看的進度
   ///
-  /// [bangumiItem] 番剧信息
-  /// [adapterName] 适配器名称
-  /// 返回观看进度，不存在返回null
+  /// [bangumiItem] 番劇資訊
+  /// [adapterName] 介面卡名稱
+  /// 返回觀看進度，不存在返回null
   Progress? getLastWatchingProgress(
     BangumiItem bangumiItem,
     String adapterName, {
     String entryKind = HistoryEntryKind.online,
   });
 
-  /// 查找特定集数的观看进度
+  /// 查詢特定集數的觀看進度
   ///
-  /// [bangumiItem] 番剧信息
-  /// [adapterName] 适配器名称
-  /// [episode] 集数
-  /// 返回观看进度，不存在返回null
+  /// [bangumiItem] 番劇資訊
+  /// [adapterName] 介面卡名稱
+  /// [episode] 集數
+  /// 返回觀看進度，不存在返回null
   Progress? findProgress(
     BangumiItem bangumiItem,
     String adapterName,
@@ -78,21 +78,21 @@ abstract class IHistoryRepository {
     String entryKind = HistoryEntryKind.online,
   });
 
-  /// 删除历史记录
+  /// 刪除歷史記錄
   ///
-  /// [history] 要删除的历史记录
+  /// [history] 要刪除的歷史記錄
   Future<void> deleteHistory(History history);
 
-  /// 清空所有历史记录
+  /// 清空所有歷史記錄
   Future<void> clearAllHistories();
 
-  /// 获取隐私模式设置
+  /// 獲取隱私模式設定
   bool getPrivateMode();
 }
 
-/// 历史记录数据访问实现类
+/// 歷史記錄資料訪問實現類
 ///
-/// 基于Hive实现的历史记录数据访问层
+/// 基於Hive實現的歷史記錄資料訪問層
 class HistoryRepository implements IHistoryRepository {
   HistoryRepository({
     Box<History>? historiesBox,
@@ -204,7 +204,7 @@ class HistoryRepository implements IHistoryRepository {
     required Duration progress,
     Duration duration = Duration.zero,
   }) async {
-    // 距结尾过近视为已看完，归零保存
+    // 距結尾過近視為已看完，歸零儲存
     if (duration > Duration.zero &&
         progress >= duration - nearEndWatchedThreshold) {
       progress = Duration.zero;
@@ -214,7 +214,7 @@ class HistoryRepository implements IHistoryRepository {
         if (!identity.canRecord) {
           return;
         }
-        // 检查隐私模式
+        // 檢查隱私模式
         if (getPrivateMode()) {
           return;
         }
@@ -230,7 +230,7 @@ class HistoryRepository implements IHistoryRepository {
             HistoryEntryKind.normalize(identity.entryKind) ==
                 HistoryEntryKind.online;
 
-        // 获取或创建历史记录
+        // 獲取或建立歷史記錄
         var history = _findHistory(
               adapterName,
               bangumiItem,
@@ -247,7 +247,7 @@ class HistoryRepository implements IHistoryRepository {
               episodePageUrl: identity.episodePageUrl,
             );
 
-        // 更新历史记录
+        // 更新歷史記錄
         history.lastWatchEpisode = episode;
         history.lastWatchTime = now;
         history.entryKind = HistoryEntryKind.normalize(identity.entryKind);
@@ -261,7 +261,7 @@ class HistoryRepository implements IHistoryRepository {
           history.episodePageUrl = identity.episodePageUrl;
         }
 
-        // 更新观看进度
+        // 更新觀看進度
         var prog = history.progresses[episode];
         if (prog == null) {
           history.progresses[episode] = Progress(
@@ -276,7 +276,7 @@ class HistoryRepository implements IHistoryRepository {
           prog.updatedAtMs = nowMs;
         }
 
-        // 保存到存储
+        // 儲存到儲存
         await _historiesBox.put(history.key, history);
         if (shouldMigrateLegacy && legacyKey != history.key) {
           await _historiesBox.delete(legacyKey);

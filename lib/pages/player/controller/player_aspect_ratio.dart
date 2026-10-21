@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 enum PlayerAspectRatio {
   automatic(
     storageValue: 1,
-    label: '自动',
+    label: '自動',
     fit: BoxFit.contain,
   ),
   crop(

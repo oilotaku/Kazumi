@@ -16,7 +16,7 @@ Future<DanmakuDestination?> showDanmakuDestinationSheet(BuildContext context) {
       mainAxisSize: MainAxisSize.min,
       children: [
         MaterialBottomSheetHeader(
-          title: '发送到',
+          title: '傳送到',
           onClose: () => Navigator.of(context).pop(),
         ),
         Flexible(
@@ -27,14 +27,14 @@ Future<DanmakuDestination?> showDanmakuDestinationSheet(BuildContext context) {
                 ListTile(
                   leading: const Icon(Icons.groups_rounded),
                   title: const Text('一起看聊天室'),
-                  subtitle: const Text('与同房间的朋友聊天'),
+                  subtitle: const Text('與同房間的朋友聊天'),
                   onTap: () =>
                       Navigator.of(context).pop(DanmakuDestination.chatRoom),
                 ),
                 ListTile(
                   leading: const Icon(Icons.subtitles_outlined),
-                  title: const Text('视频弹幕'),
-                  subtitle: const Text('发送至远程弹幕库'),
+                  title: const Text('影片彈幕'),
+                  subtitle: const Text('傳送至遠端彈幕庫'),
                   onTap: () => Navigator.of(context)
                       .pop(DanmakuDestination.remoteDanmaku),
                 ),

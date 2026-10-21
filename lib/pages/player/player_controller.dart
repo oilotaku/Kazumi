@@ -112,7 +112,7 @@ class PlayerController implements Disposable {
     unawaited(GStorage.putSetting<bool>(SettingsKeys.playerMuted, muted));
   }
 
-  /// 在音量被主动调高（手势 / 按键 / 滚轮）时退出静音状态。
+  /// 在音量被主動調高（手勢 / 按鍵 / 滾輪）時退出靜音狀態。
   void _clearMuteIfNeeded(double value) {
     if (muted && value > 0) {
       muted = false;

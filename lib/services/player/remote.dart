@@ -13,7 +13,7 @@ class RemotePlay {
     await KazumiDialog.show(builder: (BuildContext context) {
       return StatefulBuilder(builder: (context, setState) {
         return AlertDialog(
-          title: const Text('远程投屏'),
+          title: const Text('遠端投屏'),
           content: SingleChildScrollView(
             child: Column(
               children: dlnaDevice,
@@ -34,7 +34,7 @@ class RemotePlay {
                 onPressed: () {
                   setState(() {});
                   KazumiDialog.showToast(
-                    message: '开始搜索',
+                    message: '開始搜尋',
                   );
                   dlna.devices.stream.listen((deviceList) {
                     dlnaDevice = [];
@@ -51,7 +51,7 @@ class RemotePlay {
                             onTap: () {
                               try {
                                 KazumiDialog.showToast(
-                                  message: '尝试投屏至 ${value.info.friendlyName}',
+                                  message: '嘗試投屏至 ${value.info.friendlyName}',
                                 );
                                 DLNADevice(value.info).setUrl(video);
                                 DLNADevice(value.info).play();
@@ -60,7 +60,7 @@ class RemotePlay {
                                     'RemotePlay: failed to cast to device',
                                     error: e);
                                 KazumiDialog.showToast(
-                                  message: 'DLNA 异常: $e \n尝试重新进入 DLNA 投屏或切换设备',
+                                  message: 'DLNA 異常: $e \n嘗試重新進入 DLNA 投屏或切換裝置',
                                 );
                               }
                             }));
@@ -69,12 +69,12 @@ class RemotePlay {
                   });
                   // Timer(const Duration(seconds: 30), () {
                   //   KazumiDialog.showToast(
-                  //     message: '已搜索30s，若未发现设备请尝试重新进入 DLNA 投屏',
+                  //     message: '已搜尋30s，若未發現裝置請嘗試重新進入 DLNA 投屏',
                   //   );
                   // });
                 },
                 child: Text(
-                  '搜索',
+                  '搜尋',
                   style:
                       TextStyle(color: Theme.of(context).colorScheme.outline),
                 )),

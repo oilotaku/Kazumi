@@ -39,19 +39,19 @@ class StaffResponse {
 
   /// Key roles pinned to the top of the staff list, in this order.
   static const List<String> _staffRelationPriority = [
-    '动画制作',
+    '動畫製作',
     '原作',
-    '总导演',
-    '导演',
-    '系列构成',
-    '脚本',
-    '人物设定',
-    '总作画监督',
-    '作画监督',
-    '美术监督',
-    '色彩设计',
-    '音乐',
-    '音响监督',
-    '摄影监督',
+    '總導演',
+    '導演',
+    '系列構成',
+    '指令碼',
+    '人物設定',
+    '總作畫監督',
+    '作畫監督',
+    '美術監督',
+    '色彩設計',
+    '音樂',
+    '音響監督',
+    '攝影監督',
   ];
 }

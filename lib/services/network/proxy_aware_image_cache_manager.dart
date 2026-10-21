@@ -67,7 +67,7 @@ class ProxyAwareImageCacheManager extends CacheManager with ImageCacheManager {
     final proxyUrl = GStorage.getSetting(SettingsKeys.proxyUrl);
     final parsed = ProxyUtils.parseProxyUrl(proxyUrl);
     if (parsed == null) {
-      KazumiLogger().w('Proxy: 图片缓存代理地址格式错误或为空');
+      KazumiLogger().w('Proxy: 圖片快取代理地址格式錯誤或為空');
     }
     return parsed;
   }

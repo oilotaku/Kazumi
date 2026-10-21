@@ -17,13 +17,13 @@ class RouteErrorPage extends StatelessWidget {
     return SettingsDetailScaffold(
       title: const Text('Kazumi'),
       body: GeneralErrorWidget(
-        title: '无法打开页面',
+        title: '無法開啟頁面',
         errMsg: message,
         actions: [
           StateActionButton(
             onPressed: () => context.navigate('/tab/popular/'),
             icon: Icons.home_outlined,
-            text: '返回首页',
+            text: '返回首頁',
           ),
         ],
       ),

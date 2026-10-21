@@ -5,15 +5,15 @@ String formatTimestampToRelativeTime(int timeStamp) {
   if (difference.inDays > 365) {
     return '${difference.inDays ~/ 365}年前';
   } else if (difference.inDays > 30) {
-    return '${difference.inDays ~/ 30}个月前';
+    return '${difference.inDays ~/ 30}個月前';
   } else if (difference.inDays > 0) {
     return '${difference.inDays}天前';
   } else if (difference.inHours > 0) {
-    return '${difference.inHours}小时前';
+    return '${difference.inHours}小時前';
   } else if (difference.inMinutes > 0) {
-    return '${difference.inMinutes}分钟前';
+    return '${difference.inMinutes}分鐘前';
   }
-  return '刚刚';
+  return '剛剛';
 }
 
 String dateFormat(int timeStamp, {String formatType = 'list'}) {
@@ -32,11 +32,11 @@ String dateFormat(int timeStamp, {String formatType = 'list'}) {
     );
   }
   if (distance <= 60) {
-    return '刚刚';
+    return '剛剛';
   } else if (distance <= 3600) {
-    return '${(distance / 60).floor()}分钟前';
+    return '${(distance / 60).floor()}分鐘前';
   } else if (distance <= 43200) {
-    return '${(distance / 60 / 60).floor()}小时前';
+    return '${(distance / 60 / 60).floor()}小時前';
   } else if (DateTime.fromMillisecondsSinceEpoch(time * 1000).year ==
       DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000).year) {
     return _customTimestampString(

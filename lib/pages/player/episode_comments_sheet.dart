@@ -111,7 +111,7 @@ class _EpisodeCommentsSheetState extends State<EpisodeCommentsSheet>
     final controller = _controller;
     await dialogs.run((task) async {
       final episodes = await task.loading(
-        message: '分集列表加载中',
+        message: '分集列表載入中',
         action: () =>
             BangumiApi.getBangumiEpisodesByID(controller.bangumiItem.id),
       );
@@ -131,7 +131,7 @@ class _EpisodeCommentsSheetState extends State<EpisodeCommentsSheet>
       if (selected == _selectedEpisode) return;
       _selectedEpisode = selected;
       unawaited(_loadComments());
-    }, errorMessage: '分集列表加载失败，请稍后重试');
+    }, errorMessage: '分集列表載入失敗，請稍後重試');
   }
 
   @override

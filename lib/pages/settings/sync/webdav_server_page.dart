@@ -48,7 +48,7 @@ class _WebDavServerPageState extends State<WebDavServerPage> {
     setState(() {
       _busy = true;
       _failed = false;
-      _message = '正在测试连接…';
+      _message = '正在測試連線…';
     });
     try {
       await GStorage.putSetting(SettingsKeys.webDavURL, _url.text.trim());
@@ -56,12 +56,12 @@ class _WebDavServerPageState extends State<WebDavServerPage> {
           SettingsKeys.webDavUsername, _username.text.trim());
       await GStorage.putSetting(SettingsKeys.webDavPassword, _password.text);
       await WebDav().init();
-      _message = '连接成功，配置已保存';
+      _message = '連線成功，配置已儲存';
     } catch (e) {
       KazumiLogger().w('WebDAV configuration failed', error: e);
       await WebDav().setEnabled(false);
       _failed = true;
-      _message = '连接失败，同步已关闭。请检查服务器地址、账号和密码后重试。';
+      _message = '連線失敗，同步已關閉。請檢查伺服器地址、帳號和密碼後重試。';
     } finally {
       if (mounted) setState(() => _busy = false);
     }
@@ -71,14 +71,14 @@ class _WebDavServerPageState extends State<WebDavServerPage> {
   Widget build(BuildContext context) => PopScope(
         canPop: !_busy,
         child: SettingsDetailScaffold(
-          title: const Text('同步服务器'),
+          title: const Text('同步伺服器'),
           body: SyncPageBody(
             maxWidth: 640,
             children: [
               const SyncPageIntro(
                 icon: Icons.dns_rounded,
-                title: '连接 WebDAV',
-                description: '填写云盘或服务器提供的连接信息。',
+                title: '連線 WebDAV',
+                description: '填寫雲盤或伺服器提供的連線資訊。',
               ),
               TonalCard(
                 padding: const EdgeInsets.all(20),
@@ -99,7 +99,7 @@ class _WebDavServerPageState extends State<WebDavServerPage> {
                         textInputAction: TextInputAction.next,
                         autocorrect: false,
                         decoration: const InputDecoration(
-                          labelText: '服务器地址',
+                          labelText: '伺服器地址',
                           hintText: 'https://example.com/dav/',
                           border: OutlineInputBorder(),
                           errorMaxLines: 3,
@@ -109,7 +109,7 @@ class _WebDavServerPageState extends State<WebDavServerPage> {
                           if (uri == null ||
                               !['http', 'https'].contains(uri.scheme) ||
                               uri.host.isEmpty) {
-                            return '请输入完整的 http:// 或 https:// 地址';
+                            return '請輸入完整的 http:// 或 https:// 地址';
                           }
                           return null;
                         },
@@ -120,7 +120,7 @@ class _WebDavServerPageState extends State<WebDavServerPage> {
                         textInputAction: TextInputAction.next,
                         autocorrect: false,
                         decoration: const InputDecoration(
-                          labelText: '用户名',
+                          labelText: '使用者名稱',
                           border: OutlineInputBorder(),
                         ),
                       ),
@@ -132,10 +132,10 @@ class _WebDavServerPageState extends State<WebDavServerPage> {
                         enableSuggestions: false,
                         onFieldSubmitted: (_) => _save(),
                         decoration: InputDecoration(
-                          labelText: '密码或应用授权码',
+                          labelText: '密碼或應用授權碼',
                           border: const OutlineInputBorder(),
                           suffixIcon: IconButton(
-                            tooltip: _passwordVisible ? '隐藏密码' : '显示密码',
+                            tooltip: _passwordVisible ? '隱藏密碼' : '顯示密碼',
                             onPressed: () => setState(
                                 () => _passwordVisible = !_passwordVisible),
                             icon: Icon(_passwordVisible
@@ -150,7 +150,7 @@ class _WebDavServerPageState extends State<WebDavServerPage> {
               ),
               StateActionButton(
                 onPressed: _busy ? null : _save,
-                text: _busy ? '正在测试连接…' : '保存并测试',
+                text: _busy ? '正在測試連線…' : '儲存並測試',
                 icon: Icons.cloud_done_rounded,
               ),
               if (_message != null)
@@ -158,7 +158,7 @@ class _WebDavServerPageState extends State<WebDavServerPage> {
               if (_message != null && !_busy && !_failed)
                 TextButton(
                   onPressed: () => context.maybePop(),
-                  child: const Text('返回同步设置'),
+                  child: const Text('返回同步設定'),
                 ),
             ],
           ),

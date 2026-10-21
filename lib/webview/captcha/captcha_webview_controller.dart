@@ -30,63 +30,63 @@ abstract class CaptchaWebviewController<T> {
   /// WebView 初始化完成事件
   Stream<bool> get onInitialized => initEventController.stream;
 
-  /// 验证码图片 src 找到时触发（携带图片绝对 URL）
+  /// 驗證碼圖片 src 找到時觸發（攜帶圖片絕對 URL）
   Stream<String> get onCaptchaImageFound => captchaImageFoundController.stream;
 
-  /// 验证完成时触发
+  /// 驗證完成時觸發
   Stream<void> get onCaptchaDisappeared => captchaDisappearedController.stream;
 
-  /// 调试日志
+  /// 除錯日誌
   Stream<String> get onLog => logEventController.stream;
 
   /// 初始化 WebView
   Future<void> init();
 
-  /// 加载指定 URL，并注入监听验证码图片的 JS 脚本（类型1：图片验证码）
+  /// 載入指定 URL，並注入監聽驗證碼圖片的 JS 指令碼（型別1：圖片驗證碼）
   ///
-  /// [url] 要加载的页面地址（一般为搜索 URL）
-  /// [captchaXpath] 验证码图片元素的 XPath 选择器
-  /// [inputXpath] 可选，验证码输入框的 XPath。如果提供，会在检测验证码前先触发输入框的 focus 事件（某些站点需要）
+  /// [url] 要載入的頁面地址（一般為搜尋 URL）
+  /// [captchaXpath] 驗證碼圖片元素的 XPath 選擇器
+  /// [inputXpath] 可選，驗證碼輸入框的 XPath。如果提供，會在檢測驗證碼前先觸發輸入框的 focus 事件（某些站點需要）
   Future<void> loadPage(String url, String captchaXpath, {String? inputXpath});
 
-  /// 加载指定 URL，并注入监听验证按钮的 JS 脚本（类型2：自动点击验证按钮）
+  /// 載入指定 URL，並注入監聽驗證按鈕的 JS 指令碼（型別2：自動點選驗證按鈕）
   ///
-  /// 检测到 [buttonXpath] 元素后立即模拟点击；按钮消失或页面跳转时触发 [onCaptchaDisappeared]。
-  /// [url] 要加载的页面地址
-  /// [buttonXpath] 验证按钮元素的 XPath 选择器
+  /// 檢測到 [buttonXpath] 元素後立即模擬點選；按鈕消失或頁面跳轉時觸發 [onCaptchaDisappeared]。
+  /// [url] 要載入的頁面地址
+  /// [buttonXpath] 驗證按鈕元素的 XPath 選擇器
   Future<void> loadPageForButtonClick(String url, String buttonXpath);
 
-  /// 加载指定 URL，并在页面内执行自定义验证脚本（类型3：自定义 JS 验证）
+  /// 載入指定 URL，並在頁面內執行自定義驗證指令碼（型別3：自定義 JS 驗證）
   ///
-  /// 脚本可调用 window.KazumiCaptcha.log/clicked/done/fail。
+  /// 指令碼可呼叫 window.KazumiCaptcha.log/clicked/done/fail。
   Future<void> loadPageForCustomScript(String url, String script);
 
-  /// 在 WebView 内通过 JS 模拟输入验证码并模拟点击提交按钮
+  /// 在 WebView 內透過 JS 模擬輸入驗證碼並模擬點選提交按鈕
   ///
-  /// [captchaCode] 用户输入的验证码文本
-  /// [inputXpath]  验证码输入框元素的 XPath
-  /// [buttonXpath] 提交按钮元素的 XPath
+  /// [captchaCode] 使用者輸入的驗證碼文字
+  /// [inputXpath]  驗證碼輸入框元素的 XPath
+  /// [buttonXpath] 提交按鈕元素的 XPath
   Future<void> submitCaptchaInteract(
       String captchaCode, String inputXpath, String buttonXpath);
 
-  /// 获取当前页面的 Cookie 字符串（"key1=val1; key2=val2"）
+  /// 獲取當前頁面的 Cookie 字串（"key1=val1; key2=val2"）
   ///
-  /// [pageUrl] 当前加载的页面地址，部分平台用于精确过滤 Cookie
+  /// [pageUrl] 當前載入的頁面地址，部分平臺用於精確過濾 Cookie
   Future<String> getCookieString(String pageUrl);
 
-  /// 获取当前页面的完整 HTML（document.documentElement.outerHTML）
+  /// 獲取當前頁面的完整 HTML（document.documentElement.outerHTML）
   ///
-  /// 页面仍在加载（document.readyState === 'loading'）时返回空字符串，
-  /// 由调用方决定是否重试。
+  /// 頁面仍在載入（document.readyState === 'loading'）時返回空字串，
+  /// 由呼叫方決定是否重試。
   Future<String> getPageHtml();
 
-  /// 获取 WebView 实际使用的 User-Agent（navigator.userAgent）
+  /// 獲取 WebView 實際使用的 User-Agent（navigator.userAgent）
   Future<String> getUserAgent();
 
-  /// 卸载当前页面（跳转到 about:blank）
+  /// 解除安裝當前頁面（跳轉到 about:blank）
   Future<void> unloadPage();
 
-  /// 释放 WebView 资源
+  /// 釋放 WebView 資源
   void dispose();
 }
 

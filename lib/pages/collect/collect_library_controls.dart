@@ -77,7 +77,7 @@ class _CollectLayoutSwitch extends StatelessWidget {
             selected: value == layout,
             inMutuallyExclusiveGroup: true,
             child: IconButton.filledTonal(
-              tooltip: '${layout.label}布局',
+              tooltip: '${layout.label}佈局',
               isSelected: value == layout,
               onPressed: () => onChanged(layout),
               style: ButtonStyle(

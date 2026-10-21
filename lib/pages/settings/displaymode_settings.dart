@@ -58,13 +58,13 @@ class _SetDisplayModeState extends State<SetDisplayMode> {
   @override
   Widget build(BuildContext context) {
     return SettingsDetailScaffold(
-      title: const Text('屏幕帧率设置'),
+      title: const Text('螢幕幀率設定'),
       body: (modes.isEmpty)
           ? const LoadingIndicator()
           : SettingsList(
               sections: [
                 SettingsRadioSection<DisplayMode>(
-                  title: Text('没有生效? 重启app试试'),
+                  title: Text('沒有生效? 重啟app試試'),
                   groupValue: preferred,
                   onChanged: (DisplayMode? newMode) async {
                     await FlutterDisplayMode.setPreferredMode(newMode!);
@@ -77,8 +77,8 @@ class _SetDisplayModeState extends State<SetDisplayMode> {
                       .map((e) => SettingsTile<DisplayMode>.radioTile(
                             radioValue: e,
                             title: e == DisplayMode.auto
-                                ? Text('自动')
-                                : Text('$e${e == active ? "  [系统]" : ""}'),
+                                ? Text('自動')
+                                : Text('$e${e == active ? "  [系統]" : ""}'),
                           ))
                       .toList(),
                 ),

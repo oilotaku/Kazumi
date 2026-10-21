@@ -1,7 +1,7 @@
 enum BangumiSyncPriority {
-  localFirst(0, '本地优先'),
-  bangumiFirst(1, 'Bangumi优先'),
-  timeFirst(2, '最新优先');
+  localFirst(0, '本地優先'),
+  bangumiFirst(1, 'Bangumi優先'),
+  timeFirst(2, '最新優先');
 
   const BangumiSyncPriority(this.value, this.label);
 

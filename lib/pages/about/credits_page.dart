@@ -10,20 +10,20 @@ class CreditsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SettingsDetailScaffold(
-        title: const Text('致谢'),
+        title: const Text('致謝'),
         body: AboutContent(
           children: [
             ContentSection.group(
-              title: '贡献',
+              title: '貢獻',
               children: const [
                 AboutLinkTile(
                   icon: Icons.people_outline_rounded,
-                  title: '贡献者',
+                  title: '貢獻者',
                   url: '${ApiEndpoints.sourceUrl}/graphs/contributors',
                 ),
                 AboutLinkTile(
                   icon: Icons.brush_rounded,
-                  title: '图标作者',
+                  title: '圖示作者',
                   subtitle: 'Pixiv',
                   url: ApiEndpoints.iconUrl,
                 ),
@@ -31,48 +31,48 @@ class CreditsPage extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             ContentSection.group(
-              title: '服务',
+              title: '服務',
               children: const [
                 AboutLinkTile(
                   icon: Icons.menu_book_rounded,
                   title: 'Bangumi',
-                  subtitle: '番剧信息',
+                  subtitle: '番劇資訊',
                   url: ApiEndpoints.bangumiIndex,
                 ),
                 AboutLinkTile(
                   icon: Icons.subtitles_rounded,
-                  title: '弹弹play',
-                  subtitle: '弹幕',
+                  title: '彈彈play',
+                  subtitle: '彈幕',
                   url: ApiEndpoints.dandanIndex,
                 ),
                 AboutLinkTile(
                   icon: Icons.image_search_rounded,
                   title: 'trace.moe',
-                  subtitle: '以图搜番',
+                  subtitle: '以圖搜番',
                   url: 'https://trace.moe',
                 ),
               ],
             ),
             const SizedBox(height: 24),
             ContentSection.group(
-              title: '开源项目',
+              title: '開源專案',
               children: const [
                 AboutLinkTile(
                   icon: Icons.flutter_dash_rounded,
                   title: 'Flutter',
-                  subtitle: '应用框架',
+                  subtitle: '應用框架',
                   url: 'https://flutter.dev',
                 ),
                 AboutLinkTile(
                   icon: Icons.play_circle_outline_rounded,
                   title: 'media-kit',
-                  subtitle: '视频播放',
+                  subtitle: '影片播放',
                   url: 'https://github.com/media-kit/media-kit',
                 ),
                 AboutLinkTile(
                   icon: Icons.auto_awesome_rounded,
                   title: 'Anime4K',
-                  subtitle: '实时超分辨率',
+                  subtitle: '實時超解析度',
                   url: 'https://github.com/bloc97/Anime4K',
                 ),
                 AboutLinkTile(
@@ -90,13 +90,13 @@ class CreditsPage extends StatelessWidget {
                 AboutLinkTile(
                   icon: Icons.video_settings_rounded,
                   title: 'avbuild',
-                  subtitle: '非标准视频流支持',
+                  subtitle: '非標準影片流支援',
                   url: 'https://github.com/wang-bin/avbuild',
                 ),
                 AboutLinkTile(
                   icon: Icons.storage_rounded,
                   title: 'Hive CE',
-                  subtitle: '本地存储',
+                  subtitle: '本地儲存',
                   url: 'https://github.com/IO-Design-Team/hive_ce',
                 ),
               ],

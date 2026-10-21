@@ -18,15 +18,15 @@ class _UpdateSettingsPageState extends State<UpdateSettingsPage> {
 
   @override
   Widget build(BuildContext context) => SettingsDetailScaffold(
-        title: const Text('更新设置'),
+        title: const Text('更新設定'),
         body: SettingsList(
           sections: [
             SettingsSection(
-              title: const Text('启动时检查更新'),
+              title: const Text('啟動時檢查更新'),
               tiles: [
                 SettingsTile.switchTile(
                   leading: Icons.update_rounded,
-                  title: const Text('应用更新'),
+                  title: const Text('應用更新'),
                   initialValue: _autoUpdate,
                   onToggle: (value) {
                     setState(() => _autoUpdate = value ?? !_autoUpdate);
@@ -35,7 +35,7 @@ class _UpdateSettingsPageState extends State<UpdateSettingsPage> {
                 ),
                 SettingsTile.switchTile(
                   leading: Icons.extension_rounded,
-                  title: const Text('规则更新'),
+                  title: const Text('規則更新'),
                   initialValue: _pluginUpdate,
                   onToggle: (value) {
                     setState(() => _pluginUpdate = value ?? !_pluginUpdate);

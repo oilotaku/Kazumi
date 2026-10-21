@@ -28,7 +28,7 @@ final pluginModule = createModule(
         child: (context, state) {
           final plugin = state.arguments;
           if (plugin is! Plugin) {
-            return const RouteErrorPage(message: '规则测试参数无效，请返回后重试。');
+            return const RouteErrorPage(message: '規則測試參數無效，請返回後重試。');
           }
           return PluginTestPage(plugin: plugin);
         },
@@ -38,7 +38,7 @@ final pluginModule = createModule(
         child: (context, state) {
           final plugin = state.arguments;
           if (plugin is! Plugin) {
-            return const RouteErrorPage(message: '规则编辑参数无效，请返回后重试。');
+            return const RouteErrorPage(message: '規則編輯參數無效，請返回後重試。');
           }
           return PluginEditorPage(
             plugin: plugin,

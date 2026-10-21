@@ -95,7 +95,7 @@ class _SourceCaptchaFlow {
         service.dispose();
       }
       onVerified(plugin, pageHtml);
-    }, onCancelled: () => onCancelled(plugin), errorMessage: '验证失败，请稍后重试'));
+    }, onCancelled: () => onCancelled(plugin), errorMessage: '驗證失敗，請稍後重試'));
   }
 }
 
@@ -227,7 +227,7 @@ class _CaptchaDialogState extends State<_CaptchaDialog> {
     _loadTimer?.cancel();
     setState(() {
       _imageBytes = bytes;
-      _imageError = bytes == null ? '验证码图片无法显示' : null;
+      _imageError = bytes == null ? '驗證碼圖片無法顯示' : null;
     });
   }
 
@@ -243,14 +243,14 @@ class _CaptchaDialogState extends State<_CaptchaDialog> {
     });
     _loadTimer = Timer(const Duration(seconds: 15), () {
       if (!mounted || _imageBytes != null) return;
-      setState(() => _imageError = '暂时没有获取到验证码');
+      setState(() => _imageError = '暫時沒有獲取到驗證碼');
     });
     try {
       await widget.onReload();
     } catch (_) {
       if (!mounted || revision != _imageRevision) return;
       _loadTimer?.cancel();
-      setState(() => _imageError = '验证码加载失败');
+      setState(() => _imageError = '驗證碼載入失敗');
     }
   }
 
@@ -258,7 +258,7 @@ class _CaptchaDialogState extends State<_CaptchaDialog> {
     if (_submitting || _imageBytes == null) return;
     final code = _inputController.text.trim();
     if (code.isEmpty) {
-      setState(() => _inputError = '请输入图片中的字符');
+      setState(() => _inputError = '請輸入圖片中的字元');
       _inputFocus.requestFocus();
       return;
     }
@@ -270,7 +270,7 @@ class _CaptchaDialogState extends State<_CaptchaDialog> {
       if (!mounted) return;
       setState(() {
         _submitting = false;
-        _inputError = '未能提交，请重试';
+        _inputError = '未能提交，請重試';
       });
     }
   }
@@ -281,18 +281,18 @@ class _CaptchaDialogState extends State<_CaptchaDialog> {
     final colors = theme.colorScheme;
     return _VerifyDialogFrame(
       pluginName: widget.pluginName,
-      title: '输入验证码',
-      description: '输入下图中的字符，继续检索此来源。',
+      title: '輸入驗證碼',
+      description: '輸入下圖中的字元，繼續檢索此來源。',
       actions: [
         TextButton(
           style: TextButton.styleFrom(minimumSize: const Size(72, 48)),
           onPressed: () => KazumiDialog.dismiss(context: context),
-          child: const Text('返回来源'),
+          child: const Text('返回來源'),
         ),
         FilledButton(
           style: FilledButton.styleFrom(minimumSize: const Size(88, 48)),
           onPressed: _imageBytes == null || _submitting ? null : _submit,
-          child: Text(_submitting ? '验证中…' : '验证'),
+          child: Text(_submitting ? '驗證中…' : '驗證'),
         ),
       ],
       child: Column(
@@ -314,7 +314,7 @@ class _CaptchaDialogState extends State<_CaptchaDialog> {
                 style: TextButton.styleFrom(minimumSize: const Size(48, 48)),
                 onPressed: _submitting ? null : _reload,
                 icon: const Icon(Icons.refresh_rounded, size: 18),
-                label: const Text('换一张'),
+                label: const Text('換一張'),
               ),
             ),
             TextField(
@@ -329,7 +329,7 @@ class _CaptchaDialogState extends State<_CaptchaDialog> {
               },
               onSubmitted: (_) => _submit(),
               decoration: InputDecoration(
-                labelText: '验证码',
+                labelText: '驗證碼',
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 errorText: _inputError,
                 errorMaxLines: 2,
@@ -356,7 +356,7 @@ class _CaptchaDialogState extends State<_CaptchaDialog> {
             style: TextButton.styleFrom(minimumSize: const Size(48, 48)),
             onPressed: _reload,
             icon: const Icon(Icons.refresh_rounded, size: 18),
-            label: const Text('重新加载'),
+            label: const Text('重新載入'),
           ),
         ],
       );
@@ -367,9 +367,9 @@ class _CaptchaDialogState extends State<_CaptchaDialog> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           LoadingIndicator(
-              size: 40, semanticsLabel: _submitting ? '正在验证' : '正在加载验证码'),
+              size: 40, semanticsLabel: _submitting ? '正在驗證' : '正在載入驗證碼'),
           const SizedBox(height: 12),
-          Text(_submitting ? '正在等待验证结果…' : '正在加载验证码…',
+          Text(_submitting ? '正在等待驗證結果…' : '正在載入驗證碼…',
               textAlign: TextAlign.center),
         ],
       );
@@ -384,7 +384,7 @@ class _CaptchaDialogState extends State<_CaptchaDialog> {
             height: 88,
             fit: BoxFit.contain,
             filterQuality: FilterQuality.medium,
-            semanticLabel: '验证码图片',
+            semanticLabel: '驗證碼圖片',
           ),
         ),
       ),
@@ -400,19 +400,19 @@ class _AutomatedVerifyDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) => _VerifyDialogFrame(
         pluginName: pluginName,
-        title: '正在验证',
-        description: '正在等待网站响应，通过后会自动继续检索。',
+        title: '正在驗證',
+        description: '正在等待網站響應，透過後會自動繼續檢索。',
         actions: [
           TextButton(
             style: TextButton.styleFrom(minimumSize: const Size(72, 48)),
             onPressed: () => KazumiDialog.dismiss(context: context),
-            child: const Text('返回来源'),
+            child: const Text('返回來源'),
           ),
         ],
         child: const Padding(
           padding: EdgeInsets.symmetric(vertical: 16),
           child:
-              Center(child: LoadingIndicator(size: 72, semanticsLabel: '正在验证')),
+              Center(child: LoadingIndicator(size: 72, semanticsLabel: '正在驗證')),
         ),
       );
 }
@@ -454,8 +454,8 @@ class _VerificationCompleteDialogState
       canPop: false,
       child: _VerifyDialogFrame(
         pluginName: widget.pluginName,
-        title: '验证通过',
-        description: '即将自动继续检索。',
+        title: '驗證透過',
+        description: '即將自動繼續檢索。',
         child: Center(
           child: Container(
             width: 64,

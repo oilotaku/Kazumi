@@ -18,38 +18,38 @@ Future<RuleAddSource?> showRuleAddDialog(BuildContext context) =>
       builder: (context) {
         final colors = Theme.of(context).colorScheme;
         return _RuleDialog(
-          title: '添加规则',
+          title: '新增規則',
           icon: Icons.add_circle_outline_rounded,
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text('选择一种方式，添加新的番剧来源。'),
+              const Text('選擇一種方式，新增新的番劇來源。'),
               const SizedBox(height: 20),
               for (final option in [
                 (
                   RuleAddSource.catalog,
                   Icons.travel_explore_rounded,
-                  '浏览规则仓库',
-                  '发现并安装社区规则'
+                  '瀏覽規則庫',
+                  '發現並安裝社群規則'
                 ),
                 (
                   RuleAddSource.clipboard,
                   Icons.content_paste_rounded,
-                  '从剪贴板导入',
-                  '粘贴规则链接或 JSON'
+                  '從剪貼簿匯入',
+                  '貼上規則連結或 JSON'
                 ),
                 (
                   RuleAddSource.file,
                   Icons.file_open_outlined,
-                  '从文件导入',
-                  '读取本地 JSON 规则文件'
+                  '從檔案匯入',
+                  '讀取本地 JSON 規則檔案'
                 ),
                 (
                   RuleAddSource.create,
                   Icons.edit_note_rounded,
-                  '新建规则',
-                  '从模板开始编写'
+                  '新建規則',
+                  '從模板開始編寫'
                 ),
               ])
                 Padding(
@@ -88,7 +88,7 @@ Future<bool> confirmRuleDeletion(
     await KazumiDialog.show<bool>(
       context: context,
       builder: (context) => _RuleDialog(
-        title: names.length == 1 ? '删除这条规则？' : '删除 ${names.length} 条规则？',
+        title: names.length == 1 ? '刪除這條規則？' : '刪除 ${names.length} 條規則？',
         icon: Icons.delete_outline_rounded,
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -97,7 +97,7 @@ Future<bool> confirmRuleDeletion(
             Text(names.take(5).join('、') + (names.length > 5 ? ' 等' : ''),
                 style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 12),
-            const Text('删除后将不再使用这些来源搜索番剧。你可以稍后重新导入规则。'),
+            const Text('刪除後將不再使用這些來源搜尋番劇。你可以稍後重新匯入規則。'),
           ],
         ),
         actions: [
@@ -110,7 +110,7 @@ Future<bool> confirmRuleDeletion(
                 foregroundColor: Theme.of(context).colorScheme.onError,
                 minimumSize: const Size(88, 48)),
             onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('删除'),
+            child: const Text('刪除'),
           ),
         ],
       ),
@@ -122,7 +122,7 @@ Future<void> showRuleShareDialog(BuildContext context, Plugin plugin) async {
   await KazumiDialog.show<void>(
     context: context,
     builder: (context) => _RuleDialog(
-      title: '分享规则',
+      title: '分享規則',
       icon: Icons.ios_share_rounded,
       content: Column(
         mainAxisSize: MainAxisSize.min,
@@ -130,7 +130,7 @@ Future<void> showRuleShareDialog(BuildContext context, Plugin plugin) async {
         children: [
           Text(plugin.name, style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: 8),
-          const Text('复制规则链接，对方可在「添加规则」中从剪贴板导入。'),
+          const Text('複製規則連結，對方可在「新增規則」中從剪貼簿匯入。'),
           const SizedBox(height: 20),
           Container(
             padding: const EdgeInsets.all(16),
@@ -151,19 +151,19 @@ Future<void> showRuleShareDialog(BuildContext context, Plugin plugin) async {
       actions: [
         TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('关闭')),
+            child: const Text('關閉')),
         FilledButton.icon(
           icon: const Icon(Icons.copy_rounded, size: 18),
-          label: const Text('复制链接'),
+          label: const Text('複製連結'),
           onPressed: () async {
             try {
               await Clipboard.setData(ClipboardData(text: link));
               if (!context.mounted) return;
               KazumiDialog.dismiss(context: context);
-              KazumiDialog.showToast(message: '规则链接已复制');
+              KazumiDialog.showToast(message: '規則連結已複製');
             } catch (_) {
               if (context.mounted) {
-                KazumiDialog.showToast(context: context, message: '复制失败，请重试');
+                KazumiDialog.showToast(context: context, message: '複製失敗，請重試');
               }
             }
           },
@@ -211,7 +211,7 @@ class _RuleImportDialogState extends State<_RuleImportDialog> {
     final result = PluginImportParser.parse(_text.text);
     if (result.plugins.isEmpty) {
       setState(() => _error = result.failures.isEmpty
-          ? '没有识别到规则，请粘贴规则链接或 JSON。'
+          ? '沒有識別到規則，請貼上規則連結或 JSON。'
           : result.failures.first);
       return;
     }
@@ -224,13 +224,13 @@ class _RuleImportDialogState extends State<_RuleImportDialog> {
       if (!mounted) return;
       KazumiDialog.dismiss(context: context);
       KazumiDialog.showToast(
-          message: '已导入 ${result.plugins.length} 条规则'
-              '，跳过重复 ${result.duplicateCount} 条，失败 ${result.failureCount} 条');
+          message: '已匯入 ${result.plugins.length} 條規則'
+              '，跳過重複 ${result.duplicateCount} 條，失敗 ${result.failureCount} 條');
     } catch (_) {
       if (mounted) {
         setState(() {
           _saving = false;
-          _error = '保存失败，内容已保留，请重试。';
+          _error = '儲存失敗，內容已保留，請重試。';
         });
       }
     }
@@ -240,13 +240,13 @@ class _RuleImportDialogState extends State<_RuleImportDialog> {
   Widget build(BuildContext context) => PopScope(
         canPop: !_saving,
         child: _RuleDialog(
-          title: '导入规则',
+          title: '匯入規則',
           icon: Icons.content_paste_go_rounded,
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text('支持多条 kazumi:// 链接、单条 JSON 或 JSON 数组。同名规则会被替换。'),
+              const Text('支援多條 kazumi:// 連結、單條 JSON 或 JSON 陣列。同名規則會被替換。'),
               const SizedBox(height: 20),
               TextField(
                 controller: _text,
@@ -255,7 +255,7 @@ class _RuleImportDialogState extends State<_RuleImportDialog> {
                 maxLines: 8,
                 onChanged: (_) => setState(() => _error = null),
                 decoration: ruleInputDecoration(context,
-                        label: '规则内容', hint: '在这里粘贴规则链接或 JSON')
+                        label: '規則內容', hint: '在這裡貼上規則連結或 JSON')
                     .copyWith(
                         alignLabelWithHint: true,
                         errorText: _error,
@@ -273,7 +273,7 @@ class _RuleImportDialogState extends State<_RuleImportDialog> {
               icon: _saving
                   ? const LoadingIndicator(size: 20)
                   : const Icon(Icons.download_rounded, size: 18),
-              label: Text(_saving ? '正在导入' : '导入规则'),
+              label: Text(_saving ? '正在匯入' : '匯入規則'),
             ),
           ],
         ),

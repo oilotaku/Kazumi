@@ -28,14 +28,14 @@ class _NetworkMirrorSettingsState extends State<NetworkMirrorSettings> {
       GStorage.getSetting(SettingsKeys.imageAcceleration),
     );
     return SettingsSection(
-      title: const Text('访问加速'),
+      title: const Text('訪問加速'),
       margin: widget.margin,
       tiles: [
         SettingsTile(
           leading: Icons.travel_explore_rounded,
-          title: const Text('番剧条目加速'),
+          title: const Text('番劇條目加速'),
           description: const Text(
-            '番剧信息与评论',
+            '番劇資訊與評論',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -45,7 +45,7 @@ class _NetworkMirrorSettingsState extends State<NetworkMirrorSettings> {
           ),
           onPressed: (context) => _selectAcceleration(
             context,
-            title: '番剧条目加速',
+            title: '番劇條目加速',
             current: bangumiAcceleration,
             modes: BangumiAcceleration.values,
             label: (mode) => mode.label,
@@ -55,17 +55,17 @@ class _NetworkMirrorSettingsState extends State<NetworkMirrorSettings> {
         ),
         SettingsTile.switchTile(
           leading: Icons.extension_rounded,
-          title: const Text('规则仓库镜像'),
-          description: const Text('加速规则的下载与更新'),
+          title: const Text('規則庫映象'),
+          description: const Text('加速規則的下載與更新'),
           initialValue: gitProxy,
           onToggle: (value) =>
               _save(SettingsKeys.enableGitProxy, value ?? !gitProxy),
         ),
         SettingsTile(
           leading: Icons.image_rounded,
-          title: const Text('图片加速'),
+          title: const Text('圖片加速'),
           description: const Text(
-            '封面与头像',
+            '封面與頭像',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -75,7 +75,7 @@ class _NetworkMirrorSettingsState extends State<NetworkMirrorSettings> {
           ),
           onPressed: (context) => _selectAcceleration(
             context,
-            title: '图片加速',
+            title: '圖片加速',
             current: imageAcceleration,
             modes: ImageAcceleration.values,
             label: (mode) => mode.label,
@@ -131,22 +131,22 @@ class _NetworkMirrorSettingsState extends State<NetworkMirrorSettings> {
 
 extension on BangumiAcceleration {
   String get description => switch (this) {
-    BangumiAcceleration.direct => '访问官方接口',
-    BangumiAcceleration.ech => '启用加密握手',
-    BangumiAcceleration.mirror => '镜像接口（默认）',
+    BangumiAcceleration.direct => '訪問官方介面',
+    BangumiAcceleration.ech => '啟用加密握手',
+    BangumiAcceleration.mirror => '映象介面（預設）',
   };
 }
 
 extension on ImageAcceleration {
   String get label => switch (this) {
-    ImageAcceleration.direct => '直连',
+    ImageAcceleration.direct => '直連',
     ImageAcceleration.ech => 'ECH',
-    ImageAcceleration.mirror => '镜像',
+    ImageAcceleration.mirror => '映象',
   };
 
   String get description => switch (this) {
-    ImageAcceleration.direct => '加载原始图片',
-    ImageAcceleration.ech => '加密握手（推荐）',
-    ImageAcceleration.mirror => '使用图片镜像',
+    ImageAcceleration.direct => '載入原始圖片',
+    ImageAcceleration.ech => '加密握手（推薦）',
+    ImageAcceleration.mirror => '使用圖片映象',
   };
 }

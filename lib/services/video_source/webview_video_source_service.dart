@@ -3,17 +3,17 @@ import 'dart:async';
 import 'package:kazumi/webview/video/video_webview_controller.dart';
 import 'package:kazumi/services/video_source/video_source_service.dart';
 
-/// WebView 视频源解析服务
+/// WebView 影片源解析服務
 ///
-/// 使用 WebView 解析视频页面，提取视频源 URL。
-/// WebView 实例在服务生命周期内复用，切换集数时调用 unloadPage 释放页面资源，
-/// 仅在 [dispose] 时才真正销毁 WebView。
+/// 使用 WebView 解析影片頁面，提取影片源 URL。
+/// WebView 例項在服務生命週期內複用，切換集數時呼叫 unloadPage 釋放頁面資源，
+/// 僅在 [dispose] 時才真正銷燬 WebView。
 class WebViewVideoSourceService implements IVideoSourceService {
   VideoWebviewController? _webview;
   StreamSubscription? _logSubscription;
 
-  // 单个服务实例持有一个 WebView，因此解析任务按实例串行执行。
-  // 下载并行通过多个服务实例实现。
+  // 單個服務例項持有一個 WebView，因此解析任務按例項序列執行。
+  // 下載並行透過多個服務例項實現。
   Future<void>? _resolveTail = Future<void>.value();
   _ResolveRequest? _activeRequest;
 

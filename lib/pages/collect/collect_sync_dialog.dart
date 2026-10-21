@@ -8,9 +8,9 @@ import 'package:kazumi/modules/collect/collect_sync_plan.dart';
 enum CollectSyncDestination { webDavSettings, bangumiSettings }
 
 enum CollectSyncStep {
-  webDav('WebDAV 收藏', '合并本地与云端收藏', Icons.cloud_sync_rounded),
-  bangumi('Bangumi 状态', '同步追番状态', Icons.bookmarks_rounded),
-  upload('回传 WebDAV', '上传合并后的收藏', Icons.cloud_upload_rounded);
+  webDav('WebDAV 收藏', '合併本地與雲端收藏', Icons.cloud_sync_rounded),
+  bangumi('Bangumi 狀態', '同步追番狀態', Icons.bookmarks_rounded),
+  upload('回傳 WebDAV', '上傳合併後的收藏', Icons.cloud_upload_rounded);
 
   const CollectSyncStep(this._title, this._description, this._icon);
 
@@ -101,13 +101,13 @@ class _CollectSyncDialogState extends State<CollectSyncDialog> {
           )) {
         setState(() {
           state.status = _StepStatus.skipped;
-          state.message = '前两步未全部完成';
+          state.message = '前兩步未全部完成';
         });
         continue;
       }
       setState(() {
         state.status = _StepStatus.running;
-        state.message = '正在连接…';
+        state.message = '正在連線…';
       });
       bool succeeded = false;
       String? failure;
@@ -127,12 +127,12 @@ class _CollectSyncDialogState extends State<CollectSyncDialog> {
           },
         );
       } catch (_) {
-        failure ??= '连接中断，请检查网络或设置';
+        failure ??= '連線中斷，請檢查網路或設定';
       }
       if (!_active) return;
       setState(() {
         state.status = succeeded ? _StepStatus.succeeded : _StepStatus.failed;
-        state.message = succeeded ? null : failure ?? '请检查网络或同步设置';
+        state.message = succeeded ? null : failure ?? '請檢查網路或同步設定';
         state.progress = null;
       });
     }
@@ -141,7 +141,7 @@ class _CollectSyncDialogState extends State<CollectSyncDialog> {
   }
 
   String get _title {
-    if (!widget.plan.canSync) return '开启收藏同步';
+    if (!widget.plan.canSync) return '開啟收藏同步';
     if (_running) return '正在同步收藏';
     if (!_finished) return '同步收藏';
     if (!_hasFailure) return '收藏已同步';
@@ -149,12 +149,12 @@ class _CollectSyncDialogState extends State<CollectSyncDialog> {
   }
 
   String? get _description {
-    if (!widget.plan.canSync) return '选择同步服务';
+    if (!widget.plan.canSync) return '選擇同步服務';
     if (_running) {
       final current = _steps.indexWhere((s) => s.status == _StepStatus.running);
-      return '第 ${current + 1} / ${_steps.length} 步 · 请保持应用开启';
+      return '第 ${current + 1} / ${_steps.length} 步 · 請保持應用開啟';
     }
-    if (!_finished) return '同步全部收藏分类';
+    if (!_finished) return '同步全部收藏分類';
     if (_hasFailure && _hasSuccess) return '已完成的更改已保留';
     return null;
   }
@@ -243,7 +243,7 @@ class _CollectSyncDialogState extends State<CollectSyncDialog> {
                     widget.plan.shouldSyncBangumi) ...[
                   const SizedBox(height: 16),
                   Text(
-                    '冲突处理：${widget.priority.label}',
+                    '衝突處理：${widget.priority.label}',
                     style: theme.textTheme.bodySmall
                         ?.copyWith(color: colors.onSurfaceVariant),
                   ),
@@ -264,7 +264,7 @@ class _CollectSyncDialogState extends State<CollectSyncDialog> {
                     ),
                     onPressed: () => Navigator.of(context).pop(),
                     child:
-                        Text(widget.plan.canSync && !_finished ? '取消' : '关闭'),
+                        Text(widget.plan.canSync && !_finished ? '取消' : '關閉'),
                   ),
                 if (widget.plan.canSync)
                   StateActionButton(
@@ -274,7 +274,7 @@ class _CollectSyncDialogState extends State<CollectSyncDialog> {
                     icon: _finished
                         ? (failed ? Icons.refresh_rounded : Icons.check_rounded)
                         : Icons.sync_rounded,
-                    text: _finished ? (failed ? '重新同步' : '完成') : '开始同步',
+                    text: _finished ? (failed ? '重新同步' : '完成') : '開始同步',
                   ),
               ],
       ),
@@ -292,12 +292,12 @@ class _CollectSyncDialogState extends State<CollectSyncDialog> {
     final (title, description, icon) = switch (destination) {
       CollectSyncDestination.webDavSettings => (
           'WebDAV',
-          '设置服务器，开启收藏同步',
+          '設定伺服器，開啟收藏同步',
           Icons.cloud_sync_rounded
         ),
       CollectSyncDestination.bangumiSettings => (
           'Bangumi',
-          '连接账号，开启状态同步',
+          '連線帳號，開啟狀態同步',
           Icons.bookmarks_rounded
         ),
     };
@@ -335,7 +335,7 @@ class _CollectSyncDialogState extends State<CollectSyncDialog> {
       _StepStatus.running => '同步中',
       _StepStatus.succeeded => '已完成',
       _StepStatus.failed => '未完成',
-      _StepStatus.skipped => '已跳过',
+      _StepStatus.skipped => '已跳過',
     };
     final icon = switch (state.status) {
       _StepStatus.succeeded => Icons.check_circle_rounded,
@@ -402,7 +402,7 @@ class _CollectSyncDialogState extends State<CollectSyncDialog> {
                         onPressed: () =>
                             Navigator.of(context).pop(state.step._settings),
                         icon: const Icon(Icons.settings_rounded, size: 18),
-                        label: const Text('检查设置'),
+                        label: const Text('檢查設定'),
                       ),
                     ],
                     if (active && state.progress != null) ...[

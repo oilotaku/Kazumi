@@ -44,17 +44,17 @@ class _DanmakuShieldEditorState extends State<DanmakuShieldEditor> {
       padding: widget.padding,
       children: [
         ContentSection(
-          title: '添加规则',
+          title: '新增規則',
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             TextField(
               controller: textEditingController,
               decoration: InputDecoration(
-                hintText: '关键词或 /正则表达式/',
+                hintText: '關鍵詞或 /正規表示式/',
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
                 suffixIcon: IconButton(
-                  tooltip: '添加规则',
+                  tooltip: '新增規則',
                   onPressed: _addRule,
                   icon: const Icon(Icons.add_rounded),
                 ),
@@ -62,7 +62,7 @@ class _DanmakuShieldEditorState extends State<DanmakuShieldEditor> {
               onSubmitted: (_) => _addRule(),
             ),
             const SizedBox(height: 8),
-            Text('包含关键词的弹幕会被隐藏。用 / / 包裹正则表达式。',
+            Text('包含關鍵詞的彈幕會被隱藏。用 / / 包裹正規表示式。',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
                     )),
@@ -74,21 +74,21 @@ class _DanmakuShieldEditorState extends State<DanmakuShieldEditor> {
           if (rules.isEmpty) {
             return const GeneralEmptyState(
               icon: Icons.filter_alt_off_rounded,
-              title: '还没有屏蔽规则',
+              title: '還沒有遮蔽規則',
               compact: true,
             );
           }
           return ContentSection.group(
-            title: '已添加 · ${rules.length}',
+            title: '已新增 · ${rules.length}',
             children: [
               for (final rule in rules)
                 ListTile(
                   title: Text(rule),
                   subtitle: rule.startsWith('/') && rule.endsWith('/')
-                      ? const Text('正则表达式')
+                      ? const Text('正規表示式')
                       : null,
                   trailing: IconButton(
-                    tooltip: '删除规则',
+                    tooltip: '刪除規則',
                     icon: const Icon(Icons.close_rounded, size: 20),
                     onPressed: () => myController.removeShieldList(rule),
                   ),

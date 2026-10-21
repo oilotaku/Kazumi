@@ -362,7 +362,7 @@ class _VideoPageState extends State<VideoPage>
                     final errorMessage = videoPageController.errorMessage;
                     if (errorMessage != null) {
                       return MediaErrorWidget(
-                        title: '暂时无法播放',
+                        title: '暫時無法播放',
                         errMsg: errorMessage,
                         icon: Icons.videocam_off_outlined,
                       );
@@ -378,8 +378,8 @@ class _VideoPageState extends State<VideoPage>
                           const SizedBox(height: 10),
                           Text(
                             videoPageController.loading
-                                ? '视频资源解析中'
-                                : '视频资源解析成功, 播放器加载中',
+                                ? '影片資源解析中'
+                                : '影片資源解析成功, 播放器載入中',
                             style: const TextStyle(color: Colors.white),
                           ),
                         ],

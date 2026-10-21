@@ -256,7 +256,7 @@ class _CollectLibraryViewState extends State<CollectLibraryView>
             ),
             if (compact)
               IconButton(
-                tooltip: _searchExpanded ? '收起搜索' : '搜索收藏',
+                tooltip: _searchExpanded ? '收起搜尋' : '搜尋收藏',
                 isSelected: _searchExpanded,
                 selectedIcon: const Icon(Icons.search_off_rounded),
                 icon: const Icon(Icons.search_rounded),
@@ -279,7 +279,7 @@ class _CollectLibraryViewState extends State<CollectLibraryView>
   }
 
   Widget _searchBar() => Semantics(
-        label: '搜索收藏',
+        label: '搜尋收藏',
         child: SearchBar(
           controller: _searchController,
           focusNode: _searchFocus,
@@ -287,7 +287,7 @@ class _CollectLibraryViewState extends State<CollectLibraryView>
           trailing: [
             if (_query.isNotEmpty)
               IconButton(
-                tooltip: '清除搜索',
+                tooltip: '清除搜尋',
                 onPressed: () {
                   _searchController.clear();
                   _search('');
@@ -439,17 +439,17 @@ class _CollectLibraryViewState extends State<CollectLibraryView>
     final String title;
 
     if (searching) {
-      title = matchCount > 0 ? '当前分类没有匹配的番剧' : '没有找到匹配的番剧';
+      title = matchCount > 0 ? '當前分類沒有匹配的番劇' : '沒有找到匹配的番劇';
     } else if (matchCount == 0) {
-      title = '还没有收藏的番剧';
+      title = '還沒有收藏的番劇';
     } else {
       title = switch (type) {
-        CollectType.watching => '还没有在追的番剧',
-        CollectType.planToWatch => '还没有想看的番剧',
-        CollectType.watched => '还没有看过的番剧',
-        CollectType.onHold => '没有搁置的番剧',
-        CollectType.abandoned => '没有弃追的番剧',
-        _ => '还没有收藏的番剧',
+        CollectType.watching => '還沒有在追的番劇',
+        CollectType.planToWatch => '還沒有想看的番劇',
+        CollectType.watched => '還沒有看過的番劇',
+        CollectType.onHold => '沒有擱置的番劇',
+        CollectType.abandoned => '沒有棄追的番劇',
+        _ => '還沒有收藏的番劇',
       };
     }
     return GeneralEmptyState(

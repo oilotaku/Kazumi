@@ -26,7 +26,7 @@ class _InsufficientStorageException implements Exception {
   final int requiredBytes;
   _InsufficientStorageException(this.availableBytes, this.requiredBytes);
   @override
-  String toString() => '存储空间不足';
+  String toString() => '儲存空間不足';
 }
 
 class DownloadTask {
@@ -190,17 +190,17 @@ class DownloadManager implements IDownloadManager {
   String _getStorageErrorMessage(FileSystemException e) {
     // POSIX error code 28 = ENOSPC (No space left on device)
     if (e.osError?.errorCode == 28) {
-      return '存储空间不足，请清理后重试';
+      return '儲存空間不足，請清理後重試';
     }
     // POSIX error code 13 = EACCES (Permission denied)
     if (e.osError?.errorCode == 13) {
-      return '存储权限被拒绝';
+      return '儲存許可權被拒絕';
     }
     // POSIX error code 30 = EROFS (Read-only file system)
     if (e.osError?.errorCode == 30) {
-      return '存储为只读，无法写入';
+      return '儲存為只讀，無法寫入';
     }
-    return '存储错误: ${e.message}';
+    return '儲存錯誤: ${e.message}';
   }
 
   @override
@@ -443,7 +443,7 @@ class DownloadManager implements IDownloadManager {
       final playlist =
           M3u8Parser.parseMediaPlaylist(mediaM3u8Content, mediaM3u8Url);
 
-      // 展开嵌套 m3u8 片段（部分源将实际内容嵌套在 m3u8 引用中）
+      // 展開巢狀 m3u8 片段（部分源將實際內容巢狀在 m3u8 引用中）
       final resolvedSegments = await M3u8Parser.resolveNestedSegments(
         playlist.segments,
         (url) => _fetchM3u8(url, httpHeaders, task.cancelToken),
@@ -456,14 +456,14 @@ class DownloadManager implements IDownloadManager {
 
       if (!resolvedPlaylist.isVod) {
         episode.status = DownloadStatus.failed;
-        episode.errorMessage = '不支持下载直播流 (无有效分片)';
+        episode.errorMessage = '不支援下載直播流 (無有效分片)';
         _notifyProgress(task, episode);
         return;
       }
 
       if (resolvedPlaylist.segments.isEmpty) {
         episode.status = DownloadStatus.failed;
-        episode.errorMessage = 'M3U8 中未找到可下载的分片';
+        episode.errorMessage = 'M3U8 中未找到可下載的分片';
         _notifyProgress(task, episode);
         return;
       }
@@ -592,7 +592,7 @@ class DownloadManager implements IDownloadManager {
 
       if (failedCount > 0) {
         episode.status = DownloadStatus.failed;
-        episode.errorMessage = '$failedCount 个分片下载失败';
+        episode.errorMessage = '$failedCount 個分片下載失敗';
         _notifyProgress(task, episode);
         return;
       }
@@ -624,7 +624,7 @@ class DownloadManager implements IDownloadManager {
     } on _InsufficientStorageException catch (e) {
       episode.status = DownloadStatus.failed;
       episode.errorMessage =
-          '存储空间不足 (可用: ${fmt.formatBytes(e.availableBytes)})';
+          '儲存空間不足 (可用: ${fmt.formatBytes(e.availableBytes)})';
       _notifyProgress(task, episode);
       KazumiLogger().w('DownloadManager: insufficient storage space', error: e);
     } on FileSystemException catch (e) {
@@ -769,7 +769,7 @@ class DownloadManager implements IDownloadManager {
     } on _InsufficientStorageException catch (e) {
       episode.status = DownloadStatus.failed;
       episode.errorMessage =
-          '存储空间不足 (可用: ${fmt.formatBytes(e.availableBytes)})';
+          '儲存空間不足 (可用: ${fmt.formatBytes(e.availableBytes)})';
       _notifyProgress(task, episode);
       KazumiLogger().w('DownloadManager: insufficient storage space', error: e);
     } on FileSystemException catch (e) {
@@ -822,7 +822,7 @@ class DownloadManager implements IDownloadManager {
     if (cancelToken.isCancelled) {
       throw NetworkException(
         type: NetworkExceptionType.cancel,
-        message: '请求已被取消，请重新请求',
+        message: '請求已被取消，請重新請求',
       );
     }
 
@@ -852,7 +852,7 @@ class DownloadManager implements IDownloadManager {
     } on NetworkException catch (e) {
       if (cancelToken.isCancelled) rethrow;
       if (e.type == NetworkExceptionType.cancel) {
-        throw _NotM3u8Exception('响应过大，非 M3U8 播放列表');
+        throw _NotM3u8Exception('響應過大，非 M3U8 播放列表');
       }
       rethrow;
     }

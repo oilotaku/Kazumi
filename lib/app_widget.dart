@@ -267,7 +267,7 @@ class _AppWidgetState extends State<AppWidget>
     }
 
     Menu trayMenu = Menu(items: [
-      MenuItem(key: 'show_window', label: '显示窗口'),
+      MenuItem(key: 'show_window', label: '顯示視窗'),
       MenuItem.separator(),
       MenuItem(key: 'exit', label: '退出 Kazumi')
     ]);
@@ -306,10 +306,10 @@ class _AppWidgetState extends State<AppWidget>
           localizationsDelegates: GlobalMaterialLocalizations.delegates,
           supportedLocales: const [
             Locale.fromSubtags(
-                languageCode: 'zh', scriptCode: 'Hans', countryCode: "CN")
+                languageCode: 'zh', scriptCode: 'Hant', countryCode: "TW")
           ],
           locale: const Locale.fromSubtags(
-              languageCode: 'zh', scriptCode: 'Hans', countryCode: "CN"),
+              languageCode: 'zh', scriptCode: 'Hant', countryCode: "TW"),
           theme: lightTheme,
           darkTheme: effectiveDarkTheme,
           themeMode: themeProvider.themeMode,

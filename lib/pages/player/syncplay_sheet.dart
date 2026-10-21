@@ -115,7 +115,7 @@ class _SyncPlaySheetScaffold extends StatelessWidget {
                       const SizedBox(width: 8),
                       IconButton(
                         onPressed: () => Navigator.of(context).pop(),
-                        tooltip: '关闭',
+                        tooltip: '關閉',
                         icon: const Icon(Icons.close_rounded),
                       ),
                     ],
@@ -184,7 +184,7 @@ class _SyncPlayHomeSheet extends StatelessWidget {
                   foregroundColor: colorScheme.onErrorContainer,
                 ),
                 icon: const Icon(Icons.logout_rounded),
-                label: Text(connecting ? '取消连接' : '断开连接'),
+                label: Text(connecting ? '取消連線' : '斷開連線'),
               )
             : null,
         bodyBuilder: (context, compact) {
@@ -220,7 +220,7 @@ class _SyncPlayHomeSheet extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    '正在连接',
+                    '正在連線',
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: colorScheme.onSurface,
                       fontWeight: FontWeight.w600,
@@ -254,8 +254,8 @@ class _SyncPlayHomeSheet extends StatelessWidget {
             Expanded(
                 child: _ChoiceCard(
               icon: Icons.add_circle_outline_rounded,
-              title: '创建房间',
-              description: '邀请朋友加入',
+              title: '建立房間',
+              description: '邀請朋友加入',
               onTap: () =>
                   Navigator.of(context).pop(_SyncPlayDestination.create),
             )),
@@ -263,8 +263,8 @@ class _SyncPlayHomeSheet extends StatelessWidget {
             Expanded(
                 child: _ChoiceCard(
               icon: Icons.login_rounded,
-              title: '加入房间',
-              description: '输入房间号',
+              title: '加入房間',
+              description: '輸入房間號',
               onTap: () => Navigator.of(context).pop(_SyncPlayDestination.join),
             )),
           ],
@@ -272,7 +272,7 @@ class _SyncPlayHomeSheet extends StatelessWidget {
         const SizedBox(height: 16),
         ListTile(
           contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-          title: const Text('同步服务器'),
+          title: const Text('同步伺服器'),
           subtitle: Text(_readEndPoint(), overflow: TextOverflow.ellipsis),
           trailing: const Icon(Icons.chevron_right_rounded),
           onTap: () => Navigator.of(context).pop(_SyncPlayDestination.server),
@@ -294,7 +294,7 @@ class _SyncPlayHomeSheet extends StatelessWidget {
       children: [
         _RoomNumberCard(
           room: room,
-          label: '当前房间',
+          label: '當前房間',
           trailing: [_CopyButton(value: room)],
         ),
         const SizedBox(height: 12),
@@ -304,14 +304,14 @@ class _SyncPlayHomeSheet extends StatelessWidget {
               _buildInfoRow(
                 context,
                 icon: Icons.network_ping_rounded,
-                label: '网络延迟',
+                label: '網路延遲',
                 value: '$rtt ms',
               ),
               Divider(height: 1, indent: 56, color: colorScheme.outlineVariant),
               _buildInfoRow(
                 context,
                 icon: Icons.dns_outlined,
-                label: '同步服务器',
+                label: '同步伺服器',
                 value: _readEndPoint(),
               ),
             ],
@@ -319,7 +319,7 @@ class _SyncPlayHomeSheet extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         Text(
-          '分享房间号，好友即可加入',
+          '分享房間號，好友即可加入',
           style: theme.textTheme.bodySmall?.copyWith(
             color: colorScheme.onSurfaceVariant,
           ),
@@ -481,20 +481,20 @@ class _SyncPlayRoomSheetState extends State<_SyncPlayRoomSheet> {
     final bool isCreate = widget.isCreate;
 
     return _SyncPlaySheetScaffold(
-      title: isCreate ? '创建房间' : '加入房间',
-      description: isCreate ? '将房间号分享给好友' : '输入好友的房间号',
+      title: isCreate ? '建立房間' : '加入房間',
+      description: isCreate ? '將房間號分享給好友' : '輸入好友的房間號',
       showCancel: true,
       primaryAction: FilledButton.icon(
         onPressed: _submit,
         icon: Icon(
             isCreate ? Icons.play_circle_outline_rounded : Icons.login_rounded),
-        label: Text(isCreate ? '创建并加入' : '加入房间'),
+        label: Text(isCreate ? '建立並加入' : '加入房間'),
       ),
       bodyBuilder: (context, compact) {
         final Widget lead = isCreate
             ? _RoomNumberCard(
                 room: _createdRoom,
-                label: '房间号',
+                label: '房間號',
                 trailing: [
                   IconButton(
                     onPressed: () =>
@@ -541,16 +541,16 @@ class _SyncPlayRoomSheetState extends State<_SyncPlayRoomSheet> {
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: _sheetInputDecoration(
-        labelText: '房间号',
-        hintText: '6-10 位数字',
+        labelText: '房間號',
+        hintText: '6-10 位數字',
       ),
       validator: (value) {
         final String text = (value ?? '').trim();
         if (text.isEmpty) {
-          return '请输入房间号';
+          return '請輸入房間號';
         }
         if (!RegExp(r'^[0-9]{6,10}$').hasMatch(text)) {
-          return '房间号为 6-10 位数字';
+          return '房間號為 6-10 位數字';
         }
         return null;
       },
@@ -563,16 +563,16 @@ class _SyncPlayRoomSheetState extends State<_SyncPlayRoomSheet> {
       textInputAction: TextInputAction.done,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: _sheetInputDecoration(
-        labelText: '昵称',
-        helperText: compact ? null : '4-12 位英文字母，房间内可见',
+        labelText: '暱稱',
+        helperText: compact ? null : '4-12 位英文字母，房間內可見',
       ),
       validator: (value) {
         final String text = (value ?? '').trim();
         if (text.isEmpty) {
-          return '请输入昵称';
+          return '請輸入暱稱';
         }
         if (!RegExp(r'^[a-zA-Z]{4,12}$').hasMatch(text)) {
-          return '昵称为 4-12 位英文字母';
+          return '暱稱為 4-12 位英文字母';
         }
         return null;
       },
@@ -589,7 +589,7 @@ class _SyncPlayServerSheet extends StatefulWidget {
 }
 
 class _SyncPlayServerSheetState extends State<_SyncPlayServerSheet> {
-  static const String _customOption = '自定义服务器';
+  static const String _customOption = '自定義伺服器';
 
   final TextEditingController _customEndPointController =
       TextEditingController();
@@ -623,7 +623,7 @@ class _SyncPlayServerSheetState extends State<_SyncPlayServerSheet> {
     if (endPoint == _customOption) {
       endPoint = _customEndPointController.text.trim();
       if (parseSyncPlayEndPoint(endPoint) == null) {
-        setState(() => _customEndPointError = '地址格式为 host:port');
+        setState(() => _customEndPointError = '地址格式為 host:port');
         return;
       }
     }
@@ -634,12 +634,12 @@ class _SyncPlayServerSheetState extends State<_SyncPlayServerSheet> {
   @override
   Widget build(BuildContext context) {
     return _SyncPlaySheetScaffold(
-      title: '同步服务器',
-      description: '房间成员需使用同一服务器',
+      title: '同步伺服器',
+      description: '房間成員需使用同一伺服器',
       showCancel: true,
       primaryAction: FilledButton(
         onPressed: _save,
-        child: const Text('保存'),
+        child: const Text('儲存'),
       ),
       bodyBuilder: (context, compact) {
         final List<String> endPoints = [
@@ -662,7 +662,7 @@ class _SyncPlayServerSheetState extends State<_SyncPlayServerSheet> {
                 keyboardType: TextInputType.url,
                 autocorrect: false,
                 decoration: _sheetInputDecoration(
-                  labelText: '服务器地址',
+                  labelText: '伺服器地址',
                   hintText: 'example.com:8996',
                   errorText: _customEndPointError,
                 ),
@@ -799,7 +799,7 @@ class _CopyButtonState extends State<_CopyButton> {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: _copy,
-      tooltip: _copied ? '已复制' : '复制',
+      tooltip: _copied ? '已複製' : '複製',
       color: Theme.of(context).colorScheme.onSurface,
       icon: Icon(_copied ? Icons.check_rounded : Icons.copy_rounded),
     );

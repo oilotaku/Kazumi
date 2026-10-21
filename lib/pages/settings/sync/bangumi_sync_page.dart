@@ -48,7 +48,7 @@ class _BangumiSyncPageState extends State<BangumiSyncPage> {
   Future<void> _saveToken() async {
     if (_busy) return;
     if (_tokenController.text.trim().isEmpty) {
-      setState(() => _tokenError = '请填写 Access Token');
+      setState(() => _tokenError = '請填寫 Access Token');
       return;
     }
     FocusManager.instance.primaryFocus?.unfocus();
@@ -64,11 +64,11 @@ class _BangumiSyncPageState extends State<BangumiSyncPage> {
       if (mounted) {
         _tokenController.text =
             GStorage.getSetting(SettingsKeys.bangumiAccessToken);
-        _tokenStatus = '已连接 ${_bangumi.username}';
+        _tokenStatus = '已連線 ${_bangumi.username}';
       }
     } catch (e) {
       if (mounted) {
-        _tokenError = '${BangumiSyncService.describeError(e)}。修改未保存';
+        _tokenError = '${BangumiSyncService.describeError(e)}。修改未儲存';
       }
     } finally {
       if (mounted) setState(() => _action = null);
@@ -103,7 +103,7 @@ class _BangumiSyncPageState extends State<BangumiSyncPage> {
       opened = false;
     }
     if (!opened && mounted) {
-      setState(() => _tokenError = '无法打开浏览器，请稍后重试');
+      setState(() => _tokenError = '無法開啟瀏覽器，請稍後重試');
     }
   }
 
@@ -113,7 +113,7 @@ class _BangumiSyncPageState extends State<BangumiSyncPage> {
         GStorage.getSetting(SettingsKeys.bangumiAccessToken).trim()) {
       setState(() {
         _failed = true;
-        _message = '账号信息已修改，请先验证并保存。';
+        _message = '帳號資訊已修改，請先驗證並儲存。';
       });
       return;
     }
@@ -121,7 +121,7 @@ class _BangumiSyncPageState extends State<BangumiSyncPage> {
       _action = _BangumiAction.sync;
       _failed = false;
       _progress = null;
-      _message = '正在连接 Bangumi…';
+      _message = '正在連線 Bangumi…';
     });
     try {
       await _bangumi.syncCollectibles(
@@ -134,7 +134,7 @@ class _BangumiSyncPageState extends State<BangumiSyncPage> {
           });
         },
       );
-      _message = '追番状态已同步';
+      _message = '追番狀態已同步';
     } catch (e) {
       _failed = true;
       _message = BangumiSyncService.describeError(e);
@@ -168,7 +168,7 @@ class _BangumiSyncPageState extends State<BangumiSyncPage> {
                   const SyncPageIntro(
                     icon: Icons.bookmarks_rounded,
                     title: 'Bangumi',
-                    description: '同步想看、在看、看过等追番状态。',
+                    description: '同步想看、在看、看過等追番狀態。',
                   ),
                   _accountCard(configured),
                   _syncControls(configured, enabled),
@@ -190,7 +190,7 @@ class _BangumiSyncPageState extends State<BangumiSyncPage> {
                       collapsedShape: const Border(),
                       leading: const Icon(Icons.tune_rounded),
                       title: const Text('同步偏好'),
-                      subtitle: Text('状态冲突时：${priority.label}'),
+                      subtitle: Text('狀態衝突時：${priority.label}'),
                       tilePadding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 4),
                       childrenPadding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
@@ -210,18 +210,18 @@ class _BangumiSyncPageState extends State<BangumiSyncPage> {
                                   value: option,
                                   enabled: !_busy,
                                   title: Text(switch (option) {
-                                    BangumiSyncPriority.localFirst => '以本机为准',
+                                    BangumiSyncPriority.localFirst => '以本機為準',
                                     BangumiSyncPriority.bangumiFirst =>
-                                      '以 Bangumi 为准',
+                                      '以 Bangumi 為準',
                                     BangumiSyncPriority.timeFirst => '保留最近更新',
                                   }),
                                   subtitle: Text(switch (option) {
                                     BangumiSyncPriority.localFirst =>
-                                      '用本机状态更新 Bangumi',
+                                      '用本機狀態更新 Bangumi',
                                     BangumiSyncPriority.bangumiFirst =>
-                                      '用 Bangumi 状态更新本机',
+                                      '用 Bangumi 狀態更新本機',
                                     BangumiSyncPriority.timeFirst =>
-                                      '比较两边的更新时间',
+                                      '比較兩邊的更新時間',
                                   }),
                                 ),
                             ],
@@ -229,8 +229,8 @@ class _BangumiSyncPageState extends State<BangumiSyncPage> {
                         ),
                         const Divider(indent: 16, endIndent: 16),
                         SwitchListTile(
-                          title: const Text('同步结果提示'),
-                          subtitle: const Text('修改追番状态后显示同步结果'),
+                          title: const Text('同步結果提示'),
+                          subtitle: const Text('修改追番狀態後顯示同步結果'),
                           value: showToast,
                           onChanged: _busy
                               ? null
@@ -261,9 +261,9 @@ class _BangumiSyncPageState extends State<BangumiSyncPage> {
             tiles: [
               SettingsTile.switchTile(
                 leading: Icons.sync_rounded,
-                title: const Text('自动同步追番'),
+                title: const Text('自動同步追番'),
                 description:
-                    Text(configured ? '修改追番状态时同步到 Bangumi' : '请先连接 Bangumi 账号'),
+                    Text(configured ? '修改追番狀態時同步到 Bangumi' : '請先連線 Bangumi 帳號'),
                 initialValue: enabled,
                 enabled: configured && !_busy,
                 onToggle: (value) =>
@@ -279,17 +279,17 @@ class _BangumiSyncPageState extends State<BangumiSyncPage> {
                   Expanded(
                     child: Text(
                       _action == _BangumiAction.connect || _bangumi.isConnecting
-                          ? '正在连接…'
+                          ? '正在連線…'
                           : _bangumi.initialized
-                              ? '已连接 · ${_bangumi.username}'
-                              : '尚未验证连接',
+                              ? '已連線 · ${_bangumi.username}'
+                              : '尚未驗證連線',
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
                   const SizedBox(width: 8),
                   TextButton(
                     onPressed: _busy ? null : () => _connect(_bangumi.ping),
-                    child: Text(_bangumi.lastError != null ? '重试连接' : '测试连接'),
+                    child: Text(_bangumi.lastError != null ? '重試連線' : '測試連線'),
                   ),
                 ],
               ),
@@ -306,12 +306,12 @@ class _BangumiSyncPageState extends State<BangumiSyncPage> {
           tilePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
           childrenPadding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
           leading: const Icon(Icons.account_circle_outlined),
-          title: Text(configured ? 'Bangumi 账号' : '连接 Bangumi 账号'),
+          title: Text(configured ? 'Bangumi 帳號' : '連線 Bangumi 帳號'),
           subtitle: Text(_bangumi.initialized
               ? _bangumi.username
               : configured
-                  ? '已保存授权信息'
-                  : '使用 Access Token 授权'),
+                  ? '已儲存授權資訊'
+                  : '使用 Access Token 授權'),
           children: [
             const SizedBox(height: 12),
             TextField(
@@ -330,11 +330,11 @@ class _BangumiSyncPageState extends State<BangumiSyncPage> {
                 errorText: _tokenError,
                 errorMaxLines: 5,
                 helperText:
-                    _action == _BangumiAction.verify ? '正在验证…' : _tokenStatus,
+                    _action == _BangumiAction.verify ? '正在驗證…' : _tokenStatus,
                 helperMaxLines: 3,
                 border: const OutlineInputBorder(),
                 suffixIcon: IconButton(
-                  tooltip: _passwordVisible ? '隐藏授权码' : '显示授权码',
+                  tooltip: _passwordVisible ? '隱藏授權碼' : '顯示授權碼',
                   onPressed: () =>
                       setState(() => _passwordVisible = !_passwordVisible),
                   icon: Icon(_passwordVisible
@@ -352,11 +352,11 @@ class _BangumiSyncPageState extends State<BangumiSyncPage> {
                 TextButton.icon(
                   onPressed: _busy ? null : _getToken,
                   icon: const Icon(Icons.open_in_new_rounded, size: 18),
-                  label: const Text('获取授权码'),
+                  label: const Text('獲取授權碼'),
                 ),
                 StateActionButton.tonal(
                   onPressed: _busy ? null : _saveToken,
-                  text: _action == _BangumiAction.verify ? '正在验证…' : '验证并保存',
+                  text: _action == _BangumiAction.verify ? '正在驗證…' : '驗證並儲存',
                   icon: Icons.check_rounded,
                 ),
               ],

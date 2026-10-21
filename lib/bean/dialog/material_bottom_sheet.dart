@@ -61,7 +61,7 @@ class MaterialBottomSheetHeader extends StatelessWidget {
                 const SizedBox(width: 12),
                 IconButton(
                   onPressed: onClose,
-                  tooltip: '关闭',
+                  tooltip: '關閉',
                   icon: const Icon(Icons.close_rounded),
                 ),
               ],

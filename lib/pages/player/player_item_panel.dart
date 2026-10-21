@@ -126,7 +126,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
     textFieldFocus.unfocus();
 
     if (message.trim().isEmpty) {
-      KazumiDialog.showToast(message: '弹幕内容为空');
+      KazumiDialog.showToast(message: '彈幕內容為空');
       return;
     }
 
@@ -137,17 +137,17 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
 
     widget.keyboardFocus.requestFocus();
     if (playerController.danmaku.danDanmakus.isEmpty) {
-      KazumiDialog.showToast(message: '当前剧集不支持弹幕发送的说');
+      KazumiDialog.showToast(message: '當前劇集不支援彈幕傳送的說');
       return;
     }
     if (message.length > 100) {
-      KazumiDialog.showToast(message: '弹幕内容过长');
+      KazumiDialog.showToast(message: '彈幕內容過長');
       return;
     }
 
     if (destination == DanmakuDestination.chatRoom) {
       if (playerController.syncplay.syncplayRoom.isEmpty) {
-        KazumiDialog.showToast(message: '你还没有加入一起看，无法发送聊天室弹幕');
+        KazumiDialog.showToast(message: '你還沒有加入一起看，無法傳送聊天室彈幕');
         return;
       }
 
@@ -192,8 +192,8 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
                 fillColor: Colors.white38,
                 floatingLabelBehavior: FloatingLabelBehavior.never,
                 hintText: playerController.danmaku.danmakuOn
-                    ? '发个友善的弹幕见证当下'
-                    : '已关闭弹幕',
+                    ? '發個友善的彈幕見證當下'
+                    : '已關閉彈幕',
                 hintStyle: TextStyle(
                     fontSize: _desktop ? 15 : 13, color: Colors.white60),
                 alignLabelWithHint: true,
@@ -224,7 +224,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
                               BorderRadius.circular(_desktop ? 8 : 20),
                         ),
                       ),
-                      child: const Text('发送'),
+                      child: const Text('傳送'),
                     ),
                   ],
                 ),
@@ -245,7 +245,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
     KazumiDialog.show(builder: (context) {
       var input = '';
       return AlertDialog(
-        title: const Text('跳过秒数'),
+        title: const Text('跳過秒數'),
         content: TextField(
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
@@ -273,7 +273,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
               }
               KazumiDialog.dismiss();
             },
-            child: const Text('确定'),
+            child: const Text('確定'),
           ),
         ],
       );
@@ -351,14 +351,14 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
               )
             : (danmakuOn ? _danmakuOnIcon(context) : _cachedDanmakuOffIcon),
         onPressed: danmakuLoading ? null : widget.handleDanmaku,
-        tooltip: danmakuLoading ? '弹幕加载中...' : (danmakuOn ? '关闭弹幕' : '打开弹幕'),
+        tooltip: danmakuLoading ? '彈幕載入中...' : (danmakuOn ? '關閉彈幕' : '開啟彈幕'),
       );
     });
   }
 
   Widget _forwardButton() {
     return Tooltip(
-      message: '快进${playerController.playback.buttonSkipTime}秒，长按修改时间',
+      message: '快進${playerController.playback.buttonSkipTime}秒，長按修改時間',
       child: GestureDetector(
         onLongPress: _showForwardChange,
         child: IconButton(
@@ -604,7 +604,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
         onPressed: _showDanmakuSettings,
         color: Colors.white,
         icon: _cachedDanmakuSettingsIcon,
-        tooltip: '弹幕设置',
+        tooltip: '彈幕設定',
       );
 
   Widget get _desktopDanmakuControls => LayoutBuilder(
@@ -627,7 +627,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
 
   Widget get _danmakuSettingsMenuItem => KazumiMenuItem(
         onPressed: _showDanmakuSettings,
-        label: '弹幕设置',
+        label: '彈幕設定',
       );
 
   Widget get _wideControls => Row(children: [
@@ -639,7 +639,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
                 ? _danmakuOnIcon(context)
                 : _cachedDanmakuOffIcon,
             onPressed: widget.handleDanmaku,
-            tooltip: playerController.danmaku.danmakuOn ? '关闭弹幕' : '打开弹幕',
+            tooltip: playerController.danmaku.danmakuOn ? '關閉彈幕' : '開啟彈幕',
           ),
           if (playerController.danmaku.danmakuOn) ...[
             _danmakuSettingsButton,
@@ -648,7 +648,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
             const Spacer(),
         ],
         _menuButton(
-          child: const Text('超分辨率', style: TextStyle(color: Colors.white)),
+          child: const Text('超解析度', style: TextStyle(color: Colors.white)),
           items: _superResolutionItems,
         ),
         _menuButton(
@@ -661,14 +661,14 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
         ),
         _menuButton(
           child: const Icon(Icons.aspect_ratio_rounded, color: Colors.white),
-          tooltip: '视频比例',
+          tooltip: '影片比例',
           items: _aspectRatioItems,
         ),
         if (widget.onToggleSidePanel != null)
           IconButton(
             color: Colors.white,
             icon: const Icon(Icons.menu_open_rounded),
-            tooltip: '选集面板',
+            tooltip: '選集面板',
             onPressed: widget.onToggleSidePanel,
           ),
       ]);
@@ -691,7 +691,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
               desktop: _desktop,
             ),
             playPause: IconButton(
-              tooltip: playerController.playback.playing ? '暂停' : '播放',
+              tooltip: playerController.playback.playing ? '暫停' : '播放',
               onPressed: () => playerController.playOrPause(),
               icon: PlayPauseIcon(
                 iconColor: Colors.white,
@@ -820,7 +820,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
                     }
                     await widget.enterAndroidPictureInPicture();
                   },
-                  tooltip: '画中画',
+                  tooltip: '畫中畫',
                   icon: const Icon(
                     Icons.picture_in_picture,
                     color: Colors.white,
@@ -837,7 +837,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
                 builder: (context, toggle) {
                   return IconButton(
                     onPressed: toggle,
-                    tooltip: '更多选项',
+                    tooltip: '更多選項',
                     icon: const Icon(
                       Icons.more_vert,
                       color: Colors.white,
@@ -848,22 +848,22 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
                   if (compact) ...[
                     SubmenuButton(
                         menuChildren: _aspectRatioItems,
-                        child: const Text('视频比例')),
+                        child: const Text('影片比例')),
                     SubmenuButton(
                         menuChildren: _speedItems, child: const Text('倍速')),
                     SubmenuButton(
                         menuChildren: _superResolutionItems,
-                        child: const Text('超分辨率')),
+                        child: const Text('超解析度')),
                     _syncPlayMenuItem,
                   ],
                   KazumiMenuItem(
                     onPressed: widget.showDanmakuSwitch,
-                    label: '弹幕切换',
+                    label: '彈幕切換',
                   ),
                   if (compact) _danmakuSettingsMenuItem,
                   KazumiMenuItem(
                     onPressed: widget.showVideoInfo,
-                    label: '视频详情',
+                    label: '影片詳情',
                   ),
                   KazumiMenuItem(
                     onPressed: () {
@@ -878,7 +878,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
                         }
                       });
                     },
-                    label: '远程投屏',
+                    label: '遠端投屏',
                   ),
                   KazumiMenuItem(
                     onPressed: playerController.launchExternalPlayer,
@@ -888,7 +888,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
                     menuChildren: [
                       KazumiMenuItem(
                         onPressed: TimedShutdownService().cancel,
-                        label: '不开启',
+                        label: '不開啟',
                         selected: !TimedShutdownService().isActive,
                       ),
                       for (final int minutes in [15, 30, 60])
@@ -898,9 +898,9 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
                                 onExpired: widget.pauseForTimedShutdown);
                             KazumiDialog.showToast(
                                 message:
-                                    '已设置 ${TimedShutdownService().formatMinutesToDisplay(minutes)} 后定时关闭');
+                                    '已設定 ${TimedShutdownService().formatMinutesToDisplay(minutes)} 後定時關閉');
                           },
-                          label: '$minutes 分钟',
+                          label: '$minutes 分鐘',
                           selected:
                               TimedShutdownService().setMinutes == minutes,
                         ),
@@ -910,7 +910,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
                             onExpired: widget.pauseForTimedShutdown,
                           );
                         },
-                        label: '自定义',
+                        label: '自定義',
                       ),
                     ],
                     child: ValueListenableBuilder<int>(
@@ -918,8 +918,8 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
                           TimedShutdownService().remainingSecondsNotifier,
                       builder: (context, remainingSeconds, _) => Text(
                         remainingSeconds > 0
-                            ? "定时关闭 (${TimedShutdownService().formatRemainingTime()})"
-                            : "定时关闭",
+                            ? "定時關閉 (${TimedShutdownService().formatRemainingTime()})"
+                            : "定時關閉",
                       ),
                     ),
                   ),
@@ -951,7 +951,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
                   Icons.photo_camera_outlined,
                   color: Colors.white,
                 ),
-                tooltip: '截图',
+                tooltip: '截圖',
                 onPressed: widget.handleScreenShot,
               ),
             IconButton(
@@ -961,7 +961,7 @@ class _PlayerItemPanelState extends State<PlayerItemPanel> {
                     : Icons.lock_open,
                 color: Colors.white,
               ),
-              tooltip: playerController.panel.lockPanel ? '解锁面板' : '锁定面板',
+              tooltip: playerController.panel.lockPanel ? '解鎖面板' : '鎖定面板',
               onPressed: () {
                 playerController.panel.lockPanel =
                     !playerController.panel.lockPanel;

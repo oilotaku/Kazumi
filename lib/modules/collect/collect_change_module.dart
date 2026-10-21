@@ -23,9 +23,9 @@ class CollectedBangumiChange {
 
   // 1. 在看
   // 2. 想看
-  // 3. 搁置
-  // 4. 看过
-  // 5. 抛弃
+  // 3. 擱置
+  // 4. 看過
+  // 5. 拋棄
   @HiveField(3)
   int type;
 

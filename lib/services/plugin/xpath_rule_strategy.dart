@@ -58,7 +58,7 @@ class XPathRuleStrategy {
     final uri = Uri.tryParse(queryUrl);
     if (uri == null || !uri.hasScheme || uri.host.isEmpty) {
       throw XPathRuleFormatException(
-        '搜索 URL 无效: $queryUrl',
+        '搜尋 URL 無效: $queryUrl',
         kind: XPathRuleFormatKind.invalidUrl,
       );
     }
@@ -86,7 +86,7 @@ class XPathRuleStrategy {
     final uri = Uri.tryParse(url);
     if (uri == null || !uri.hasScheme || uri.host.isEmpty) {
       throw XPathRuleFormatException(
-        '章节 URL 无效: $url',
+        '章節 URL 無效: $url',
         kind: XPathRuleFormatKind.invalidUrl,
       );
     }
@@ -132,7 +132,7 @@ class XPathRuleStrategy {
             )?.attributes['href']?.trim() ??
             '';
         if (name.isEmpty || source.isEmpty) {
-          diagnostics.add('搜索节点 $index 缺少名称或来源，已跳过');
+          diagnostics.add('搜尋節點 $index 缺少名稱或來源，已跳過');
           continue;
         }
         items.add(SearchItem(name: name, src: source));
@@ -140,7 +140,7 @@ class XPathRuleStrategy {
       } on XPathRuleFormatException {
         rethrow;
       } catch (error) {
-        diagnostics.add('搜索节点 $index 解析失败: $error');
+        diagnostics.add('搜尋節點 $index 解析失敗: $error');
       }
     }
     return RuleSearchParseResult(
@@ -180,7 +180,7 @@ class XPathRuleStrategy {
             final source = episode.attributes['href']?.trim() ?? '';
             if (source.isEmpty) {
               diagnostics.add(
-                '线路 $roadIndex 的剧集节点 $episodeIndex 缺少 URL，已跳过',
+                '線路 $roadIndex 的劇集節點 $episodeIndex 缺少 URL，已跳過',
               );
               continue;
             }
@@ -189,17 +189,17 @@ class XPathRuleStrategy {
             names.add(name.isEmpty ? '第${episodeIndex + 1}集' : name);
           } catch (error) {
             diagnostics.add(
-              '线路 $roadIndex 的剧集节点 $episodeIndex 解析失败: $error',
+              '線路 $roadIndex 的劇集節點 $episodeIndex 解析失敗: $error',
             );
           }
         }
         if (urls.isEmpty) {
-          diagnostics.add('线路 $roadIndex 没有有效剧集，已跳过');
+          diagnostics.add('線路 $roadIndex 沒有有效劇集，已跳過');
           continue;
         }
         roads.add(
           Road(
-            name: '播放线路${roads.length + 1}',
+            name: '播放線路${roads.length + 1}',
             data: urls,
             identifier: names,
           ),
@@ -207,7 +207,7 @@ class XPathRuleStrategy {
       } on XPathRuleFormatException {
         rethrow;
       } catch (error) {
-        diagnostics.add('线路节点 $roadIndex 解析失败: $error');
+        diagnostics.add('線路節點 $roadIndex 解析失敗: $error');
       }
     }
     return RuleChapterParseResult(
@@ -271,7 +271,7 @@ class XPathRuleStrategy {
       final element = parse(raw).documentElement;
       if (element == null) {
         throw const XPathRuleFormatException(
-          'HTML 响应没有根节点',
+          'HTML 響應沒有根節點',
           kind: XPathRuleFormatKind.invalidDocument,
         );
       }
@@ -280,7 +280,7 @@ class XPathRuleStrategy {
       rethrow;
     } catch (error) {
       throw XPathRuleFormatException(
-        'HTML 响应解析失败',
+        'HTML 響應解析失敗',
         kind: XPathRuleFormatKind.invalidDocument,
         cause: error,
       );
@@ -295,7 +295,7 @@ class XPathRuleStrategy {
     final label = _fieldLabel(field);
     if (expression.trim().isEmpty) {
       throw XPathRuleFormatException(
-        '$label XPath 不能为空',
+        '$label XPath 不能為空',
         kind: XPathRuleFormatKind.invalidSelector,
         field: field,
         expression: expression,
@@ -305,7 +305,7 @@ class XPathRuleStrategy {
       return query();
     } catch (error) {
       throw XPathRuleFormatException(
-        '$label XPath 无效: $expression',
+        '$label XPath 無效: $expression',
         kind: XPathRuleFormatKind.invalidSelector,
         field: field,
         expression: expression,
@@ -316,14 +316,14 @@ class XPathRuleStrategy {
 
   String _fieldLabel(XPathRuleField field) {
     return switch (field) {
-      XPathRuleField.searchList => '搜索结果列表',
-      XPathRuleField.searchName => '条目名称',
-      XPathRuleField.searchResult => '条目链接',
-      XPathRuleField.chapterRoads => '播放线路列表',
-      XPathRuleField.chapterResult => '剧集列表',
-      XPathRuleField.captchaDetectValue => '验证页检测',
-      XPathRuleField.captchaImage => '验证码图片',
-      XPathRuleField.captchaButton => '验证按钮',
+      XPathRuleField.searchList => '搜尋結果列表',
+      XPathRuleField.searchName => '條目名稱',
+      XPathRuleField.searchResult => '條目連結',
+      XPathRuleField.chapterRoads => '播放線路列表',
+      XPathRuleField.chapterResult => '劇集列表',
+      XPathRuleField.captchaDetectValue => '驗證頁檢測',
+      XPathRuleField.captchaImage => '驗證碼圖片',
+      XPathRuleField.captchaButton => '驗證按鈕',
     };
   }
 

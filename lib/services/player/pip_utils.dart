@@ -8,7 +8,7 @@ import 'package:kazumi/utils/device.dart';
 class PipUtils {
   static bool androidPIPInited = false;
 
-  // 比例约分
+  // 比例約分
   static Size getPIPAspectSize({required int width, required int height}) {
     if (width <= 0 || height <= 0) {
       return const Size(16, 9);
@@ -111,7 +111,7 @@ class PipUtils {
     }
   }
 
-  // 进入桌面设备小窗模式，并用播放源比例固定窗口宽高比
+  // 進入桌面裝置小窗模式，並用播放源比例固定視窗寬高比
   static Future<void> enterDesktopPIPWindow(
       {int width = 16, int height = 9}) async {
     final Size aspectSize = getPIPAspectSize(width: width, height: height);
@@ -122,7 +122,7 @@ class PipUtils {
     await windowManager.setSize(Size(pipWidth, pipWidth / aspectRatio));
   }
 
-  // 退出桌面设备小窗模式
+  // 退出桌面裝置小窗模式
   static Future<void> exitDesktopPIPWindow() async {
     final lowResolution = await isLowResolution();
     await windowManager.setAlwaysOnTop(false);

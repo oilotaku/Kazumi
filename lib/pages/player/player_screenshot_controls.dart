@@ -19,7 +19,7 @@ class PlayerScreenshotControls extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         IconButton(
-          tooltip: '截取当前画面',
+          tooltip: '擷取當前畫面',
           style: IconButton.styleFrom(
             foregroundColor: Colors.white,
             minimumSize: const Size(48, 48),
@@ -37,7 +37,7 @@ class PlayerScreenshotControls extends StatelessWidget {
         ),
         if (controller.candidates.isNotEmpty)
           IconButton(
-            tooltip: '挑选截图 · ${controller.candidates.length} 张',
+            tooltip: '挑選截圖 · ${controller.candidates.length} 張',
             style: IconButton.styleFrom(
               foregroundColor: Colors.white,
               minimumSize: const Size(48, 48),

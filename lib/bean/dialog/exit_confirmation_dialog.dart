@@ -71,7 +71,7 @@ class _ExitConfirmationDialogState extends State<ExitConfirmationDialog> {
         ),
       ),
       titlePadding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
-      title: const Text('关闭 Kazumi？', textAlign: TextAlign.center),
+      title: const Text('關閉 Kazumi？', textAlign: TextAlign.center),
       titleTextStyle: theme.textTheme.headlineSmall?.copyWith(
         color: colors.onSurface,
         fontWeight: FontWeight.w600,
@@ -84,7 +84,7 @@ class _ExitConfirmationDialogState extends State<ExitConfirmationDialog> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              '选择关闭窗口后的操作',
+              '選擇關閉視窗後的操作',
               textAlign: TextAlign.center,
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: colors.onSurfaceVariant,
@@ -128,9 +128,9 @@ class _ExitConfirmationDialogState extends State<ExitConfirmationDialog> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
-              title: Text('记住我的选择', style: theme.textTheme.bodyMedium),
+              title: Text('記住我的選擇', style: theme.textTheme.bodyMedium),
               subtitle: Text(
-                '下次关闭窗口时不再询问',
+                '下次關閉視窗時不再詢問',
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: colors.onSurfaceVariant,
                 ),
@@ -154,7 +154,7 @@ class _ExitConfirmationDialogState extends State<ExitConfirmationDialog> {
           ),
           child: Text(
             switch (_action) {
-              ExitDialogAction.minimizeToTray => '最小化至托盘',
+              ExitDialogAction.minimizeToTray => '最小化至託盤',
               ExitDialogAction.exit => '退出',
             },
           ),
@@ -172,13 +172,13 @@ class _ExitConfirmationDialogState extends State<ExitConfirmationDialog> {
     final (icon, title, description) = switch (action) {
       ExitDialogAction.minimizeToTray => (
           Icons.minimize_rounded,
-          '最小化至托盘',
-          '隐藏窗口，继续在后台运行',
+          '最小化至託盤',
+          '隱藏視窗，繼續在後臺執行',
         ),
       ExitDialogAction.exit => (
           Icons.power_settings_new_rounded,
           '退出 Kazumi',
-          '结束运行并关闭应用',
+          '結束執行並關閉應用',
         ),
     };
     final selected = _action == action;

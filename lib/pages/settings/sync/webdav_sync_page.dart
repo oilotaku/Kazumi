@@ -29,7 +29,7 @@ class _WebDavSyncPageState extends State<WebDavSyncPage> {
     setState(() {
       _busy = true;
       _failed = false;
-      _message = '正在连接 WebDAV…';
+      _message = '正在連線 WebDAV…';
     });
     try {
       await action();
@@ -37,7 +37,7 @@ class _WebDavSyncPageState extends State<WebDavSyncPage> {
       KazumiLogger().w('WebDAV settings operation failed', error: e);
       if (mounted) {
         _failed = true;
-        _message = '未能完成，请检查网络或服务器配置后重试。';
+        _message = '未能完成，請檢查網路或伺服器配置後重試。';
       }
     } finally {
       if (mounted) setState(() => _busy = false);
@@ -56,9 +56,9 @@ class _WebDavSyncPageState extends State<WebDavSyncPage> {
         } else if (!webDav.isHistorySyncing) {
           await webDav.ping();
         }
-        if (mounted) setState(() => _message = '正在同步观看记录…');
+        if (mounted) setState(() => _message = '正在同步觀看記錄…');
         await webDav.syncHistory();
-        _message = '观看记录已同步';
+        _message = '觀看記錄已同步';
       });
 
   Future<void> _configure() async {
@@ -72,9 +72,9 @@ class _WebDavSyncPageState extends State<WebDavSyncPage> {
   }
 
   Future<void> _syncDanmakuShield() => _run(() async {
-        if (mounted) setState(() => _message = '正在同步弹幕屏蔽词…');
+        if (mounted) setState(() => _message = '正在同步彈幕遮蔽詞…');
         await widget.danmakuShieldSync.sync();
-        _message = '弹幕屏蔽词已同步';
+        _message = '彈幕遮蔽詞已同步';
       });
 
   @override
@@ -89,34 +89,34 @@ class _WebDavSyncPageState extends State<WebDavSyncPage> {
     return PopScope(
       canPop: !_busy,
       child: SettingsDetailScaffold(
-        title: const Text('多设备同步'),
+        title: const Text('多裝置同步'),
         body: SyncPageBody(
           maxWidth: 720,
           children: [
             const SyncPageIntro(
               icon: Icons.devices_rounded,
               title: 'WebDAV',
-              description: '连接自己的云盘，同步观看记录、收藏与弹幕屏蔽词。',
+              description: '連線自己的雲盤，同步觀看記錄、收藏與彈幕遮蔽詞。',
             ),
             SettingsSection(
               margin: EdgeInsets.zero,
               tiles: [
                 SettingsTile(
                   leading: Icons.dns_rounded,
-                  title: Text(configured ? '同步服务器' : '连接你的云盘'),
+                  title: Text(configured ? '同步伺服器' : '連線你的雲盤'),
                   description: Text(configured
-                      ? (host == null || host.isEmpty ? '已保存服务器地址' : host)
-                      : '需要支持 WebDAV 的云盘或服务器'),
+                      ? (host == null || host.isEmpty ? '已儲存伺服器地址' : host)
+                      : '需要支援 WebDAV 的雲盤或伺服器'),
                   trailing: const Icon(Icons.chevron_right_rounded),
                   enabled: !_busy,
                   onPressed: (_) => _configure(),
                 ),
                 SettingsTile.switchTile(
                   leading: Icons.cloud_sync_rounded,
-                  title: const Text('启用 WebDAV'),
+                  title: const Text('啟用 WebDAV'),
                   description: Text(configured
-                      ? (enabled ? '已开启，选择下方要同步的内容' : '开启后选择要同步的内容')
-                      : '请先配置服务器'),
+                      ? (enabled ? '已開啟，選擇下方要同步的內容' : '開啟後選擇要同步的內容')
+                      : '請先配置伺服器'),
                   initialValue: enabled,
                   enabled: configured && !_busy,
                   onToggle: (value) => _setEnabled(value ?? !enabled),
@@ -124,13 +124,13 @@ class _WebDavSyncPageState extends State<WebDavSyncPage> {
               ],
             ),
             SettingsSection(
-              title: const Text('同步内容'),
+              title: const Text('同步內容'),
               margin: EdgeInsets.zero,
               tiles: [
                 SettingsTile.switchTile(
                   leading: Icons.history_rounded,
-                  title: const Text('观看记录'),
-                  description: const Text('自动同步播放进度与历史记录'),
+                  title: const Text('觀看記錄'),
+                  description: const Text('自動同步播放進度與歷史記錄'),
                   initialValue: history,
                   enabled: enabled && !_busy,
                   onToggle: (value) async {
@@ -142,7 +142,7 @@ class _WebDavSyncPageState extends State<WebDavSyncPage> {
                 SettingsTile.switchTile(
                   leading: Icons.favorite_rounded,
                   title: const Text('收藏'),
-                  description: const Text('在收藏页同步所有追番分类'),
+                  description: const Text('在收藏頁同步所有追番分類'),
                   initialValue: collect,
                   enabled: enabled && !_busy,
                   onToggle: (value) async {
@@ -153,8 +153,8 @@ class _WebDavSyncPageState extends State<WebDavSyncPage> {
                 ),
                 SettingsTile.switchTile(
                   leading: Icons.filter_alt_rounded,
-                  title: const Text('弹幕屏蔽词'),
-                  description: const Text('启动和修改规则后自动同步，包含关键词与正则表达式'),
+                  title: const Text('彈幕遮蔽詞'),
+                  description: const Text('啟動和修改規則後自動同步，包含關鍵詞與正規表示式'),
                   initialValue: shield,
                   enabled: enabled && !_busy,
                   onToggle: (value) async {
@@ -170,13 +170,13 @@ class _WebDavSyncPageState extends State<WebDavSyncPage> {
             ),
             StateActionButton(
               onPressed: enabled && !_busy ? _syncHistory : null,
-              text: _busy ? '请稍候…' : '立即同步观看记录',
+              text: _busy ? '請稍候…' : '立即同步觀看記錄',
               icon: Icons.sync_rounded,
             ),
             StateActionButton.tonal(
               onPressed:
                   enabled && shield && !_busy ? _syncDanmakuShield : null,
-              text: '立即同步弹幕屏蔽词',
+              text: '立即同步彈幕遮蔽詞',
               icon: Icons.sync_rounded,
             ),
             if (_message != null)

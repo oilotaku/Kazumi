@@ -1,23 +1,23 @@
-/// 集数源站 URL 归一化。
+/// 集數源站 URL 歸一化。
 ///
-/// 把插件抓取到的原始 `href`（可能是相对路径、缺协议、带尾斜杠或多余噪声）
-/// 转换为一个稳定一致的绝对 URL，使"同一集"在播放、下载、历史回填等不同入口
-/// 始终得到同一个字符串，可作为身份匹配的主键（`pageUrl`）。
+/// 把插件抓取到的原始 `href`（可能是相對路徑、缺協議、帶尾斜槓或多餘噪聲）
+/// 轉換為一個穩定一致的絕對 URL，使"同一集"在播放、下載、歷史回填等不同入口
+/// 始終得到同一個字串，可作為身份匹配的主鍵（`pageUrl`）。
 ///
-/// 归一化规则：
-/// - 去除首尾空白；空输入返回空串（调用方据此判断"无 URL"）。
-/// - 相对路径基于 [baseUrl] 补全为绝对 URL。
-/// - 与 [baseUrl] 同站（同 host、同显式端口）的 URL，协议统一到 [baseUrl]
-///   声明的协议，避免同一集因 `http`/`https` 混用产生两个 key；跨站或端口
-///   不同的 URL 保持原协议不动——规则站点可能仅支持 http（如自建反代），
-///   改写协议会导致无法访问。
-/// - 去除 path 多余尾斜杠（根路径 `/` 保留）。
+/// 歸一化規則：
+/// - 去除首尾空白；空輸入返回空串（呼叫方據此判斷"無 URL"）。
+/// - 相對路徑基於 [baseUrl] 補全為絕對 URL。
+/// - 與 [baseUrl] 同站（同 host、同顯式埠）的 URL，協議統一到 [baseUrl]
+///   宣告的協議，避免同一集因 `http`/`https` 混用產生兩個 key；跨站或埠
+///   不同的 URL 保持原協議不動——規則站點可能僅支援 http（如自建反代），
+///   改寫協議會導致無法訪問。
+/// - 去除 path 多餘尾斜槓（根路徑 `/` 保留）。
 /// - 去除空 query。
-/// - 幂等：`normalizeEpisodeUrl(b, normalizeEpisodeUrl(b, x))` 等于
+/// - 冪等：`normalizeEpisodeUrl(b, normalizeEpisodeUrl(b, x))` 等於
 ///   `normalizeEpisodeUrl(b, x)`。
 ///
-/// 归一化结果同时作为"身份 key"与可访问的"请求 URL"使用，因此归一化
-/// 不得改变 URL 实际指向的端点，协议口径以规则中用户声明的 [baseUrl] 为准。
+/// 歸一化結果同時作為"身份 key"與可訪問的"請求 URL"使用，因此歸一化
+/// 不得改變 URL 實際指向的端點，協議口徑以規則中使用者宣告的 [baseUrl] 為準。
 String normalizeEpisodeUrl(String baseUrl, String raw) {
   final trimmed = raw.trim();
   if (trimmed.isEmpty) return '';
@@ -29,7 +29,7 @@ String normalizeEpisodeUrl(String baseUrl, String raw) {
 
   Uri? resolved;
   if (rawUri != null && rawUri.hasScheme && rawUri.host.isNotEmpty) {
-    // 已是绝对 URL。
+    // 已是絕對 URL。
     resolved = rawUri;
   } else if (hasValidBase) {
     try {
@@ -39,12 +39,12 @@ String normalizeEpisodeUrl(String baseUrl, String raw) {
     }
   }
 
-  // 无法解析为绝对 URL（baseUrl 缺失/非法），原样返回去空白后的输入。
+  // 無法解析為絕對 URL（baseUrl 缺失/非法），原樣返回去空白後的輸入。
   if (resolved == null || resolved.host.isEmpty) {
     return trimmed;
   }
 
-  // 同站 URL 的协议统一到 baseUrl 声明的协议。
+  // 同站 URL 的協議統一到 baseUrl 宣告的協議。
   if (hasValidBase &&
       _isHttpScheme(baseUri.scheme) &&
       _isHttpScheme(resolved.scheme) &&
@@ -55,7 +55,7 @@ String normalizeEpisodeUrl(String baseUrl, String raw) {
     resolved = resolved.replace(scheme: baseUri.scheme);
   }
 
-  // 去除 path 尾斜杠（根路径除外）。
+  // 去除 path 尾斜槓（根路徑除外）。
   String path = resolved.path;
   while (path.length > 1 && path.endsWith('/')) {
     path = path.substring(0, path.length - 1);

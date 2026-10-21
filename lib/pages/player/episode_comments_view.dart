@@ -70,17 +70,17 @@ class EpisodeCommentsView extends StatelessWidget {
               SliverToBoxAdapter(
                 child: GeneralErrorWidget(
                   icon: Icons.cloud_off_rounded,
-                  title: '评论暂时未能加载',
-                  errMsg: '请检查网络后重试，或切换分集查看讨论。',
+                  title: '評論暫時未能載入',
+                  errMsg: '請檢查網路後重試，或切換分集檢視討論。',
                   onRetry: onRefresh,
-                  retryText: '重新加载',
+                  retryText: '重新載入',
                 ),
               )
             else if (!isLoading && comments.isEmpty)
               const SliverToBoxAdapter(
                 child: GeneralEmptyState(
                   icon: Icons.chat_bubble_outline_rounded,
-                  title: '本集还没有讨论',
+                  title: '本集還沒有討論',
                 ),
               )
             else if (comments.isNotEmpty) ...[
@@ -95,7 +95,7 @@ class EpisodeCommentsView extends StatelessWidget {
                         padding: const EdgeInsets.fromLTRB(16, 4, 8, 4),
                         child: Row(children: [
                           Expanded(
-                            child: Text('刷新失败，已保留现有讨论',
+                            child: Text('重新整理失敗，已保留現有討論',
                                 style:
                                     TextStyle(color: colors.onErrorContainer)),
                           ),
@@ -103,7 +103,7 @@ class EpisodeCommentsView extends StatelessWidget {
                             onPressed: onRefresh,
                             style: TextButton.styleFrom(
                                 foregroundColor: colors.onErrorContainer),
-                            child: const Text('重试'),
+                            child: const Text('重試'),
                           ),
                         ]),
                       ),
@@ -138,7 +138,7 @@ class EpisodeCommentsView extends StatelessWidget {
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-                  child: Text('已显示全部 ${comments.length} 条讨论 · 来自 Bangumi',
+                  child: Text('已顯示全部 ${comments.length} 條討論 · 來自 Bangumi',
                       textAlign: TextAlign.center,
                       style: Theme.of(context)
                           .textTheme
@@ -161,7 +161,7 @@ class EpisodeCommentsView extends StatelessWidget {
     final type = Theme.of(context).textTheme;
     return LayoutBuilder(builder: (context, constraints) {
       final title = Row(mainAxisSize: MainAxisSize.min, children: [
-        Text('讨论',
+        Text('討論',
             style: type.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
         if ((!isLoading && !hasError) || comments.isNotEmpty) ...[
           const SizedBox(width: 8),
@@ -186,13 +186,13 @@ class EpisodeCommentsView extends StatelessWidget {
                   ? Icons.arrow_upward_rounded
                   : Icons.arrow_downward_rounded,
               size: 18),
-          label: Text(isAscending ? '最早优先' : '最新优先'),
+          label: Text(isAscending ? '最早優先' : '最新優先'),
         ),
         const SizedBox(width: 4),
         SizedBox.square(
           dimension: 48,
           child: IconButton.filledTonal(
-            tooltip: isLoading ? '正在加载评论' : '刷新评论',
+            tooltip: isLoading ? '正在載入評論' : '重新整理評論',
             onPressed: isLoading ? null : onRefresh,
             style: IconButton.styleFrom(
               backgroundColor: colors.secondaryContainer,
@@ -204,7 +204,7 @@ class EpisodeCommentsView extends StatelessWidget {
                 ? LoadingIndicator(
                     size: 24,
                     color: colors.onSecondaryContainer,
-                    semanticsLabel: '正在加载评论',
+                    semanticsLabel: '正在載入評論',
                   )
                 : const Icon(Icons.refresh_rounded, size: 24),
           ),
@@ -289,7 +289,7 @@ class _EpisodeHeader extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                     ),
                     icon: const Icon(Icons.video_library_outlined, size: 18),
-                    label: const Text('切换分集'),
+                    label: const Text('切換分集'),
                   ),
                 ],
               ),

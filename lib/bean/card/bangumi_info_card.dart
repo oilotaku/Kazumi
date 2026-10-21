@@ -7,7 +7,7 @@ import 'package:kazumi/bean/card/network_img_layer.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-// 视频卡片 - 水平布局
+// 影片卡片 - 水平佈局
 class BangumiInfoCardV extends StatefulWidget {
   const BangumiInfoCardV({
     super.key,
@@ -33,7 +33,7 @@ class _BangumiInfoCardVState extends State<BangumiInfoCardV> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '  评分透视:',
+            '  評分透視:',
           ),
           SizedBox(height: 16),
           AspectRatio(
@@ -180,11 +180,11 @@ class _BangumiInfoCardVState extends State<BangumiInfoCardV> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    '放送开始:',
+                                    '放送開始:',
                                   ),
                                   Text(
                                     widget.bangumiItem.airDate == ''
-                                        ? '2000-11-11' // Skeleton Loader 占位符
+                                        ? '2000-11-11' // Skeleton Loader 佔位符
                                         : widget.bangumiItem.airDate,
                                     style: TextStyle(
                                       fontSize: 20,
@@ -196,11 +196,11 @@ class _BangumiInfoCardVState extends State<BangumiInfoCardV> {
                                   SizedBox(height: 8),
                                   Text(
                                     widget.showRating
-                                        ? '${widget.bangumiItem.votes} 人评分:'
-                                        : '*** 人评分:',
+                                        ? '${widget.bangumiItem.votes} 人評分:'
+                                        : '*** 人評分:',
                                   ),
                                   if (widget.isLoading)
-                                    // Skeleton Loader 占位符
+                                    // Skeleton Loader 佔位符
                                     Text(
                                       '10.0 ********',
                                       style: TextStyle(

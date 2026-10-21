@@ -135,11 +135,11 @@ class _PopularPageState extends State<PopularPage> {
       padding: const EdgeInsets.all(8),
       sliver: SliverGrid(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          // 行间距
+          // 行間距
           mainAxisSpacing: StyleString.cardSpace - 2,
-          // 列间距
+          // 列間距
           crossAxisSpacing: StyleString.cardSpace,
-          // 列数
+          // 列數
           crossAxisCount: crossCount,
           mainAxisExtent:
               MediaQuery.of(context).size.width / crossCount / 0.65 +
@@ -178,7 +178,7 @@ class _PopularPageState extends State<PopularPage> {
                   ((constraints.maxHeight - kToolbarHeight) /
                           (maxExtent - kToolbarHeight))
                       .clamp(0.0, 1.0));
-              // 字重收缩后为 w500，展开时为 w700
+              // 字重收縮後為 w500，展開時為 w700
               final fontWeight = t < 0.5 ? FontWeight.w700 : FontWeight.w500;
               final fontSize = lerpDouble(28, 20, t)!;
               return Align(
@@ -199,7 +199,7 @@ class _PopularPageState extends State<PopularPage> {
                           menuChildren: [
                             for (final tag in ['', ...defaultAnimeTags])
                               KazumiMenuItem(
-                                label: tag.isEmpty ? '热门番组' : tag,
+                                label: tag.isEmpty ? '熱門番組' : tag,
                                 selected: tag == popularController.currentTag,
                                 onPressed: () => _selectTag(tag),
                               ),
@@ -211,7 +211,7 @@ class _PopularPageState extends State<PopularPage> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
-                                  isTrend ? '热门番组' : popularController.currentTag,
+                                  isTrend ? '熱門番組' : popularController.currentTag,
                                   style: theme.textTheme.headlineMedium!.copyWith(
                                     fontWeight: fontWeight,
                                     fontSize: fontSize,
@@ -240,12 +240,12 @@ class _PopularPageState extends State<PopularPage> {
     return <Widget>[
       if (MediaQuery.of(context).orientation == Orientation.portrait)
         IconButton(
-          tooltip: '搜索',
+          tooltip: '搜尋',
           onPressed: () => context.pushNamed('/search/'),
           icon: const Icon(Icons.search),
         ),
       IconButton(
-        tooltip: '历史记录',
+        tooltip: '歷史記錄',
         onPressed: () => context.pushNamed('/settings/history/'),
         icon: const Icon(Icons.history),
       ),

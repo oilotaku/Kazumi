@@ -18,7 +18,7 @@ final videoModule = createModule(
       child: (context, state) {
         final args = state.arguments;
         if (args is! VideoPlaybackArgs) {
-          return const RouteErrorPage(message: '播放参数无效，请返回后重试。');
+          return const RouteErrorPage(message: '播放參數無效，請返回後重試。');
         }
         return VideoPage(
           args: args,

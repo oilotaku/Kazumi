@@ -25,15 +25,15 @@ class RatingReviewDialog extends StatefulWidget {
 
 class _RatingReviewDialogState extends State<RatingReviewDialog> {
   static const _scoreLabels = [
-    '未评分',
-    '不忍直视',
+    '未評分',
+    '不忍直視',
     '很差',
     '差',
-    '较差',
-    '不过不失',
-    '还行',
-    '推荐',
-    '力荐',
+    '較差',
+    '不過不失',
+    '還行',
+    '推薦',
+    '力薦',
     '神作',
     '超神作',
   ];
@@ -122,7 +122,7 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
       if (_selectedTags.remove(tag)) {
         _tagError = null;
       } else if (_selectedTags.length >= _maxTags) {
-        _tagError = '最多 $_maxTags 个标签';
+        _tagError = '最多 $_maxTags 個標籤';
       } else {
         _selectedTags.add(tag);
         _tagError = null;
@@ -135,13 +135,13 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
     final tag = _tagController.text.trim();
     final String? error;
     if (tag.isEmpty) {
-      error = '请输入标签';
+      error = '請輸入標籤';
     } else if (tag.characters.length > _maxTagLength) {
-      error = '标签最多 $_maxTagLength 字';
+      error = '標籤最多 $_maxTagLength 字';
     } else if (_selectedTags.contains(tag)) {
-      error = '标签已添加';
+      error = '標籤已新增';
     } else if (_selectedTags.length >= _maxTags) {
-      error = '最多 $_maxTags 个标签';
+      error = '最多 $_maxTags 個標籤';
     } else {
       error = null;
     }
@@ -167,16 +167,16 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
       context: context,
       builder: (dialogContext) => AlertDialog(
         icon: const Icon(Icons.edit_note_rounded),
-        title: const Text('放弃编辑？'),
-        content: const Text('未保存的修改将丢失。'),
+        title: const Text('放棄編輯？'),
+        content: const Text('未儲存的修改將丟失。'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialogContext, false),
-            child: const Text('继续编辑'),
+            child: const Text('繼續編輯'),
           ),
           TextButton(
             onPressed: () => Navigator.pop(dialogContext, true),
-            child: const Text('放弃编辑'),
+            child: const Text('放棄編輯'),
           ),
         ],
       ),
@@ -194,7 +194,7 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
     if (_commentController.text.characters.length > _maxCommentLength ||
         _selectedTags.length > _maxTags) {
       setState(
-          () => _submitError = '吐槽最多 $_maxCommentLength 字，标签最多 $_maxTags 个');
+          () => _submitError = '吐槽最多 $_maxCommentLength 字，標籤最多 $_maxTags 個');
       _revealFeedback();
       return;
     }
@@ -222,7 +222,7 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
     if (!_active) return;
     setState(() {
       _submitting = false;
-      _submitError = '发表失败，请检查网络或 Bangumi 授权';
+      _submitError = '發表失敗，請檢查網路或 Bangumi 授權';
     });
     _revealFeedback();
   }
@@ -322,13 +322,13 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
         padding: const EdgeInsets.fromLTRB(12, 12, 24, 12),
         child: Row(children: [
           IconButton(
-            tooltip: '关闭',
+            tooltip: '關閉',
             onPressed: _submitting ? null : _requestClose,
             icon: const Icon(Icons.close_rounded),
           ),
           const SizedBox(width: 12),
           Expanded(
-            child: Text(_editing ? '编辑吐槽' : '发表吐槽',
+            child: Text(_editing ? '編輯吐槽' : '發表吐槽',
                 style: Theme.of(context).textTheme.titleLarge),
           ),
         ]),
@@ -380,7 +380,7 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
         Row(children: [
           Semantics(
             liveRegion: true,
-            label: _score == 0 ? '未评分' : '$_score 分，${_scoreLabels[_score]}',
+            label: _score == 0 ? '未評分' : '$_score 分，${_scoreLabels[_score]}',
             child: ExcludeSemantics(
               child: AnimatedSwitcher(
                 duration: _duration,
@@ -401,7 +401,7 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                Text('评分',
+                Text('評分',
                     style: theme.textTheme.labelLarge
                         ?.copyWith(color: colors.onSecondaryContainer)),
                 const SizedBox(height: 4),
@@ -411,7 +411,7 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
               ])),
           if (_score != 0)
             IconButton(
-              tooltip: '清除评分',
+              tooltip: '清除評分',
               onPressed: _submitting ? null : () => _setScore(0),
               icon: Icon(Icons.restart_alt_rounded,
                   color: colors.onSecondaryContainer),
@@ -495,7 +495,7 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
     final suggestions = _showAllTags ? _popularTags : _popularTags.take(6);
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       Row(children: [
-        Expanded(child: Text('标签', style: theme.textTheme.titleMedium)),
+        Expanded(child: Text('標籤', style: theme.textTheme.titleMedium)),
         Text('${_selectedTags.length} / $_maxTags',
             style: theme.textTheme.labelLarge
                 ?.copyWith(color: colors.onSurfaceVariant)),
@@ -508,14 +508,14 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
               label: Text(tag, overflow: TextOverflow.ellipsis),
               selected: true,
               showCheckmark: false,
-              deleteButtonTooltipMessage: '移除标签 $tag',
+              deleteButtonTooltipMessage: '移除標籤 $tag',
               onDeleted: _submitting ? null : () => _toggleTag(tag),
             ),
         ]),
         const SizedBox(height: 12),
       ],
       if (_popularTags.isNotEmpty) ...[
-        Text('热门标签',
+        Text('熱門標籤',
             style: theme.textTheme.labelMedium
                 ?.copyWith(color: colors.onSurfaceVariant)),
         const SizedBox(height: 4),
@@ -543,7 +543,7 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
         if (!_showCustomTag)
           ActionChip(
             avatar: const Icon(Icons.add_rounded, size: 18),
-            label: const Text('自定义标签'),
+            label: const Text('自定義標籤'),
             onPressed: _submitting
                 ? null
                 : () {
@@ -569,14 +569,14 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
                   onSubmitted: (_) => _addCustomTag(),
                   onChanged: (_) => setState(() => _tagError = null),
                   decoration: InputDecoration(
-                    labelText: '自定义标签',
-                    hintText: '例如：治愈',
+                    labelText: '自定義標籤',
+                    hintText: '例如：治癒',
                     filled: true,
                     fillColor: colors.surfaceContainerLowest,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16)),
                     suffixIcon: IconButton(
-                      tooltip: '添加标签',
+                      tooltip: '新增標籤',
                       onPressed: _submitting ? null : _addCustomTag,
                       icon: const Icon(Icons.add_rounded),
                     ),
@@ -622,7 +622,7 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
       padding: const EdgeInsets.fromLTRB(24, 12, 24, 16),
       child: Row(children: [
         Expanded(
-            child: Text('发布至 Bangumi',
+            child: Text('釋出至 Bangumi',
                 style: Theme.of(context)
                     .textTheme
                     .bodySmall
@@ -637,18 +637,18 @@ class _RatingReviewDialogState extends State<RatingReviewDialog> {
                     LoadingIndicator(
                         size: 24,
                         color: colors.primary,
-                        semanticsLabel: '正在发表'),
+                        semanticsLabel: '正在發表'),
                     const SizedBox(width: 12),
-                    const Text('正在发表…'),
+                    const Text('正在發表…'),
                   ])))
         else
           StateActionButton(
             onPressed: _canSubmit ? _submit : null,
             text: _submitError != null
-                ? '重试'
+                ? '重試'
                 : _editing
-                    ? '保存修改'
-                    : '发表',
+                    ? '儲存修改'
+                    : '發表',
             icon: _submitError != null
                 ? Icons.refresh_rounded
                 : Icons.arrow_upward_rounded,

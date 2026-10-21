@@ -18,7 +18,7 @@ class UpdateSourceStep extends StatelessWidget {
           shape: OnboardingIconShape.cookie,
         ),
         title: '以你的方式更新',
-        subtitle: '选择适合你的更新来源，让 Kazumi 保持最新。',
+        subtitle: '選擇適合你的更新來源，讓 Kazumi 保持最新。',
         child: RadioGroup<bool>(
           groupValue: useGithubUpdate,
           onChanged: (value) {
@@ -30,7 +30,7 @@ class UpdateSourceStep extends StatelessWidget {
               _OptionCard(
                 icon: Icons.rocket_launch_rounded,
                 title: 'GitHub',
-                description: '在应用内检查并获取新版本，适合大多数用户。',
+                description: '在應用內檢查並獲取新版本，適合大多數使用者。',
                 value: true,
                 selected: useGithubUpdate,
                 recommended: true,
@@ -39,11 +39,11 @@ class UpdateSourceStep extends StatelessWidget {
               _OptionCard(
                 icon: Icons.storefront_rounded,
                 title: 'F-Droid',
-                description: '由 F-Droid 商店管理更新，应用内不再自动检查。',
+                description: '由 F-Droid 商店管理更新，應用內不再自動檢查。',
                 value: false,
                 selected: !useGithubUpdate,
               ),
-              const OnboardingHint(text: '之后也可以在 关于 → 自动检查更新 中修改。'),
+              const OnboardingHint(text: '之後也可以在 關於 → 自動檢查更新 中修改。'),
             ],
           ),
         ),
@@ -111,7 +111,7 @@ class _OptionCard extends StatelessWidget {
                   decoration: ShapeDecoration(
                       color: colors.tertiaryContainer,
                       shape: const StadiumBorder()),
-                  child: Text('推荐',
+                  child: Text('推薦',
                       style: theme.textTheme.labelMedium
                           ?.copyWith(color: colors.onTertiaryContainer)),
                 ),

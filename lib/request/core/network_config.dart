@@ -94,7 +94,7 @@ class NetworkConfig {
     final proxyUrl = GStorage.getSetting(SettingsKeys.proxyUrl);
     final parsed = ProxyUtils.parseProxyUrl(proxyUrl);
     if (parsed == null) {
-      KazumiLogger().w('Proxy: 代理地址格式错误或为空');
+      KazumiLogger().w('Proxy: 代理地址格式錯誤或為空');
       return NetworkConfig(
         connectTimeout: connectTimeout,
         receiveTimeout: receiveTimeout,

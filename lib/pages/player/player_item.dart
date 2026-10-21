@@ -285,7 +285,7 @@ class _PlayerItemState extends State<PlayerItem>
       return;
     }
     if (!supported) {
-      KazumiDialog.showToast(message: '当前设备不支持画中画');
+      KazumiDialog.showToast(message: '當前裝置不支援畫中畫');
       return;
     }
     setState(() {
@@ -303,7 +303,7 @@ class _PlayerItemState extends State<PlayerItem>
     if (entered || !mounted) {
       return;
     }
-    KazumiDialog.showToast(message: '进入画中画失败');
+    KazumiDialog.showToast(message: '進入畫中畫失敗');
     setState(() {
       _pipEnterRequested = false;
     });
@@ -405,11 +405,11 @@ class _PlayerItemState extends State<PlayerItem>
     }
 
     if (targetEpisode > episodes.length) {
-      KazumiDialog.showToast(message: '已经是最新一集');
+      KazumiDialog.showToast(message: '已經是最新一集');
       return;
     }
     if (targetEpisode <= 0) {
-      KazumiDialog.showToast(message: '已经是第一集');
+      KazumiDialog.showToast(message: '已經是第一集');
       return;
     }
 
@@ -419,7 +419,7 @@ class _PlayerItemState extends State<PlayerItem>
     );
     final targetRef = videoPageController.resolveEpisode(targetSelection);
     if (targetRef != null) {
-      KazumiDialog.showToast(message: '正在加载${targetRef.displayTitle}');
+      KazumiDialog.showToast(message: '正在載入${targetRef.displayTitle}');
     }
     widget.changeEpisode(targetEpisode, currentRoad: currentRoad);
   }
@@ -748,7 +748,7 @@ class _PlayerItemState extends State<PlayerItem>
     final source = videoPageController.src;
     final player = playerController.playback.mediaPlayer;
     if (videoPageController.loading || player == null) {
-      KazumiDialog.showToast(message: '暂未获取到画面，请等视频显示后重试');
+      KazumiDialog.showToast(message: '暫未獲取到畫面，請等影片顯示後重試');
       return;
     }
     final added = await _screenshots.capture(
@@ -772,10 +772,10 @@ class _PlayerItemState extends State<PlayerItem>
       if (!added || _screenshots.candidates.length == 1) {
         KazumiDialog.showToast(
           message: added
-              ? '已截取画面，点击右上角图库挑选保存'
-              : _screenshots.message ?? '截图失败，请重试',
+              ? '已擷取畫面，點選右上角相簿挑選儲存'
+              : _screenshots.message ?? '截圖失敗，請重試',
           showActionButton: _screenshots.candidates.isNotEmpty,
-          actionLabel: '挑选截图',
+          actionLabel: '挑選截圖',
           onActionPressed: showScreenshotCandidates,
         );
       }
@@ -788,7 +788,7 @@ class _PlayerItemState extends State<PlayerItem>
       final screenshot = await playerController.screenshotPng();
       if (!mounted) return;
       if (screenshot == null || screenshot.isEmpty) {
-        KazumiDialog.showToast(message: '截图失败：未获取到图像');
+        KazumiDialog.showToast(message: '截圖失敗：未獲取到影象');
         return;
       }
       final result = await SaverGallery.saveImage(
@@ -798,10 +798,10 @@ class _PlayerItemState extends State<PlayerItem>
         skipIfExists: false,
       );
       if (mounted && !result.isSuccess) {
-        KazumiDialog.showToast(message: '截图保存失败：${result.errorMessage}');
+        KazumiDialog.showToast(message: '截圖儲存失敗：${result.errorMessage}');
       }
     } catch (e) {
-      if (mounted) KazumiDialog.showToast(message: '截图失败：$e');
+      if (mounted) KazumiDialog.showToast(message: '截圖失敗：$e');
     }
   }
 
@@ -868,15 +868,15 @@ class _PlayerItemState extends State<PlayerItem>
       if (androidVideoRenderer == 'mediacodec_embed') {
         await KazumiDialog.show(builder: (context) {
           return AlertDialog(
-            title: const Text('兼容性提示'),
-            content: const Text('MediaCodec 渲染器不支持超分辨率功能。\n\n'
-                '如需使用超分辨率，请在播放设置中将视频渲染器切换为 gpu 或 gpu-next。'),
+            title: const Text('相容性提示'),
+            content: const Text('MediaCodec 渲染器不支援超解析度功能。\n\n'
+                '如需使用超解析度，請在播放設定中將影片渲染器切換為 gpu 或 gpu-next。'),
             actions: [
               TextButton(
                 onPressed: () {
                   KazumiDialog.dismiss(context: context);
                 },
-                child: const Text('确定'),
+                child: const Text('確定'),
               ),
             ],
           );
@@ -898,12 +898,12 @@ class _PlayerItemState extends State<PlayerItem>
 
         return StatefulBuilder(builder: (context, setState) {
           return AlertDialog(
-            title: const Text('性能提示'),
+            title: const Text('效能提示'),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('启用超分辨率（质量档）可能会造成设备卡顿，是否继续？'),
+                const Text('啟用超解析度（質量檔）可能會造成裝置卡頓，是否繼續？'),
                 const SizedBox(height: 12),
                 Row(
                   mainAxisSize: MainAxisSize.min,
@@ -913,7 +913,7 @@ class _PlayerItemState extends State<PlayerItem>
                       onChanged: (value) =>
                           setState(() => dontAskAgain = value ?? false),
                     ),
-                    const Text('下次不再询问'),
+                    const Text('下次不再詢問'),
                   ],
                 ),
               ],
@@ -944,7 +944,7 @@ class _PlayerItemState extends State<PlayerItem>
                   if (!context.mounted) return;
                   KazumiDialog.dismiss(context: context);
                 },
-                child: const Text('确认'),
+                child: const Text('確認'),
               ),
             ],
           );
@@ -1039,14 +1039,14 @@ class _PlayerItemState extends State<PlayerItem>
           index++;
           setPlaybackSpeed(defaultPlaySpeedList[index]);
         } else {
-          KazumiDialog.showToast(message: '已达倍速上限');
+          KazumiDialog.showToast(message: '已達倍速上限');
         }
       } else if (type == "down") {
         if (index > 0) {
           index--;
           setPlaybackSpeed(defaultPlaySpeedList[index]);
         } else {
-          KazumiDialog.showToast(message: '已达倍速下限');
+          KazumiDialog.showToast(message: '已達倍速下限');
         }
       }
     } catch (e) {
@@ -1222,7 +1222,7 @@ class _PlayerItemState extends State<PlayerItem>
           // Let the controller report resolution failures without retrying every tick.
           final nextRef = videoPageController.resolveEpisode(nextSelection);
           if (nextRef != null) {
-            KazumiDialog.showToast(message: '正在加载${nextRef.displayTitle}');
+            KazumiDialog.showToast(message: '正在載入${nextRef.displayTitle}');
           }
           try {
             playerTimer!.cancel();

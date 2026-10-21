@@ -48,12 +48,12 @@ class HistoryRecordTile extends StatelessWidget {
         ? history.bangumiItem.name
         : history.bangumiItem.nameCn;
     final episode = history.lastWatchEpisodeName.isEmpty
-        ? '第 ${history.lastWatchEpisode} 话'
+        ? '第 ${history.lastWatchEpisode} 話'
         : history.lastWatchEpisodeName;
     final source = HistoryEntryKind.normalize(history.entryKind) ==
             HistoryEntryKind.offline
-        ? '缓存'
-        : '在线';
+        ? '快取'
+        : '線上';
     final time =
         TimeOfDay.fromDateTime(history.lastWatchTime.toLocal()).format(context);
     final image = history.bangumiItem.images['large'] ?? '';
@@ -205,7 +205,7 @@ class HistoryRecordTile extends StatelessWidget {
     }
     if (editing) {
       return IconButton.filledTonal(
-        tooltip: '删除记录',
+        tooltip: '刪除記錄',
         style: IconButton.styleFrom(
           minimumSize: const Size(48, 48),
           backgroundColor: colors.errorContainer,
@@ -218,7 +218,7 @@ class HistoryRecordTile extends StatelessWidget {
 
     final buttons = [
       IconButton.filledTonal(
-        tooltip: '继续播放',
+        tooltip: '繼續播放',
         style: IconButton.styleFrom(
           minimumSize: const Size(48, 48),
           backgroundColor: colors.primaryContainer,
@@ -231,7 +231,7 @@ class HistoryRecordTile extends StatelessWidget {
         menuChildren: [
           KazumiMenuItem(
             onPressed: onDetails,
-            label: '番剧详情',
+            label: '番劇詳情',
           ),
           SubmenuButton(
             menuChildren: [
@@ -250,7 +250,7 @@ class HistoryRecordTile extends StatelessWidget {
           KazumiMenuItem(
             destructive: true,
             onPressed: onDelete,
-            label: '删除记录',
+            label: '刪除記錄',
           ),
         ],
         builder: (context, toggle) => IconButton(

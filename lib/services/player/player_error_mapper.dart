@@ -8,7 +8,7 @@ class PlayerErrorMapper {
     final message = error.toString();
     if (message.contains('Failed to recognize file format') ||
         (isBuffering && message.contains('Failed to open'))) {
-      return '加载失败, 请尝试更换其他视频来源';
+      return '載入失敗, 請嘗試更換其他影片來源';
     }
     return null;
   }

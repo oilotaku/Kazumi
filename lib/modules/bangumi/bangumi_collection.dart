@@ -2,42 +2,42 @@ import 'package:kazumi/modules/bangumi/bangumi_item.dart';
 
 import 'bangumi_collection_type.dart';
 
-/// NOTE: 该类仅用于解析 Bangumi API 返回的收藏数据，不适用本地收藏
+/// NOTE: 該類僅用於解析 Bangumi API 返回的收藏資料，不適用本地收藏
 class BangumiCollection {
-  /// 最后更新时间
+  /// 最後更新時間
   DateTime updatedAt;
 
   /// Bangumi ID
   int bangumiId;
 
-  /// Bangumi 收藏类型。
+  /// Bangumi 收藏型別。
   BangumiCollectionType type;
 
   /// 上映日期
   String? date;
 
-  /// 番剧名称
+  /// 番劇名稱
   String name;
 
-  /// 番剧中文名称
+  /// 番劇中文名稱
   String nameCn;
 
-  /// 简介
+  /// 簡介
   String shortSummary;
 
-  /// 平均评分
+  /// 平均評分
   double score;
 
-  /// 总集数
+  /// 總集數
   int eps;
 
   /// 排名
   int rank;
 
-  /// 图片链接，包含 large、common、medium、small、grid 五种尺寸
+  /// 圖片連結，包含 large、common、medium、small、grid 五種尺寸
   Map<String, String> images;
 
-  /// 标签列表，每个标签包含 name 和 count 字段
+  /// 標籤列表，每個標籤包含 name 和 count 欄位
   List<Map<String, dynamic>> tags;
 
   BangumiCollection(

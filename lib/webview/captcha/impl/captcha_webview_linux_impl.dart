@@ -37,7 +37,7 @@ class CaptchaWebviewLinuxImpl extends CaptchaWebviewController<Webview> {
     if (parsed == null) return null;
 
     final (host, port) = parsed;
-    KazumiLogger().i('[Captcha WebView] 代理设置成功 $host:$port');
+    KazumiLogger().i('[Captcha WebView] 代理設定成功 $host:$port');
     return ProxyConfiguration(host: host, port: port);
   }
 
@@ -448,9 +448,9 @@ $script
     }
   }
 
-  /// WebKitGTK 通过 jsc_value_to_json 返回结果，字符串会带外围双引号且内容
-  /// 被转义，必须解码后才能当作 HTML 或 UA 使用。旧 WebKit 若返回裸字符串，
-  /// 解码失败则按原值回落。
+  /// WebKitGTK 透過 jsc_value_to_json 返回結果，字串會帶外圍雙引號且內容
+  /// 被轉義，必須解碼後才能當作 HTML 或 UA 使用。舊 WebKit 若返回裸字串，
+  /// 解碼失敗則按原值回落。
   String _decodeJsString(String? raw) {
     if (raw == null || raw.isEmpty) return '';
     try {

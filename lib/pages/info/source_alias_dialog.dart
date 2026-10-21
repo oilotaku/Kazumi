@@ -35,14 +35,14 @@ void _showCustomKeywordDialog({
 
   KazumiDialog.show(
     builder: (context) => AlertDialog(
-      title: const Text('修改检索词'),
+      title: const Text('修改檢索詞'),
       content: TextFormField(
         initialValue: initialKeyword,
         autofocus: true,
         textInputAction: TextInputAction.search,
         decoration: InputDecoration(
-          labelText: '检索关键词',
-          helperText: '仅检索来源：$sourceName',
+          labelText: '檢索關鍵詞',
+          helperText: '僅檢索來源：$sourceName',
           helperMaxLines: 3,
           border: const OutlineInputBorder(),
         ),
@@ -59,7 +59,7 @@ void _showCustomKeywordDialog({
         ),
         TextButton(
           onPressed: () => submit(keyword),
-          child: const Text('检索'),
+          child: const Text('檢索'),
         ),
       ],
     ),
@@ -87,8 +87,8 @@ class _AliasPickerDialogState extends State<_AliasPickerDialog> {
   void _confirmDelete(int index) {
     KazumiDialog.show(
       builder: (context) => AlertDialog(
-        title: const Text('删除确认'),
-        content: const Text('删除后无法恢复，确认要永久删除这个别名吗？'),
+        title: const Text('刪除確認'),
+        content: const Text('刪除後無法恢復，確認要永久刪除這個別名嗎？'),
         actions: [
           TextButton(
             onPressed: KazumiDialog.dismiss,
@@ -107,7 +107,7 @@ class _AliasPickerDialogState extends State<_AliasPickerDialog> {
                 Navigator.of(this.context).pop();
               }
             },
-            child: const Text('确认'),
+            child: const Text('確認'),
           ),
         ],
       ),
@@ -128,10 +128,10 @@ class _AliasPickerDialogState extends State<_AliasPickerDialog> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('别名检索', style: Theme.of(context).textTheme.titleLarge),
+                  Text('別名檢索', style: Theme.of(context).textTheme.titleLarge),
                   const SizedBox(height: 8),
                   Text(
-                    '仅检索来源：${widget.sourceName}',
+                    '僅檢索來源：${widget.sourceName}',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),

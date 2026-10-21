@@ -19,13 +19,13 @@ class _InterfaceSettingsPageState extends State<InterfaceSettingsPage> {
   late String defaultPage;
   late CollectLayout _defaultCollectLayout;
   bool _savingCollectLayout = false;
-  static const _exitBehaviorTitles = ['退出 Kazumi', '最小化至托盘', '每次都询问'];
+  static const _exitBehaviorTitles = ['退出 Kazumi', '最小化至託盤', '每次都詢問'];
   int _exitBehavior = GStorage.getSetting(SettingsKeys.exitBehavior)
       .clamp(0, _exitBehaviorTitles.length - 1);
 
   static const Map<String, String> defaultPageMap = {
-    '/tab/popular/': '推荐',
-    '/tab/timeline/': '时间表',
+    '/tab/popular/': '推薦',
+    '/tab/timeline/': '時間表',
     '/tab/collect/': '追番',
     '/tab/my/': '我的',
   };
@@ -54,7 +54,7 @@ class _InterfaceSettingsPageState extends State<InterfaceSettingsPage> {
       await GStorage.putSetting(SettingsKeys.defaultCollectLayout, layout.name);
       if (mounted) setState(() => _defaultCollectLayout = layout);
     } catch (_) {
-      if (mounted) KazumiDialog.showToast(message: '追番默认布局保存失败，请重试');
+      if (mounted) KazumiDialog.showToast(message: '追番預設佈局儲存失敗，請重試');
     } finally {
       if (mounted) setState(() => _savingCollectLayout = false);
     }
@@ -63,25 +63,25 @@ class _InterfaceSettingsPageState extends State<InterfaceSettingsPage> {
   @override
   Widget build(BuildContext context) {
     return SettingsDetailScaffold(
-      title: Text('界面设置'),
+      title: Text('介面設定'),
       body: SettingsList(
         sections: [
-          SettingsSection(title: Text('启动'), tiles: [
+          SettingsSection(title: Text('啟動'), tiles: [
             SettingsDropdownTile<String>(
               leading: Icons.home_rounded,
-              title: const Text('启动界面设置'),
-              description: const Text('设置应用开启时的默认页面'),
+              title: const Text('啟動介面設定'),
+              description: const Text('設定應用開啟時的預設頁面'),
               value: defaultPage,
               options: defaultPageMap,
-              fallbackLabel: '推荐',
+              fallbackLabel: '推薦',
               onChanged: updateDefaultPage,
             ),
           ]),
-          SettingsSection(title: Text('展示信息'), tiles: [
+          SettingsSection(title: Text('展示資訊'), tiles: [
             SettingsDropdownTile<CollectLayout>(
               leading: Icons.view_agenda_rounded,
-              title: const Text('追番默认布局'),
-              description: const Text('下次打开追番页时使用，页面内切换不会改变此设置'),
+              title: const Text('追番預設佈局'),
+              description: const Text('下次開啟追番頁時使用，頁面內切換不會改變此設定'),
               enabled: !_savingCollectLayout,
               value: _defaultCollectLayout,
               options: {
@@ -96,19 +96,19 @@ class _InterfaceSettingsPageState extends State<InterfaceSettingsPage> {
                 await GStorage.putSetting(SettingsKeys.showRating, showRating);
                 setState(() {});
               },
-              title: Text('显示评分'),
-              description: Text('关闭后隐藏概览和番剧列表中的评分信息'),
+              title: Text('顯示評分'),
+              description: Text('關閉後隱藏概覽和番劇列表中的評分資訊'),
               initialValue: showRating,
             ),
           ]),
           if (isDesktop())
             SettingsSection(
-              title: const Text('窗口行为'),
+              title: const Text('視窗行為'),
               tiles: [
                 SettingsDropdownTile<int>(
                   leading: Icons.exit_to_app_rounded,
-                  title: const Text('关闭窗口时'),
-                  description: const Text('设置点击窗口关闭按钮后的行为'),
+                  title: const Text('關閉視窗時'),
+                  description: const Text('設定點選視窗關閉按鈕後的行為'),
                   value: _exitBehavior,
                   options: {
                     for (var i = 0; i < _exitBehaviorTitles.length; i++)

@@ -71,7 +71,7 @@ abstract class _PlayerScreenshotController with Store {
   }) async {
     if (_disposed || busy) return false;
     if (_candidates.length >= _maxCandidates || _byteCount >= _maxBytes) {
-      _report('待处理截图已满，请保存或移除部分截图后继续', error: true);
+      _report('待處理截圖已滿，請儲存或移除部分截圖後繼續', error: true);
       return false;
     }
     _capturing = true;
@@ -82,15 +82,15 @@ abstract class _PlayerScreenshotController with Store {
       final bytes = await capturePng();
       if (_disposed) return false;
       if (!isCurrent()) {
-        _report('视频已切换，请重新截图', error: true);
+        _report('影片已切換，請重新截圖', error: true);
         return false;
       }
       if (bytes == null || bytes.isEmpty) {
-        _report('暂未获取到画面，请等视频显示后重试', error: true);
+        _report('暫未獲取到畫面，請等影片顯示後重試', error: true);
         return false;
       }
       if (_byteCount + bytes.lengthInBytes > _maxBytes) {
-        _report('截图暂存空间已满，请保存或移除部分截图后继续', error: true);
+        _report('截圖暫存空間已滿，請儲存或移除部分截圖後繼續', error: true);
         return false;
       }
       final item = ScreenshotCandidate(
@@ -104,7 +104,7 @@ abstract class _PlayerScreenshotController with Store {
       _byteCount += bytes.lengthInBytes;
       return true;
     } catch (_) {
-      _report('截图失败，请稍后重试', error: true);
+      _report('截圖失敗，請稍後重試', error: true);
       return false;
     } finally {
       if (!_disposed) _capturing = false;
@@ -146,7 +146,7 @@ abstract class _PlayerScreenshotController with Store {
     if (_disposed || busy || selectedCount == 0) return;
     final count = selectedCount;
     _removeCandidates(_candidates.where(isSelected));
-    _report('已移除 $count 张候选截图');
+    _report('已移除 $count 張候選截圖');
   }
 
   @action
@@ -173,7 +173,7 @@ abstract class _PlayerScreenshotController with Store {
       final destination = await chooseDestination();
       if (_disposed) return;
       if (destination == null) {
-        _report('已取消保存，候选截图仍保留');
+        _report('已取消儲存，候選截圖仍保留');
         return;
       }
       for (final item in batch) {
@@ -190,14 +190,14 @@ abstract class _PlayerScreenshotController with Store {
       }
       if (failures > 0) {
         _report(
-          '已保存 ${saved.length} 张，$failures 张失败；未保存的截图仍已选中，请重试',
+          '已儲存 ${saved.length} 張，$failures 張失敗；未儲存的截圖仍已選中，請重試',
           error: true,
         );
       } else {
-        _report('已保存 ${saved.length} 张到所选位置');
+        _report('已儲存 ${saved.length} 張到所選位置');
       }
     } catch (_) {
-      _report('无法打开保存位置，请检查权限后重试', error: true);
+      _report('無法開啟儲存位置，請檢查許可權後重試', error: true);
     } finally {
       if (!_disposed) {
         // Keep the preview stable during the batch, then release successful items.

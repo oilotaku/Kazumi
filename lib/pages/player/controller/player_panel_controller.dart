@@ -9,15 +9,15 @@ class PlayerPanelController = _PlayerPanelController
     with _$PlayerPanelController;
 
 abstract class _PlayerPanelController with Store {
-  /// 视频比例
+  /// 影片比例
   @observable
   PlayerAspectRatio aspectRatioMode = PlayerAspectRatio.automatic;
 
-  // 视频亮度
+  // 影片亮度
   @observable
   double brightness = 0;
 
-  // 播放器界面控制
+  // 播放器介面控制
   @observable
   bool lockPanel = false;
   @observable

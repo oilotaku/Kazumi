@@ -56,14 +56,14 @@ void main() async {
       });
     }
     runApp(MaterialApp(
-        title: '初始化失败',
+        title: '初始化失敗',
         localizationsDelegates: GlobalMaterialLocalizations.delegates,
         supportedLocales: const [
           Locale.fromSubtags(
-              languageCode: 'zh', scriptCode: 'Hans', countryCode: "CN")
+              languageCode: 'zh', scriptCode: 'Hant', countryCode: "TW")
         ],
         locale: const Locale.fromSubtags(
-            languageCode: 'zh', scriptCode: 'Hans', countryCode: "CN"),
+            languageCode: 'zh', scriptCode: 'Hant', countryCode: "TW"),
         builder: (context, child) {
           return const StorageErrorPage();
         }));

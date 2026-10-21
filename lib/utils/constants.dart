@@ -64,7 +64,7 @@ class LayoutBreakpoint {
   static const Map<String, double> medium = {'width': 840, 'height': 900};
 }
 
-/// 随机UA列表
+/// 隨機UA列表
 const List<String> userAgentsList = [
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36',
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36',
@@ -77,14 +77,14 @@ const List<String> userAgentsList = [
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0',
 ];
 
-/// 随机HTTP请求头accept-language字段列表
+/// 隨機HTTP請求頭accept-language欄位列表
 const List<String> acceptLanguageList = [
   'zh-CN,zh;q=0.9',
   'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6',
   'zh-CN,zh-TW;q=0.9,zh;q=0.8,en-US;q=0.7,en;q=0.6',
 ];
 
-/// Bangumi API 文档要求的UA格式
+/// Bangumi API 檔案要求的UA格式
 Map<String, String> bangumiHTTPHeader = {
   'user-agent':
       'Predidit/Kazumi/${ApiEndpoints.version} (Android) (https://github.com/Predidit/Kazumi)',
@@ -92,44 +92,44 @@ Map<String, String> bangumiHTTPHeader = {
   'content-type': 'application/json'
 };
 
-/// 可选硬件解码器
+/// 可選硬體解碼器
 const Map<String, String> hardwareDecodersList = {
-  'auto': '启用任意可用解码器',
-  'auto-safe': '启用最佳解码器',
-  'auto-copy': '启用带拷贝功能的最佳解码器',
+  'auto': '啟用任意可用解碼器',
+  'auto-safe': '啟用最佳解碼器',
+  'auto-copy': '啟用帶複製功能的最佳解碼器',
   'd3d11va': 'DirectX11 (windows8 及以上)',
   'd3d11va-copy': 'DirectX11 (windows8 及以上) (非直通)',
   'videotoolbox': 'VideoToolbox (macOS / iOS)',
   'videotoolbox-copy': 'VideoToolbox (macOS / iOS) (非直通)',
   'vaapi': 'VAAPI (Linux)',
   'vaapi-copy': 'VAAPI (Linux) (非直通)',
-  'nvdec': 'NVDEC (NVIDIA独占)',
-  'nvdec-copy': 'NVDEC (NVIDIA独占) (非直通)',
+  'nvdec': 'NVDEC (NVIDIA獨佔)',
+  'nvdec-copy': 'NVDEC (NVIDIA獨佔) (非直通)',
   'drm': 'DRM (Linux)',
   'drm-copy': 'DRM (Linux) (非直通)',
-  'vulkan': 'Vulkan (全平台) (实验性)',
-  'vulkan-copy': 'Vulkan (全平台) (实验性) (非直通)',
+  'vulkan': 'Vulkan (全平臺) (實驗性)',
+  'vulkan-copy': 'Vulkan (全平臺) (實驗性) (非直通)',
   'dxva2': 'DXVA2 (Windows7 及以上)',
   'dxva2-copy': 'DXVA2 (Windows7 及以上) (非直通)',
   'vdpau': 'VDPAU (Linux)',
   'vdpau-copy': 'VDPAU (Linux) (非直通)',
   'mediacodec': 'MediaCodec (Android)',
   'mediacodec-copy': 'MediaCodec (Android) (非直通)',
-  'cuda': 'CUDA (NVIDIA独占) (过时)',
-  'cuda-copy': 'CUDA (NVIDIA独占) (过时) (非直通)',
-  'crystalhd': 'CrystalHD (全平台) (过时)',
-  'rkmpp': 'Rockchip MPP (仅部分Rockchip芯片)',
+  'cuda': 'CUDA (NVIDIA獨佔) (過時)',
+  'cuda-copy': 'CUDA (NVIDIA獨佔) (過時) (非直通)',
+  'crystalhd': 'CrystalHD (全平臺) (過時)',
+  'rkmpp': 'Rockchip MPP (僅部分Rockchip晶片)',
 };
 
-/// Android 可选视频渲染器
+/// Android 可選影片渲染器
 const Map<String, String> androidVideoRenderersList = {
-  'auto': '自动选择',
-  'gpu': '基于 OpenGL, 通用和稳健的选项',
-  'gpu-next': '基于 Vulkan, 在新设备上表现最好',
-  'mediacodec_embed': '功耗最低，不支持超分辨率',
+  'auto': '自動選擇',
+  'gpu': '基於 OpenGL, 通用和穩健的選項',
+  'gpu-next': '基於 Vulkan, 在新裝置上表現最好',
+  'mediacodec_embed': '功耗最低，不支援超解析度',
 };
 
-/// 超分辨率滤镜
+/// 超解析度濾鏡
 const List<String> mpvAnime4KShaders = [
   'Anime4K_Clamp_Highlights.glsl',
   'Anime4K_Restore_CNN_VL.glsl',
@@ -139,7 +139,7 @@ const List<String> mpvAnime4KShaders = [
   'Anime4K_Upscale_CNN_x2_M.glsl'
 ];
 
-/// 超分辨率滤镜 (轻量)
+/// 超解析度濾鏡 (輕量)
 const List<String> mpvAnime4KShadersLite = [
   'Anime4K_Clamp_Highlights.glsl',
   'Anime4K_Restore_CNN_M.glsl',
@@ -150,7 +150,7 @@ const List<String> mpvAnime4KShadersLite = [
   'Anime4K_Upscale_CNN_x2_S.glsl'
 ];
 
-/// 可选播放倍速
+/// 可選播放倍速
 const List<double> defaultPlaySpeedList = [
   0.25,
   0.5,
@@ -166,8 +166,8 @@ const List<double> defaultPlaySpeedList = [
   3.0,
 ];
 
-/// 距视频结尾在此阈值内视为"已看完"：
-/// 保存历史时进度归零，续播起点落在其中时从头播放
+/// 距影片結尾在此閾值內視為"已看完"：
+/// 儲存歷史時進度歸零，續播起點落在其中時從頭播放
 const Duration nearEndWatchedThreshold = Duration(seconds: 5);
 
 const String danmakuOnSvg = '''
@@ -177,37 +177,37 @@ const String danmakuOnSvg = '''
     </svg>
     ''';
 
-/// 可选播放器日志等级
-/// LogLevel 0: 错误 1: 警告 2: 简略 3: 详细 4: 调试（隐藏） 5: 全部（隐藏）
+/// 可選播放器日誌等級
+/// LogLevel 0: 錯誤 1: 警告 2: 簡略 3: 詳細 4: 除錯（隱藏） 5: 全部（隱藏）
 const Map<int, String> playerLogLevelMap = {
-  0: "错误",
+  0: "錯誤",
   1: "警告",
-  2: "简略",
-  3: "详细",
-  // 以下两个级别被MPV官方支持，但是输出内容过于冗长，暂时隐藏
-  // 4: "调试",
+  2: "簡略",
+  3: "詳細",
+  // 以下兩個級別被MPV官方支援，但是輸出內容過於冗長，暫時隱藏
+  // 4: "除錯",
   // 5: "全部",
 };
 
 final List<String> defaultAnimeTags = const [
   '日常',
-  '原创',
-  '校园',
+  '原創',
+  '校園',
   '搞笑',
   '奇幻',
   '百合',
-  '恋爱',
-  '悬疑',
-  '热血',
-  '后宫',
-  '机战',
-  '轻改',
+  '戀愛',
+  '懸疑',
+  '熱血',
+  '後宮',
+  '機戰',
+  '輕改',
   '偶像',
-  '治愈',
-  '异世界',
+  '治癒',
+  '異世界',
 ];
 
-// 播放器默认快捷键
+// 播放器預設快捷鍵
 final Map<String, List<String>> defaultShortcuts = const {
   'playorpause': [' '],
   'forward': ['Arrow Right'],
@@ -229,37 +229,37 @@ final Map<String, List<String>> defaultShortcuts = const {
   'speeddown': ['Z'],
 };
 
-// 键位别名
+// 鍵位別名
 final Map<String, String> keyAliases = {
   ' ': '空格',
   'Arrow Up': '↑',
   'Arrow Down': '↓',
   'Arrow Left': '←',
   'Arrow Right': '→',
-  'Enter': '回车',
+  'Enter': '回車',
   'Tab': 'Tab',
   'Escape': 'Esc',
   'Backspace': '退格',
 };
 
-//功能中文名对应
+//功能中文名對應
 final Map<String, String> shortcutsChineseName = {
-  'playorpause': '播放 / 暂停',
-  'forward': '快进 / 长按倍速',
+  'playorpause': '播放 / 暫停',
+  'forward': '快進 / 長按倍速',
   'rewind': '快退',
   'next': '下一集',
   'prev': '上一集',
   'volumeup': '音量加',
-  'volumedown': '音量减',
-  'togglemute': '静音',
+  'volumedown': '音量減',
+  'togglemute': '靜音',
   'fullscreen': '全屏',
   'exitfullscreen': '退出全屏',
-  'toggledanmaku': '弹幕开关',
-  'screenshot': '截图',
-  'skip': '跳过',
+  'toggledanmaku': '彈幕開關',
+  'screenshot': '截圖',
+  'skip': '跳過',
   'speed1': '倍速：1x',
   'speed2': '倍速：2x',
   'speed3': '倍速：3x',
   'speedup': '倍速加',
-  'speeddown': '倍速减',
+  'speeddown': '倍速減',
 };

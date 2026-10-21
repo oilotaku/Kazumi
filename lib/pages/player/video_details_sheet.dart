@@ -86,7 +86,7 @@ class _VideoDetailsSheetState extends State<_VideoDetailsSheet>
 
   void _copyToClipboard(BuildContext context, String value) {
     Clipboard.setData(ClipboardData(text: value));
-    KazumiDialog.showToast(message: '已复制到剪贴板', context: context);
+    KazumiDialog.showToast(message: '已複製到剪貼簿', context: context);
   }
 
   @override
@@ -97,13 +97,13 @@ class _VideoDetailsSheetState extends State<_VideoDetailsSheet>
                 backgroundColor: Colors.transparent,
                 body: Column(children: [
                   MaterialBottomSheetHeader(
-                    title: '播放信息',
+                    title: '播放資訊',
                     onClose: () => Navigator.of(context).pop(),
                   ),
                   ConnectedTabs(
                     padding: materialBottomSheetTabsPadding,
                     controller: _tabController,
-                    labels: const ['概览', '日志'],
+                    labels: const ['概覽', '日誌'],
                   ),
                   Expanded(
                       child: TabBarView(
@@ -121,52 +121,52 @@ class _VideoDetailsSheetState extends State<_VideoDetailsSheet>
       final theme = Theme.of(context);
       final resolution = debug.playerWidth > 0 && debug.playerHeight > 0
           ? '${debug.playerWidth} × ${debug.playerHeight}'
-          : '等待画面';
+          : '等待畫面';
       return ListView(
         key: const PageStorageKey('video-details-overview'),
         padding: materialBottomSheetContentPadding,
         children: [
           ContentSection(
-            title: '画面与声音',
+            title: '畫面與聲音',
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(resolution, style: theme.textTheme.headlineSmall),
               const SizedBox(height: 16),
               Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Expanded(
-                    child: _metric(context, '视频码率', debug.playerVideoBitrate)),
+                    child: _metric(context, '影片位元速率', debug.playerVideoBitrate)),
                 const SizedBox(width: 16),
                 Expanded(
-                    child: _metric(context, '音频码率', debug.playerAudioBitrate)),
+                    child: _metric(context, '音訊位元速率', debug.playerAudioBitrate)),
               ]),
             ]),
           ),
           const SizedBox(height: 24),
-          ContentSection.group(title: '媒体', children: [
-            _statusField(context, '媒体地址', playerController.videoUrl,
+          ContentSection.group(title: '媒體', children: [
+            _statusField(context, '媒體地址', playerController.videoUrl,
                 compact: true),
             _statusField(context, '播放列表', debug.playerPlaylist, compact: true),
           ]),
           const SizedBox(height: 24),
-          ContentSection.group(title: '技术信息', children: [
+          ContentSection.group(title: '技術資訊', children: [
             ExpansionTile(
               key: const PageStorageKey('video-parameters'),
-              title: const Text('视频参数'),
+              title: const Text('影片參數'),
               shape: const Border(),
               collapsedShape: const Border(),
               children: [
-                _statusField(context, '编码参数', debug.playerVideoParams),
-                _statusField(context, '轨道', debug.playerVideoTracks),
+                _statusField(context, '編碼參數', debug.playerVideoParams),
+                _statusField(context, '軌道', debug.playerVideoTracks),
               ],
             ),
             ExpansionTile(
               key: const PageStorageKey('audio-parameters'),
-              title: const Text('音频参数'),
+              title: const Text('音訊參數'),
               shape: const Border(),
               collapsedShape: const Border(),
               children: [
-                _statusField(context, '编码参数', debug.playerAudioParams),
-                _statusField(context, '轨道', debug.playerAudioTracks),
+                _statusField(context, '編碼參數', debug.playerAudioParams),
+                _statusField(context, '軌道', debug.playerAudioTracks),
               ],
             ),
           ]),
@@ -191,14 +191,14 @@ class _VideoDetailsSheetState extends State<_VideoDetailsSheet>
     return ListTile(
       title: Text(label),
       subtitle: Text(
-        value.isEmpty ? '尚未获取' : value,
+        value.isEmpty ? '尚未獲取' : value,
         maxLines: compact ? 2 : null,
         overflow: compact ? TextOverflow.ellipsis : null,
       ),
       trailing: value.isEmpty
           ? null
           : IconButton(
-              tooltip: '复制$label',
+              tooltip: '複製$label',
               icon: const Icon(Icons.content_copy_rounded, size: 18),
               onPressed: () => _copyToClipboard(context, value),
             ),
@@ -237,14 +237,14 @@ class _VideoDetailsSheetState extends State<_VideoDetailsSheet>
         padding: materialBottomSheetContentPadding,
         child: Column(children: [
           Row(children: [
-            Text('${logs.length} 条记录', style: theme.textTheme.labelMedium),
+            Text('${logs.length} 條記錄', style: theme.textTheme.labelMedium),
             const Spacer(),
             TextButton.icon(
               onPressed: logs.isEmpty
                   ? null
                   : () => _copyToClipboard(context, logs.join('\n')),
               icon: const Icon(Icons.content_copy_rounded, size: 18),
-              label: const Text('复制全部'),
+              label: const Text('複製全部'),
             ),
           ]),
           const SizedBox(height: 8),
@@ -253,7 +253,7 @@ class _VideoDetailsSheetState extends State<_VideoDetailsSheet>
             child: logs.isEmpty
                 ? const GeneralEmptyState(
                     icon: Icons.receipt_long_rounded,
-                    title: '还没有运行日志',
+                    title: '還沒有執行日誌',
                     compact: true,
                   )
                 : ListView.builder(

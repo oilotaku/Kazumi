@@ -44,13 +44,13 @@ class HistoryPlaybackService {
         HistoryEntryKind.offline) {
       final args = _offlineArgs(history);
       return args == null
-          ? const HistoryPlaybackUnavailable('未找到可用缓存')
+          ? const HistoryPlaybackUnavailable('未找到可用快取')
           : HistoryPlaybackReady(args);
     }
 
     final args = await _onlineArgs(history, cancelToken);
     return args == null
-        ? const HistoryPlaybackUnavailable('在线源不可用，请重新选择播放源')
+        ? const HistoryPlaybackUnavailable('線上源不可用，請重新選擇播放源')
         : HistoryPlaybackReady(args);
   }
 

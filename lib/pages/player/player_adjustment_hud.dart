@@ -739,7 +739,7 @@ class _PlayerSeekHudState extends State<PlayerSeekHud> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
-                                  _displayCancelPending ? '松开取消' : _offsetText,
+                                  _displayCancelPending ? '鬆開取消' : _offsetText,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: Theme.of(context)
@@ -753,7 +753,7 @@ class _PlayerSeekHudState extends State<PlayerSeekHud> {
                                 const SizedBox(height: 1),
                                 Text(
                                   _displayCancelPending
-                                      ? '移回画面继续调整'
+                                      ? '移回畫面繼續調整'
                                       : '${durationToString(_displayCurrentPosition)} / ${durationToString(_displayDuration)}',
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,

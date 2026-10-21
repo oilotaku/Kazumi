@@ -10,7 +10,7 @@ class DanmakuShieldSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SettingsDetailScaffold(
-        title: const Text('屏蔽规则'),
+        title: const Text('遮蔽規則'),
         body: Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 1000),

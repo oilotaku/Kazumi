@@ -128,18 +128,18 @@ class _ThemeSettingsPageState extends State<ThemeSettingsPage> {
   @override
   Widget build(BuildContext context) {
     return SettingsDetailScaffold(
-      title: const Text('外观设置'),
+      title: const Text('外觀設定'),
       body: SettingsList(
         sections: [
           SettingsSection(
-            title: Text('外观'),
+            title: Text('外觀'),
             tiles: [
               SettingsDropdownTile<String>(
                 leading: Icons.dark_mode_rounded,
                 title: const Text('深色模式'),
                 value: defaultThemeMode,
-                fallbackLabel: '跟随系统',
-                options: const {'system': '跟随系统', 'light': '浅色', 'dark': '深色'},
+                fallbackLabel: '跟隨系統',
+                options: const {'system': '跟隨系統', 'light': '淺色', 'dark': '深色'},
                 onChanged: updateTheme,
               ),
               SettingsTile(
@@ -203,7 +203,7 @@ class _ThemeSettingsPageState extends State<ThemeSettingsPage> {
                   themeProvider.setDynamic(useDynamicColor);
                   setState(() {});
                 },
-                title: Text('动态配色'),
+                title: Text('動態配色'),
                 initialValue: useDynamicColor,
               ),
               SettingsTile.switchTile(
@@ -222,15 +222,15 @@ class _ThemeSettingsPageState extends State<ThemeSettingsPage> {
                   setTheme(color);
                   setState(() {});
                 },
-                title: Text('使用系统字体'),
-                description: Text('关闭后使用 MI Sans 字体'),
+                title: Text('使用系統字型'),
+                description: Text('關閉後使用 MI Sans 字型'),
                 initialValue: useSystemFont,
               ),
             ],
-            bottomInfo: Text('动态配色仅支持安卓12及以上和桌面平台'),
+            bottomInfo: Text('動態配色僅支援安卓12及以上和桌面平臺'),
           ),
           SettingsSection(
-            title: Text('显示'),
+            title: Text('顯示'),
             tiles: [
               SettingsTile.switchTile(
                 leading: Icons.contrast_rounded,
@@ -241,15 +241,15 @@ class _ThemeSettingsPageState extends State<ThemeSettingsPage> {
                   updateOledEnhance();
                   setState(() {});
                 },
-                title: Text('OLED优化'),
-                description: Text('深色模式下使用纯黑背景'),
+                title: Text('OLED最佳化'),
+                description: Text('深色模式下使用純黑背景'),
                 initialValue: oledEnhance,
               ),
             ],
           ),
           if (isDesktop())
             SettingsSection(
-              title: Text('窗口'),
+              title: Text('視窗'),
               tiles: [
                 SettingsTile.switchTile(
                   leading: Icons.web_asset_rounded,
@@ -259,22 +259,22 @@ class _ThemeSettingsPageState extends State<ThemeSettingsPage> {
                         SettingsKeys.showWindowButton, showWindowButton);
                     setState(() {});
                   },
-                  title: Text('使用系统标题栏'),
-                  description: Text('重启应用生效'),
+                  title: Text('使用系統標題欄'),
+                  description: Text('重啟應用生效'),
                   initialValue: showWindowButton,
                 ),
               ],
             ),
           if (Platform.isAndroid)
             SettingsSection(
-              title: Text('屏幕'),
+              title: Text('螢幕'),
               tiles: [
                 SettingsTile(
                   leading: Icons.sixty_fps_rounded,
                   onPressed: (_) async {
                     context.pushNamed('/settings/theme/display');
                   },
-                  title: Text('屏幕帧率'),
+                  title: Text('螢幕幀率'),
                 ),
               ],
             ),

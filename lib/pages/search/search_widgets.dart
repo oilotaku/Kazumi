@@ -1,13 +1,13 @@
 part of 'search_page.dart';
 
 const _searchSortLabels = {
-  'heat': '热度',
+  'heat': '熱度',
   'rank': '排名',
-  'score': '评分',
+  'score': '評分',
   'match': '匹配',
 };
 
-String _sortLabel(String sort) => _searchSortLabels[sort] ?? '热度';
+String _sortLabel(String sort) => _searchSortLabels[sort] ?? '熱度';
 
 String _filterSummary(SearchFilterState state) => [
       ...state.tags,
@@ -15,7 +15,7 @@ String _filterSummary(SearchFilterState state) => [
       if (state.season.isEmpty && state.dateRange != null)
         '${state.dateRange!.start} 至 ${state.dateRange!.end}',
       if (state.scoreRange?.isValid == true)
-        '评分 ${state.scoreRange!.toToken()}',
+        '評分 ${state.scoreRange!.toToken()}',
       if (state.rankRange?.isValid == true) '排名 ${state.rankRange!.toToken()}',
       if (state.weekdays.isNotEmpty)
         '周${state.weekdays.map((day) => '一二三四五六日'[day - 1]).join('、')}',
@@ -26,7 +26,7 @@ String _readableQuery(String query) {
   final summary = _filterSummary(state);
   return [
     if (state.keyword.isNotEmpty) state.keyword,
-    if (state.id.isNotEmpty) '条目 ${state.id}',
+    if (state.id.isNotEmpty) '條目 ${state.id}',
     if (summary.isNotEmpty) summary,
     if (state.sort != 'heat') '${_sortLabel(state.sort)}排序',
   ].join(' · ');
@@ -98,7 +98,7 @@ class _SearchResultGrid extends StatelessWidget {
       return height;
     }
 
-    final titleHeight = textHeight('番剧\n番剧', titleStyle);
+    final titleHeight = textHeight('番劇\n番劇', titleStyle);
     final metadataHeight = math.max(_SearchResultCard.ratingIconSize,
         textHeight('0.0 0000', textTheme.labelMedium!));
     final columns = math.max(2, (width / 180).floor());
@@ -213,7 +213,7 @@ class _SearchLoadingState extends StatelessWidget {
           const SizedBox(height: 20),
           Semantics(
               liveRegion: true,
-              child: Text('正在搜索番剧',
+              child: Text('正在搜尋番劇',
                   textAlign: TextAlign.center,
                   style: theme.textTheme.titleMedium)),
         ]));

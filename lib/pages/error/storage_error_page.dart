@@ -14,23 +14,23 @@ class StorageErrorPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('内部错误'),
+        title: const Text('內部錯誤'),
       ),
       body: FutureBuilder<Directory>(
         future: getApplicationSupportDirectory(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            final path = snapshot.data?.path ?? '未知路径';
+            final path = snapshot.data?.path ?? '未知路徑';
             return GeneralErrorWidget(
-              title: '无法初始化本地存储',
+              title: '無法初始化本地儲存',
               icon: Icons.storage_rounded,
-              errMsg: '当前存储位置：\n$path\n\n可在退出后删除该目录以重置本地存储，此操作会清除本地数据。',
+              errMsg: '當前儲存位置：\n$path\n\n可在退出後刪除該目錄以重置本地儲存，此操作會清除本地資料。',
               actions: [
                 StateActionButton(
                   onPressed: () {
                     exit(0);
                   },
-                  text: '退出程序',
+                  text: '退出程式',
                   icon: Icons.close_rounded,
                 ),
               ],

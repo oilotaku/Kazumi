@@ -10,13 +10,13 @@ class ProxyManager {
   static void applyProxy() {
     DioFactory.reset();
     _applyImageCacheManager();
-    KazumiLogger().i('Proxy: 网络客户端配置已刷新');
+    KazumiLogger().i('Proxy: 網路客戶端配置已重新整理');
   }
 
   static void clearProxy() {
     DioFactory.reset();
     _applyImageCacheManager();
-    KazumiLogger().i('Proxy: 网络客户端代理已清除');
+    KazumiLogger().i('Proxy: 網路客戶端代理已清除');
   }
 
   static void _applyImageCacheManager() {

@@ -44,7 +44,7 @@ class _HistoryPageState extends State<HistoryPage> {
       }
     } catch (_) {
       if (mounted) {
-        KazumiDialog.showToast(context: context, message: '删除失败，请稍后重试');
+        KazumiDialog.showToast(context: context, message: '刪除失敗，請稍後重試');
       }
     } finally {
       if (mounted) setState(() => _deleting.remove(history.key));
@@ -57,9 +57,9 @@ class _HistoryPageState extends State<HistoryPage> {
       context: context,
       builder: (context) => AlertDialog(
         icon: const Icon(Icons.delete_sweep_outlined),
-        title: const Text('清空历史记录？'),
+        title: const Text('清空歷史記錄？'),
         content: Text(
-            '将删除全部 ${widget.controller.histories.length} 条观看记录，包括在线和缓存记录。此操作无法撤销。'),
+            '將刪除全部 ${widget.controller.histories.length} 條觀看記錄，包括線上和快取記錄。此操作無法撤銷。'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
@@ -82,7 +82,7 @@ class _HistoryPageState extends State<HistoryPage> {
       if (mounted) setState(() => _editing = false);
     } catch (_) {
       if (mounted) {
-        KazumiDialog.showToast(context: context, message: '清空失败，请稍后重试');
+        KazumiDialog.showToast(context: context, message: '清空失敗，請稍後重試');
       }
     } finally {
       if (mounted) setState(() => _clearing = false);
@@ -102,7 +102,7 @@ class _HistoryPageState extends State<HistoryPage> {
         },
         child: Scaffold(
           appBar: SysAppBar(
-            title: Text('历史记录',
+            title: Text('歷史記錄',
                 style: Theme.of(context)
                     .textTheme
                     .headlineSmall
@@ -119,14 +119,14 @@ class _HistoryPageState extends State<HistoryPage> {
                           child: const Text('完成'),
                         )
                       : IconButton.filledTonal(
-                          tooltip: '管理历史记录',
+                          tooltip: '管理歷史記錄',
                           onPressed: () => setState(() => _editing = true),
                           icon: const Icon(Icons.edit_outlined),
                         ),
                 ),
                 if (_editing)
                   IconButton(
-                    tooltip: '清空全部历史记录',
+                    tooltip: '清空全部歷史記錄',
                     onPressed: _clearing || _deleting.isNotEmpty
                         ? null
                         : _clearHistory,
@@ -186,7 +186,7 @@ class _HistoryCardState extends State<_HistoryCard> with KazumiDialogOwner {
     await dialogs.run((task) async {
       final cancelToken = RuleCancelToken();
       final result = await task.loading(
-        message: '获取中',
+        message: '獲取中',
         barrierDismissible: isDesktop(),
         onCancel: cancelToken.cancel,
         action: () =>
@@ -199,7 +199,7 @@ class _HistoryCardState extends State<_HistoryCard> with KazumiDialogOwner {
         case HistoryPlaybackUnavailable(:final reason):
           KazumiDialog.showToast(message: reason);
       }
-    }, errorMessage: '暂时无法继续播放，请稍后重试');
+    }, errorMessage: '暫時無法繼續播放，請稍後重試');
   }
 
   Future<void> _changeCollect(CollectType type) async {
@@ -209,7 +209,7 @@ class _HistoryCardState extends State<_HistoryCard> with KazumiDialogOwner {
       await _collectController.addCollect(widget.history.bangumiItem,
           type: type.value);
     } catch (_) {
-      KazumiDialog.showToast(message: '修改收藏状态失败，请稍后重试');
+      KazumiDialog.showToast(message: '修改收藏狀態失敗，請稍後重試');
     } finally {
       if (mounted) setState(() => _updatingCollect = false);
     }

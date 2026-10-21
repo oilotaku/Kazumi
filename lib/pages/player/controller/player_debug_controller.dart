@@ -12,7 +12,7 @@ class PlayerDebugController = _PlayerDebugController
     with _$PlayerDebugController;
 
 abstract class _PlayerDebugController with Store {
-  /// LogLevel 0: 错误 1: 警告 2: 简略 3: 详细
+  /// LogLevel 0: 錯誤 1: 警告 2: 簡略 3: 詳細
   int playerLogLevel = 2;
 
   @observable

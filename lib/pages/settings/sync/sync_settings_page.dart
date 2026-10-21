@@ -8,13 +8,13 @@ import 'package:kazumi/services/storage/storage.dart';
 import 'package:kazumi/services/sync/bangumi_sync_service.dart';
 
 enum _SyncStatus {
-  unconnected('未连接', Icons.link_off_rounded),
+  unconnected('未連線', Icons.link_off_rounded),
   unconfigured('未配置', Icons.settings_outlined),
-  connecting('正在连接', Icons.sync_rounded),
-  connectionError('连接异常', Icons.error_outline_rounded),
-  enabled('已开启', Icons.check_circle_outline_rounded),
-  disabled('已关闭', Icons.pause_circle_outline_rounded),
-  contentRequired('待选择内容', Icons.tune_rounded);
+  connecting('正在連線', Icons.sync_rounded),
+  connectionError('連線異常', Icons.error_outline_rounded),
+  enabled('已開啟', Icons.check_circle_outline_rounded),
+  disabled('已關閉', Icons.pause_circle_outline_rounded),
+  contentRequired('待選擇內容', Icons.tune_rounded);
 
   const _SyncStatus(this.label, this.icon);
 
@@ -37,7 +37,7 @@ class _SyncSettingsPageState extends State<SyncSettingsPage> {
 
   @override
   Widget build(BuildContext context) => SettingsDetailScaffold(
-        title: const Text('同步设置'),
+        title: const Text('同步設定'),
         body: ListenableBuilder(
           listenable: BangumiSyncService(),
           builder: (context, _) {
@@ -61,8 +61,8 @@ class _SyncSettingsPageState extends State<SyncSettingsPage> {
               _SyncServiceCard(
                 title: '追番同步',
                 service: 'Bangumi',
-                description: '与 Bangumi 保持相同的追番状态。',
-                content: '想看 · 在看 · 看过 · 搁置 · 抛弃',
+                description: '與 Bangumi 保持相同的追番狀態。',
+                content: '想看 · 在看 · 看過 · 擱置 · 拋棄',
                 icon: Icons.bookmarks_rounded,
                 color: colors.secondaryContainer,
                 onColor: colors.onSecondaryContainer,
@@ -75,14 +75,14 @@ class _SyncSettingsPageState extends State<SyncSettingsPage> {
                             : bangumiEnabled
                                 ? _SyncStatus.enabled
                                 : _SyncStatus.disabled,
-                action: hasToken ? '管理追番同步' : '连接 Bangumi',
+                action: hasToken ? '管理追番同步' : '連線 Bangumi',
                 onPressed: () => _open('/settings/bangumi/'),
               ),
               _SyncServiceCard(
-                title: '多设备同步',
+                title: '多裝置同步',
                 service: 'WebDAV',
-                description: '通过自己的云盘，在其他设备接着看。',
-                content: '观看记录 · 收藏 · 弹幕屏蔽词',
+                description: '透過自己的雲盤，在其他裝置接著看。',
+                content: '觀看記錄 · 收藏 · 彈幕遮蔽詞',
                 icon: Icons.devices_rounded,
                 color: colors.tertiaryContainer,
                 onColor: colors.onTertiaryContainer,
@@ -93,7 +93,7 @@ class _SyncSettingsPageState extends State<SyncSettingsPage> {
                             ? _SyncStatus.enabled
                             : _SyncStatus.contentRequired
                         : _SyncStatus.disabled,
-                action: hasServer ? '管理多设备同步' : '设置 WebDAV',
+                action: hasServer ? '管理多裝置同步' : '設定 WebDAV',
                 onPressed: () => _open('/settings/webdav/'),
               ),
             ];
@@ -101,8 +101,8 @@ class _SyncSettingsPageState extends State<SyncSettingsPage> {
               children: [
                 const SyncPageIntro(
                   icon: Icons.sync_rounded,
-                  title: '让追番保持同步',
-                  description: '选择需要的服务，也可以同时使用。',
+                  title: '讓追番保持同步',
+                  description: '選擇需要的服務，也可以同時使用。',
                 ),
                 LayoutBuilder(
                   builder: (context, constraints) {

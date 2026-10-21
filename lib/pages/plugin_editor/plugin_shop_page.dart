@@ -9,7 +9,7 @@ class PluginShopPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SettingsDetailScaffold(
-        title: const Text('规则仓库'),
+        title: const Text('規則庫'),
         body: SafeArea(
           top: false,
           child: Align(

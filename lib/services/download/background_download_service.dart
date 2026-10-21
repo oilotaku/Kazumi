@@ -3,13 +3,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:kazumi/services/logging/logger.dart';
 
-/// Android 后台下载服务
+/// Android 後臺下載服務
 ///
-/// 使用 Foreground Service 保持 app 进程存活，防止系统在后台时杀死下载进程。
-/// 下载逻辑仍在主 Isolate 运行，此服务仅负责：
-/// 1. 显示通知栏进度
-/// 2. 保持进程存活
-/// 3. 提供通知栏交互（暂停全部）
+/// 使用 Foreground Service 保持 app 程式存活，防止系統在後臺時殺死下載程式。
+/// 下載邏輯仍在主 Isolate 執行，此服務僅負責：
+/// 1. 顯示通知欄進度
+/// 2. 保持程式存活
+/// 3. 提供通知欄互動（暫停全部）
 class BackgroundDownloadService {
   static final BackgroundDownloadService _instance =
       BackgroundDownloadService._internal();
@@ -22,7 +22,7 @@ class BackgroundDownloadService {
   void Function()? onPauseAll;
   void Function()? onNavigateToDownloadRequested;
 
-  /// 返回 true 表示用户同意请求权限，false 表示用户拒绝
+  /// 返回 true 表示使用者同意請求許可權，false 表示使用者拒絕
   Future<bool> Function()? onNotificationPermissionRequired;
 
   bool get isSupported => Platform.isAndroid;
@@ -33,8 +33,8 @@ class BackgroundDownloadService {
     FlutterForegroundTask.init(
       androidNotificationOptions: AndroidNotificationOptions(
         channelId: 'kazumi_download_channel',
-        channelName: '下载服务',
-        channelDescription: '视频下载后台服务',
+        channelName: '下載服務',
+        channelDescription: '影片下載後臺服務',
         channelImportance: NotificationChannelImportance.LOW,
         priority: NotificationPriority.LOW,
         onlyAlertOnce: true,
@@ -93,7 +93,7 @@ class BackgroundDownloadService {
               .i('BackgroundDownloadService: user declined permission dialog');
         }
       } else {
-        // 没有设置回调，直接请求权限（兼容旧行为）
+        // 沒有設定回撥，直接請求許可權（相容舊行為）
         final granted = await requestNotificationPermission();
         if (!granted) {
           KazumiLogger()
@@ -104,10 +104,10 @@ class BackgroundDownloadService {
 
     try {
       final result = await FlutterForegroundTask.startService(
-        notificationTitle: '正在下载',
-        notificationText: '准备中...',
+        notificationTitle: '正在下載',
+        notificationText: '準備中...',
         notificationButtons: [
-          const NotificationButton(id: 'pause_all', text: '暂停全部'),
+          const NotificationButton(id: 'pause_all', text: '暫停全部'),
         ],
         callback: _backgroundCallback,
       );
@@ -153,7 +153,7 @@ class BackgroundDownloadService {
         notificationText: text,
       );
     } catch (e) {
-      // 忽略更新失败，不影响下载
+      // 忽略更新失敗，不影響下載
     }
   }
 
@@ -169,11 +169,11 @@ class BackgroundDownloadService {
     String text;
 
     if (activeCount == 0) {
-      title = '下载已暂停';
-      text = '共 $totalCount 个任务';
+      title = '下載已暫停';
+      text = '共 $totalCount 個任務';
     } else {
       final percent = (overallProgress * 100).toInt();
-      title = '正在下载 ($activeCount/$totalCount)';
+      title = '正在下載 ($activeCount/$totalCount)';
       text = '$percent% · $speedText';
     }
 
@@ -199,10 +199,10 @@ class BackgroundDownloadService {
   }
 }
 
-/// 后台任务回调（在独立 Isolate 中运行）
+/// 後臺任務回撥（在獨立 Isolate 中執行）
 ///
-/// 注意：此回调主要用于保持服务存活和处理通知交互。
-/// 实际下载逻辑在主 Isolate 中运行。
+/// 注意：此回撥主要用於保持服務存活和處理通知互動。
+/// 實際下載邏輯在主 Isolate 中執行。
 @pragma('vm:entry-point')
 void _backgroundCallback() {
   FlutterForegroundTask.setTaskHandler(_DownloadTaskHandler());
@@ -216,7 +216,7 @@ class _DownloadTaskHandler extends TaskHandler {
 
   @override
   void onRepeatEvent(DateTime timestamp) {
-    // eventAction 配置为 nothing，不会触发
+    // eventAction 配置為 nothing，不會觸發
   }
 
   @override
@@ -234,7 +234,7 @@ class _DownloadTaskHandler extends TaskHandler {
 
   @override
   void onNotificationDismissed() {
-    // 前台服务通知通常不可划掉
+    // 前臺服務通知通常不可劃掉
   }
 
   @override

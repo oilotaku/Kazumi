@@ -395,7 +395,7 @@ class _CollectEntryMenu extends StatelessWidget {
       builder: (context, toggle) {
         return showStatusLabel
             ? Tooltip(
-                message: '调整《$title》的观看状态',
+                message: '調整《$title》的觀看狀態',
                 child: FilledButton.tonalIcon(
                   style: FilledButton.styleFrom(
                     visualDensity: VisualDensity.standard,

@@ -139,7 +139,7 @@ class _SearchPageState extends State<SearchPage> {
       builder: (context, value, child) => SearchBar(
         controller: _input,
         focusNode: _inputFocus,
-        hintText: '搜索番剧名称',
+        hintText: '搜尋番劇名稱',
         textInputAction: TextInputAction.search,
         constraints: const BoxConstraints(minHeight: 64),
         elevation: const WidgetStatePropertyAll(0),
@@ -147,18 +147,18 @@ class _SearchPageState extends State<SearchPage> {
         padding:
             const WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 8)),
         leading: IconButton(
-          tooltip: '搜索',
+          tooltip: '搜尋',
           onPressed: () => _submit(_input.text),
           icon: const Icon(Icons.search_rounded),
         ),
         trailing: [
           if (value.text.isNotEmpty || _hasSearched)
             IconButton(
-                tooltip: '清空搜索',
+                tooltip: '清空搜尋',
                 onPressed: _clearSearch,
                 icon: const Icon(Icons.close_rounded)),
           IconButton(
-            tooltip: '以图搜番',
+            tooltip: '以圖搜番',
             onPressed: _imageSearch,
             icon: const Icon(Icons.image_search_rounded),
           ),
@@ -185,8 +185,8 @@ class _SearchPageState extends State<SearchPage> {
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
             leading: const Icon(Icons.tune_rounded),
-            title: const Text('按条件查找'),
-            subtitle: const Text('题材、放送时间与评分'),
+            title: const Text('按條件查詢'),
+            subtitle: const Text('題材、放送時間與評分'),
             trailing: const Icon(Icons.chevron_right_rounded),
             onTap: _showFilters,
           )),
@@ -201,7 +201,7 @@ class _SearchPageState extends State<SearchPage> {
                   padding: const EdgeInsets.only(left: 16, right: 4),
                   child: Row(children: [
                     Expanded(
-                        child: Text('最近搜索',
+                        child: Text('最近搜尋',
                             style: theme.textTheme.titleSmall?.copyWith(
                                 color: theme.colorScheme.onSurfaceVariant))),
                     if (_managingHistory)
@@ -232,7 +232,7 @@ class _SearchPageState extends State<SearchPage> {
                           maxLines: 2, overflow: TextOverflow.ellipsis),
                       trailing: _managingHistory
                           ? IconButton(
-                              tooltip: '删除这条搜索记录',
+                              tooltip: '刪除這條搜尋記錄',
                               onPressed: () =>
                                   _controller.deleteSearchHistory(history),
                               icon: const Icon(Icons.close_rounded, size: 20))
@@ -270,7 +270,7 @@ class _SearchPageState extends State<SearchPage> {
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(children: [
             Expanded(
-                child: Text('搜索结果',
+                child: Text('搜尋結果',
                     style: Theme.of(context)
                         .textTheme
                         .titleMedium
@@ -281,7 +281,7 @@ class _SearchPageState extends State<SearchPage> {
                   onChanged: (sort) =>
                       _applyFilters(submitted.copyWith(sort: sort))),
             IconButton(
-              tooltip: '筛选番剧',
+              tooltip: '篩選番劇',
               onPressed: _showFilters,
               icon: Badge(
                   backgroundColor: Theme.of(context).colorScheme.primary,
@@ -294,8 +294,8 @@ class _SearchPageState extends State<SearchPage> {
           ]),
           Text(
               busy
-                  ? '正在搜索…'
-                  : '${items.length} 部番剧${items.length < allItems.length ? ' · 隐藏 ${allItems.length - items.length} 部' : ''}',
+                  ? '正在搜尋…'
+                  : '${items.length} 部番劇${items.length < allItems.length ? ' · 隐藏 ${allItems.length - items.length} 部' : ''}',
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: Theme.of(context).colorScheme.onSurfaceVariant)),
           if (summary.isNotEmpty) ...[
@@ -314,14 +314,14 @@ class _SearchPageState extends State<SearchPage> {
         const SliverToBoxAdapter(
           child: GeneralEmptyState(
             icon: Icons.search_off_rounded,
-            title: '没有找到番剧',
+            title: '沒有找到番劇',
           ),
         )
       else if (items.isEmpty)
         SliverToBoxAdapter(
             child: GeneralEmptyState(
           icon: Icons.filter_alt_off_rounded,
-          title: '这些番剧被筛选隐藏了',
+          title: '這些番劇被篩選隱藏了',
           actions: [
             StateActionButton.tonal(
               onPressed: () async {
@@ -329,7 +329,7 @@ class _SearchPageState extends State<SearchPage> {
                 await _controller.setNotShowAbandonedBangumis(false);
               },
               icon: Icons.visibility_outlined,
-              text: '显示全部',
+              text: '顯示全部',
             ),
           ],
         ))
@@ -352,8 +352,8 @@ class _SearchPageState extends State<SearchPage> {
                           ? TextButton.icon(
                               onPressed: _loadMore,
                               icon: const Icon(Icons.expand_more_rounded),
-                              label: const Text('加载更多'))
-                          : Text('已经看到全部结果',
+                              label: const Text('載入更多'))
+                          : Text('已經看到全部結果',
                               style: Theme.of(context)
                                   .textTheme
                                   .bodySmall
@@ -369,7 +369,7 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const SysAppBar(
-          backgroundColor: Colors.transparent, title: Text('番剧搜索')),
+          backgroundColor: Colors.transparent, title: Text('番劇搜尋')),
       body: SafeArea(
           top: false,
           child: LayoutBuilder(builder: (context, constraints) {

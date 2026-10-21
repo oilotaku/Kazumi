@@ -7,7 +7,7 @@ import 'package:kazumi/request/config/api_endpoints.dart';
 class TraceApi {
   static final TraceClient _client = TraceClient.instance;
 
-  ///根据图片搜索番剧信息
+  ///根據圖片搜尋番劇資訊
   static Future<ImageSearchItem> searchAnimeByImageFile(File imageFile,
       {int anilistInfo = 2}) async {
     final bytes = await imageFile.readAsBytes();
@@ -23,7 +23,7 @@ class TraceApi {
     return ImageSearchItem.fromJson(data as Map<String, dynamic>);
   }
 
-  ///根据图片URL搜索番剧信息
+  ///根據圖片URL搜尋番劇資訊
   static Future<ImageSearchItem> searchAnimeByImageUrl(String imageUrl,
       {int anilistInfo = 2}) async {
     final data = await _client.post(

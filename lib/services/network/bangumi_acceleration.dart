@@ -15,8 +15,8 @@ enum BangumiAcceleration {
   };
 
   String get label => switch (this) {
-    direct => '直连',
+    direct => '直連',
     ech => 'ECH',
-    mirror => '镜像',
+    mirror => '映象',
   };
 }

@@ -8,7 +8,7 @@ class LoadingIndicator extends StatefulWidget {
     super.key,
     this.size = 48,
     this.color,
-    this.semanticsLabel = '加载中',
+    this.semanticsLabel = '載入中',
   });
 
   final double size;

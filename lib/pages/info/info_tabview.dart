@@ -86,7 +86,7 @@ class _InfoTabViewState extends State<InfoTabView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('简介', style: TextStyle(fontSize: 18)),
+              Text('簡介', style: TextStyle(fontSize: 18)),
               const SizedBox(height: 8),
               LayoutBuilder(builder: (context, constraints) {
                 final span = TextSpan(text: widget.bangumiItem.summary);
@@ -119,7 +119,7 @@ class _InfoTabViewState extends State<InfoTabView> {
                             fullIntro = !fullIntro;
                           });
                         },
-                        child: Text(fullIntro ? '加载更少' : '加载更多'),
+                        child: Text(fullIntro ? '載入更少' : '載入更多'),
                       ),
                     ],
                   );
@@ -133,7 +133,7 @@ class _InfoTabViewState extends State<InfoTabView> {
                 }
               }),
               const SizedBox(height: 16),
-              Text('标签', style: TextStyle(fontSize: 18)),
+              Text('標籤', style: TextStyle(fontSize: 18)),
               const SizedBox(height: 8),
               Wrap(
                 spacing: 8.0,
@@ -190,7 +190,7 @@ class _InfoTabViewState extends State<InfoTabView> {
           scrollBehavior: const ScrollBehavior().copyWith(
             scrollbars: false,
           ),
-          key: const PageStorageKey<String>('关联'),
+          key: const PageStorageKey<String>('關聯'),
           slivers: <Widget>[
             SliverOverlapInjector(
               handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
@@ -201,8 +201,8 @@ class _InfoTabViewState extends State<InfoTabView> {
                   return SliverFillRemaining(
                     hasScrollBody: false,
                     child: GeneralErrorWidget(
-                      title: '关联条目加载失败',
-                      errMsg: '请检查网络连接后重试。',
+                      title: '關聯條目載入失敗',
+                      errMsg: '請檢查網路連線後重試。',
                       onRetry: widget.loadRelations,
                     ),
                   );
@@ -212,7 +212,7 @@ class _InfoTabViewState extends State<InfoTabView> {
                     hasScrollBody: false,
                     child: GeneralEmptyState(
                       icon: Icons.account_tree_rounded,
-                      title: '暂无关联条目',
+                      title: '暫無關聯條目',
                     ),
                   );
                 }
@@ -318,7 +318,7 @@ class _InfoTabViewState extends State<InfoTabView> {
           scrollBehavior: const ScrollBehavior().copyWith(
             scrollbars: false,
           ),
-          key: PageStorageKey<String>('制作人员'),
+          key: PageStorageKey<String>('製作人員'),
           slivers: <Widget>[
             SliverOverlapInjector(
               handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
@@ -347,8 +347,8 @@ class _InfoTabViewState extends State<InfoTabView> {
               if (widget.staffQueryTimeout) {
                 return SliverFillRemaining(
                   child: GeneralErrorWidget(
-                    title: '制作人员加载失败',
-                    errMsg: '请检查网络连接后重试。',
+                    title: '製作人員載入失敗',
+                    errMsg: '請檢查網路連線後重試。',
                     onRetry: widget.loadStaff,
                   ),
                 );
@@ -358,7 +358,7 @@ class _InfoTabViewState extends State<InfoTabView> {
                   hasScrollBody: false,
                   child: GeneralEmptyState(
                     icon: Icons.groups_rounded,
-                    title: '暂无制作人员信息',
+                    title: '暫無製作人員資訊',
                   ),
                 );
               }
@@ -425,8 +425,8 @@ class _InfoTabViewState extends State<InfoTabView> {
               if (widget.charactersQueryTimeout) {
                 return SliverFillRemaining(
                   child: GeneralErrorWidget(
-                    title: '角色列表加载失败',
-                    errMsg: '请检查网络连接后重试。',
+                    title: '角色列表載入失敗',
+                    errMsg: '請檢查網路連線後重試。',
                     onRetry: widget.loadCharacters,
                   ),
                 );
@@ -436,7 +436,7 @@ class _InfoTabViewState extends State<InfoTabView> {
                   hasScrollBody: false,
                   child: GeneralEmptyState(
                     icon: Icons.people_alt_rounded,
-                    title: '暂无角色信息',
+                    title: '暫無角色資訊',
                   ),
                 );
               }
@@ -479,7 +479,7 @@ class _InfoTabViewState extends State<InfoTabView> {
               scrollBehavior: const ScrollBehavior().copyWith(
                 scrollbars: false,
               ),
-              key: PageStorageKey<String>('概览'),
+              key: PageStorageKey<String>('概覽'),
               slivers: <Widget>[
                 SliverOverlapInjector(
                   handle:
@@ -529,7 +529,7 @@ class _RelatedBangumiCardH extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final textScaler =
         MediaQuery.textScalerOf(context).clamp(maxScaleFactor: 1.1);
-    final relationLabel = relation.relation.isEmpty ? '关联' : relation.relation;
+    final relationLabel = relation.relation.isEmpty ? '關聯' : relation.relation;
     final bangumiItem = relation.toBangumiItem();
     final title = bangumiItem.nameCn.isEmpty
         ? bangumiItem.name.trim()

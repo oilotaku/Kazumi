@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:kazumi/utils/danmaku.dart';
 
 class DanmakuEntry {
-  // 弹幕内容
+  // 彈幕內容
   String message;
-  // 弹幕时间
+  // 彈幕時間
   double time;
-  // 弹幕类型 (1-普通弹幕，4-底部弹幕，5-顶部弹幕)
+  // 彈幕型別 (1-普通彈幕，4-底部彈幕，5-頂部彈幕)
   int type;
-  // 弹幕颜色
+  // 彈幕顏色
   Color color;
-  // 弹幕来源 ([BiliBili], [Gamer])
+  // 彈幕來源 ([BiliBili], [Gamer])
   String source;
 
   DanmakuEntry(
@@ -35,9 +35,9 @@ class DanmakuEntry {
         source: sourceValue);
   }
 
-  /// 序列化为 JSON 格式 (与 fromJson 格式一致)
+  /// 序列化為 JSON 格式 (與 fromJson 格式一致)
   Map<String, dynamic> toJson() {
-    // 只存储 RGB 部分 (与 DanDanPlay API 格式一致)
+    // 只儲存 RGB 部分 (與 DanDanPlay API 格式一致)
     final colorValue = ((color.r * 255).toInt() << 16) |
         ((color.g * 255).toInt() << 8) |
         (color.b * 255).toInt();

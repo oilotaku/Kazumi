@@ -101,7 +101,7 @@ class _PluginTestPageState extends State<PluginTestPage> {
     if (isTesting) return;
     final keyword = testKeywordController.text.trim();
     if (keyword.isEmpty) {
-      setState(() => errorMsg = '请输入一个番剧名称作为测试关键词。');
+      setState(() => errorMsg = '請輸入一個番劇名稱作為測試關鍵詞。');
       return;
     }
     _resetState();
@@ -149,12 +149,12 @@ class _PluginTestPageState extends State<PluginTestPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return SettingsDetailScaffold(
-      title: const Text('规则测试'),
+      title: const Text('規則測試'),
       actions: [
         IconButton(
           onPressed: _resetState,
           icon: const Icon(Icons.restart_alt_rounded),
-          tooltip: '重置测试',
+          tooltip: '重置測試',
         ),
         const SizedBox(width: 8),
       ],
@@ -170,13 +170,13 @@ class _PluginTestPageState extends State<PluginTestPage> {
                 children: [
                   RulePageIntro(
                     title: plugin.name,
-                    description: '一次测试，检查搜索请求、结果解析和播放线路。',
+                    description: '一次測試，檢查搜尋請求、結果解析和播放線路。',
                     icon: Icons.science_outlined,
                   ),
                   const SizedBox(height: 20),
                   RuleSection(
-                    title: '试着搜索一部番剧',
-                    description: '选集测试会使用第一条搜索结果。',
+                    title: '試著搜尋一部番劇',
+                    description: '選集測試會使用第一條搜尋結果。',
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -191,7 +191,7 @@ class _PluginTestPageState extends State<PluginTestPage> {
                             icon: Icon(isTesting
                                 ? Icons.stop_rounded
                                 : Icons.play_arrow_rounded),
-                            label: Text(isTesting ? '停止测试' : '开始测试'),
+                            label: Text(isTesting ? '停止測試' : '開始測試'),
                           ),
                         ),
                         if (isTesting) ...[
@@ -209,7 +209,7 @@ class _PluginTestPageState extends State<PluginTestPage> {
                   _buildExpansionTile(
                       theme: theme,
                       number: 1,
-                      title: '搜索请求',
+                      title: '搜尋請求',
                       subtitle: _getSearchSubtitle(),
                       completed: _hasSearchRaw,
                       expanded: false,
@@ -218,7 +218,7 @@ class _PluginTestPageState extends State<PluginTestPage> {
                   _buildExpansionTile(
                       theme: theme,
                       number: 2,
-                      title: '结果解析',
+                      title: '結果解析',
                       subtitle: _getParseSubtitle(),
                       completed: _hasSearchData,
                       expanded: _hasSearchData,
@@ -227,7 +227,7 @@ class _PluginTestPageState extends State<PluginTestPage> {
                   _buildExpansionTile(
                       theme: theme,
                       number: 3,
-                      title: '播放线路',
+                      title: '播放線路',
                       subtitle: _getChapterSubtitle(),
                       completed: _hasChapters,
                       expanded: _hasChapters,
@@ -308,8 +308,8 @@ class _PluginTestPageState extends State<PluginTestPage> {
   Widget _buildKeywordInput() => TextField(
         controller: testKeywordController,
         decoration: ruleInputDecoration(context,
-            label: '测试关键词',
-            hint: '输入番剧名称',
+            label: '測試關鍵詞',
+            hint: '輸入番劇名稱',
             prefix: const Icon(Icons.search_rounded)),
         enabled: !isTesting,
         textInputAction: TextInputAction.search,
@@ -337,7 +337,7 @@ class _PluginTestPageState extends State<PluginTestPage> {
                 style: TextButton.styleFrom(
                     backgroundColor:
                         theme.colorScheme.error.withValues(alpha: 0.1)),
-                child: Text('重试测试',
+                child: Text('重試測試',
                     style:
                         TextStyle(color: theme.colorScheme.onErrorContainer)),
               ),
@@ -368,9 +368,9 @@ class _PluginTestPageState extends State<PluginTestPage> {
       );
 
   String _getSearchSubtitle() {
-    if (isTesting && !_hasSearchRaw) return '正在请求站点…';
-    if (!_hasSearchRaw) return _hasRun ? '没有收到响应' : '等待开始';
-    return '${plugin.searchMode == RuleMode.api ? 'JSON' : 'HTML'}长度：${searchRaw.length} 字符';
+    if (isTesting && !_hasSearchRaw) return '正在請求站點…';
+    if (!_hasSearchRaw) return _hasRun ? '沒有收到響應' : '等待開始';
+    return '${plugin.searchMode == RuleMode.api ? 'JSON' : 'HTML'}長度：${searchRaw.length} 字元';
   }
 
   Widget _codePanel(String raw, ThemeData theme,
@@ -385,20 +385,20 @@ class _PluginTestPageState extends State<PluginTestPage> {
           Padding(
             padding: const EdgeInsets.only(left: 16, right: 4, top: 4),
             child: Row(children: [
-              Expanded(child: Text('响应内容', style: theme.textTheme.labelLarge)),
+              Expanded(child: Text('響應內容', style: theme.textTheme.labelLarge)),
               IconButton(
-                  tooltip: '复制响应内容',
+                  tooltip: '複製響應內容',
                   onPressed: () async {
                     try {
                       await Clipboard.setData(ClipboardData(text: raw));
                       if (mounted) {
                         KazumiDialog.showToast(
-                            context: context, message: '已复制响应内容');
+                            context: context, message: '已複製響應內容');
                       }
                     } catch (_) {
                       if (mounted) {
                         KazumiDialog.showToast(
-                            context: context, message: '复制失败，请重试');
+                            context: context, message: '複製失敗，請重試');
                       }
                     }
                   },
@@ -425,7 +425,7 @@ class _PluginTestPageState extends State<PluginTestPage> {
 
   Widget _buildSearchContent(ThemeData theme) {
     if (isTesting && !_hasSearchRaw) return _buildLoading(theme);
-    if (!_hasSearchRaw) return _buildEmpty('输入关键词后，点击「开始测试」。', theme);
+    if (!_hasSearchRaw) return _buildEmpty('輸入關鍵詞後，點選「開始測試」。', theme);
     return _codePanel(
         _formattedRaw(searchRaw, isJson: plugin.searchMode == RuleMode.api),
         theme,
@@ -433,18 +433,18 @@ class _PluginTestPageState extends State<PluginTestPage> {
   }
 
   String _getParseSubtitle() {
-    if (isTesting && !_hasSearchRaw) return '等待搜索响应';
-    if (!_hasSearchRaw) return _hasRun ? '等待有效响应' : '等待开始';
-    if (!_hasSearchData) return '未解析到结果';
+    if (isTesting && !_hasSearchRaw) return '等待搜尋響應';
+    if (!_hasSearchRaw) return _hasRun ? '等待有效響應' : '等待開始';
+    if (!_hasSearchData) return '未解析到結果';
     final skipped =
-        searchDiagnostics.isEmpty ? '' : '，跳过 ${searchDiagnostics.length} 条';
-    return '解析到 ${searchRes?.data.length ?? 0} 条结果$skipped';
+        searchDiagnostics.isEmpty ? '' : '，跳過 ${searchDiagnostics.length} 條';
+    return '解析到 ${searchRes?.data.length ?? 0} 條結果$skipped';
   }
 
   Widget _buildParseContent(ThemeData theme) {
     if (isTesting && !_hasSearchRaw) return _buildLoading(theme);
-    if (!_hasSearchRaw) return _buildEmpty('请先完成搜索请求测试', theme);
-    if (!_hasSearchData) return _buildEmpty('未解析到搜索结果', theme, isError: true);
+    if (!_hasSearchRaw) return _buildEmpty('請先完成搜尋請求測試', theme);
+    if (!_hasSearchData) return _buildEmpty('未解析到搜尋結果', theme, isError: true);
 
     return Column(children: [
       _buildDiagnosticsWidget(searchDiagnostics, theme),
@@ -477,7 +477,7 @@ class _PluginTestPageState extends State<PluginTestPage> {
                 color: theme.colorScheme.error, size: 20),
             const SizedBox(width: 8.0),
             Expanded(
-                child: Text('部分节点被跳过（${diagnostics.length}）',
+                child: Text('部分節點被跳過（${diagnostics.length}）',
                     style: theme.textTheme.bodyMedium?.copyWith(
                         color: theme.colorScheme.onErrorContainer,
                         fontWeight: FontWeight.w500))),
@@ -498,7 +498,7 @@ class _PluginTestPageState extends State<PluginTestPage> {
 
   Widget _buildSearchItemCard(SearchItem item, int i, ThemeData theme) {
     final isShowingFragment = _shownFragmentIndex == i;
-    final fragment = _itemFragmentMap[i] ?? '无匹配片段';
+    final fragment = _itemFragmentMap[i] ?? '無匹配片段';
 
     return Column(children: [
       Card(
@@ -527,11 +527,11 @@ class _PluginTestPageState extends State<PluginTestPage> {
                   size: 18,
                   color: theme.colorScheme.primary,
                 ),
-                tooltip: isShowingFragment ? '隐藏匹配片段' : '查看匹配片段',
+                tooltip: isShowingFragment ? '隱藏匹配片段' : '檢視匹配片段',
               ),
             ]),
             _h8,
-            Text('链接：${item.src}',
+            Text('連結：${item.src}',
                 style: theme.textTheme.bodySmall
                     ?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
           ]),
@@ -547,22 +547,22 @@ class _PluginTestPageState extends State<PluginTestPage> {
   }
 
   String _getChapterSubtitle() {
-    if (!_hasRun) return '等待开始';
-    if (isTesting) return _hasSearchData ? '正在获取播放线路…' : '等待搜索结果';
-    if (!_hasSearchData) return '等待有效搜索结果';
-    if (!_needChapterParse) return '无需解析章节';
-    if (chapters == null) return '未获取章节数据';
+    if (!_hasRun) return '等待開始';
+    if (isTesting) return _hasSearchData ? '正在獲取播放線路…' : '等待搜尋結果';
+    if (!_hasSearchData) return '等待有效搜尋結果';
+    if (!_needChapterParse) return '無需解析章節';
+    if (chapters == null) return '未獲取章節資料';
     final skipped =
-        chapterDiagnostics.isEmpty ? '' : '，跳过 ${chapterDiagnostics.length} 条';
-    return '获取到 ${chapters?.length ?? 0} 个播放线路$skipped';
+        chapterDiagnostics.isEmpty ? '' : '，跳過 ${chapterDiagnostics.length} 條';
+    return '獲取到 ${chapters?.length ?? 0} 個播放線路$skipped';
   }
 
   Widget _buildChapterContent(ThemeData theme) {
-    if (!_needChapterParse) return _buildEmpty('未填写章节规则', theme);
+    if (!_needChapterParse) return _buildEmpty('未填寫章節規則', theme);
     if (isTesting) return _buildLoading(theme);
-    if (!_hasSearchData) return _buildEmpty('请先解析到有效结果', theme);
-    if (chapters == null) return _buildEmpty('未获取章节数据', theme, isError: true);
-    if (!_hasChapters) return _buildEmpty('无可用章节', theme, isError: true);
+    if (!_hasSearchData) return _buildEmpty('請先解析到有效結果', theme);
+    if (chapters == null) return _buildEmpty('未獲取章節資料', theme, isError: true);
+    if (!_hasChapters) return _buildEmpty('無可用章節', theme, isError: true);
 
     return Column(
       children: [
@@ -609,12 +609,12 @@ class _PluginTestPageState extends State<PluginTestPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  '播放线路 ${i + 1}：${road.name}',
+                  '播放線路 ${i + 1}：${road.name}',
                   style: theme.textTheme.titleMedium
                       ?.copyWith(fontWeight: FontWeight.w500),
                 ),
                 _h8,
-                Text('章节数量：${road.data.length}',
+                Text('章節數量：${road.data.length}',
                     style: theme.textTheme.bodySmall
                         ?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
                 _h8,

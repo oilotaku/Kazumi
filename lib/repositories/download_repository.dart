@@ -16,33 +16,33 @@ abstract class IDownloadRepository {
   Future<void> deleteEpisode(String recordKey, int episodeNumber);
   bool getForceAdBlocker();
 
-  /// 获取指定番剧的下载记录
+  /// 獲取指定番劇的下載記錄
   ///
-  /// [bangumiId] 番剧 ID
-  /// [pluginName] 插件名称
+  /// [bangumiId] 番劇 ID
+  /// [pluginName] 插件名稱
   DownloadRecord? getRecordByBangumiId(int bangumiId, String pluginName);
 
-  /// 获取指定集数的下载信息
+  /// 獲取指定集數的下載資訊
   ///
-  /// [bangumiId] 番剧 ID
-  /// [pluginName] 插件名称
-  /// [episodeNumber] 集数编号
+  /// [bangumiId] 番劇 ID
+  /// [pluginName] 插件名稱
+  /// [episodeNumber] 集數編號
   DownloadEpisode? getEpisode(
       int bangumiId, String pluginName, int episodeNumber);
 
-  /// 获取已完成下载的集数列表
+  /// 獲取已完成下載的集數列表
   ///
-  /// [bangumiId] 番剧 ID
-  /// [pluginName] 插件名称
-  /// 返回所有已完成下载的集数
+  /// [bangumiId] 番劇 ID
+  /// [pluginName] 插件名稱
+  /// 返回所有已完成下載的集數
   List<DownloadEpisode> getCompletedEpisodes(int bangumiId, String pluginName);
 
-  /// 通过集数页面 URL 查找下载记录
+  /// 透過集數頁面 URL 查詢下載記錄
   ///
-  /// [bangumiId] 番剧 ID
-  /// [pluginName] 插件名称
-  /// [episodePageUrl] 集数页面 URL
-  /// 当 URL 为空时返回 null（兼容旧数据）
+  /// [bangumiId] 番劇 ID
+  /// [pluginName] 插件名稱
+  /// [episodePageUrl] 集數頁面 URL
+  /// 當 URL 為空時返回 null（相容舊資料）
   DownloadEpisode? getEpisodeByUrl(
       int bangumiId, String pluginName, String episodePageUrl);
 }
@@ -71,7 +71,7 @@ class DownloadRepository implements IDownloadRepository {
             result.add(record);
           }
         } catch (e) {
-          // 单条记录读取失败，跳过该记录并记录日志
+          // 單條記錄讀取失敗，跳過該記錄並記錄日誌
           KazumiLogger().w(
               'DownloadRepository: failed to read record key=$key, skipping',
               error: e);

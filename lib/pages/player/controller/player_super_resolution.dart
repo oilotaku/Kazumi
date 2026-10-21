@@ -1,18 +1,18 @@
 enum SuperResolutionMode {
   off(
     storageValue: 1,
-    label: '关闭',
-    description: '默认禁用超分辨率',
+    label: '關閉',
+    description: '預設禁用超解析度',
   ),
   efficiency(
     storageValue: 2,
-    label: '效率档',
-    description: '默认启用基于Anime4K的超分辨率 (效率优先)',
+    label: '效率檔',
+    description: '預設啟用基於Anime4K的超解析度 (效率優先)',
   ),
   quality(
     storageValue: 3,
-    label: '质量档',
-    description: '默认启用基于Anime4K的超分辨率 (质量优先)',
+    label: '質量檔',
+    description: '預設啟用基於Anime4K的超解析度 (質量優先)',
   );
 
   const SuperResolutionMode({

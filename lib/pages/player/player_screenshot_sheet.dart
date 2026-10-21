@@ -227,8 +227,8 @@ class _PlayerScreenshotSheetState extends State<_PlayerScreenshotSheet> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('清空候选截图？'),
-        content: Text('这将丢弃 ${collection.candidates.length} 张未保存的截图，无法恢复。'),
+        title: const Text('清空候選截圖？'),
+        content: Text('這將丟棄 ${collection.candidates.length} 張未儲存的截圖，無法恢復。'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -434,7 +434,7 @@ class _PlayerScreenshotSheetState extends State<_PlayerScreenshotSheet> {
     mainAxisSize: MainAxisSize.min,
     children: [
       IconButton(
-        tooltip: '上一张',
+        tooltip: '上一張',
         onPressed: _index > 0 ? () => _step(-1) : null,
         icon: const Icon(Icons.chevron_left_rounded),
       ),
@@ -443,7 +443,7 @@ class _PlayerScreenshotSheetState extends State<_PlayerScreenshotSheet> {
         style: Theme.of(context).textTheme.labelMedium,
       ),
       IconButton(
-        tooltip: '下一张',
+        tooltip: '下一張',
         onPressed: _index < collection.candidates.length - 1
             ? () => _step(1)
             : null,
@@ -470,7 +470,7 @@ class _PlayerScreenshotSheetState extends State<_PlayerScreenshotSheet> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '挑选截图',
+                '挑選截圖',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: compact
@@ -494,19 +494,19 @@ class _PlayerScreenshotSheetState extends State<_PlayerScreenshotSheet> {
             animated: true,
             enabled: !collection.busy,
             builder: (context, toggle) => IconButton(
-              tooltip: '管理截图',
+              tooltip: '管理截圖',
               icon: const Icon(Icons.more_vert_rounded),
               onPressed: toggle,
             ),
             menuChildren: [
               KazumiMenuItem(
-                label: '移除所选',
+                label: '移除所選',
                 onPressed: !collection.busy && collection.selectedCount > 0
                     ? _removeSelected
                     : null,
               ),
               KazumiMenuItem(
-                label: '清空候选',
+                label: '清空候選',
                 onPressed: collection.busy
                     ? null
                     : () => unawaited(_clearCandidates()),
@@ -515,7 +515,7 @@ class _PlayerScreenshotSheetState extends State<_PlayerScreenshotSheet> {
           ),
         if (current != null)
           IconButton(
-            tooltip: _zoomed ? '还原大小' : '放大查看',
+            tooltip: _zoomed ? '還原大小' : '放大檢視',
             onPressed: _toggleZoom,
             icon: Icon(
               _zoomed ? Icons.zoom_out_rounded : Icons.zoom_in_rounded,
@@ -573,7 +573,7 @@ class _PlayerScreenshotSheetState extends State<_PlayerScreenshotSheet> {
                 bytes: collection.candidates[index].bytes,
                 semanticLabel:
                     '${collection.candidates[index].episode} '
-                    '${collection.candidates[index].timeLabel} 截图',
+                    '${collection.candidates[index].timeLabel} 截圖',
               ),
             ),
           ),
@@ -623,7 +623,7 @@ class _PlayerScreenshotSheetState extends State<_PlayerScreenshotSheet> {
                 : Icons.radio_button_unchecked_rounded,
             size: 20,
           ),
-          label: Text(selected ? '已选中' : '选择这张'),
+          label: Text(selected ? '已選中' : '選擇這張'),
         ),
       );
     },
@@ -669,7 +669,7 @@ class _PlayerScreenshotSheetState extends State<_PlayerScreenshotSheet> {
                 ),
               ),
               IconButton(
-                tooltip: '关闭提示',
+                tooltip: '關閉提示',
                 color: colors.onInverseSurface,
                 onPressed: () => setState(() => _notice = null),
                 icon: const Icon(Icons.close_rounded, size: 20),
@@ -707,7 +707,7 @@ class _PlayerScreenshotSheetState extends State<_PlayerScreenshotSheet> {
           label: Text(
             collection.saving
                 ? '${collection.saveCompleted}/${collection.saveTotal}'
-                : '保存${collection.selectedCount > 0 ? ' ${collection.selectedCount} 张' : '所选'}',
+                : '儲存${collection.selectedCount > 0 ? ' ${collection.selectedCount} 张' : '所选'}',
             maxLines: 1,
           ),
         ),
@@ -775,7 +775,7 @@ class _PlayerScreenshotSheetState extends State<_PlayerScreenshotSheet> {
             final onPressed = collection.saving
                 ? null
                 : () => collection.setAllSelected(!all);
-            final label = Text(all ? '取消全选' : '全选');
+            final label = Text(all ? '取消全選' : '全選');
             if (compact) {
               return FilledButton.tonal(
                 style: style.copyWith(
@@ -840,15 +840,15 @@ class _PlayerScreenshotSheetState extends State<_PlayerScreenshotSheet> {
             color: Theme.of(context).colorScheme.primary,
           ),
           const SizedBox(height: 20),
-          Text('暂无待处理截图', style: Theme.of(context).textTheme.titleLarge),
+          Text('暫無待處理截圖', style: Theme.of(context).textTheme.titleLarge),
           if (_notice != null) ...[const SizedBox(height: 16), _noticeView()],
           const SizedBox(height: 8),
           const Text(
-            '返回视频，点击相机收集喜欢的画面。\n保存或移除截图后，可以继续截图。',
+            '返回影片，點選相機收集喜歡的畫面。\n儲存或移除截圖後，可以繼續截圖。',
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
-          FilledButton.tonal(onPressed: _close, child: const Text('返回视频截图')),
+          FilledButton.tonal(onPressed: _close, child: const Text('返回影片截圖')),
         ],
       ),
     ),
@@ -988,7 +988,7 @@ class _FrameThumbnail extends StatelessWidget {
       button: true,
       selected: active,
       label:
-          '查看第 ${index + 1} 张，${item.episode} ${item.timeLabel}${selected ? '，已选中' : ''}',
+          '檢視第 ${index + 1} 張，${item.episode} ${item.timeLabel}${selected ? '，已选中' : ''}',
       child: Material(
         color: Colors.transparent,
         child: InkWell(

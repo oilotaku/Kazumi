@@ -5,21 +5,21 @@ import 'package:kazumi/services/logging/logger.dart';
 import 'package:kazumi/utils/async_single_flight.dart';
 import 'package:kazumi/webview/captcha/captcha_webview_controller.dart';
 
-/// 验证码验证服务
+/// 驗證碼驗證服務
 ///
-/// 三种验证流程各自加载搜索页并等待验证通过：
+/// 三種驗證流程各自載入搜尋頁並等待驗證透過：
 ///
-/// - **类型1：图片验证码**（[loadForCaptcha] + [submitCaptcha]）
-///   监听验证码图片并经 [onCaptchaImageUrl] 交给 UI，UI 回传用户输入后
-///   在页面内填写并提交，验证码图片消失即视为通过。
-/// - **类型2：自动点击验证按钮**（[loadForButtonClick]）
-///   检测到按钮后自动点击，按钮消失或页面跳转即视为通过。
-/// - **类型3：自定义 JavaScript 验证**（[loadForCustomScript]）
-///   注入规则提供的脚本，脚本调用 KazumiCaptcha.done 或返回 true 即通过。
+/// - **型別1：圖片驗證碼**（[loadForCaptcha] + [submitCaptcha]）
+///   監聽驗證碼圖片並經 [onCaptchaImageUrl] 交給 UI，UI 回傳使用者輸入後
+///   在頁面內填寫並提交，驗證碼圖片消失即視為透過。
+/// - **型別2：自動點選驗證按鈕**（[loadForButtonClick]）
+///   檢測到按鈕後自動點選，按鈕消失或頁面跳轉即視為透過。
+/// - **型別3：自定義 JavaScript 驗證**（[loadForCustomScript]）
+///   注入規則提供的指令碼，指令碼呼叫 KazumiCaptcha.done 或返回 true 即透過。
 ///
-/// 验证通过后统一收尾：收割验证后页面的 HTML，保存 Cookie 与 User-Agent 到
-/// [PluginCookieManager]，再将 HTML 交给 onVerified。UI 能解析该 HTML 时直接
-/// 展示结果，否则回落到重新检索。
+/// 驗證透過後統一收尾：收割驗證後頁面的 HTML，儲存 Cookie 與 User-Agent 到
+/// [PluginCookieManager]，再將 HTML 交給 onVerified。UI 能解析該 HTML 時直接
+/// 展示結果，否則回落到重新檢索。
 class CaptchaVerificationService {
   CaptchaWebviewController? _controller;
 
@@ -36,29 +36,29 @@ class CaptchaVerificationService {
   bool _disposed = false;
   String _pageUrl = '';
 
-  /// 共享收尾任务。收割页面需要数秒，期间用户仍可取消，两条路径便会同时
-  /// 对同一个 WebView 卸载页面和读取内容。汇合到同一次收尾以避免并发访问，
-  /// 也使 [cancelAndSave] 的 await 覆盖住调用方随后的 dispose。
+  /// 共享收尾任務。收割頁面需要數秒，期間使用者仍可取消，兩條路徑便會同時
+  /// 對同一個 WebView 解除安裝頁面和讀取內容。匯合到同一次收尾以避免併發訪問，
+  /// 也使 [cancelAndSave] 的 await 覆蓋住呼叫方隨後的 dispose。
   final AsyncSingleFlight<String> _finalize = AsyncSingleFlight<String>();
 
   bool _outcomeClaimed = false;
 
-  /// 认领向 UI 提交结果的权利。
+  /// 認領向 UI 提交結果的權利。
   ///
-  /// 收尾任务的归属与结果的归属可以不同：成功路径先启动收尾，用户随后取消，
-  /// 此时应由取消提交结果。故在共享收尾之外单独仲裁——取消在 [cancelAndSave]
-  /// 入口同步认领，成功路径在收尾结束后认领，后到者放弃提交。
+  /// 收尾任務的歸屬與結果的歸屬可以不同：成功路徑先啟動收尾，使用者隨後取消，
+  /// 此時應由取消提交結果。故在共享收尾之外單獨仲裁——取消在 [cancelAndSave]
+  /// 入口同步認領，成功路徑在收尾結束後認領，後到者放棄提交。
   bool _claimOutcome() {
     if (_outcomeClaimed) return false;
     _outcomeClaimed = true;
     return true;
   }
 
-  /// 订阅验证通过事件：收尾后把收割到的 HTML 交给 [onVerified]。
+  /// 訂閱驗證透過事件：收尾後把收割到的 HTML 交給 [onVerified]。
   ///
-  /// [onFinalizing] 在观察到验证通过、开始收尾之前触发。收尾需要数秒，
-  /// 调用方若对验证设有超时，必须以此为准而非 [onVerified]，
-  /// 否则超时会在收尾途中把已经成功的验证判成失败。
+  /// [onFinalizing] 在觀察到驗證透過、開始收尾之前觸發。收尾需要數秒，
+  /// 呼叫方若對驗證設有超時，必須以此為準而非 [onVerified]，
+  /// 否則超時會在收尾途中把已經成功的驗證判成失敗。
   void _listenForVerification(
     String pluginName,
     void Function(String pageHtml) onVerified, {
@@ -70,7 +70,7 @@ class CaptchaVerificationService {
 
     Future<void> onDisappeared() async {
       _disappearedSub?.cancel();
-      // 重新读取：订阅到事件之间可能已被 dispose 置空。
+      // 重新讀取：訂閱到事件之間可能已被 dispose 置空。
       final current = _controller;
       if (current == null) return;
       onFinalizing?.call();
@@ -104,11 +104,11 @@ class CaptchaVerificationService {
     KazumiLogger().i('[CaptchaVerificationService] WebView initialized');
   }
 
-  /// 加载指定页面并开始监听验证码图片
+  /// 載入指定頁面並開始監聽驗證碼圖片
   ///
-  /// [url] 要加载的页面地址
-  /// [captchaXpath] 验证码图片元素的 XPath
-  /// [inputXpath] 可选，验证码输入框的 XPath。如果提供，会在检测验证码前先触发输入框的 focus 事件
+  /// [url] 要載入的頁面地址
+  /// [captchaXpath] 驗證碼圖片元素的 XPath
+  /// [inputXpath] 可選，驗證碼輸入框的 XPath。如果提供，會在檢測驗證碼前先觸發輸入框的 focus 事件
   Future<void> loadForCaptcha(String url, String captchaXpath,
       {String? inputXpath}) async {
     _pageUrl = url;
@@ -128,9 +128,9 @@ class CaptchaVerificationService {
     KazumiLogger().i('[CaptchaVerificationService] Page loading: $url');
   }
 
-  /// 在页面中填写 [captchaCode] 并点击 [buttonXpath] 提交
+  /// 在頁面中填寫 [captchaCode] 並點選 [buttonXpath] 提交
   ///
-  /// [onFinalizing] 在验证通过、开始收尾时触发，早于 [onVerified] 数秒。
+  /// [onFinalizing] 在驗證透過、開始收尾時觸發，早於 [onVerified] 數秒。
   Future<void> submitCaptcha({
     required String captchaCode,
     required String inputXpath,
@@ -153,7 +153,7 @@ class CaptchaVerificationService {
         .submitCaptchaInteract(captchaCode, inputXpath, buttonXpath);
   }
 
-  /// 加载 [url] 并在检测到 [buttonXpath] 后自动点击
+  /// 載入 [url] 並在檢測到 [buttonXpath] 後自動點選
   Future<void> loadForButtonClick({
     required String url,
     required String buttonXpath,
@@ -170,7 +170,7 @@ class CaptchaVerificationService {
         '[CaptchaVerificationService] (type2) Page loading for button click: $url');
   }
 
-  /// 加载 [url] 并注入规则提供的验证脚本 [script]
+  /// 載入 [url] 並注入規則提供的驗證指令碼 [script]
   Future<void> loadForCustomScript({
     required String url,
     required String script,
@@ -187,18 +187,18 @@ class CaptchaVerificationService {
         '[CaptchaVerificationService] (type3) Page loading for custom script: $url');
   }
 
-  /// 用户取消验证：认领结果提交权并保存已有 Cookie。
+  /// 使用者取消驗證：認領結果提交權並儲存已有 Cookie。
   ///
-  /// 认领必须发生在任何 await 之前，这样即使验证恰好在此刻通过，
-  /// 其 onVerified 也不会再提交结果，由调用方按取消语义收尾。
+  /// 認領必須發生在任何 await 之前，這樣即使驗證恰好在此刻透過，
+  /// 其 onVerified 也不會再提交結果，由呼叫方按取消語義收尾。
   Future<void> cancelAndSave(String pluginName) async {
     _claimOutcome();
     _disappearedSub?.cancel();
     _disappearedSub = null;
-    // 先取到本地：dispose 可能在两次 await 之间把 _controller 置空。
+    // 先取到本地：dispose 可能在兩次 await 之間把 _controller 置空。
     final controller = _controller;
     if (controller == null || _pageUrl.isEmpty) return;
-    // 若验证成功路径已在收尾，这里会汇合到那一次并等它把 Cookie 存完。
+    // 若驗證成功路徑已在收尾，這裡會匯合到那一次並等它把 Cookie 存完。
     await _finalize.run(() => _saveCookiesAndUnload(
           controller,
           pluginName,
@@ -207,14 +207,14 @@ class CaptchaVerificationService {
         ));
   }
 
-  /// 保存 Cookie 与 User-Agent 并卸载页面。
+  /// 儲存 Cookie 與 User-Agent 並解除安裝頁面。
   ///
-  /// [harvestHtml] 为 true 时先收割验证后页面的 HTML 并返回，
-  /// 供上层直接解析检索结果；取消路径不收割。
+  /// [harvestHtml] 為 true 時先收割驗證後頁面的 HTML 並返回，
+  /// 供上層直接解析檢索結果；取消路徑不收割。
   ///
-  /// 按契约不抛异常：成功与取消两条路径共享这一个 Future，任何异常都会同时
-  /// 打断两边——成功路径的 onVerified 不再触发，取消路径 onDismiss 里的
-  /// dispose 与回落检索也会被跳过。故内部兜住异常，尽力返回已取到的内容。
+  /// 按契約不拋異常：成功與取消兩條路徑共享這一個 Future，任何異常都會同時
+  /// 打斷兩邊——成功路徑的 onVerified 不再觸發，取消路徑 onDismiss 裡的
+  /// dispose 與回落檢索也會被跳過。故內部兜住異常，盡力返回已取到的內容。
   Future<String> _saveCookiesAndUnload(
     CaptchaWebviewController controller,
     String pluginName, {
@@ -223,7 +223,7 @@ class CaptchaVerificationService {
   }) async {
     String pageHtml = '';
     try {
-      // 先收割：等待结果页稳定的同时，也让 JS 写入的 Cookie 落地后再读取。
+      // 先收割：等待結果頁穩定的同時，也讓 JS 寫入的 Cookie 落地後再讀取。
       if (harvestHtml) {
         pageHtml = await _waitForPageHtml(controller);
         KazumiLogger().i(
@@ -251,9 +251,9 @@ class CaptchaVerificationService {
     return pageHtml;
   }
 
-  /// 等待验证后的页面加载完成并返回其 HTML。
-  /// 验证消失事件可能早于结果页加载完成，因此短暂轮询；
-  /// 超时返回空字符串，由上层回落到重新检索。
+  /// 等待驗證後的頁面載入完成並返回其 HTML。
+  /// 驗證消失事件可能早於結果頁載入完成，因此短暫輪詢；
+  /// 超時返回空字串，由上層回落到重新檢索。
   Future<String> _waitForPageHtml(CaptchaWebviewController controller) async {
     const maxAttempts = 10;
     const interval = Duration(milliseconds: 300);

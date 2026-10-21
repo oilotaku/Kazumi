@@ -65,7 +65,7 @@ class _ImageSourceSelector extends StatelessWidget {
                                 ? Icons.link_rounded
                                 : Icons.photo_library_outlined,
                         size: 20),
-                    Text(url ? '图片链接' : '本地图片'),
+                    Text(url ? '圖片連結' : '本地圖片'),
                   ]),
             ),
           ));
@@ -102,9 +102,9 @@ class _ScreenshotTip extends StatelessWidget {
       Expanded(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text('保留完整画面，识别更准确', style: type.titleSmall),
+        Text('保留完整畫面，識別更準確', style: type.titleSmall),
         const SizedBox(height: 4),
-        Text('保持原始比例，尽量避开黑边、水印和拼图。',
+        Text('保持原始比例，儘量避開黑邊、水印和拼圖。',
             style: type.bodyMedium?.copyWith(color: colors.onSurfaceVariant)),
       ])),
     ]);
@@ -132,18 +132,18 @@ class _ImageSearchResults extends StatelessWidget {
       return const _ImageSearchLoadingState();
     }
     if (results.isEmpty) {
-      if (error != '未找到匹配结果') {
+      if (error != '未找到匹配結果') {
         return GeneralErrorWidget(
-          title: '这次识别未完成',
+          title: '這次識別未完成',
           errMsg: error,
           icon: Icons.wifi_off_rounded,
           onRetry: onRetry,
-          retryText: '重新识别',
+          retryText: '重新識別',
         );
       }
       return const GeneralEmptyState(
         icon: Icons.image_search_rounded,
-        title: '没有找到匹配画面',
+        title: '沒有找到匹配畫面',
       );
     }
     final colors = Theme.of(context).colorScheme;
@@ -152,11 +152,11 @@ class _ImageSearchResults extends StatelessWidget {
       Semantics(
           header: true,
           liveRegion: true,
-          child: Text('找到 ${results.length} 个相似片段',
+          child: Text('找到 ${results.length} 個相似片段',
               style:
                   type.headlineSmall?.copyWith(fontWeight: FontWeight.w700))),
       const SizedBox(height: 6),
-      Text('按画面相似度排序，先对照截图再确认。',
+      Text('按畫面相似度排序，先對照截圖再確認。',
           style: type.bodyMedium?.copyWith(color: colors.onSurfaceVariant)),
       if (error.isNotEmpty) ...[
         const SizedBox(height: 12),
@@ -193,14 +193,14 @@ class _ImageSearchLoadingState extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 32),
           child: Column(children: [
-            const LoadingIndicator(size: 72, semanticsLabel: '正在匹配动画画面'),
+            const LoadingIndicator(size: 72, semanticsLabel: '正在匹配動畫畫面'),
             const SizedBox(height: 24),
-            Text('正在寻找这一幕',
+            Text('正在尋找這一幕',
                 textAlign: TextAlign.center,
                 style:
                     type.headlineSmall?.copyWith(fontWeight: FontWeight.w700)),
             const SizedBox(height: 12),
-            Text('正在比对动画画面，匹配番名、集数与时间。\n请稍等片刻。',
+            Text('正在比對動畫畫面，匹配番名、集數與時間。\n請稍等片刻。',
                 textAlign: TextAlign.center,
                 style: type.bodyLarge?.copyWith(
                     color: Theme.of(context).colorScheme.onSurfaceVariant)),
@@ -234,7 +234,7 @@ class _BestMatch extends StatelessWidget {
         ]),
         if (lowSimilarity) ...[
           const SizedBox(height: 12),
-          Text('相似度偏低，建议对照画面，或换一张截图。',
+          Text('相似度偏低，建議對照畫面，或換一張截圖。',
               style: type.bodyMedium?.copyWith(color: colors.onSurface)),
         ],
         const SizedBox(height: 16),
@@ -243,7 +243,7 @@ class _BestMatch extends StatelessWidget {
             onPressed: () => onSelect(_title(result)),
             style: FilledButton.styleFrom(minimumSize: const Size(0, 48)),
             icon: const Icon(Icons.search_rounded, size: 20),
-            label: const Text('搜索这部番'),
+            label: const Text('搜尋這部番'),
           ),
           if (video != null)
             OutlinedButton.icon(
@@ -254,7 +254,7 @@ class _BestMatch extends StatelessWidget {
                 minimumSize: const Size(0, 48),
               ),
               icon: const Icon(Icons.play_arrow_rounded, size: 20),
-              label: const Text('预览片段'),
+              label: const Text('預覽片段'),
             ),
         ]),
       ]),
@@ -345,7 +345,7 @@ class _OtherMatch extends StatelessWidget {
         onTap: () => onSelect(_title(result)),
         child: Semantics(
           button: true,
-          label: '搜索 ${_title(result)}',
+          label: '搜尋 ${_title(result)}',
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: LayoutBuilder(
@@ -431,7 +431,7 @@ class _TraceFrame extends StatelessWidget {
               ? placeholder
               : Image.network(source,
                   fit: BoxFit.contain,
-                  semanticLabel: '${_title(result)}的匹配画面',
+                  semanticLabel: '${_title(result)}的匹配畫面',
                   errorBuilder: (context, error, stack) => placeholder,
                   loadingBuilder: (context, child, progress) =>
                       progress == null ? child : placeholder),
@@ -450,7 +450,7 @@ String _title(ResultItem result) {
   ]) {
     if (value != null && value.trim().isNotEmpty) return value.trim();
   }
-  return '未知番剧';
+  return '未知番劇';
 }
 
 String _episode(dynamic value) {
@@ -461,7 +461,7 @@ String _episode(dynamic value) {
         value.whereType<num>().where((n) => n.isFinite).map(number).toList();
     if (numbers.isNotEmpty) return '第 ${numbers.join(' / ')} 集';
   }
-  return '集数未知';
+  return '集數未知';
 }
 
 String _similarity(ResultItem result) {
@@ -480,7 +480,7 @@ String _timeRange(ResultItem result) {
 
   final from = result.from ?? result.at;
   final to = result.to;
-  if (from == null || !from.isFinite || from < 0) return '时间未知';
+  if (from == null || !from.isFinite || from < 0) return '時間未知';
   if (to == null || !to.isFinite || to < from) return time(from);
   return '${time(from)} – ${time(to)}';
 }

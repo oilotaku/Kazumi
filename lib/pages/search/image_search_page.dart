@@ -114,15 +114,15 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
           (await Clipboard.getData(Clipboard.kTextPlain))?.text?.trim();
       if (!mounted || _busy || !_useUrl) return;
       if (text == null || text.isEmpty) {
-        setState(() => _inputError = '剪贴板里还没有图片链接');
+        setState(() => _inputError = '剪貼簿裡還沒有圖片連結');
         return;
       }
       _urlController.text = text;
       if (!_hasImage) {
-        setState(() => _inputError = '请输入以 https:// 或 http:// 开头的图片链接');
+        setState(() => _inputError = '請輸入以 https:// 或 http:// 開頭的圖片連結');
       }
     } catch (_) {
-      if (mounted) setState(() => _inputError = '无法读取剪贴板，请手动粘贴链接');
+      if (mounted) setState(() => _inputError = '無法讀取剪貼簿，請手動貼上連結');
     }
   }
 
@@ -137,7 +137,7 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
       if (image == null) return;
       final file = File(image.path);
       if (await file.length() > 25 * 1024 * 1024) {
-        if (mounted) setState(() => _inputError = '图片超过 25 MB，请换一张较小的截图');
+        if (mounted) setState(() => _inputError = '圖片超過 25 MB，請換一張較小的截圖');
         return;
       }
       if (!mounted) return;
@@ -146,7 +146,7 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
         _imageFile = file;
       });
     } catch (_) {
-      if (mounted) setState(() => _inputError = '无法读取图片，请重新选择并检查相册权限');
+      if (mounted) setState(() => _inputError = '無法讀取圖片，請重新選擇並檢查相簿許可權');
     } finally {
       if (mounted) setState(() => _isPicking = false);
     }
@@ -155,7 +155,7 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
   Future<void> _search() async {
     if (_busy) return;
     if (!_hasImage) {
-      setState(() => _inputError = '请输入有效的 HTTP 或 HTTPS 图片链接');
+      setState(() => _inputError = '請輸入有效的 HTTP 或 HTTPS 圖片連結');
       _urlFocus.requestFocus();
       return;
     }
@@ -201,7 +201,7 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
       // Fall through to the shared error message.
     }
     if (!mounted) return;
-    KazumiDialog.showToast(context: context, message: '暂时无法打开链接，请稍后再试');
+    KazumiDialog.showToast(context: context, message: '暫時無法開啟連結，請稍後再試');
   }
 
   void _showHelp() {
@@ -209,23 +209,23 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
       context: context,
       builder: (context) => AlertDialog(
         icon: const Icon(Icons.image_search_rounded),
-        title: const Text('让截图更容易被找到'),
+        title: const Text('讓截圖更容易被找到'),
         content: const SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 16,
             children: [
-              Text('使用动画正片截图，保留原始比例。尽量避开黑边、字幕遮挡、水印与拼接画面。'),
-              Text('插画、漫画和经过大幅裁剪的图片通常无法匹配。相似度仅供参考，建议对照画面或预览片段确认。'),
-              Text('识别由 trace.moe 提供。开始识别后，所选图片或图片链接会发送至该服务。'),
+              Text('使用動畫正片截圖，保留原始比例。儘量避開黑邊、字幕遮擋、水印與拼接畫面。'),
+              Text('插畫、漫畫和經過大幅裁剪的圖片通常無法匹配。相似度僅供參考，建議對照畫面或預覽片段確認。'),
+              Text('識別由 trace.moe 提供。開始識別後，所選圖片或圖片連結會傳送至該服務。'),
             ],
           ),
         ),
         actions: [
           TextButton(
             onPressed: () => _openExternal(Uri.parse('https://trace.moe')),
-            child: const Text('访问 trace.moe'),
+            child: const Text('訪問 trace.moe'),
           ),
           FilledButton(
               onPressed: () => Navigator.pop(context),
@@ -245,7 +245,7 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
         actions: [
           IconButton(
               onPressed: _showHelp,
-              tooltip: '搜图小贴士',
+              tooltip: '搜圖小貼士',
               icon: const Icon(Icons.help_outline_rounded)),
         ],
       ),
@@ -398,10 +398,10 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
           header: true,
           child: Text(
             showResults
-                ? '搜索图片'
+                ? '搜尋圖片'
                 : short
-                    ? '用截图找到番名'
-                    : '这一幕，\n出自哪部番？',
+                    ? '用截圖找到番名'
+                    : '這一幕，\n出自哪部番？',
             style:
                 (showResults || short ? type.headlineSmall : type.displaySmall)
                     ?.copyWith(
@@ -410,7 +410,7 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
         ),
         if (!showResults && !short) ...[
           const SizedBox(height: 8),
-          Text('用一张截图，找到番名与出现的集数。',
+          Text('用一張截圖，找到番名與出現的集數。',
               style: type.bodyLarge?.copyWith(color: colors.onSurfaceVariant)),
         ],
         SizedBox(height: short ? 12 : 24),
@@ -429,7 +429,7 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
             onSubmitted: (_) => _search(),
             onTapOutside: (_) => _urlFocus.unfocus(),
             decoration: InputDecoration(
-              labelText: '图片链接',
+              labelText: '圖片連結',
               hintText: 'https://…',
               filled: true,
               fillColor: colors.surfaceContainerLow,
@@ -437,13 +437,13 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
                   OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
               suffixIcon: IconButton(
                 onPressed: busy ? null : _pasteUrl,
-                tooltip: '粘贴图片链接',
+                tooltip: '貼上圖片連結',
                 icon: const Icon(Icons.content_paste_rounded),
               ),
             ),
           ),
           const SizedBox(height: 8),
-          Text('使用可直接访问的 HTTP 或 HTTPS 图片地址',
+          Text('使用可直接訪問的 HTTP 或 HTTPS 圖片地址',
               style: type.bodySmall?.copyWith(color: colors.onSurfaceVariant)),
           if (_previewUrl.isNotEmpty) ...[
             const SizedBox(height: 16),
@@ -461,7 +461,7 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
                       const _ImageSearchEmblem(size: 48),
                       const SizedBox(width: 12),
                       Expanded(
-                          child: Text('截图预览',
+                          child: Text('截圖預覽',
                               style: type.titleMedium
                                   ?.copyWith(color: colors.onSurfaceVariant))),
                     ])
@@ -469,7 +469,7 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
                       children: [
                         const _ImageSearchEmblem(size: 72),
                         const SizedBox(height: 12),
-                        Text('截图预览',
+                        Text('截圖預覽',
                             textAlign: TextAlign.center,
                             style: type.titleMedium
                                 ?.copyWith(color: colors.onSurfaceVariant)),
@@ -488,7 +488,7 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
                             ?.copyWith(color: colors.onSurfaceVariant))),
                 TextButton.icon(
                     onPressed: busy ? null : _pickImage,
-                    label: const Text('更换截图'),
+                    label: const Text('更換截圖'),
                     icon: const Icon(Icons.swap_horiz_rounded, size: 20)),
               ],
             )
@@ -508,7 +508,7 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
         const SizedBox(height: 16),
         if (inlineAction) _buildPrimaryAction(searching),
         const SizedBox(height: 12),
-        Text('由 trace.moe 识别动画截图',
+        Text('由 trace.moe 識別動畫截圖',
             textAlign: TextAlign.center,
             style: type.bodySmall?.copyWith(color: colors.onSurfaceVariant)),
         if (!showResults && !short) ...[
@@ -551,14 +551,14 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
               ? Icons.image_search_rounded
               : Icons.add_photo_alternate_outlined),
       label: Text(searching
-          ? '正在识别'
+          ? '正在識別'
           : _isPicking
-              ? '正在读取图片'
+              ? '正在讀取圖片'
               : selecting
-                  ? '选择截图'
+                  ? '選擇截圖'
                   : _useUrl
-                      ? '开始识别'
-                      : '识别这张截图'),
+                      ? '開始識別'
+                      : '識別這張截圖'),
     );
   }
 
@@ -568,10 +568,10 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
         const Center(
             child: Padding(
           padding: EdgeInsets.all(16),
-          child: Text('暂时无法预览\n仍可尝试识别，或更换图片', textAlign: TextAlign.center),
+          child: Text('暫時無法預覽\n仍可嘗試識別，或更換圖片', textAlign: TextAlign.center),
         ));
     return Semantics(
-      label: '待识别的完整截图',
+      label: '待識別的完整截圖',
       image: true,
       child: Container(
         height: short ? 136 : 208,
@@ -586,7 +586,7 @@ class _ImageSearchPageState extends State<ImageSearchPage> {
                 loadingBuilder: (context, child, progress) => progress == null
                     ? child
                     : const Center(
-                        child: LoadingIndicator(semanticsLabel: '正在加载截图')))
+                        child: LoadingIndicator(semanticsLabel: '正在載入截圖')))
             : Image.file(_imageFile!,
                 fit: BoxFit.contain, errorBuilder: fallback),
       ),

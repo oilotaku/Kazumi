@@ -19,8 +19,8 @@ class BangumiMirrorErrorWidget extends StatelessWidget {
     final acceleration = BangumiAcceleration.current;
 
     return GeneralErrorWidget(
-      title: '暂时无法加载番剧',
-      errMsg: '请检查网络连接，或调整加速设置后重试。\n番剧条目加速：${acceleration.label}',
+      title: '暫時無法載入番劇',
+      errMsg: '請檢查網路連線，或調整加速設定後重試。\n番劇條目加速：${acceleration.label}',
       icon: Icons.cloud_off_rounded,
       onRetry: onRetry,
       actions: [
@@ -30,7 +30,7 @@ class BangumiMirrorErrorWidget extends StatelessWidget {
             onSettingsReturned?.call();
           },
           icon: Icons.tune_rounded,
-          text: '加速设置',
+          text: '加速設定',
         ),
       ],
     );

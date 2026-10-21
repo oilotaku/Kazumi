@@ -60,7 +60,7 @@ class DownloadRecordCard extends StatelessWidget {
 
     var meta = '$completedCount/$totalCount 已完成';
     if (activeCount > 0) {
-      meta += ' · $activeCount 项进行中';
+      meta += ' · $activeCount 項進行中';
       if (totalSpeed > 0) {
         meta += ' · ${formatSpeed(totalSpeed)}';
       }
@@ -130,9 +130,9 @@ class DownloadRecordCard extends StatelessWidget {
                       onPressed: toggle,
                     ),
                     menuChildren: [
-                      KazumiMenuItem(label: '全部开始', onPressed: onResumeAll),
+                      KazumiMenuItem(label: '全部開始', onPressed: onResumeAll),
                       KazumiMenuItem(
-                        label: '全部删除',
+                        label: '全部刪除',
                         destructive: true,
                         onPressed: onDeleteAll,
                       ),

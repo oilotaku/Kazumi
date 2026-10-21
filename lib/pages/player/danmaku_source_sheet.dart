@@ -132,7 +132,7 @@ class _DanmakuSourceSheetState extends State<_DanmakuSourceSheet> {
   Future<void> _searchAnime() async {
     final keyword = _keywordController.text.trim();
     if (keyword.isEmpty) {
-      setState(() => _error = '请输入番剧名称');
+      setState(() => _error = '請輸入番劇名稱');
       return;
     }
 
@@ -164,14 +164,14 @@ class _DanmakuSourceSheetState extends State<_DanmakuSourceSheet> {
         _loading = false;
         _animes = response.animes;
         _hasMore = response.hasMore;
-        if (response.animes.isEmpty) _error = '未找到番剧';
+        if (response.animes.isEmpty) _error = '未找到番劇';
       });
     } catch (error) {
       KazumiLogger().w('Danmaku source search failed', error: error);
       if (!mounted) return;
       setState(() {
         _loading = false;
-        _error = '搜索失败';
+        _error = '搜尋失敗';
       });
     }
   }
@@ -194,14 +194,14 @@ class _DanmakuSourceSheetState extends State<_DanmakuSourceSheet> {
       setState(() {
         _loading = false;
         _episodes = response.episodes;
-        if (_episodes.isEmpty) _error = '暂无分集';
+        if (_episodes.isEmpty) _error = '暫無分集';
       });
     } catch (error) {
       KazumiLogger().w('Danmaku episode list failed to load', error: error);
       if (!mounted) return;
       setState(() {
         _loading = false;
-        _error = '分集加载失败';
+        _error = '分集載入失敗';
       });
     }
   }
@@ -216,12 +216,12 @@ class _DanmakuSourceSheetState extends State<_DanmakuSourceSheet> {
       widget.danmakuController.setDanmakuEnabled(hasDanmakus);
       KazumiDialog.dismiss(context: context);
       KazumiDialog.showToast(
-        message: hasDanmakus ? '已切换弹幕源' : '暂无弹幕',
+        message: hasDanmakus ? '已切換彈幕源' : '暫無彈幕',
       );
     } catch (_) {
       if (!mounted) return;
       setState(() => _loading = false);
-      KazumiDialog.showToast(message: '弹幕源切换失败');
+      KazumiDialog.showToast(message: '彈幕源切換失敗');
     }
   }
 
@@ -249,7 +249,7 @@ class _DanmakuSourceSheetState extends State<_DanmakuSourceSheet> {
   void _jumpToEpisode() {
     final number = int.tryParse(_episodeJumpController.text.trim());
     if (number == null || number < 1 || number > _episodes.length) {
-      KazumiDialog.showToast(message: '集号范围：1–${_episodes.length}');
+      KazumiDialog.showToast(message: '集號範圍：1–${_episodes.length}');
       return;
     }
 
@@ -329,8 +329,8 @@ class _DanmakuSourceSheetState extends State<_DanmakuSourceSheet> {
 
   Widget _buildLoading() {
     final label = switch (_step) {
-      _SourceStep.search || _SourceStep.anime => '搜索中…',
-      _SourceStep.episode => _episodes.isEmpty ? '加载分集…' : '切换中…',
+      _SourceStep.search || _SourceStep.anime => '搜尋中…',
+      _SourceStep.episode => _episodes.isEmpty ? '載入分集…' : '切換中…',
     };
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 20),
@@ -369,7 +369,7 @@ class _DanmakuSourceSheetState extends State<_DanmakuSourceSheet> {
               textInputAction: TextInputAction.search,
               onSubmitted: (_) => _searchAnime(),
               decoration: InputDecoration(
-                hintText: '番剧名称',
+                hintText: '番劇名稱',
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: value.text.isEmpty
                     ? null
@@ -394,7 +394,7 @@ class _DanmakuSourceSheetState extends State<_DanmakuSourceSheet> {
                 ],
                 if (_recentKeywords.isNotEmpty) ...[
                   Text(
-                    '最近搜索',
+                    '最近搜尋',
                     style: Theme.of(context).textTheme.labelLarge,
                   ),
                   const SizedBox(height: 10),
@@ -437,7 +437,7 @@ class _DanmakuSourceSheetState extends State<_DanmakuSourceSheet> {
                 StateActionButton(
                   onPressed: _searchAnime,
                   icon: Icons.search,
-                  text: '搜索',
+                  text: '搜尋',
                 ),
               ],
             ),
@@ -454,7 +454,7 @@ class _DanmakuSourceSheetState extends State<_DanmakuSourceSheet> {
         icon: Icons.search_off,
         title: _error!,
         actions: [
-          StateActionButton.tonal(onPressed: _goBack, text: '返回搜索'),
+          StateActionButton.tonal(onPressed: _goBack, text: '返回搜尋'),
         ],
       );
     }
@@ -465,7 +465,7 @@ class _DanmakuSourceSheetState extends State<_DanmakuSourceSheet> {
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 4, 20, 12),
             child: Text(
-              '仅显示部分结果',
+              '僅顯示部分結果',
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
@@ -508,7 +508,7 @@ class _DanmakuSourceSheetState extends State<_DanmakuSourceSheet> {
         icon: Icons.subtitles_off_outlined,
         title: _error!,
         errMsg: '',
-        actions: [StateActionButton.tonal(onPressed: _goBack, text: '返回番剧')],
+        actions: [StateActionButton.tonal(onPressed: _goBack, text: '返回番劇')],
       );
     }
     final visible = _visibleEpisodes;
@@ -584,9 +584,9 @@ class _SheetHeader extends StatelessWidget {
   final VoidCallback onClose;
 
   String get title => switch (step) {
-        _SourceStep.search => '选择弹幕源',
-        _SourceStep.anime => '选择番剧',
-        _SourceStep.episode => '选择分集',
+        _SourceStep.search => '選擇彈幕源',
+        _SourceStep.anime => '選擇番劇',
+        _SourceStep.episode => '選擇分集',
       };
 
   String? get subtitle => switch (step) {
@@ -702,7 +702,7 @@ class _EpisodeToolbar extends StatelessWidget {
                     onChanged: onSearch,
                     decoration: InputDecoration(
                       isDense: true,
-                      hintText: '标题或集号',
+                      hintText: '標題或集號',
                       prefixIcon: const Icon(Icons.search, size: 18),
                       suffixIcon: searchController.text.isEmpty
                           ? null
@@ -731,9 +731,9 @@ class _EpisodeToolbar extends StatelessWidget {
                     onSubmitted: (_) => onJump(),
                     decoration: InputDecoration(
                       isDense: true,
-                      hintText: '集号',
+                      hintText: '集號',
                       suffixIcon: IconButton(
-                        tooltip: '跳转',
+                        tooltip: '跳轉',
                         onPressed: onJump,
                         icon: const Icon(Icons.arrow_forward, size: 18),
                       ),
@@ -750,7 +750,7 @@ class _EpisodeToolbar extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    '集数',
+                    '集數',
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
                   const SizedBox(width: 10),
@@ -789,7 +789,7 @@ class _EpisodeToolbar extends StatelessWidget {
           ],
           const SizedBox(height: 8),
           Text(
-            matched == total ? '共 $total 集' : '显示 $matched 集，共 $total 集',
+            matched == total ? '共 $total 集' : '顯示 $matched 集，共 $total 集',
             style: Theme.of(context).textTheme.bodySmall,
           ),
         ],

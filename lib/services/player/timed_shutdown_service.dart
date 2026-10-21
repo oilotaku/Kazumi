@@ -84,22 +84,22 @@ class TimedShutdownService {
       },
       builder: (context) {
         return AlertDialog(
-          title: const Text('定时关闭'),
-          content: const Text('定时时间已到，视频已暂停'),
+          title: const Text('定時關閉'),
+          content: const Text('定時時間已到，影片已暫停'),
           actions: [
             TextButton(
               onPressed: () {
                 start(_lastSetMinutes, onExpired: _onExpiredCallback);
-                KazumiDialog.showToast(message: '已重新开始 $_lastSetMinutes 分钟定时');
+                KazumiDialog.showToast(message: '已重新開始 $_lastSetMinutes 分鐘定時');
               },
-              child: const Text('重复'),
+              child: const Text('重複'),
             ),
             TextButton(
               onPressed: () {
                 dialog.dismiss();
               },
               child: Text(
-                '关闭',
+                '關閉',
                 style: TextStyle(color: Theme.of(context).colorScheme.outline),
               ),
             ),
@@ -121,11 +121,11 @@ class TimedShutdownService {
     final hours = totalMinutes ~/ 60;
     final minutes = totalMinutes % 60;
     if (hours > 0 && minutes > 0) {
-      return '$hours 小时 $minutes 分钟';
+      return '$hours 小時 $minutes 分鐘';
     } else if (hours > 0) {
-      return '$hours 小时';
+      return '$hours 小時';
     } else {
-      return '$minutes 分钟';
+      return '$minutes 分鐘';
     }
   }
 
@@ -175,21 +175,21 @@ class _CustomTimerDialogState extends State<_CustomTimerDialog> {
   void _confirm() {
     final totalMinutes = _selectedHours * 60 + _selectedMinutes;
     if (totalMinutes <= 0) {
-      KazumiDialog.showToast(message: '请选择有效的时间');
+      KazumiDialog.showToast(message: '請選擇有效的時間');
       return;
     }
     KazumiDialog.dismiss(context: context);
     TimedShutdownService().start(totalMinutes, onExpired: widget.onExpired);
     KazumiDialog.showToast(
       message:
-          '已设置 ${TimedShutdownService().formatMinutesToDisplay(totalMinutes)} 后定时关闭',
+          '已設定 ${TimedShutdownService().formatMinutesToDisplay(totalMinutes)} 後定時關閉',
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('自定义定时'),
+      title: const Text('自定義定時'),
       content: SizedBox(
         height: 200,
         child: Row(
@@ -197,7 +197,7 @@ class _CustomTimerDialogState extends State<_CustomTimerDialog> {
             Expanded(
               child: Column(
                 children: [
-                  const Text('时', style: TextStyle(fontSize: 14)),
+                  const Text('時', style: TextStyle(fontSize: 14)),
                   const SizedBox(height: 8),
                   Expanded(
                     child: CupertinoPicker(
@@ -263,7 +263,7 @@ class _CustomTimerDialogState extends State<_CustomTimerDialog> {
         ),
         TextButton(
           onPressed: _confirm,
-          child: const Text('确定'),
+          child: const Text('確定'),
         ),
       ],
     );

@@ -450,7 +450,7 @@ abstract class _VideoPageController with Store implements Disposable {
     if (resolvedEpisode == null) {
       KazumiLogger().e(
           'VideoPageController: failed to resolve online episode. road=$currentRoad, episode=$episode');
-      _failLoading('集数解析失败');
+      _failLoading('集數解析失敗');
       return;
     }
 
@@ -484,7 +484,7 @@ abstract class _VideoPageController with Store implements Disposable {
     if (resolvedEpisode == null) {
       KazumiLogger().e(
           'VideoPageController: failed to resolve offline episode. road=${selection.road}, episode=${selection.episode}');
-      _failLoading('集数解析失败');
+      _failLoading('集數解析失敗');
       return;
     }
 
@@ -494,7 +494,7 @@ abstract class _VideoPageController with Store implements Disposable {
       resolvedEpisode.historyEpisodeNumber,
     );
     if (localPath == null) {
-      _failLoading('该集数未下载');
+      _failLoading('該集數未下載');
       return;
     }
     _applyResolvedSelection(resolvedEpisode);
@@ -562,14 +562,14 @@ abstract class _VideoPageController with Store implements Disposable {
         } else {
           playerController.danmaku.applyUnavailableDanmakuLoad(result);
           if (result.isFailed) {
-            KazumiDialog.showToast(message: '弹幕加载失败，可手动检索');
+            KazumiDialog.showToast(message: '彈幕載入失敗，可手動檢索');
           }
         }
       }
     } catch (e) {
       if (session.isActive && danmakuSession.isActive) {
         playerController.danmaku.finishDanmakuLoad(disableDanmaku: true);
-        KazumiDialog.showToast(message: '弹幕加载失败，可手动检索');
+        KazumiDialog.showToast(message: '彈幕載入失敗，可手動檢索');
       }
       KazumiLogger().w('VideoPageController: failed to load danmaku', error: e);
     }
@@ -661,14 +661,14 @@ abstract class _VideoPageController with Store implements Disposable {
       if (session.isStale) {
         return;
       }
-      _failLoading('视频解析超时，请重试');
+      _failLoading('影片解析超時，請重試');
     } on VideoSourceCancelledException {
       KazumiLogger().i('VideoPageController: video URL resolution cancelled');
     } catch (e) {
       if (session.isStale) {
         return;
       }
-      _failLoading('视频解析失败：${e.toString()}');
+      _failLoading('影片解析失敗：${e.toString()}');
     }
   }
 

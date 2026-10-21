@@ -123,7 +123,7 @@ class EpisodeSelectionPanelState extends State<EpisodeSelectionPanel> {
                       Semantics(
                         header: true,
                         child: Text(
-                          widget.title.isEmpty ? '剧集列表' : widget.title,
+                          widget.title.isEmpty ? '劇集列表' : widget.title,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: theme.textTheme.titleLarge?.copyWith(
@@ -159,8 +159,8 @@ class EpisodeSelectionPanelState extends State<EpisodeSelectionPanel> {
                                     constraints.maxWidth < 320
                                 ? '$count 集'
                                 : widget.isOffline
-                                    ? '已缓存 · $count 集'
-                                    : '全部剧集 · $count 集',
+                                    ? '已快取 · $count 集'
+                                    : '全部劇集 · $count 集',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: theme.textTheme.labelLarge?.copyWith(
@@ -169,13 +169,13 @@ class EpisodeSelectionPanelState extends State<EpisodeSelectionPanel> {
                           ),
                         ),
                         IconButton(
-                          tooltip: '定位当前集',
+                          tooltip: '定位當前集',
                           onPressed: _canLocate ? revealCurrentEpisode : null,
                           icon: const Icon(Icons.my_location_rounded, size: 20),
                         ),
                         if (!widget.isOffline)
                           IconButton.filledTonal(
-                            tooltip: '缓存剧集',
+                            tooltip: '快取劇集',
                             onPressed: count > 0 && widget.onDownload != null
                                 ? () => widget.onDownload!(_visibleRoad)
                                 : null,
@@ -191,7 +191,7 @@ class EpisodeSelectionPanelState extends State<EpisodeSelectionPanel> {
                   hasScrollBody: false,
                   child: GeneralEmptyState(
                     icon: Icons.video_library_outlined,
-                    title: '这条线路暂无剧集',
+                    title: '這條線路暫無劇集',
                   ),
                 )
               else
@@ -291,9 +291,9 @@ class _RoadSelectorState extends State<_RoadSelector> {
 
   String _name(int index) => index >= 0 && index < widget.roads.length
       ? (widget.roads[index].name.trim().isEmpty
-          ? '播放线路 ${index + 1}'
+          ? '播放線路 ${index + 1}'
           : widget.roads[index].name)
-      : '暂无线路';
+      : '暫無線路';
 
   void _toggleMenu(MenuController controller) {
     final pointerActivation = _pointerActivation;
@@ -432,7 +432,7 @@ class _RoadSelectorState extends State<_RoadSelector> {
           Padding(
             padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
             child: Text(
-              '选择播放线路',
+              '選擇播放線路',
               style: theme.textTheme.labelLarge?.copyWith(
                 color: colors.onSurfaceVariant,
               ),
@@ -448,7 +448,7 @@ class _RoadSelectorState extends State<_RoadSelector> {
           return Semantics(
             button: canSwitch,
             expanded: canSwitch ? open : null,
-            label: canSwitch ? '切换播放线路' : null,
+            label: canSwitch ? '切換播放線路' : null,
             child: Material(
               animationDuration: duration,
               color:
@@ -469,7 +469,7 @@ class _RoadSelectorState extends State<_RoadSelector> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              widget.isOffline ? '离线观看' : '播放线路',
+                              widget.isOffline ? '離線觀看' : '播放線路',
                               style: theme.textTheme.labelMedium
                                   ?.copyWith(color: foreground),
                             ),
@@ -575,22 +575,22 @@ class _EpisodeRowState extends State<_EpisodeRow>
     final status =
         widget.isOffline ? DownloadStatus.completed : widget.download?.status;
     final downloadLabel = switch (status) {
-      DownloadStatus.completed => '已缓存',
-      DownloadStatus.downloading => '正在缓存',
-      DownloadStatus.failed => '缓存失败',
-      DownloadStatus.paused => '缓存已暂停',
-      DownloadStatus.pending => '等待缓存',
+      DownloadStatus.completed => '已快取',
+      DownloadStatus.downloading => '正在快取',
+      DownloadStatus.failed => '快取失敗',
+      DownloadStatus.paused => '快取已暫停',
+      DownloadStatus.pending => '等待快取',
       DownloadStatus.resolving => '正在解析',
       _ => null,
     };
     final playbackLabel =
-        widget.selected ? (widget.isPlaying ? '正在播放' : '当前选集') : '播放';
+        widget.selected ? (widget.isPlaying ? '正在播放' : '當前選集') : '播放';
 
     final supportingText = [
       if (widget.selected) playbackLabel,
       if (!widget.isOffline && downloadLabel != null)
         status == DownloadStatus.downloading
-            ? '缓存 ${(widget.download!.progressPercent.clamp(0, 1) * 100).round()}%'
+            ? '快取 ${(widget.download!.progressPercent.clamp(0, 1) * 100).round()}%'
             : downloadLabel,
     ].join(' · ');
 

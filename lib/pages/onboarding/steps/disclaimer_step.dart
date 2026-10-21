@@ -32,7 +32,7 @@ class _DisclaimerStepState extends State<DisclaimerStep> {
         error: error,
         stackTrace: stackTrace,
       );
-      text = '免责声明加载失败，请退出后重试。';
+      text = '免責宣告載入失敗，請退出後重試。';
     }
     if (!mounted) {
       return;
@@ -47,7 +47,7 @@ class _DisclaimerStepState extends State<DisclaimerStep> {
     final textTheme = Theme.of(context).textTheme;
     return OnboardingStepLayout(
       leading: const OnboardingStepIcon(icon: Icons.waving_hand_rounded),
-      title: '欢迎来到 Kazumi',
+      title: '歡迎來到 Kazumi',
       child: TonalCard(
         padding: const EdgeInsets.all(24),
         child: _statementsText == null
@@ -63,7 +63,7 @@ class _DisclaimerStepState extends State<DisclaimerStep> {
                         color: Theme.of(context).colorScheme.primary),
                     const SizedBox(width: 12),
                     Expanded(
-                      child: Text('免责声明',
+                      child: Text('免責宣告',
                           style: textTheme.titleLarge
                               ?.copyWith(fontWeight: FontWeight.w600)),
                     ),

@@ -17,7 +17,7 @@ double normalizeDanmakuTimeOffset(double value) {
 
 String formatDanmakuTimeOffset(double value) {
   if (value == 0) {
-    return '无偏移';
+    return '無偏移';
   }
   return '${value > 0 ? '延后' : '提前'} ${_formatDanmakuOffsetDuration(value)}';
 }
@@ -81,8 +81,8 @@ class _DanmakuTimeOffsetSheetState extends State<DanmakuTimeOffsetSheet> {
       mainAxisSize: MainAxisSize.min,
       children: [
         MaterialBottomSheetHeader(
-          title: '弹幕时间校准',
-          description: '弹幕出现太早就延后，太晚就提前。',
+          title: '彈幕時間校準',
+          description: '彈幕出現太早就延後，太晚就提前。',
           onClose: () => Navigator.of(context).pop(),
         ),
         Flexible(
@@ -93,7 +93,7 @@ class _DanmakuTimeOffsetSheetState extends State<DanmakuTimeOffsetSheet> {
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(children: [
-                  Text(_offset == 0 ? '与视频同步' : (_offset > 0 ? '延后' : '提前'),
+                  Text(_offset == 0 ? '與影片同步' : (_offset > 0 ? '延後' : '提前'),
                       style: theme.textTheme.labelLarge
                           ?.copyWith(color: colors.onSurfaceVariant)),
                   const SizedBox(height: 8),
@@ -115,7 +115,7 @@ class _DanmakuTimeOffsetSheetState extends State<DanmakuTimeOffsetSheet> {
                           )),
                     )),
                     IconButton.filledTonal(
-                      tooltip: '延后 1 秒',
+                      tooltip: '延後 1 秒',
                       onPressed: _offset < _maxDanmakuTimeOffset
                           ? () => _updateOffset(_offset + 1)
                           : null,
@@ -134,8 +134,8 @@ class _DanmakuTimeOffsetSheetState extends State<DanmakuTimeOffsetSheet> {
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('提前 3 分钟', style: theme.textTheme.labelSmall),
-                        Text('延后 3 分钟', style: theme.textTheme.labelSmall),
+                        Text('提前 3 分鐘', style: theme.textTheme.labelSmall),
+                        Text('延後 3 分鐘', style: theme.textTheme.labelSmall),
                       ]),
                 ]),
               ),
@@ -143,7 +143,7 @@ class _DanmakuTimeOffsetSheetState extends State<DanmakuTimeOffsetSheet> {
             const SizedBox(height: 12),
             TextButton(
               onPressed: _offset != 0 ? () => _updateOffset(0) : null,
-              child: const Text('恢复同步'),
+              child: const Text('恢復同步'),
             ),
           ]),
         )),

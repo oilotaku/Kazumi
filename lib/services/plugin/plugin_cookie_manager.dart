@@ -1,14 +1,14 @@
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:kazumi/services/logging/logger.dart';
 
-/// 每条规则的 Cookie 管理器
+/// 每條規則的 Cookie 管理器
 ///
-/// 为每条规则维护一个独立的内存 [CookieJar]，
-/// 通过 [saveFromWebView] 将 WebView 捕获的 document.cookie 字符串
-/// 解析后存入对应规则的 jar。规则请求执行器按需读取并组装 Cookie 请求头。
-/// 验证 Cookie 通常与 User-Agent 绑定，故同时记录 WebView 的 UA，
-/// 供后续 dio 请求对齐指纹。
-/// Cookie 仅在当前 App 会话内有效，重启后需重新验证。
+/// 為每條規則維護一個獨立的記憶體 [CookieJar]，
+/// 透過 [saveFromWebView] 將 WebView 捕獲的 document.cookie 字串
+/// 解析後存入對應規則的 jar。規則請求執行器按需讀取並組裝 Cookie 請求頭。
+/// 驗證 Cookie 通常與 User-Agent 綁定，故同時記錄 WebView 的 UA，
+/// 供後續 dio 請求對齊指紋。
+/// Cookie 僅在當前 App 會話內有效，重啟後需重新驗證。
 class PluginCookieManager {
   PluginCookieManager._();
   static final PluginCookieManager instance = PluginCookieManager._();
@@ -39,7 +39,7 @@ class PluginCookieManager {
         '[PluginCookieManager] Saved ${cookies.length} cookies for $pluginName');
   }
 
-  /// 解析字符串为 [Cookie] 列表
+  /// 解析字串為 [Cookie] 列表
   List<Cookie> _parseCookieString(String raw, Uri uri) {
     final cookies = <Cookie>[];
     for (final part in raw.split(';')) {
@@ -68,6 +68,6 @@ class PluginCookieManager {
     return jar.loadForRequest(uri);
   }
 
-  /// 验证时 WebView 使用的 User-Agent；未验证过的规则返回 null
+  /// 驗證時 WebView 使用的 User-Agent；未驗證過的規則返回 null
   String? userAgentFor(String pluginName) => _userAgents[pluginName];
 }

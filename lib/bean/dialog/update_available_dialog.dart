@@ -86,7 +86,7 @@ class _UpdateAvailableDialogState extends State<UpdateAvailableDialog> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
-                title: Text('不再自动检查', style: theme.textTheme.bodyMedium),
+                title: Text('不再自動檢查', style: theme.textTheme.bodyMedium),
               ),
             ],
           ],
@@ -98,7 +98,7 @@ class _UpdateAvailableDialogState extends State<UpdateAvailableDialog> {
         TextButton(
           style: TextButton.styleFrom(minimumSize: const Size(64, 48)),
           onPressed: () => KazumiDialog.dismiss(context: context),
-          child: const Text('稍后'),
+          child: const Text('稍後'),
         ),
         StateActionButton(
           onPressed: () => KazumiDialog.dismiss(
@@ -108,7 +108,7 @@ class _UpdateAvailableDialogState extends State<UpdateAvailableDialog> {
           icon: downloadInApp
               ? Icons.download_rounded
               : Icons.open_in_new_rounded,
-          text: downloadInApp ? '更新' : '前往下载',
+          text: downloadInApp ? '更新' : '前往下載',
         ),
       ],
     );
@@ -136,7 +136,7 @@ class _UpdateAvailableDialogState extends State<UpdateAvailableDialog> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '发现新版本',
+                '發現新版本',
                 style: theme.textTheme.headlineSmall?.copyWith(
                   color: colors.onSurface,
                   fontWeight: FontWeight.w600,
@@ -182,7 +182,7 @@ class _UpdateAvailableDialogState extends State<UpdateAvailableDialog> {
                       ),
                       iconAlignment: IconAlignment.end,
                       icon: const Icon(Icons.open_in_new_rounded, size: 16),
-                      label: const Text('更新日志'),
+                      label: const Text('更新日誌'),
                     ),
                 ],
               ),
@@ -226,7 +226,7 @@ class _UpdateAvailableDialogState extends State<UpdateAvailableDialog> {
       tiles: [
         SettingsDropdownTile<UpdateDownloadSource>(
           leading: Icons.cloud_download_rounded,
-          title: const Text('下载源'),
+          title: const Text('下載源'),
           value: _source,
           options: {
             for (final source in UpdateDownloadSource.values)
@@ -237,7 +237,7 @@ class _UpdateAvailableDialogState extends State<UpdateAvailableDialog> {
         if (types.length > 1)
           SettingsDropdownTile<InstallationType>(
             leading: Icons.inventory_2_rounded,
-            title: const Text('安装类型'),
+            title: const Text('安裝型別'),
             value: _type,
             options: {for (final type in types) type: type.label},
             onChanged: (type) => setState(() => _type = type),

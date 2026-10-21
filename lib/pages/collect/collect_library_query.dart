@@ -2,10 +2,10 @@ import 'package:kazumi/modules/collect/collect_module.dart';
 import 'package:kazumi/modules/collect/collect_type.dart';
 
 enum CollectSort {
-  recentlyChanged('最近变更'),
-  title('番剧名称'),
-  rating('评分最高'),
-  airDate('开播时间');
+  recentlyChanged('最近變更'),
+  title('番劇名稱'),
+  rating('評分最高'),
+  airDate('開播時間');
 
   const CollectSort(this.label);
   final String label;

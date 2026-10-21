@@ -12,7 +12,7 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SettingsDetailScaffold(
-        title: const Text('关于'),
+        title: const Text('關於'),
         body: AboutContent(
           children: [
             _ProjectHeader(onCheckUpdate: onCheckUpdate),
@@ -20,21 +20,21 @@ class AboutPage extends StatelessWidget {
             LayoutBuilder(builder: (context, constraints) {
               final sections = [
                 ContentSection.group(
-                  title: '项目',
+                  title: '專案',
                   children: const [
                     AboutLinkTile(
                       icon: Icons.code_rounded,
-                      title: '源代码',
+                      title: '原始碼',
                       url: ApiEndpoints.sourceUrl,
                     ),
                     AboutLinkTile(
                       icon: Icons.language_rounded,
-                      title: '项目主页',
+                      title: '專案主頁',
                       url: ApiEndpoints.projectUrl,
                     ),
                     AboutLinkTile(
                       icon: Icons.bug_report_rounded,
-                      title: '问题反馈',
+                      title: '問題反饋',
                       url: '${ApiEndpoints.sourceUrl}/issues',
                     ),
                     AboutLinkTile(
@@ -45,27 +45,27 @@ class AboutPage extends StatelessWidget {
                   ],
                 ),
                 ContentSection.group(
-                  title: '开源',
+                  title: '開源',
                   children: [
                     const AboutLinkTile(
                       icon: Icons.handshake_outlined,
-                      title: '贡献指南',
+                      title: '貢獻指南',
                       url:
                           '${ApiEndpoints.sourceUrl}/blob/main/static/doc/CONTRIBUTING.md',
                     ),
                     const AboutLinkTile.route(
                       icon: Icons.favorite_outline_rounded,
-                      title: '致谢',
+                      title: '致謝',
                       route: '/settings/about/credits',
                     ),
                     const AboutLinkTile(
                       icon: Icons.balance_rounded,
-                      title: 'GPL-3.0 许可证',
+                      title: 'GPL-3.0 許可證',
                       url: '${ApiEndpoints.sourceUrl}/blob/main/LICENSE',
                     ),
                     const AboutLinkTile.route(
                       icon: Icons.description_outlined,
-                      title: '第三方许可证',
+                      title: '第三方許可證',
                       route: '/settings/about/license',
                     ),
                   ],
@@ -128,7 +128,7 @@ class _ProjectHeader extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            '基于自定义规则的开源番剧应用',
+            '基於自定義規則的開源番劇應用',
             style: theme.textTheme.bodyLarge,
           ),
           const SizedBox(height: 20),
@@ -144,7 +144,7 @@ class _ProjectHeader extends StatelessWidget {
                   context,
                   '${ApiEndpoints.sourceUrl}/releases',
                 ),
-                child: const Text('更新日志'),
+                child: const Text('更新日誌'),
               ),
             ],
           ),

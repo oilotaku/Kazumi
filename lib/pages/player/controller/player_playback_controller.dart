@@ -87,17 +87,17 @@ abstract class _PlayerPlaybackController with Store {
   int buttonSkipTime = 80;
   int arrowKeySkipTime = 10;
 
-  /// 历史记录传入的 offset
+  /// 歷史記錄傳入的 offset
   int startOffset = 0;
 
-  /// 当前超分辨率模式
+  /// 當前超解析度模式
   @observable
   SuperResolutionMode superResolutionMode = SuperResolutionMode.off;
 
   @observable
   double volume = -1;
 
-  /// 手势调节时的精确音量，避免 UI 节流导致累计误差
+  /// 手勢調節時的精確音量，避免 UI 節流導致累計誤差
   double preciseVolume = -1;
 
   @observable
@@ -147,8 +147,8 @@ abstract class _PlayerPlaybackController with Store {
     startOffset = 0;
   }
 
-  /// 本次会话是否从距结尾 [nearEndWatchedThreshold] 以内的位置起播。
-  /// 这样的"播放完成"并非真正看完，应从头重播而非切下一集
+  /// 本次會話是否從距結尾 [nearEndWatchedThreshold] 以內的位置起播。
+  /// 這樣的"播放完成"並非真正看完，應從頭重播而非切下一集
   bool get resumedNearEnd {
     if (startOffset <= 0 || duration <= Duration.zero) {
       return false;
@@ -156,8 +156,8 @@ abstract class _PlayerPlaybackController with Store {
     return Duration(seconds: startOffset) >= duration - nearEndWatchedThreshold;
   }
 
-  /// 从头重播当前视频。[startOffset] 在重播落地后才归零，
-  /// 避免自动连播在此期间抢先触发
+  /// 從頭重播當前影片。[startOffset] 在重播落地後才歸零，
+  /// 避免自動連播在此期間搶先觸發
   Future<void> restartFromBeginning() async {
     final player = mediaPlayer;
     if (player == null) {
@@ -317,9 +317,9 @@ abstract class _PlayerPlaybackController with Store {
       }
 
       var pp = player.platform as NativePlayer;
-      // media-kit 默认启用硬盘作为双重缓存，这可以维持大缓存的前提下减轻内存压力
-      // media-kit 内部硬盘缓存目录按照 Linux 配置，这导致该功能在其他平台上被损坏
-      // 该设置可以在所有平台上正确启用双重缓存
+      // media-kit 預設啟用硬碟作為雙重快取，這可以維持大快取的前提下減輕記憶體壓力
+      // media-kit 內部硬碟快取目錄按照 Linux 配置，這導致該功能在其他平臺上被損壞
+      // 該設定可以在所有平臺上正確啟用雙重快取
       await pp.setProperty("demuxer-cache-dir", await getPlayerTempPath());
       if (!isCurrentPlayer(player)) {
         return await _discardIfNotCurrent(candidate);
@@ -356,7 +356,7 @@ abstract class _PlayerPlaybackController with Store {
           if (!isCurrentPlayer(player)) {
             return await _discardIfNotCurrent(candidate);
           }
-          KazumiLogger().i('Player: HTTP 代理设置成功 $formattedProxy');
+          KazumiLogger().i('Player: HTTP 代理設定成功 $formattedProxy');
         }
       } else if (SystemProxyService.isActive) {
         final proxy = SystemProxyService.proxyFor('https');
@@ -365,7 +365,7 @@ abstract class _PlayerPlaybackController with Store {
           if (!isCurrentPlayer(player)) {
             return await _discardIfNotCurrent(candidate);
           }
-          KazumiLogger().i('Player: 跟随系统代理 http://${proxy.$1}:${proxy.$2}');
+          KazumiLogger().i('Player: 跟隨系統代理 http://${proxy.$1}:${proxy.$2}');
         }
       }
 
@@ -382,9 +382,9 @@ abstract class _PlayerPlaybackController with Store {
             GStorage.getSetting(SettingsKeys.androidVideoRenderer);
 
         if (androidVideoRenderer == 'auto') {
-          // Android 14 及以上使用基于 Vulkan 的 MPV GPU-NEXT 视频输出，着色器性能更好
-          // GPU-NEXT 需要 Vulkan 1.2 支持
-          // 避免 Android 13 及以下设备上部分机型 Vulkan 支持不佳导致的黑屏问题
+          // Android 14 及以上使用基於 Vulkan 的 MPV GPU-NEXT 影片輸出，著色器效能更好
+          // GPU-NEXT 需要 Vulkan 1.2 支援
+          // 避免 Android 13 及以下裝置上部分機型 Vulkan 支援不佳導致的黑屏問題
           final int androidSdkVersion =
               await PlatformEnvironmentService.getAndroidSdkVersion();
           if (!isCurrentPlayer(player)) {
@@ -433,7 +433,7 @@ abstract class _PlayerPlaybackController with Store {
                 message: actionableMessage, showActionButton: true);
           } else if (showPlayerError) {
             KazumiDialog.showToast(
-                message: '播放器内部错误 ${event.toString()} ${videoUrl()}',
+                message: '播放器內部錯誤 ${event.toString()} ${videoUrl()}',
                 duration: const Duration(seconds: 5),
                 showActionButton: true);
           }
@@ -466,7 +466,7 @@ abstract class _PlayerPlaybackController with Store {
       }
 
       if (cachePolicy.networkAutomatic) {
-        KazumiDialog.showToast(message: '移动数据下已自动开启低内存模式，可在播放设置中改为始终关闭');
+        KazumiDialog.showToast(message: '行動資料下已自動開啟低記憶體模式，可在播放設定中改為始終關閉');
       }
 
       return player;
@@ -549,7 +549,7 @@ abstract class _PlayerPlaybackController with Store {
     volume = value;
   }
 
-  /// 外部来源（硬件键、系统面板等）变更音量时同步，并清除手势缓存
+  /// 外部來源（硬體鍵、系統面板等）變更音量時同步，並清除手勢快取
   @action
   void applyExternalVolume(double value) {
     value = value.clamp(0.0, 100.0);

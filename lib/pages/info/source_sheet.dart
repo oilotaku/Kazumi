@@ -90,7 +90,7 @@ class _SourceSheetState extends State<SourceSheet> with KazumiDialogOwner {
   void _showVerifiedResult(Plugin plugin, String pageHtml) {
     if (!mounted) return;
     if (_searchService.applyHarvestedSearchResult(plugin.name, pageHtml)) {
-      KazumiDialog.showToast(message: '验证成功');
+      KazumiDialog.showToast(message: '驗證成功');
       return;
     }
     _captchaFlow.showSuccess(
@@ -115,7 +115,7 @@ class _SourceSheetState extends State<SourceSheet> with KazumiDialogOwner {
     } catch (error) {
       KazumiLogger().w('SourceSheet: failed to open browser', error: error);
     }
-    if (mounted) KazumiDialog.showToast(message: '无法打开浏览器，请稍后重试');
+    if (mounted) KazumiDialog.showToast(message: '無法開啟瀏覽器，請稍後重試');
   }
 
   Future<void> _openSearchItem(String name, SearchItem searchItem) async {
@@ -124,7 +124,7 @@ class _SourceSheetState extends State<SourceSheet> with KazumiDialogOwner {
     await dialogs.run((task) async {
       final cancelToken = RuleCancelToken();
       final roads = await task.loading(
-        message: '正在获取播放列表',
+        message: '正在獲取播放列表',
         barrierDismissible: isDesktop(),
         onCancel: cancelToken.cancel,
         action: () =>
@@ -143,13 +143,13 @@ class _SourceSheetState extends State<SourceSheet> with KazumiDialogOwner {
           ));
     }, onError: (error, stackTrace) {
       KazumiLogger().w('SourceSheet: failed to query playlist', error: error);
-      KazumiDialog.showToast(message: '未能获取播放列表，请重试或选择其他结果');
+      KazumiDialog.showToast(message: '未能獲取播放列表，請重試或選擇其他結果');
     });
   }
 
   void _showAliasPicker(String pluginName) {
     if (widget.infoController.bangumiItem.alias.isEmpty) {
-      KazumiDialog.showToast(message: '无可用别名，试试修改检索关键词');
+      KazumiDialog.showToast(message: '無可用別名，試試修改檢索關鍵詞');
       return;
     }
     _showAliasPickerDialog(

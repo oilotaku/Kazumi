@@ -95,8 +95,8 @@ final indexModule = createModule(
         child: (context, state) => Scaffold(
           appBar: AppBar(title: const Text('Kazumi')),
           body: const GeneralErrorWidget(
-            title: '初始化失败',
-            errMsg: '请重新启动应用后再试。',
+            title: '初始化失敗',
+            errMsg: '請重新啟動應用後再試。',
           ),
         ),
       )
@@ -107,7 +107,7 @@ final indexModule = createModule(
         child: (context, state) {
           final args = state.arguments;
           if (args is! ImageViewerRouteArgs) {
-            return const RouteErrorPage(message: '图片预览参数无效，请返回后重试。');
+            return const RouteErrorPage(message: '圖片預覽參數無效，請返回後重試。');
           }
           return ImageViewer(
             imageUrls: args.imageUrls,

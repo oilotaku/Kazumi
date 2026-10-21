@@ -44,11 +44,11 @@ class InfoPage extends StatefulWidget {
 class _InfoPageState extends State<InfoPage>
     with SingleTickerProviderStateMixin {
   static const List<String> _infoTabs = <String>[
-    '概览',
+    '概覽',
     '吐槽',
     '角色',
-    '关联',
-    '制作人员',
+    '關聯',
+    '製作人員',
   ];
   static const Duration _minimumBangumiInfoLoadingDuration =
       Duration(milliseconds: 600);
@@ -176,13 +176,13 @@ class _InfoPageState extends State<InfoPage>
     final token =
         GStorage.getSetting(SettingsKeys.bangumiAccessToken).toString().trim();
     if (token.isEmpty) {
-      KazumiDialog.showToast(message: '请先在同步设置中绑定 Bangumi');
+      KazumiDialog.showToast(message: '請先在同步設定中綁定 Bangumi');
       return;
     }
     final localType = infoController.collectController
         .getCollectType(infoController.bangumiItem);
     if (localType == 0) {
-      KazumiDialog.showToast(message: '请先追番');
+      KazumiDialog.showToast(message: '請先追番');
       return;
     }
     final editing =
@@ -199,7 +199,7 @@ class _InfoPageState extends State<InfoPage>
       setState(() {});
       KazumiDialog.showToast(
         context: context,
-        message: editing ? '吐槽已更新' : '吐槽已发表',
+        message: editing ? '吐槽已更新' : '吐槽已發表',
       );
     }
   }
@@ -303,9 +303,9 @@ class _InfoPageState extends State<InfoPage>
   void _startWatching() {
     if (widget.pluginsController.pluginList.isEmpty) {
       KazumiDialog.showToast(
-        message: '还没有规则，无法开始观看',
+        message: '還沒有規則，無法開始觀看',
         showActionButton: true,
-        actionLabel: '添加规则',
+        actionLabel: '新增規則',
         onActionPressed: () {
           if (mounted) context.pushNamed('/settings/plugin/');
         },
@@ -469,9 +469,9 @@ class _InfoPageState extends State<InfoPage>
         }),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        tooltip: '开始观看',
+        tooltip: '開始觀看',
         onPressed: _startWatching,
-        label: const Text('开始观看'),
+        label: const Text('開始觀看'),
         icon: const Icon(Icons.play_arrow_rounded),
       ),
     );

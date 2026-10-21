@@ -491,7 +491,7 @@ class VideoWebviewImpl
           await android_webview.AndroidWebViewFeature.instance()
               .isFeatureSupported(WebViewFeature.PROXY_OVERRIDE);
       if (!proxyAvailable) {
-        KazumiLogger().w('WebView: 当前 Android 版本不支持代理');
+        KazumiLogger().w('WebView: 當前 Android 版本不支援代理');
         return;
       }
 
@@ -504,9 +504,9 @@ class VideoWebviewImpl
           ],
         ),
       );
-      KazumiLogger().i('WebView: 代理设置成功 $formattedProxy');
+      KazumiLogger().i('WebView: 代理設定成功 $formattedProxy');
     } catch (e) {
-      KazumiLogger().e('WebView: 设置代理失败 $e');
+      KazumiLogger().e('WebView: 設定代理失敗 $e');
     }
   }
 }

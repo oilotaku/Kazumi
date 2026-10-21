@@ -101,9 +101,9 @@ class _DownloadEpisodeSheetState extends State<DownloadEpisodeSheet> {
           return Column(
             children: [
               MaterialBottomSheetHeader(
-                title: '下载选集',
+                title: '下載選集',
                 description: downloadedCount > 0
-                    ? '$episodeCount 集 · 已下载 $downloadedCount 集'
+                    ? '$episodeCount 集 · 已下載 $downloadedCount 集'
                     : '共 $episodeCount 集',
                 onClose: () => Navigator.of(context).pop(),
               ),
@@ -172,8 +172,8 @@ class _DownloadEpisodeSheetState extends State<DownloadEpisodeSheet> {
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
-                            const Opacity(opacity: 0, child: Text('取消全选')),
-                            Text(allSelected ? '取消全选' : '全选'),
+                            const Opacity(opacity: 0, child: Text('取消全選')),
+                            Text(allSelected ? '取消全選' : '全選'),
                           ],
                         ),
                       ),
@@ -188,8 +188,8 @@ class _DownloadEpisodeSheetState extends State<DownloadEpisodeSheet> {
                               : () => _startBatchDownload(context),
                           icon: const Icon(Icons.download_rounded),
                           label: Text(_selectedEpisodes.isEmpty
-                              ? '选择集数'
-                              : '下载 ${_selectedEpisodes.length} 集'),
+                              ? '選擇集數'
+                              : '下載 ${_selectedEpisodes.length} 集'),
                         ),
                       ),
                     ],
@@ -230,7 +230,7 @@ class _DownloadEpisodeSheetState extends State<DownloadEpisodeSheet> {
     }
 
     KazumiDialog.showToast(
-      message: '已添加 ${sortedEpisodes.length} 集到下载队列，可在下载管理中查看',
+      message: '已新增 ${sortedEpisodes.length} 集到下載佇列，可在下載管理中檢視',
     );
   }
 }

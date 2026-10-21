@@ -22,7 +22,7 @@ class CharacterInfoView extends StatelessWidget {
   final String characterRelation;
   final List<String> actorNames;
 
-  static const _quickKeys = {'性别', '生日', '年龄', '身高', '体重', '血型'};
+  static const _quickKeys = {'性別', '生日', '年齡', '身高', '體重', '血型'};
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +94,7 @@ class CharacterInfoView extends StatelessWidget {
         if (quickFields.isNotEmpty) ...[
           const SizedBox(height: 16),
           ContentSection(
-            title: '基本资料',
+            title: '基本資料',
             child: LayoutBuilder(builder: (context, constraints) {
               final columns =
                   constraints.maxWidth >= 240 && useCompactColumns ? 2 : 1;
@@ -153,7 +153,7 @@ class CharacterInfoView extends StatelessWidget {
             if (character.summary.isNotEmpty) ...[
               const SizedBox(height: 24),
               ContentSection(
-                title: '人物简介',
+                title: '人物簡介',
                 child: SelectableText(character.summary,
                     style: theme.textTheme.bodyLarge?.copyWith(height: 1.65)),
               ),
@@ -161,7 +161,7 @@ class CharacterInfoView extends StatelessWidget {
             if (moreFields.isNotEmpty) ...[
               const SizedBox(height: 24),
               ContentSection.group(
-                title: '更多资料',
+                title: '更多資料',
                 children: [
                   for (final field in moreFields)
                     Padding(
@@ -174,7 +174,7 @@ class CharacterInfoView extends StatelessWidget {
             if (character.unstructuredInfo.isNotEmpty) ...[
               const SizedBox(height: 24),
               ContentSection(
-                title: '人物资料',
+                title: '人物資料',
                 child: SelectableText(character.unstructuredInfo,
                     style: theme.textTheme.bodyMedium?.copyWith(height: 1.6)),
               ),
@@ -186,7 +186,7 @@ class CharacterInfoView extends StatelessWidget {
               const TonalCard(
                 child: GeneralEmptyState(
                   icon: Icons.person_outline_rounded,
-                  title: '暂无人物资料',
+                  title: '暫無人物資料',
                   compact: true,
                 ),
               ),
@@ -234,7 +234,7 @@ class _CharacterPortrait extends StatelessWidget {
           height: 160,
           child: GeneralEmptyState(
             icon: Icons.person_outline_rounded,
-            title: '暂无人物图片',
+            title: '暫無人物圖片',
             compact: true,
           ),
         ),
@@ -244,7 +244,7 @@ class _CharacterPortrait extends StatelessWidget {
 
     return Semantics(
       button: true,
-      label: '查看人物原图',
+      label: '檢視人物原圖',
       child: Material(
         color: colors.surfaceContainerLow,
         borderRadius: BorderRadius.circular(28),
@@ -279,7 +279,7 @@ class _CharacterPortrait extends StatelessWidget {
                           size: 20, color: colors.primary),
                       const SizedBox(width: 8),
                       Flexible(
-                        child: Text('查看原图',
+                        child: Text('檢視原圖',
                             style: Theme.of(context)
                                 .textTheme
                                 .labelLarge

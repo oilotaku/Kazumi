@@ -6,9 +6,9 @@ import 'package:kazumi/services/storage/storage.dart';
 
 extension _ConversionLabel on DanmakuChConvert {
   String get label => switch (this) {
-    DanmakuChConvert.none => '不转换',
-    DanmakuChConvert.simplified => '转为简体',
-    DanmakuChConvert.traditional => '转为繁体',
+    DanmakuChConvert.none => '不轉換',
+    DanmakuChConvert.simplified => '轉為簡體',
+    DanmakuChConvert.traditional => '轉為繁體',
   };
 }
 
@@ -32,7 +32,7 @@ class _DanmakuChConvertTileState extends State<DanmakuChConvertTile> {
       await GStorage.putSetting(SettingsKeys.danmakuChConvert, mode.value);
     } catch (_) {
       if (mounted) {
-        KazumiDialog.showToast(context: context, message: '简繁转换设置保存失败，请重试');
+        KazumiDialog.showToast(context: context, message: '簡繁轉換設定儲存失敗，請重試');
       }
     } finally {
       if (mounted) setState(() => _saving = false);
@@ -49,8 +49,8 @@ class _DanmakuChConvertTileState extends State<DanmakuChConvertTile> {
         );
         return SettingsDropdownTile<DanmakuChConvert>(
           leading: Icons.translate_rounded,
-          title: const Text('简繁转换'),
-          description: const Text('下次联网加载弹幕时生效，已缓存弹幕保留下载时的文字'),
+          title: const Text('簡繁轉換'),
+          description: const Text('下次聯網載入彈幕時生效，已快取彈幕保留下載時的文字'),
           enabled: !_saving,
           value: mode,
           options: {

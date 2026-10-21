@@ -79,11 +79,11 @@ class DownloadEpisode {
   @HiveField(13, defaultValue: '')
   String episodePageUrl;
 
-  /// 缓存的弹幕数据 (JSON 字符串格式)
+  /// 快取的彈幕資料 (JSON 字串格式)
   @HiveField(14, defaultValue: '')
   String danmakuData;
 
-  /// DanDanPlay 番剧 ID (用于弹幕查询缓存)
+  /// DanDanPlay 番劇 ID (用於彈幕查詢快取)
   @HiveField(15, defaultValue: 0)
   int danDanBangumiID;
 

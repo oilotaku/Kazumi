@@ -18,7 +18,7 @@ class InfoCommentsView extends StatelessWidget {
     required this.onLoadMore,
   });
 
-  static const _writeReviewLabel = '下面我简单喵两句';
+  static const _writeReviewLabel = '下面我簡單喵兩句';
   static const _maxWidth = 950.0;
 
   final BangumiInterest? interest;
@@ -111,8 +111,8 @@ class InfoCommentsView extends StatelessWidget {
                 SliverFillRemaining(
                   hasScrollBody: false,
                   child: GeneralErrorWidget(
-                    title: '评论加载失败',
-                    errMsg: '请检查网络连接后重试。',
+                    title: '評論載入失敗',
+                    errMsg: '請檢查網路連線後重試。',
                     onRetry: onRetry,
                   ),
                 )
@@ -121,7 +121,7 @@ class InfoCommentsView extends StatelessWidget {
                   hasScrollBody: false,
                   child: GeneralEmptyState(
                     icon: Icons.chat_bubble_outline_rounded,
-                    title: '暂无吐槽',
+                    title: '暫無吐槽',
                     actions: [
                       TextButton(
                         onPressed: onReviewTap,
@@ -169,7 +169,7 @@ class InfoCommentsView extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
       child: Row(children: [
-        Expanded(child: Text(editing ? '编辑' : _writeReviewLabel)),
+        Expanded(child: Text(editing ? '編輯' : _writeReviewLabel)),
         const SizedBox(width: 8),
         const Icon(Icons.chevron_right_rounded, size: 20),
       ]),
@@ -188,7 +188,7 @@ class InfoCommentsView extends StatelessWidget {
             child: TextButton(
               onPressed: onReviewTap,
               style: TextButton.styleFrom(minimumSize: const Size(48, 48)),
-              child: const Text('编辑'),
+              child: const Text('編輯'),
             ),
           ),
         ),

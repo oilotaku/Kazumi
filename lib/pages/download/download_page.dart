@@ -47,14 +47,14 @@ class _DownloadPageState extends State<DownloadPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const SysAppBar(title: Text('下载管理')),
+      appBar: const SysAppBar(title: Text('下載管理')),
       body: Observer(builder: (context) {
         final recordKeys = downloadController.recordKeys.toList();
         _expanded.removeWhere((key, _) => !recordKeys.contains(key));
         if (recordKeys.isEmpty) {
           return const GeneralEmptyState(
             icon: Icons.download_rounded,
-            title: '还没有下载记录',
+            title: '還沒有下載記錄',
           );
         }
         return ListView.builder(
@@ -103,7 +103,7 @@ class _DownloadPageState extends State<DownloadPage> {
             record.bangumiId,
             record.pluginName,
           );
-          KazumiDialog.showToast(message: '已开始恢复下载');
+          KazumiDialog.showToast(message: '已開始恢復下載');
         },
         onDeleteAll: () => _confirmDeleteRecord(record),
         totalSpeed: totalSpeed,
@@ -141,13 +141,13 @@ class _DownloadPageState extends State<DownloadPage> {
         return '${(episode.progressPercent * 100).toStringAsFixed(0)}% · '
             '${episode.downloadedSegments}/${episode.totalSegments} 分片$speedText';
       case DownloadStatus.failed:
-        return episode.errorMessage.isNotEmpty ? episode.errorMessage : '下载失败';
+        return episode.errorMessage.isNotEmpty ? episode.errorMessage : '下載失敗';
       case DownloadStatus.paused:
-        return '已暂停 · ${(episode.progressPercent * 100).toStringAsFixed(0)}%';
+        return '已暫停 · ${(episode.progressPercent * 100).toStringAsFixed(0)}%';
       case DownloadStatus.pending:
-        return '排队中';
+        return '排隊中';
       case DownloadStatus.resolving:
-        return '正在解析视频源';
+        return '正在解析影片源';
       default:
         return '';
     }
@@ -176,7 +176,7 @@ class _DownloadPageState extends State<DownloadPage> {
             record.pluginName,
             episode.episodeNumber,
           ),
-          tooltip: '暂停',
+          tooltip: '暫停',
           visualDensity: VisualDensity.compact,
         ));
         break;
@@ -188,7 +188,7 @@ class _DownloadPageState extends State<DownloadPage> {
             pluginName: record.pluginName,
             episodeNumber: episode.episodeNumber,
           ),
-          tooltip: '继续',
+          tooltip: '繼續',
           visualDensity: VisualDensity.compact,
         ));
         break;
@@ -200,7 +200,7 @@ class _DownloadPageState extends State<DownloadPage> {
             pluginName: record.pluginName,
             episodeNumber: episode.episodeNumber,
           ),
-          tooltip: '重试',
+          tooltip: '重試',
           visualDensity: VisualDensity.compact,
         ));
         break;
@@ -213,9 +213,9 @@ class _DownloadPageState extends State<DownloadPage> {
               pluginName: record.pluginName,
               episodeNumber: episode.episodeNumber,
             );
-            KazumiDialog.showToast(message: '已插队优先下载');
+            KazumiDialog.showToast(message: '已插隊優先下載');
           },
-          tooltip: '优先下载',
+          tooltip: '優先下載',
           visualDensity: VisualDensity.compact,
         ));
         break;
@@ -227,7 +227,7 @@ class _DownloadPageState extends State<DownloadPage> {
       icon: Icon(Icons.delete_outline,
           size: 20, color: colorScheme.onSurfaceVariant),
       onPressed: () => _confirmDeleteEpisode(record, episode),
-      tooltip: '删除',
+      tooltip: '刪除',
       visualDensity: VisualDensity.compact,
     ));
 
@@ -241,7 +241,7 @@ class _DownloadPageState extends State<DownloadPage> {
       episode.episodeNumber,
     );
     if (localPath == null) {
-      KazumiDialog.showToast(message: '本地文件不存在');
+      KazumiDialog.showToast(message: '本地檔案不存在');
       return;
     }
 
@@ -283,9 +283,9 @@ class _DownloadPageState extends State<DownloadPage> {
   void _confirmDeleteEpisode(DownloadRecord record, DownloadEpisode episode) {
     KazumiDialog.show(
       builder: (context) => AlertDialog(
-        title: const Text('删除下载'),
+        title: const Text('刪除下載'),
         content: Text(
-            '确定要删除「${episode.episodeName.isNotEmpty ? episode.episodeName : '第${episode.episodeNumber}集'}」的下载文件吗？'),
+            '確定要刪除「${episode.episodeName.isNotEmpty ? episode.episodeName : '第${episode.episodeNumber}集'}」的下載檔案嗎？'),
         actions: [
           TextButton(
             onPressed: () => KazumiDialog.dismiss(),
@@ -306,7 +306,7 @@ class _DownloadPageState extends State<DownloadPage> {
               );
             },
             child: Text(
-              '删除',
+              '刪除',
               style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
           ),
@@ -318,8 +318,8 @@ class _DownloadPageState extends State<DownloadPage> {
   void _confirmDeleteRecord(DownloadRecord record) {
     KazumiDialog.show(
       builder: (context) => AlertDialog(
-        title: const Text('删除全部下载'),
-        content: Text('确定要删除「${record.bangumiName}」的所有下载文件吗？'),
+        title: const Text('刪除全部下載'),
+        content: Text('確定要刪除「${record.bangumiName}」的所有下載檔案嗎？'),
         actions: [
           TextButton(
             onPressed: () => KazumiDialog.dismiss(),
@@ -339,7 +339,7 @@ class _DownloadPageState extends State<DownloadPage> {
               );
             },
             child: Text(
-              '删除',
+              '刪除',
               style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
           ),
@@ -357,12 +357,12 @@ class _DownloadPageState extends State<DownloadPage> {
       KazumiDialog.show(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text('删除失败'),
-          content: const Text('删除下载文件失败，请稍后重试'),
+          title: const Text('刪除失敗'),
+          content: const Text('刪除下載檔案失敗，請稍後重試'),
           actions: [
             TextButton(
               onPressed: () => KazumiDialog.dismiss(context: context),
-              child: const Text('确定'),
+              child: const Text('確定'),
             ),
           ],
         ),

@@ -11,13 +11,13 @@ class MirrorSettingsStep extends StatelessWidget {
       icon: Icons.public_rounded,
       shape: OnboardingIconShape.clover,
     ),
-    title: '让连接更顺畅',
-    subtitle: '番剧信息与评论默认使用镜像，也可选择 ECH 或直连。图片默认使用 ECH 加速。',
+    title: '讓連線更順暢',
+    subtitle: '番劇資訊與評論預設使用映象，也可選擇 ECH 或直連。圖片預設使用 ECH 加速。',
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         NetworkMirrorSettings(margin: EdgeInsets.zero),
-        OnboardingHint(text: '可在「设置 → 网络设置」中调整。'),
+        OnboardingHint(text: '可在「設定 → 網路設定」中調整。'),
       ],
     ),
   );

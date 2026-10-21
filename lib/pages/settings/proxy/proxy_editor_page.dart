@@ -40,7 +40,7 @@ class _ProxyEditorPageState extends State<ProxyEditorPage> {
 
     final url = urlController.text.trim();
     if (url.isEmpty) {
-      KazumiDialog.showToast(message: '请输入代理地址');
+      KazumiDialog.showToast(message: '請輸入代理地址');
       return;
     }
 
@@ -77,11 +77,11 @@ class _ProxyEditorPageState extends State<ProxyEditorPage> {
           )
           .timeout(const Duration(seconds: 15));
       await GStorage.putSetting(SettingsKeys.proxyConfigured, true);
-      KazumiDialog.showToast(message: '测试成功');
+      KazumiDialog.showToast(message: '測試成功');
     } catch (e) {
       await GStorage.putSetting(SettingsKeys.proxyEnable, false);
       ProxyManager.clearProxy();
-      KazumiDialog.showToast(message: '代理连接失败');
+      KazumiDialog.showToast(message: '代理連線失敗');
     }
   }
 
@@ -107,10 +107,10 @@ class _ProxyEditorPageState extends State<ProxyEditorPage> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return '请输入代理地址';
+                        return '請輸入代理地址';
                       }
                       if (!ProxyUtils.isValidProxyUrl(value)) {
-                        return '格式错误，请使用 http://host:port 格式';
+                        return '格式錯誤，請使用 http://host:port 格式';
                       }
                       return null;
                     },
@@ -119,7 +119,7 @@ class _ProxyEditorPageState extends State<ProxyEditorPage> {
                   TextFormField(
                     controller: testUrlController,
                     decoration: const InputDecoration(
-                      labelText: '测试地址',
+                      labelText: '測試地址',
                       hintText: 'https://www.google.com',
                       border: OutlineInputBorder(),
                     ),
@@ -133,7 +133,7 @@ class _ProxyEditorPageState extends State<ProxyEditorPage> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: saveAndTest,
         icon: const Icon(Icons.save),
-        label: const Text('保存并测试'),
+        label: const Text('儲存並測試'),
       ),
     );
   }

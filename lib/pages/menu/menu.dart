@@ -88,7 +88,7 @@ class _ScaffoldMenu extends State<ScaffoldMenu> with RouteAware {
     if (lastPromptAt == null ||
         now.difference(lastPromptAt) > const Duration(seconds: 2)) {
       _lastExitPromptAt = now;
-      KazumiDialog.showToast(message: '再按一次退出应用', context: context);
+      KazumiDialog.showToast(message: '再按一次退出應用', context: context);
       return;
     }
 
@@ -144,12 +144,12 @@ class _ScaffoldMenu extends State<ScaffoldMenu> with RouteAware {
           NavigationDestination(
             selectedIcon: Icon(Icons.home),
             icon: Icon(Icons.home_outlined),
-            label: '推荐',
+            label: '推薦',
           ),
           NavigationDestination(
             selectedIcon: Icon(Icons.timeline),
             icon: Icon(Icons.timeline_outlined),
-            label: '时间表',
+            label: '時間表',
           ),
           NavigationDestination(
             selectedIcon: Icon(Icons.favorite),
@@ -192,12 +192,12 @@ class _ScaffoldMenu extends State<ScaffoldMenu> with RouteAware {
                 NavigationRailDestination(
                   selectedIcon: Icon(Icons.home),
                   icon: Icon(Icons.home_outlined),
-                  label: Text('推荐'),
+                  label: Text('推薦'),
                 ),
                 NavigationRailDestination(
                   selectedIcon: Icon(Icons.timeline),
                   icon: Icon(Icons.timeline_outlined),
-                  label: Text('时间表'),
+                  label: Text('時間表'),
                 ),
                 NavigationRailDestination(
                   selectedIcon: Icon(Icons.favorite),

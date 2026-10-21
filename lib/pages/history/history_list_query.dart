@@ -2,8 +2,8 @@ import 'package:kazumi/modules/history/history_module.dart';
 
 enum HistorySourceFilter {
   all('全部'),
-  online('在线'),
-  offline('缓存');
+  online('線上'),
+  offline('快取');
 
   const HistorySourceFilter(this.label);
 

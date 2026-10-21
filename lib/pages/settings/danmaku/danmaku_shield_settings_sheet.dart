@@ -14,7 +14,7 @@ class DanmakuShieldSettingsSheet extends StatelessWidget {
         body: Column(
           children: [
             MaterialBottomSheetHeader(
-              title: '屏蔽规则',
+              title: '遮蔽規則',
               onClose: () => Navigator.of(context).pop(),
             ),
             Expanded(

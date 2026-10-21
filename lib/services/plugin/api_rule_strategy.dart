@@ -21,7 +21,7 @@ class RestrictedJsonPath {
 
   static void validate(String expression) {
     if (expression.isEmpty || !expression.startsWith(r'$')) {
-      throw ApiRuleFormatException('JSONPath 必须以 \$ 开头: $expression');
+      throw ApiRuleFormatException('JSONPath 必須以 \$ 開頭: $expression');
     }
     var index = 1;
     while (index < expression.length) {
@@ -34,7 +34,7 @@ class RestrictedJsonPath {
           index++;
         }
         if (index == start) {
-          throw ApiRuleFormatException('不支持的 JSONPath: $expression');
+          throw ApiRuleFormatException('不支援的 JSONPath: $expression');
         }
         continue;
       }
@@ -47,12 +47,12 @@ class RestrictedJsonPath {
             ((content.startsWith("'") && content.endsWith("'")) ||
                 (content.startsWith('"') && content.endsWith('"')));
         if (!isIndex && !isWildcard && !isQuoted) {
-          throw ApiRuleFormatException('不支持的 JSONPath 片段: [$content]');
+          throw ApiRuleFormatException('不支援的 JSONPath 片段: [$content]');
         }
         index = end + 1;
         continue;
       }
-      throw ApiRuleFormatException('不支持的 JSONPath: $expression');
+      throw ApiRuleFormatException('不支援的 JSONPath: $expression');
     }
   }
 
@@ -87,7 +87,7 @@ class RestrictedJsonPath {
     try {
       return JsonPath(expression).readValues(document).toList();
     } catch (error) {
-      throw ApiRuleFormatException('JSONPath 解析失败 $expression: $error');
+      throw ApiRuleFormatException('JSONPath 解析失敗 $expression: $error');
     }
   }
 
@@ -105,7 +105,7 @@ class ApiRuleStrategy {
     try {
       return jsonDecode(raw);
     } on FormatException catch (error) {
-      throw ApiRuleFormatException('API 响应不是有效 JSON: ${error.message}');
+      throw ApiRuleFormatException('API 響應不是有效 JSON: ${error.message}');
     }
   }
 
@@ -115,15 +115,15 @@ class ApiRuleStrategy {
   ) {
     final method = config.method.toUpperCase();
     if (method != 'GET' && method != 'POST') {
-      throw ApiRuleFormatException('仅支持 GET/POST，当前为 $method');
+      throw ApiRuleFormatException('僅支援 GET/POST，當前為 $method');
     }
     if (config.url.trim().isEmpty) {
-      throw const ApiRuleFormatException('API 请求 URL 不能为空');
+      throw const ApiRuleFormatException('API 請求 URL 不能為空');
     }
     final url = _renderTemplate(config.url.trim(), variables, encode: true);
     final uri = Uri.tryParse(url);
     if (uri == null || !uri.hasScheme || uri.host.isEmpty) {
-      throw ApiRuleFormatException('API 请求 URL 无效: $url');
+      throw ApiRuleFormatException('API 請求 URL 無效: $url');
     }
     final hasBody = method == 'POST' && config.bodyType != ApiBodyType.none;
     return PreparedRuleRequest(
@@ -145,7 +145,7 @@ class ApiRuleStrategy {
     RestrictedJsonPath.validate(config.sourcePath);
     final template = config.sourceTemplate;
     if (template.isNotEmpty && !template.contains('@source')) {
-      throw const ApiRuleFormatException('详情页地址模板必须引用 @source');
+      throw const ApiRuleFormatException('詳情頁地址模板必須引用 @source');
     }
   }
 
@@ -167,7 +167,7 @@ class ApiRuleStrategy {
           RestrictedJsonPath.readFirst(node, config.sourcePath),
         );
         if (name.isEmpty || source.isEmpty) {
-          diagnostics.add('搜索节点 $index 缺少名称或来源，已跳过');
+          diagnostics.add('搜尋節點 $index 缺少名稱或來源，已跳過');
           continue;
         }
         // Plain replacement so @source may follow a letter (`/GV@source`).
@@ -179,7 +179,7 @@ class ApiRuleStrategy {
       } on ApiRuleFormatException {
         rethrow;
       } catch (error) {
-        diagnostics.add('搜索节点 $index 解析失败: $error');
+        diagnostics.add('搜尋節點 $index 解析失敗: $error');
       }
     }
     return RuleSearchParseResult(
@@ -202,7 +202,7 @@ class ApiRuleStrategy {
       final value = RestrictedJsonPath.readFirst(document, entry.value);
       if (value == null) {
         throw ApiRuleFormatException(
-          '章节响应变量 ${entry.key} 未匹配到值: ${entry.value}',
+          '章節響應變數 ${entry.key} 未匹配到值: ${entry.value}',
         );
       }
       rootVariables[entry.key] = value;
@@ -284,7 +284,7 @@ class ApiRuleStrategy {
             );
             if (pageUrl.isEmpty) {
               diagnostics.add(
-                '线路 $roadIndex 的剧集节点 $episodeIndex 缺少 URL，已跳过',
+                '線路 $roadIndex 的劇集節點 $episodeIndex 缺少 URL，已跳過',
               );
               continue;
             }
@@ -296,18 +296,18 @@ class ApiRuleStrategy {
             rethrow;
           } catch (error) {
             diagnostics.add(
-              '线路 $roadIndex 的剧集节点 $episodeIndex 解析失败: $error',
+              '線路 $roadIndex 的劇集節點 $episodeIndex 解析失敗: $error',
             );
           }
         }
         if (urls.isEmpty) {
-          diagnostics.add('线路节点 $roadIndex 没有有效剧集，已跳过');
+          diagnostics.add('線路節點 $roadIndex 沒有有效劇集，已跳過');
           continue;
         }
         roads.add(
           Road(
             name: roadName.isEmpty
-                ? '播放线路${roads.length + 1}'
+                ? '播放線路${roads.length + 1}'
                 : roadName,
             data: urls,
             identifier: names,
@@ -316,7 +316,7 @@ class ApiRuleStrategy {
       } on ApiRuleFormatException {
         rethrow;
       } catch (error) {
-        diagnostics.add('线路节点 $roadIndex 解析失败: $error');
+        diagnostics.add('線路節點 $roadIndex 解析失敗: $error');
       }
     }
     return roads;
@@ -351,7 +351,7 @@ class ApiRuleStrategy {
         final separatorIndex = entry.indexOf(config.fieldSeparator);
         if (separatorIndex < 0) {
           diagnostics.add(
-            '线路 $roadIndex 的剧集条目 $episodeIndex 缺少字段分隔符，已跳过',
+            '線路 $roadIndex 的劇集條目 $episodeIndex 缺少欄位分隔符，已跳過',
           );
           continue;
         }
@@ -370,7 +370,7 @@ class ApiRuleStrategy {
           );
           if (pageUrl.isEmpty) {
             diagnostics.add(
-              '线路 $roadIndex 的剧集条目 $episodeIndex 缺少 URL，已跳过',
+              '線路 $roadIndex 的劇集條目 $episodeIndex 缺少 URL，已跳過',
             );
             continue;
           }
@@ -380,12 +380,12 @@ class ApiRuleStrategy {
           rethrow;
         } catch (error) {
           diagnostics.add(
-            '线路 $roadIndex 的剧集条目 $episodeIndex 解析失败: $error',
+            '線路 $roadIndex 的劇集條目 $episodeIndex 解析失敗: $error',
           );
         }
       }
       if (urls.isEmpty) {
-        diagnostics.add('线路 $roadIndex 没有有效剧集，已跳过');
+        diagnostics.add('線路 $roadIndex 沒有有效劇集，已跳過');
         continue;
       }
       final configuredName =
@@ -393,7 +393,7 @@ class ApiRuleStrategy {
       roads.add(
         Road(
           name: configuredName.isEmpty
-              ? '播放线路${roads.length + 1}'
+              ? '播放線路${roads.length + 1}'
               : configuredName,
           data: urls,
           identifier: names,
@@ -414,7 +414,7 @@ class ApiRuleStrategy {
     final page = config.episodePage;
     if (page == null) return normalizeEpisodeUrl(baseUrl, rawUrl);
     if (page.url.trim().isEmpty) {
-      throw const ApiRuleFormatException('播放页地址模板不能为空');
+      throw const ApiRuleFormatException('播放頁地址模板不能為空');
     }
     // The template language has no arithmetic, so both 0-based and 1-based
     // indices must be provided; @episodeUrl carries the raw value extracted
@@ -430,7 +430,7 @@ class ApiRuleStrategy {
     final path = _renderTemplate(page.url, variables, encode: true);
     final uri = Uri.tryParse(path);
     if (uri == null) {
-      throw ApiRuleFormatException('剧集页面 URL 无效: $path');
+      throw ApiRuleFormatException('劇集頁面 URL 無效: $path');
     }
     final renderedQuery = _renderMap(page.query, variables).map(
       (key, value) => MapEntry(key, value.toString()),
@@ -458,7 +458,7 @@ class ApiRuleStrategy {
       if (config.roadSeparator.isEmpty ||
           config.episodeSeparator.isEmpty ||
           config.fieldSeparator.isEmpty) {
-        throw const ApiRuleFormatException('章节分隔符不能为空');
+        throw const ApiRuleFormatException('章節分隔符不能為空');
       }
       return;
     }
@@ -475,11 +475,11 @@ class ApiRuleStrategy {
       RestrictedJsonPath.validate(config.episodeUrlPath);
     } else if (config.episodePage == null) {
       throw const ApiRuleFormatException(
-        '必须配置播放入口地址路径或播放页地址模板',
+        '必須配置播放入口地址路徑或播放頁地址模板',
       );
     }
     if (config.episodePage != null && config.episodePage!.url.trim().isEmpty) {
-      throw const ApiRuleFormatException('播放页地址模板不能为空');
+      throw const ApiRuleFormatException('播放頁地址模板不能為空');
     }
   }
 
@@ -501,7 +501,7 @@ class ApiRuleStrategy {
       if (exact != null) {
         final name = exact.group(1)!;
         if (!variables.containsKey(name)) {
-          throw ApiRuleFormatException('缺少模板变量 @$name');
+          throw ApiRuleFormatException('缺少模板變數 @$name');
         }
         return variables[name];
       }
@@ -531,7 +531,7 @@ class ApiRuleStrategy {
       (match) {
         final name = match.group(1)!;
         if (!variables.containsKey(name)) {
-          throw ApiRuleFormatException('缺少模板变量 @$name');
+          throw ApiRuleFormatException('缺少模板變數 @$name');
         }
         final value = variables[name]?.toString() ?? '';
         return encode ? Uri.encodeComponent(value) : value;

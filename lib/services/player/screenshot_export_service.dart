@@ -8,7 +8,7 @@ class ScreenshotExportService {
   const ScreenshotExportService();
 
   Future<String?> chooseDestination() => FilePicker.platform.getDirectoryPath(
-    dialogTitle: '选择截图保存文件夹',
+    dialogTitle: '選擇截圖儲存資料夾',
     lockParentWindow: true,
   );
 

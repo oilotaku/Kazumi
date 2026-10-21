@@ -113,9 +113,9 @@ abstract class _CollectController with Store {
     return KazumiDialog.show<_BangumiDeleteSyncAction>(
       clickMaskDismiss: true,
       builder: (context) => AlertDialog(
-        title: const Text('Bangumi 不支持删除收藏'),
+        title: const Text('Bangumi 不支援刪除收藏'),
         content: const Text(
-          '因为安全考虑，Bangumi 未提供删除接口，您可以选择把本地和远端标记为“抛弃”，或者选择仅删除本地收藏并打开网页后手动删除 Bangumi 数据。',
+          '因為安全考慮，Bangumi 未提供刪除介面，您可以選擇把本地和遠端標記為“拋棄”，或者選擇僅刪除本地收藏並開啟網頁後手動刪除 Bangumi 資料。',
         ),
         actions: [
           TextButton(
@@ -128,13 +128,13 @@ abstract class _CollectController with Store {
             onPressed: () {
               Navigator.of(context).pop(_BangumiDeleteSyncAction.openWeb);
             },
-            child: const Text('打开网页'),
+            child: const Text('開啟網頁'),
           ),
           FilledButton(
             onPressed: () {
               Navigator.of(context).pop(_BangumiDeleteSyncAction.markAbandoned);
             },
-            child: const Text('标记为抛弃'),
+            child: const Text('標記為拋棄'),
           ),
         ],
       ),
@@ -147,7 +147,7 @@ abstract class _CollectController with Store {
       await launchUrl(url, mode: LaunchMode.externalApplication);
       return;
     }
-    KazumiDialog.showToast(message: '无法打开 Bangumi 网页');
+    KazumiDialog.showToast(message: '無法開啟 Bangumi 網頁');
   }
 
   Future<bool> _syncBangumiCollectIfEnabled(
@@ -171,7 +171,7 @@ abstract class _CollectController with Store {
         KazumiDialog.showToast(message: '已同步到 Bangumi');
         return true;
       } else if (!synced) {
-        KazumiDialog.showToast(message: '同步到 Bangumi 失败，已取消本次状态修改');
+        KazumiDialog.showToast(message: '同步到 Bangumi 失敗，已取消本次狀態修改');
         KazumiLogger().w(
           'Bangumi: immediate collect sync did not complete. bangumiId=$bangumiId, type=$localType',
         );
@@ -181,7 +181,7 @@ abstract class _CollectController with Store {
     } catch (e, stackTrace) {
       KazumiDialog.showToast(
           message:
-              '同步到 Bangumi 失败，已取消本次状态修改：${BangumiSyncService.describeError(e)}');
+              '同步到 Bangumi 失敗，已取消本次狀態修改：${BangumiSyncService.describeError(e)}');
       KazumiLogger().e(
         'Bangumi: immediate collect sync failed. bangumiId=$bangumiId, type=$localType',
         error: e,
@@ -208,17 +208,17 @@ abstract class _CollectController with Store {
     final bool webDavCollectEnable =
         GStorage.getSetting(SettingsKeys.webDavEnableCollect);
     if (!webDavCollectEnable) {
-      _reportSyncError('请开启 WebDAV 收藏同步', onError);
+      _reportSyncError('請開啟 WebDAV 收藏同步', onError);
       return false;
     }
     if (!WebDav().initialized) {
-      _reportSyncError('WebDAV 未连接，请检查配置', onError);
+      _reportSyncError('WebDAV 未連線，請檢查配置', onError);
       return false;
     }
     try {
       await WebDav().ping();
     } catch (e) {
-      _reportSyncError('WebDAV 连接失败，请检查网络或配置', onError, error: e);
+      _reportSyncError('WebDAV 連線失敗，請檢查網路或配置', onError, error: e);
       return false;
     }
     return true;
@@ -231,7 +231,7 @@ abstract class _CollectController with Store {
     try {
       await WebDav().syncCollectibles();
     } catch (e) {
-      _reportSyncError('WebDAV 同步失败，请检查连接', onError, error: e);
+      _reportSyncError('WebDAV 同步失敗，請檢查連線', onError, error: e);
       return false;
     }
     loadCollectibles();
@@ -246,7 +246,7 @@ abstract class _CollectController with Store {
     try {
       await WebDav().updateCollectibles();
     } catch (e) {
-      _reportSyncError('WebDAV 回传失败，请检查连接', onError, error: e);
+      _reportSyncError('WebDAV 回傳失敗，請檢查連線', onError, error: e);
       return false;
     }
     return true;
@@ -281,7 +281,7 @@ abstract class _CollectController with Store {
   }) async {
     final bool syncEnable = GStorage.getSetting(SettingsKeys.bangumiSyncEnable);
     if (!syncEnable) {
-      _reportSyncError('请开启 Bangumi 同步', onError);
+      _reportSyncError('請開啟 Bangumi 同步', onError);
       return false;
     }
 

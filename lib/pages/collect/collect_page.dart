@@ -74,7 +74,7 @@ class _CollectPageState extends State<CollectPage> with KazumiDialogOwner {
     try {
       await collectController.addCollect(item, type: type.value);
     } catch (_) {
-      KazumiDialog.showToast(message: '修改收藏状态失败，请稍后重试');
+      KazumiDialog.showToast(message: '修改收藏狀態失敗，請稍後重試');
     } finally {
       if (mounted) setState(() => _pendingIds.remove(item.id));
     }
@@ -102,7 +102,7 @@ class _CollectPageState extends State<CollectPage> with KazumiDialogOwner {
             CollectSyncDestination.webDavSettings => '/settings/webdav/',
             CollectSyncDestination.bangumiSettings => '/settings/bangumi/',
           }));
-    }, errorMessage: '同步未完成，请稍后重试');
+    }, errorMessage: '同步未完成，請稍後重試');
   }
 
   @override

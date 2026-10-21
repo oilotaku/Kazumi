@@ -97,7 +97,7 @@ class _CharacterPageState extends State<CharacterPage> {
             ),
             const ConnectedTabs(
               padding: materialBottomSheetTabsPadding,
-              labels: ['资料', '吐槽'],
+              labels: ['資料', '吐槽'],
             ),
             Expanded(
               child: TabBarView(
@@ -114,8 +114,8 @@ class _CharacterPageState extends State<CharacterPage> {
     final character = _character;
     if (character != null && character.id == 0) {
       return GeneralErrorWidget(
-        title: '人物资料加载失败',
-        errMsg: '请检查网络连接后重试。',
+        title: '人物資料載入失敗',
+        errMsg: '請檢查網路連線後重試。',
         onRetry: _loadCharacter,
       );
     }
@@ -170,8 +170,8 @@ class _CharacterPageState extends State<CharacterPage> {
     if (_commentsError) {
       return SliverFillRemaining(
         child: GeneralErrorWidget(
-          title: '人物吐槽加载失败',
-          errMsg: '请检查网络连接后重试。',
+          title: '人物吐槽載入失敗',
+          errMsg: '請檢查網路連線後重試。',
           onRetry: _loadComments,
         ),
       );
@@ -181,7 +181,7 @@ class _CharacterPageState extends State<CharacterPage> {
         hasScrollBody: false,
         child: GeneralEmptyState(
           icon: Icons.chat_bubble_outline_rounded,
-          title: '还没有评论',
+          title: '還沒有評論',
         ),
       );
     }

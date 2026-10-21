@@ -74,7 +74,7 @@ class DownloadDirectoryService {
     final directory = customDirectory;
     if (directory.isEmpty) return getDefaultDownloadDirectory();
     if (_accessLost) {
-      throw const DownloadDirectoryException('下载目录访问权限已失效，请在下载设置中重新选择该目录');
+      throw const DownloadDirectoryException('下載目錄訪問許可權已失效，請在下載設定中重新選擇該目錄');
     }
     return directory;
   }
@@ -83,7 +83,7 @@ class DownloadDirectoryService {
   /// it proves writable and its access is persisted.
   Future<String?> selectDirectory() async {
     if (!supportsCustomDirectory) {
-      throw const DownloadDirectoryException('当前平台不支持手动选择目录');
+      throw const DownloadDirectoryException('當前平臺不支援手動選擇目錄');
     }
     final current = customDirectory.isEmpty
         ? await getDefaultDownloadDirectory()
@@ -109,7 +109,7 @@ class DownloadDirectoryService {
   Future<String?> _pickDirectory(String? initialDirectory) async {
     if (!Platform.isAndroid) {
       return FilePicker.platform.getDirectoryPath(
-        dialogTitle: '选择下载位置',
+        dialogTitle: '選擇下載位置',
         initialDirectory: initialDirectory,
       );
     }
@@ -119,7 +119,7 @@ class DownloadDirectoryService {
           await _androidChannel.invokeMethod<bool>('requestStorageAccess') ??
           false;
       if (!granted) {
-        throw const DownloadDirectoryException('未授予存储访问权限，下载位置未修改');
+        throw const DownloadDirectoryException('未授予儲存訪問許可權，下載位置未修改');
       }
       return await _androidChannel.invokeMethod<String>('pickDirectory', {
         'initialDirectory': initialDirectory,
@@ -127,8 +127,8 @@ class DownloadDirectoryService {
     } on PlatformException catch (e) {
       throw DownloadDirectoryException(
         e.code == 'UNSUPPORTED_DIRECTORY'
-            ? '请选择内部存储或 SD 卡中的本地文件夹'
-            : '选择下载位置失败，请重试',
+            ? '請選擇內部儲存或 SD 卡中的本地資料夾'
+            : '選擇下載位置失敗，請重試',
       );
     }
   }
@@ -143,7 +143,7 @@ class DownloadDirectoryService {
         'DownloadDirectoryService: failed to bookmark $directory',
         error: e,
       );
-      throw const DownloadDirectoryException('无法获得该目录的持久访问权限，请更换目录');
+      throw const DownloadDirectoryException('無法獲得該目錄的持久訪問許可權，請更換目錄');
     }
     await GStorage.putSetting(SettingsKeys.downloadDirectoryBookmark, bookmark);
   }

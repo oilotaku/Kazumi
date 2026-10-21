@@ -30,11 +30,11 @@ class _SuperResolutionSettingsState extends State<SuperResolutionSettings> {
   @override
   Widget build(BuildContext context) {
     return SettingsDetailScaffold(
-      title: const Text('超分辨率'),
+      title: const Text('超解析度'),
       body: SettingsList(
         sections: [
           SettingsRadioSection<SuperResolutionMode>(
-            title: Text('超分辨率需要启用硬件解码, 若启用硬件解码后仍然不生效, 尝试切换视频渲染器为 gpu'),
+            title: Text('超解析度需要啟用硬體解碼, 若啟用硬體解碼後仍然不生效, 嘗試切換影片渲染器為 gpu'),
             groupValue: superResolutionMode,
             onChanged: (SuperResolutionMode? value) {
               if (value == null) return;
@@ -56,12 +56,12 @@ class _SuperResolutionSettingsState extends State<SuperResolutionSettings> {
             ],
           ),
           SettingsSection(
-            title: Text('默认行为'),
+            title: Text('預設行為'),
             tiles: [
               SettingsTile.switchTile(
                 leading: Icons.notifications_off_rounded,
-                title: Text('关闭提示'),
-                description: Text('关闭每次启用超分辨率时的提示'),
+                title: Text('關閉提示'),
+                description: Text('關閉每次啟用超解析度時的提示'),
                 initialValue: disableWarning,
                 onToggle: (value) async {
                   disableWarning = value ?? !disableWarning;

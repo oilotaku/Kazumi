@@ -1,12 +1,12 @@
 part of 'timeline_page.dart';
 
-const _timelineOptionsTitle = '排序与筛选';
+const _timelineOptionsTitle = '排序與篩選';
 
 extension _TimelineSortLabel on TimelineSort {
   String get label => switch (this) {
-        TimelineSort.popularity => '热度优先',
-        TimelineSort.rating => '评分优先',
-        TimelineSort.defaultOrder => '默认顺序',
+        TimelineSort.popularity => '熱度優先',
+        TimelineSort.rating => '評分優先',
+        TimelineSort.defaultOrder => '預設順序',
       };
 }
 
@@ -103,20 +103,20 @@ class _TimelineOptionsSheet extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 ContentSection.group(
-                  title: '显示范围',
+                  title: '顯示範圍',
                   children: [
                     SwitchListTile(
-                      title: const Text('隐藏看过的番剧'),
+                      title: const Text('隱藏看過的番劇'),
                       value: controller.notShowWatchedBangumis,
                       onChanged: controller.setNotShowWatchedBangumis,
                     ),
                     SwitchListTile(
-                      title: const Text('隐藏抛弃的番剧'),
+                      title: const Text('隱藏拋棄的番劇'),
                       value: controller.notShowAbandonedBangumis,
                       onChanged: controller.setNotShowAbandonedBangumis,
                     ),
                     SwitchListTile(
-                      title: const Text('只看正在追的番剧'),
+                      title: const Text('只看正在追的番劇'),
                       value: controller.onlyShowWatchingBangumis,
                       onChanged: controller.setOnlyShowWatchingBangumis,
                     ),

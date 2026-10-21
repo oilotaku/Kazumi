@@ -59,7 +59,7 @@ class _TimelinePageState extends State<TimelinePage> {
         children: [
           MaterialBottomSheetHeader(
             title: '放送季度',
-            description: '正在查看 ${_seasonLabel(_controller.selectedDate)}',
+            description: '正在檢視 ${_seasonLabel(_controller.selectedDate)}',
             onClose: () => Navigator.of(context).pop(),
           ),
           Expanded(
@@ -181,7 +181,7 @@ class _TimelinePageState extends State<TimelinePage> {
             title: narrowPortrait
                 ? _buildSeasonPicker(context, loading: loading, inAppBar: true)
                 : Text(
-                    '时间表',
+                    '時間表',
                     style: theme.textTheme.headlineSmall
                         ?.copyWith(fontWeight: FontWeight.w700),
                   ),
@@ -302,13 +302,13 @@ class _TimelinePageState extends State<TimelinePage> {
             ? theme.textTheme.titleLarge
             : theme.textTheme.headlineMedium;
     return Semantics(
-      label: '切换放送季度，$label',
+      label: '切換放送季度，$label',
       button: true,
       enabled: !loading,
       onTap: loading ? null : () => _showSeasonBottomSheet(context),
       excludeSemantics: true,
       child: Tooltip(
-        message: '切换放送季度',
+        message: '切換放送季度',
         child: InkWell(
           onTap: loading ? null : () => _showSeasonBottomSheet(context),
           borderRadius: BorderRadius.circular(20),
@@ -355,7 +355,7 @@ class _TimelinePageState extends State<TimelinePage> {
         _buildSeasonPicker(context, loading: loading, compact: compact),
         if (!compact)
           Text(
-            loading ? '正在加载放送时间表…' : '$startMonth — ${startMonth + 2} 月 · 每周放送',
+            loading ? '正在載入放送時間表…' : '$startMonth — ${startMonth + 2} 月 · 每週放送',
             style: theme.textTheme.bodyMedium
                 ?.copyWith(color: colors.onSurfaceVariant),
           ),
@@ -389,12 +389,12 @@ class _TimelinePageState extends State<TimelinePage> {
                 icon: filteredOut
                     ? Icons.filter_alt_off_rounded
                     : Icons.event_available_rounded,
-                title: filteredOut ? '没有符合筛选的番剧' : '这一天暂无放送',
+                title: filteredOut ? '沒有符合篩選的番劇' : '這一天暫無放送',
                 actions: [
                   if (filteredOut)
                     StateActionButton.tonal(
                       onPressed: _controller.clearFilters,
-                      text: '清除筛选',
+                      text: '清除篩選',
                     ),
                 ],
               ),

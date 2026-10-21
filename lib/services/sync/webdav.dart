@@ -50,7 +50,7 @@ class WebDav {
     webDavUsername = GStorage.getSetting(SettingsKeys.webDavUsername);
     webDavPassword = GStorage.getSetting(SettingsKeys.webDavPassword);
     if (webDavURL.isEmpty) {
-      throw Exception('请先填写WebDAV URL');
+      throw Exception('請先填寫WebDAV URL');
     }
     client = webdav.newClient(
       webDavURL,

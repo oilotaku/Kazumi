@@ -1,11 +1,11 @@
-/// 代理相关的工具函数
+/// 代理相關的工具函式
 class ProxyUtils {
-  // 防止实例化
+  // 防止例項化
   ProxyUtils._();
 
-  /// 解析代理 URL，返回 (主机, 端口)
+  /// 解析代理 URL，返回 (主機, 埠)
   ///
-  /// 支持的格式:
+  /// 支援的格式:
   /// - http://127.0.0.1:7890
   /// - 127.0.0.1:7890
   static (String, int)? parseProxyUrl(String url) {
@@ -14,14 +14,14 @@ class ProxyUtils {
 
     String hostPort = url;
 
-    // 移除 http:// 前缀
+    // 移除 http:// 字首
     if (url.toLowerCase().startsWith('http://')) {
       hostPort = url.substring(7);
     } else if (url.toLowerCase().startsWith('https://')) {
       hostPort = url.substring(8);
     }
 
-    // 解析主机和端口
+    // 解析主機和埠
     final parts = hostPort.split(':');
     if (parts.length != 2) return null;
 
@@ -32,14 +32,14 @@ class ProxyUtils {
     return (host, port);
   }
 
-  /// 获取格式化的代理 URL（用于 mpv）
+  /// 獲取格式化的代理 URL（用於 mpv）
   static String? getFormattedProxyUrl(String url) {
     final parsed = parseProxyUrl(url);
     if (parsed == null) return null;
     return 'http://${parsed.$1}:${parsed.$2}';
   }
 
-  /// 验证代理 URL 是否有效
+  /// 驗證代理 URL 是否有效
   static bool isValidProxyUrl(String url) {
     return parseProxyUrl(url) != null;
   }
