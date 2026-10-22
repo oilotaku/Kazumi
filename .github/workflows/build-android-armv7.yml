@@ -1,0 +1,62 @@
+name: Build Android armeabi-v7a APK (zh-TW)
+
+# 32-bit ARM build for old Android TV boxes; the official release only ships arm64-v8a.
+on:
+  workflow_dispatch:
+  push:
+    branches: [zh-tw]
+    paths: ['lib/**', 'pubspec.*', 'android/**', 'assets/**', '.github/workflows/build-android-armv7.yml']
+
+env:
+  DANDANAPI_APPID: ${{ secrets.DANDANAPI_APPID }}
+  DANDANAPI_KEY: ${{ secrets.DANDANAPI_KEY }}
+  KAZUMI_APPID: ${{ secrets.KAZUMI_APPID }}
+  KAZUMI_KEY: ${{ secrets.KAZUMI_KEY }}
+
+jobs:
+  build-android-armv7:
+    name: Build Android (armeabi-v7a)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore signing key
+        env:
+          ANDROID_KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
+        run: |
+          if [ -z "$ANDROID_KEYSTORE_B64" ]; then
+            echo "::error::secret ANDROID_KEYSTORE_B64 is missing; refusing to build with throwaway debug keys"
+            exit 1
+          fi
+          echo "$ANDROID_KEYSTORE_B64" | base64 -d > "$RUNNER_TEMP/kazumi-release.p12"
+          echo "ANDROID_KEYSTORE_PATH=$RUNNER_TEMP/kazumi-release.p12" >> "$GITHUB_ENV"
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2.16.0
+        id: flutter-action
+        with:
+          channel: stable
+          flutter-version-file: pubspec.yaml
+      - name: Get Flutter dependencies
+        run: flutter pub get
+      - name: Remove build id
+        run: sed -i -e 's/-Wl,/-Wl,--build-id=none,/' ${{ steps.flutter-action.outputs.PUB-CACHE-PATH }}/hosted/pub.dev/jni-*/src/CMakeLists.txt
+      - name: Build APK
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: >-
+          flutter build apk --split-per-abi --target-platform android-arm
+          --dart-define=DANDANAPI_APPID=$DANDANAPI_APPID
+          --dart-define=DANDANAPI_KEY=$DANDANAPI_KEY
+          --dart-define=KAZUMI_APPID=$KAZUMI_APPID
+          --dart-define=KAZUMI_KEY=$KAZUMI_KEY
+      - name: Package
+        run: |
+          ver=$(sed -n 's/^version: \([^+]*\).*/\1/p' pubspec.yaml)
+          cp build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk "Kazumi_android_${ver}_zhTW_armeabi-v7a.apk"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Kazumi-android-armv7-zhTW
+          path: Kazumi_android_*_zhTW_armeabi-v7a.apk

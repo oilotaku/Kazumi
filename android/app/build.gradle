@@ -53,11 +53,25 @@ android {
         versionName flutterVersionName
     }
 
+    // zh-TW fork: sign with a fixed sideload key when the CI provides one,
+    // so later builds can update the installed app in place.
+    def releaseKeystore = System.getenv("ANDROID_KEYSTORE_PATH")
+    signingConfigs {
+        if (releaseKeystore) {
+            release {
+                storeFile file(releaseKeystore)
+                storeType "pkcs12"
+                storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
+                keyAlias "kazumi"
+                keyPassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
+            }
+        }
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            // Falls back to the debug keys so `flutter run --release` works locally.
+            signingConfig releaseKeystore ? signingConfigs.release : signingConfigs.debug
         }
     }
 }

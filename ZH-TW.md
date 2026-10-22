@@ -9,6 +9,10 @@
 | 官方修補版 | `tools/patch_ipa_strings.py` 原地改官方 IPA 的 Dart 字串 | 繁體(系統內建選單仍簡體) | 簡體 | 可用(沿用官方內嵌憑證) |
 | 原始碼版 | `tools/s2twp.py` 轉字串 + `lib/utils/zh_convert.dart` 顯示時轉換,Actions 編譯 | 繁體 | 繁體 | **不可用**:需自備 DanDanPlay / Kazumi 憑證放進 repo secrets |
 
+原始碼版另有 Android 32 位元(`armeabi-v7a`)APK:`build-android-armv7.yml`,給舊電視盒用(官方只發 arm64)。
+用固定的側載金鑰簽(repo secrets `ANDROID_KEYSTORE_B64`、`ANDROID_KEYSTORE_PASSWORD`,PKCS12、alias `kazumi`),
+之後的版本才能覆蓋安裝;沒設 secret 時 workflow 直接失敗,不會改用每次不同的 debug 金鑰。
+
 ## 跟上游新版
 
 ```sh
