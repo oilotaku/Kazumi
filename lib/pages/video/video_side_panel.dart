@@ -34,6 +34,7 @@ class VideoSidePanelState extends State<VideoSidePanel>
 
   // Lets the system back key close the panel before leaving the page.
   LocalHistoryEntry? _historyEntry;
+  ModalRoute<dynamic>? _historyRoute;
 
   bool get _isOpening =>
       _animation.status == AnimationStatus.forward ||
@@ -49,7 +50,8 @@ class VideoSidePanelState extends State<VideoSidePanel>
         _animation.forward();
       }
       _historyEntry = LocalHistoryEntry(onRemove: _onHistoryRemoved);
-      ModalRoute.of(context)?.addLocalHistoryEntry(_historyEntry!);
+      _historyRoute = ModalRoute.of(context);
+      _historyRoute?.addLocalHistoryEntry(_historyEntry!);
       widget.onOpened?.call();
     }
   }
@@ -57,7 +59,8 @@ class VideoSidePanelState extends State<VideoSidePanel>
   void _removeHistoryEntry() {
     final entry = _historyEntry;
     _historyEntry = null;
-    entry?.remove();
+    // A route that is already leaving drops its local history itself.
+    if (entry != null && (_historyRoute?.isActive ?? false)) entry.remove();
   }
 
   void _onHistoryRemoved() {

@@ -8,6 +8,7 @@ import 'package:kazumi/utils/zh_convert.dart';
 import 'package:kazumi/bean/widget/empty_state_widget.dart';
 import 'package:kazumi/modules/download/download_module.dart';
 import 'package:kazumi/modules/roads/road_module.dart';
+import 'package:kazumi/services/platform/platform_environment_service.dart';
 
 class EpisodeSelectionPanel extends StatefulWidget {
   const EpisodeSelectionPanel({
@@ -94,14 +95,11 @@ class EpisodeSelectionPanelState extends State<EpisodeSelectionPanel> {
     );
   }
 
-  /// Moves remote/keyboard focus into the panel after revealing the current
-  /// episode, so a TV remote can pick an episode without a pointer.
+  /// On TV, moves focus into the panel after revealing the current episode so
+  /// the remote can pick an episode without a pointer.
   Future<void> focusCurrentEpisode() async {
     await revealCurrentEpisode();
-    if (!mounted ||
-        FocusManager.instance.highlightMode != FocusHighlightMode.traditional) {
-      return;
-    }
+    if (!mounted || !PlatformEnvironmentService.isTelevision) return;
     await WidgetsBinding.instance.endOfFrame;
     if (!mounted) return;
     if (_currentEpisodeFocus.context != null) {
