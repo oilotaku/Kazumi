@@ -23,6 +23,7 @@ import 'package:kazumi/services/platform/desktop_window_config.dart';
 import 'package:kazumi/services/platform/webview_feature_service.dart';
 import 'package:kazumi/bean/dialog/dialog_helper.dart';
 import 'package:kazumi/navigation.dart';
+import 'package:kazumi/services/platform/platform_environment_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,6 +40,12 @@ void main() async {
 
   if (Platform.isAndroid) {
     await WebViewFeatureService.initialize();
+    await PlatformEnvironmentService.detectTelevision();
+    if (PlatformEnvironmentService.isTelevision) {
+      // Remote-only devices: show focus highlights from the first frame.
+      FocusManager.instance.highlightStrategy =
+          FocusHighlightStrategy.alwaysTraditional;
+    }
   }
 
   try {

@@ -45,6 +45,9 @@ class EpisodeSelectionPanelState extends State<EpisodeSelectionPanel> {
       ListObserverController(controller: _scrollController)
         ..cacheJumpIndexOffset = false;
   late int _visibleRoad = widget.selectedRoad;
+  final _panelFocus =
+      FocusNode(debugLabel: 'Episode panel', skipTraversal: true);
+  final _currentEpisodeFocus = FocusNode(debugLabel: 'Current episode');
 
   bool get _canLocate =>
       widget.selectedRoad >= 0 &&
@@ -91,9 +94,28 @@ class EpisodeSelectionPanelState extends State<EpisodeSelectionPanel> {
     );
   }
 
+  /// Moves remote/keyboard focus into the panel after revealing the current
+  /// episode, so a TV remote can pick an episode without a pointer.
+  Future<void> focusCurrentEpisode() async {
+    await revealCurrentEpisode();
+    if (!mounted ||
+        FocusManager.instance.highlightMode != FocusHighlightMode.traditional) {
+      return;
+    }
+    await WidgetsBinding.instance.endOfFrame;
+    if (!mounted) return;
+    if (_currentEpisodeFocus.context != null) {
+      _currentEpisodeFocus.requestFocus();
+    } else {
+      _panelFocus.traversalDescendants.firstOrNull?.requestFocus();
+    }
+  }
+
   @override
   void dispose() {
     _scrollController.dispose();
+    _panelFocus.dispose();
+    _currentEpisodeFocus.dispose();
     super.dispose();
   }
 
@@ -108,127 +130,134 @@ class EpisodeSelectionPanelState extends State<EpisodeSelectionPanel> {
 
     return LayoutBuilder(builder: (context, constraints) {
       final textScaler = MediaQuery.textScalerOf(context);
-      return ListViewObserver(
-        controller: _observerController,
-        child: Scrollbar(
-          controller: _scrollController,
-          child: CustomScrollView(
+      return Focus(
+        focusNode: _panelFocus,
+        child: ListViewObserver(
+          controller: _observerController,
+          child: Scrollbar(
             controller: _scrollController,
-            slivers: [
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 20, 16, 4),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Semantics(
-                        header: true,
-                        child: Text(
-                          widget.title.isEmpty ? '劇集列表' : widget.title.tw,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: theme.textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.w700,
-                            color: colors.onSurface,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      _RoadSelector(
-                        roads: widget.roads,
-                        visibleRoad: _visibleRoad,
-                        isOffline: widget.isOffline,
-                        onChanged: _selectRoad,
-                        disableAnimations: widget.disableAnimations,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: _EpisodeToolbar(
-                  height: _toolbarHeight,
-                  color: colors.surface,
+            child: CustomScrollView(
+              controller: _scrollController,
+              slivers: [
+                SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 4, 8, 4),
-                    child: Row(
+                    padding: const EdgeInsets.fromLTRB(16, 20, 16, 4),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Expanded(
+                        Semantics(
+                          header: true,
                           child: Text(
-                            textScaler.scale(14) > 21 ||
-                                    constraints.maxWidth < 320
-                                ? '$count 集'
-                                : widget.isOffline
-                                    ? '已快取 · $count 集'
-                                    : '全部劇集 · $count 集',
-                            maxLines: 1,
+                            widget.title.isEmpty ? '劇集列表' : widget.title.tw,
+                            maxLines: 2,
                             overflow: TextOverflow.ellipsis,
-                            style: theme.textTheme.labelLarge?.copyWith(
-                              color: colors.onSurfaceVariant,
+                            style: theme.textTheme.titleLarge?.copyWith(
+                              fontWeight: FontWeight.w700,
+                              color: colors.onSurface,
                             ),
                           ),
                         ),
-                        IconButton(
-                          tooltip: '定位當前集',
-                          onPressed: _canLocate ? revealCurrentEpisode : null,
-                          icon: const Icon(Icons.my_location_rounded, size: 20),
+                        const SizedBox(height: 16),
+                        _RoadSelector(
+                          roads: widget.roads,
+                          visibleRoad: _visibleRoad,
+                          isOffline: widget.isOffline,
+                          onChanged: _selectRoad,
+                          disableAnimations: widget.disableAnimations,
                         ),
-                        if (!widget.isOffline)
-                          IconButton.filledTonal(
-                            tooltip: '快取劇集',
-                            onPressed: count > 0 && widget.onDownload != null
-                                ? () => widget.onDownload!(_visibleRoad)
-                                : null,
-                            icon: const Icon(Icons.download_rounded, size: 20),
-                          ),
                       ],
                     ),
                   ),
                 ),
-              ),
-              if (count == 0)
-                const SliverFillRemaining(
-                  hasScrollBody: false,
-                  child: GeneralEmptyState(
-                    icon: Icons.video_library_outlined,
-                    title: '這條線路暫無劇集',
-                  ),
-                )
-              else
-                SliverPadding(
-                  padding: EdgeInsets.fromLTRB(
-                    16,
-                    0,
-                    16,
-                    16 + MediaQuery.paddingOf(context).bottom,
-                  ),
-                  sliver: SliverList.builder(
-                    itemCount: count,
-                    itemBuilder: (context, index) {
-                      final episode = index + 1;
-                      final name = index < road!.identifier.length &&
-                              road.identifier[index].trim().isNotEmpty
-                          ? road.identifier[index].tw
-                          : '第$episode集';
-                      return _EpisodeRow(
-                        key: ValueKey('$_visibleRoad:$episode'),
-                        name: name,
-                        first: index == 0,
-                        last: index == count - 1,
-                        selected: _visibleRoad == widget.selectedRoad &&
-                            episode == widget.selectedEpisode,
-                        isPlaying: widget.isPlaying,
-                        isOffline: widget.isOffline,
-                        download: widget.downloads[road.data[index]],
-                        disableAnimations: widget.disableAnimations,
-                        onTap: () =>
-                            widget.onEpisodeSelected(episode, _visibleRoad),
-                      );
-                    },
+                SliverPersistentHeader(
+                  pinned: true,
+                  delegate: _EpisodeToolbar(
+                    height: _toolbarHeight,
+                    color: colors.surface,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 4, 8, 4),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              textScaler.scale(14) > 21 ||
+                                      constraints.maxWidth < 320
+                                  ? '$count 集'
+                                  : widget.isOffline
+                                      ? '已快取 · $count 集'
+                                      : '全部劇集 · $count 集',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: theme.textTheme.labelLarge?.copyWith(
+                                color: colors.onSurfaceVariant,
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            tooltip: '定位當前集',
+                            onPressed: _canLocate ? revealCurrentEpisode : null,
+                            icon: const Icon(Icons.my_location_rounded, size: 20),
+                          ),
+                          if (!widget.isOffline)
+                            IconButton.filledTonal(
+                              tooltip: '快取劇集',
+                              onPressed: count > 0 && widget.onDownload != null
+                                  ? () => widget.onDownload!(_visibleRoad)
+                                  : null,
+                              icon: const Icon(Icons.download_rounded, size: 20),
+                            ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-            ],
+                if (count == 0)
+                  const SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: GeneralEmptyState(
+                      icon: Icons.video_library_outlined,
+                      title: '這條線路暫無劇集',
+                    ),
+                  )
+                else
+                  SliverPadding(
+                    padding: EdgeInsets.fromLTRB(
+                      16,
+                      0,
+                      16,
+                      16 + MediaQuery.paddingOf(context).bottom,
+                    ),
+                    sliver: SliverList.builder(
+                      itemCount: count,
+                      itemBuilder: (context, index) {
+                        final episode = index + 1;
+                        final name = index < road!.identifier.length &&
+                                road.identifier[index].trim().isNotEmpty
+                            ? road.identifier[index].tw
+                            : '第$episode集';
+                        return _EpisodeRow(
+                          key: ValueKey('$_visibleRoad:$episode'),
+                          name: name,
+                          first: index == 0,
+                          last: index == count - 1,
+                          selected: _visibleRoad == widget.selectedRoad &&
+                              episode == widget.selectedEpisode,
+                          isPlaying: widget.isPlaying,
+                          isOffline: widget.isOffline,
+                          download: widget.downloads[road.data[index]],
+                          disableAnimations: widget.disableAnimations,
+                          focusNode: _visibleRoad == widget.selectedRoad &&
+                                  episode == widget.selectedEpisode
+                              ? _currentEpisodeFocus
+                              : null,
+                          onTap: () =>
+                              widget.onEpisodeSelected(episode, _visibleRoad),
+                        );
+                      },
+                    ),
+                  ),
+              ],
+            ),
           ),
         ),
       );
@@ -520,6 +549,7 @@ class _EpisodeRow extends StatefulWidget {
     required this.isOffline,
     required this.disableAnimations,
     required this.onTap,
+    this.focusNode,
     this.download,
   });
 
@@ -531,6 +561,7 @@ class _EpisodeRow extends StatefulWidget {
   final bool isOffline;
   final bool disableAnimations;
   final VoidCallback onTap;
+  final FocusNode? focusNode;
   final DownloadEpisode? download;
 
   @override
@@ -633,6 +664,7 @@ class _EpisodeRowState extends State<_EpisodeRow>
             );
           },
           child: InkWell(
+            focusNode: widget.focusNode,
             onTap: widget.onTap,
             onHighlightChanged: _setPressed,
             excludeFromSemantics: true,

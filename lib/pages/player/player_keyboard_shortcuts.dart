@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kazumi/services/platform/platform_environment_service.dart';
 import 'package:kazumi/services/storage/storage.dart';
 import 'package:kazumi/utils/constants.dart';
 
@@ -73,13 +74,35 @@ class _PlayerKeyboardShortcutsState extends State<PlayerKeyboardShortcuts> {
   }
 
   Map<String, List<String>> _loadShortcuts() {
-    return <String, List<String>>{
+    final shortcuts = <String, List<String>>{
       for (final entry in defaultShortcuts.entries)
-        entry.key: GStorage.getStringListSettingByName(
-          'shortcut_${entry.key}',
-          defaultValue: entry.value,
-        ),
+        entry.key: [
+          ...GStorage.getStringListSettingByName(
+            'shortcut_${entry.key}',
+            defaultValue: entry.value,
+          ),
+        ],
     };
+    if (PlatformEnvironmentService.isTelevision) {
+      _applyRemoteLayout(shortcuts);
+    }
+    return shortcuts;
+  }
+
+  // The TV handles volume itself, so Up/Down open the controls and the
+  // episode panel instead, and Enter acts like the remote's OK key.
+  static void _applyRemoteLayout(Map<String, List<String>> shortcuts) {
+    const remote = <String, String>{
+      'Arrow Up': 'controls',
+      'Arrow Down': 'episodes',
+      'Enter': 'playorpause',
+    };
+    for (final entry in remote.entries) {
+      for (final keys in shortcuts.values) {
+        keys.remove(entry.key);
+      }
+      (shortcuts[entry.value] ??= <String>[]).add(entry.key);
+    }
   }
 
   KeyEventResult _handleKeyEvent(KeyEvent event) {

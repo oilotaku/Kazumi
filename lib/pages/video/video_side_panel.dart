@@ -32,6 +32,9 @@ class VideoSidePanelState extends State<VideoSidePanel>
   late final Animation<double> _opacity =
       _animation.drive(CurveTween(curve: Curves.easeIn));
 
+  // Lets the system back key close the panel before leaving the page.
+  LocalHistoryEntry? _historyEntry;
+
   bool get _isOpening =>
       _animation.status == AnimationStatus.forward ||
       _animation.status == AnimationStatus.completed;
@@ -45,11 +48,26 @@ class VideoSidePanelState extends State<VideoSidePanel>
       } else {
         _animation.forward();
       }
+      _historyEntry = LocalHistoryEntry(onRemove: _onHistoryRemoved);
+      ModalRoute.of(context)?.addLocalHistoryEntry(_historyEntry!);
       widget.onOpened?.call();
     }
   }
 
+  void _removeHistoryEntry() {
+    final entry = _historyEntry;
+    _historyEntry = null;
+    entry?.remove();
+  }
+
+  void _onHistoryRemoved() {
+    if (_historyEntry == null) return;
+    _historyEntry = null;
+    close();
+  }
+
   void close() {
+    _removeHistoryEntry();
     if (widget.disableAnimations) {
       _animation.value = 0;
     } else {
@@ -62,11 +80,15 @@ class VideoSidePanelState extends State<VideoSidePanel>
   void didUpdateWidget(VideoSidePanel oldWidget) {
     super.didUpdateWidget(oldWidget);
     // Reset before rendering the new mode to avoid a sidebar flash.
-    if (oldWidget.fullscreen != widget.fullscreen) _animation.value = 0;
+    if (oldWidget.fullscreen != widget.fullscreen) {
+      _animation.value = 0;
+      _removeHistoryEntry();
+    }
   }
 
   @override
   void dispose() {
+    _removeHistoryEntry();
     _animation.dispose();
     super.dispose();
   }

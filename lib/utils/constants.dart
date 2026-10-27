@@ -209,11 +209,11 @@ final List<String> defaultAnimeTags = const [
 
 // 播放器預設快捷鍵
 final Map<String, List<String>> defaultShortcuts = const {
-  'playorpause': [' '],
-  'forward': ['Arrow Right'],
-  'rewind': ['Arrow Left'],
-  'next': ['N'],
-  'prev': ['P'],
+  'playorpause': [' ', 'Select', 'Media Play Pause'],
+  'forward': ['Arrow Right', 'Media Fast Forward'],
+  'rewind': ['Arrow Left', 'Media Rewind'],
+  'next': ['N', 'Media Track Next'],
+  'prev': ['P', 'Media Track Previous'],
   'volumeup': ['Arrow Up'],
   'volumedown': ['Arrow Down'],
   'togglemute': ['M'],
@@ -227,6 +227,8 @@ final Map<String, List<String>> defaultShortcuts = const {
   'speed3': ['3'],
   'speedup': ['X'],
   'speeddown': ['Z'],
+  'controls': ['Info'],
+  'episodes': ['Context Menu'],
 };
 
 // 鍵位別名
@@ -262,4 +264,6 @@ final Map<String, String> shortcutsChineseName = {
   'speed3': '倍速：3x',
   'speedup': '倍速加',
   'speeddown': '倍速減',
+  'controls': '顯示控制列',
+  'episodes': '選集',
 };

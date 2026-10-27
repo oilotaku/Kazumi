@@ -1,6 +1,7 @@
 package com.example.kazumi
 
 import android.app.PendingIntent
+import android.app.UiModeManager
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.BroadcastReceiver
@@ -126,6 +127,8 @@ class MainActivity: AudioServiceActivity() {
             } else if (call.method == "getAndroidSdkVersion") {
                 val sdkVersion = getAndroidSdkVersion()
                 result.success(sdkVersion)
+            } else if (call.method == "isTelevision") {
+                result.success(isTelevision())
             } else if (call.method == "setSystemBarsHidden") {
                 systemBarsHidden = call.arguments as? Boolean ?: false
                 applySystemBarsState()
@@ -178,6 +181,13 @@ class MainActivity: AudioServiceActivity() {
                 result.notImplemented()
             }
         }
+    }
+
+    // TV boxes often also declare a touchscreen, so check leanback as well.
+    private fun isTelevision(): Boolean {
+        val uiMode = getSystemService(UI_MODE_SERVICE) as? UiModeManager
+        return uiMode?.currentModeType == Configuration.UI_MODE_TYPE_TELEVISION ||
+            packageManager.hasSystemFeature(PackageManager.FEATURE_LEANBACK)
     }
 
     private fun openWithMime(url: String, mimeType: String) {

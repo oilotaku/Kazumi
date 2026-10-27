@@ -20,6 +20,21 @@ class PlatformEnvironmentService {
     }
   }
 
+  /// Android TV or set-top box; set once by [detectTelevision] at startup.
+  static bool isTelevision = false;
+
+  static Future<void> detectTelevision() async {
+    if (!Platform.isAndroid) {
+      return;
+    }
+    try {
+      isTelevision =
+          await _intentChannel.invokeMethod<bool>('isTelevision') ?? false;
+    } on PlatformException catch (e) {
+      KazumiLogger().e("Failed to detect television: '${e.message}'.");
+    }
+  }
+
   static Future<int> getAndroidSdkVersion() async {
     if (!Platform.isAndroid) {
       return 0;

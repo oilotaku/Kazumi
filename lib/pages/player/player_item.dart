@@ -373,6 +373,8 @@ class _PlayerItemState extends State<PlayerItem>
       'speed3': () => setPlaybackSpeed(3.0),
       'speedup': () => handleSpeedChange('up'),
       'speeddown': () => handleSpeedChange('down'),
+      'controls': _toggleVideoController,
+      'episodes': () => widget.onToggleSidePanel?.call(),
     };
     keyboardLongPressActions = {
       'forward': PlayerLongPressShortcutActions(

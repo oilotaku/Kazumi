@@ -266,6 +266,12 @@ class _VideoPageState extends State<VideoPage>
     });
   }
 
+  void _focusCurrentEpisode() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) _episodePanelKey.currentState?.focusCurrentEpisode();
+    });
+  }
+
   void _toggleSidePanel() => _sidePanelKey.currentState?.toggle();
 
   void _closeSidePanel() => _sidePanelKey.currentState?.close();
@@ -335,7 +341,7 @@ class _VideoPageState extends State<VideoPage>
                 key: _sidePanelKey,
                 fullscreen: videoPageController.isFullscreen,
                 disableAnimations: disableAnimations,
-                onOpened: _revealCurrentEpisode,
+                onOpened: _focusCurrentEpisode,
                 onClosed: keyboardFocus.requestFocus,
                 child: tabBody,
               ),
