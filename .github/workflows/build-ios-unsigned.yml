@@ -6,20 +6,14 @@ on:
     branches: [zh-tw]
     paths: ['lib/**', 'pubspec.*', 'ios/**', '.github/workflows/build-ios-unsigned.yml']
 
-env:
-  DANDANAPI_APPID: ${{ secrets.DANDANAPI_APPID }}
-  DANDANAPI_KEY: ${{ secrets.DANDANAPI_KEY }}
-  KAZUMI_APPID: ${{ secrets.KAZUMI_APPID }}
-  KAZUMI_KEY: ${{ secrets.KAZUMI_KEY }}
-
 jobs:
   build-ios:
     name: Build iOS (no codesign)
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Set up Flutter
-        uses: subosito/flutter-action@v2.16.0
+        uses: subosito/flutter-action@44ac965b96f18d999802d4b807e3256d5a3f9fa1 # v2.16.0
         with:
           channel: stable
           flutter-version-file: pubspec.yaml
@@ -27,6 +21,11 @@ jobs:
       - name: Install native build tools
         run: brew install cmake ninja
       - name: Build
+        env:
+          DANDANAPI_APPID: ${{ secrets.DANDANAPI_APPID }}
+          DANDANAPI_KEY: ${{ secrets.DANDANAPI_KEY }}
+          KAZUMI_APPID: ${{ secrets.KAZUMI_APPID }}
+          KAZUMI_KEY: ${{ secrets.KAZUMI_KEY }}
         run: >-
           flutter build ios --release --no-codesign
           --dart-define=DANDANAPI_APPID=$DANDANAPI_APPID
@@ -40,7 +39,7 @@ jobs:
           find Payload/Runner.app/Frameworks -type d -name "*.framework" -exec codesign --force --sign - --preserve-metadata=identifier,entitlements {} \;
           VER=$(grep -m1 '^version:' pubspec.yaml | awk '{print $2}' | cut -d+ -f1)
           zip -q -r "Kazumi_ios_${VER}_zhTW_no_sign.ipa" Payload
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: Kazumi-ios-zhTW-unsigned
           path: Kazumi_ios_*.ipa
